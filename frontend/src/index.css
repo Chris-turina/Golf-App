@@ -1,0 +1,43 @@
+main {
+    min-height: 80vh;
+    
+}
+
+.formModalBackground {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formModal {
+    background-color: white;
+    padding: 10vh;
+    border-radius: 10px;
+}
+
+.modal-contnet {
+    background-color: green;
+}
+
+.form-EditYards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.edit-hole-yards-form {
+    background-color: rgba(0, 0, 0, 0.072);
+    margin: 20px;
+    border-radius: 2rem;
+    padding: 3rem;
+    height: 250px;
+    min-width: 200px;
+    max-width: 200px;
+    
+}
