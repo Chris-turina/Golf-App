@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import GolfCourse, TeeColor, Tee, Hole, Round, HoleScore
+from .models import GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
 # , GolfScore, Round
 from .forms import HoleForm, TeeColorForm, TeeForm
 # , ScoreForm
@@ -13,3 +13,4 @@ admin.site.register(Hole)
 admin.site.register(Tee)
 admin.site.register(Round)
 admin.site.register(HoleScore)
+admin.site.register(RoundStats)

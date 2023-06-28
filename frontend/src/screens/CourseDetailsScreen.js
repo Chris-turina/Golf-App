@@ -84,7 +84,7 @@ function CourseDetailsScreen() {
     }
 
     // This function handles the submition of the form and also converts all the values from the form into an Int instead of a string
-    const handleSubmit = () => {        
+    const handleSubmit = () => {
         const data = selectedTeeHoles
         const newScore = []
         data.forEach(({color, hole, id, num, putts, score, yards}) => {

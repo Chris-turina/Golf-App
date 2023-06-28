@@ -71,12 +71,43 @@ class HoleScore(models.Model):
     tee = models.ForeignKey(Tee, on_delete=models.SET_NULL, null=True, blank=False)
     strokes = models.IntegerField(validators=[MaxValueValidator(20), MinValueValidator(1)])
     putts = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
+    # Where did your drive go
 
     def __str__(self):
         return str(self.hole) + ' ' + str(self.roundStat)
 
 
     
+class RoundStats(models.Model):
+    roundStat = models.ForeignKey(Round, on_delete=models.SET_NULL, null=True)
+    totalStrokes = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])
+    totalPutts = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])
+    totalCoursePar = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])
+    totalDistance = models.IntegerField(validators=[MaxValueValidator(10000), MinValueValidator(1)], null=True)
+    totalHoles = models.IntegerField(validators=[MaxValueValidator(18), MinValueValidator(9)], null=True)
+
+    # total missed fairways
+    # Greens in regulation
+
+    
+    
+    def __str__(self):
+        return 'Stats for ' + str(self.roundStat)
+    
+
+
+# class HoleStats(models.Model):
+    # fairway hit (left, middle, right)
+    # drive distance
+
+# class UserStats(models.Model):
+    # Rounds played
+    # handicap
+    # total under over par
+    # driving stats
+    # puttting stats
+    # putts per round average
+
 
     
 

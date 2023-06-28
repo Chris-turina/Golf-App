@@ -9,7 +9,7 @@ import Message from '../components/Message';
 import { listGolfCourses } from '../actions/golfCourseActions';
 
 function RoundsScreen() {
-    const [renderCourseList, setRenderCoureseList] = useState(true)
+    const [showRounds, setShowRounds] = useState(true)
     const [roundsPlayed, setRoundsPlayed] = useState( [] )
     const [courses, setCourses] = useState( [] )    
 
@@ -21,10 +21,10 @@ function RoundsScreen() {
     const { userInfo } = userLogin
 
     const golfCourseList = useSelector(state => state.golfCourseList)
-    const { loading, error, golfCourses } = golfCourseList
+    const { loading: loadingCourse, error: errorCourse, golfCourses } = golfCourseList
 
     const roundList = useSelector(state => state.roundList)
-    const { loading: loadingRounds, error: errorRounds, rounds } = roundList
+    const { loading, error, rounds } = roundList
 
     useEffect(() => {
         if (!userInfo) {
@@ -37,40 +37,29 @@ function RoundsScreen() {
         }
     }, [dispatch, userInfo])
 
-    const renderCoursesPlayed = () => {
-       
-        const roundsCounter = []
-        const newCoursesArr = []
-        let count = 0
-        for (let i = 0; i < rounds.length; i++) {
-            const round = rounds[i].course;            
-            roundsCounter.push(round)
-        }
-
-        for (let i = 0; i < golfCourses.length; i++) {
-            const course = golfCourses[i];      
-            course.roundsPlayed = roundsCounter.filter(x => x==course.course_id).length
-            newCoursesArr.push(course)
-            
-        }
+    const renderRounds = () => {
+        console.log(rounds);
         return (
-            <Row>            
-                {newCoursesArr.map(golfCourse => (
-                    <Row key={golfCourse.course_id}>
-                        <Card style={{ width: '20rem', marginTop:'3rem', marginBottom: '3rem'}}>
-                            <Card.Title>{golfCourse.name}</Card.Title>
-                            <Card.Body>Rounds Played: {golfCourse.roundsPlayed}</Card.Body>
-                        </Card>                                    
-                    </Row>
-                ))}          
+            <div>
+                {rounds.map(round => (
+                    <div key={round.id}>                                    
+                        <h3>{round.course}</h3>
+                        <p> Tee: {round.teeColorUsed}</p>
+                        <hr/>
+                        <p>Score: 100</p>
+                        <hr/>
+                        
+                    </div>
+                ))
                 
-            </Row>
+                }
+            </div>
         )
     }
 
+
     return (
         <div>
-            Rounds Played
 
             {loading
                 ? <Loader />
@@ -78,7 +67,7 @@ function RoundsScreen() {
                     ? <Message variant='danger'>{error}</Message>
                     : (
                         <div>
-                            {renderCourseList && renderCoursesPlayed()}
+                            {showRounds && renderRounds()}
                         </div>
                     )
             }
