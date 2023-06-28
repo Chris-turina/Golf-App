@@ -109,30 +109,13 @@ function CourseDetailsScreen() {
                 <form onSubmit={handleSubmit}>
                     <div className='formScore'>
                         {selectedTeeHoles.map((hole, index) => (
-                        //     <div className='formScoreInput' key={hole.id}>
-                        //     <label>
-                        //         Hole: {hole.num} <input name='hole' hidden disabled value={hole.hole} />
-                        //     </label>
-                        //     <hr />
-                        //     <label>
-                        //         Par: {hole.par} <input name='Par' hidden disabled />
-                        //     </label>
-                        //     <hr />
-                        //     <label>
-                        //         Yards: {hole.yards} <input name='yards' hidden disabled value={hole.yards} />
-                        //     </label>
-                        //     <hr />
-                        //     <label>
-                        //         Score: <input name='score' type='number' placeholder='Enter Score' value={hole.score} onChange={(e) => handleFormChange(index, e)}/>
-                        //     </label>
-                        //     <hr />
-                        //     <label>
-                        //         Putts: <input name='putts' type='nubmer' placeholder='Enter Putts' value={hole.putts} onChange={(e) => handleFormChange(index, e)}/>
-                        //     </label>
-                        //     <hr />                           
-                        // </div>
 
-                        <ScoreFormInput props={hole} onChange = {(e) => handleFormChange(index, e)} key={hole.id}/>
+                        <ScoreFormInput 
+                            props={hole} 
+                            handleChange = {(e) => handleFormChange(index, e)} 
+                            key={hole.id}
+                        />
+
                         ))}
                     </div>
                     <input type='submit' />
