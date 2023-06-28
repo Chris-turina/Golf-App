@@ -1,9 +1,6 @@
 
 
 
-# golfbert.com - This is the Api I am going to use for my data
-
-
 # Golf App install guide with list of all the install and technologies used
 
 - npm init react-app fronend  |  "This is to create the react app"
