@@ -26,4 +26,6 @@ urlpatterns = [
     path('api/holes/', include('base.urls.hole_urls')),
     path('api/rounds/', include('base.urls.round_urls')),
     path('api/holescore/', include('base.urls.holescore_urls')),
+    path('api/roundstats/', include('base.urls.roundstats_urls')),
+    
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import GolfCourse, TeeColor, Tee, Hole, Round, HoleScore
+from .models import GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
 # GolfScore, Round
 
 
@@ -98,10 +98,13 @@ class HoleScoreSerializer(serializers.ModelSerializer):
         fields = '__all__'        
 
 class RoundSerializer(serializers.ModelSerializer):
+    course = serializers.StringRelatedField(many=False)  
+    teeColorUsed = serializers.StringRelatedField(many=False)    
     holeScores = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Round
-        fields = '__all__'
+        fields = [ 'id', 'course', 'teeColorUsed', 'course', 'holeScores', 'user']
+        
 
     def get_holeScores(self, obj):
         holeScores = obj.holescore_set.all()
@@ -110,4 +113,9 @@ class RoundSerializer(serializers.ModelSerializer):
 
 
 
+# Stats Serializers
 
+class RoundStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoundStats
+        fields = '__all__'
