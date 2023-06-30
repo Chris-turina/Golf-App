@@ -5,22 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { listGolfCourseDetails } from '../actions/golfCourseActions';
-import { createHole, updateHole } from '../actions/holeActions';
+import { listGolfCourseDetails, updateGolfCourseHoles } from '../actions/golfCourseActions';
+// import { createHole, updateHole } from '../actions/holeActions';
 
 
 function AdminCourseHoleDetailsScreen() {
+    const [showForm, setShowForm] = useState(false)
+    const [showTees, setShowTees] = useState(false)
+    const [editTeeArr, setEditTeeArr] = useState( [] )
+    const [editHolesArr, setEditHolesArr] = useState( [] )
 
-    const [holeId, setHoleId] = useState(0)
-    const [holePar, setHolePar] = useState(0)
-    const [holeNumber, setHoleNumber] = useState(0)
-    const [holeTees, setHoleTees] = useState( [] )
-    const [courseTees, setCourseTees] = useState( [] )
-    const [holes, setHoles] = useState( [] )
-    
-    const [showEditForm, setShowEditForm] = useState(false)
-    const [showHolesDetails, setShowHoleDetails] = useState(false)
-    const [showHoleEditForm, setShowHoleEditForm] = useState(false)
 
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -41,118 +35,69 @@ function AdminCourseHoleDetailsScreen() {
         }
     }, [navigate, dispatch, id])
 
+    // This Functions sets the state for the page to make the edits
+    const handleClick = () => {
+        const data = [...golfCourse.holes]
+        console.log(data);
+        setEditHolesArr(data)
+        setShowForm(true)
+        setShowTees(true)
+    }
 
-    // This Function sumbits the the par for the Hole
-    const submitHandler = () => {
-        dispatch(updateHole({
-            id:holeId,
-            par:holePar
+    // This function submits the form and calls an action to update the database
+    const handleSubmit = (e) => {
+        const data = editHolesArr
+        // console.log(golfCourse);
+
+        dispatch(updateGolfCourseHoles({
+            holes: editHolesArr,
+            id: golfCourse.course_id
         }))
-    }
-
-    // This Function sets the state for the "Par" information then shows the form
-    const editHandler = (holeId,newPar) => {        
-        setHoleId(holeId)
-        setHolePar(newPar)
-        setShowEditForm(true)
-    }
-
-    // This is the Edit form to change the Par of the Hole
-    const renderEditForm = (hole) => {
-        return (
-            <FormContainer>
-                <div className='formModalBackground'>
-                    <Form className='formModal' onSubmit={submitHandler}>
-                        <h3>Edit Hole - Par</h3>
-                        <Form.Group controlId='num_of_holes'>
-                            <Form.Label>Edit Par</Form.Label>                                
-                            <Form.Select onChange={(e) =>setHolePar(e.target.value)} >
-                                <option>Select New Par</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>        
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Button type='submit' variant='primary'>
-                                Update
-                            </Button>
-                    </Form>
-                </div>
-            </FormContainer>
-        )
-    }
-
-    // This is the function that sets the sate for when the user clicks on the Hole details button, it pulls up the Tees for the hole
-    const getHoledetails = (holeId, holeNum, holePar, holeTees) => {
-        // sets state for this hole's information        
-        setCourseTees(golfCourse.teeColors)
-        setHoleId(holeId)
-        setHoleNumber(holeNum)
-        setHolePar(holePar)
-        setHoleTees(holeTees)    
         
-        setShowHoleDetails(true)
+    }
+    
+    // This function hanldes the changes to the par atribute
+    const handleFormChangePar = (index, e) => {        
+        const data = [...golfCourse.holes]
+        data[index][e.target.name] = parseInt(e.target.value)
+        setEditHolesArr(data)
+        
     }
 
-    
-    // This function shows a modal with the details of the hole seleced
-    const renderHoleDetails = () => {
+     
+    // This function renders the tee inputs into the form to change the yards on each tee, per hole
+    const renderTeeInputs = (hole) => {
 
-        // This Function loops through the the holes.tees and matches the tee color with the courses main teeColors
-        const getTeeColor = (colorId) => {
-            for (let i = 0; i < courseTees.length; i++) {
-                const colorArr = courseTees[i];
-                if (colorArr.id == colorId) {                    
-                    return colorArr.colors                   
-                }             
-            }
-        }
-
+        // This funciton handles the changes to the yards on each tee per hole
+        const handleFormChangeYards = (tee, index, e) => {            
+            const data = [...hole.tees]                      
+            data[index][e.target.name] = parseInt(e.target.value)            
+            setEditTeeArr(data)  
+        } 
+        
         return (
-            <div className='formModalBackground'>
-                <Card style={{ width: '18rem' }}>
-                    <div onClick={() => setShowHoleDetails(false)}>Back</div>                    
-                    <Card.Title>Hole: {holeNumber}</Card.Title>
-                    <Card.Text>Par: {holePar}</Card.Text>
-                    <ListGroup>
-                        {holeTees.map(tee => (                        
-                            <ListGroup.Item key={tee.id}>{getTeeColor(tee.color)}: {tee.yards} yards</ListGroup.Item>
-
-                        ))}
-                    </ListGroup>
-                </Card>
-                
+            <div>
+                {hole.tees.map((tee, index) => (
+                    <div key={tee.id}>
+                        <label>
+                            {tee.color}: 
+                            <input 
+                                name='yards' 
+                                type='number' 
+                                placeholder='Enter Yards' 
+                                value={tee.yards} 
+                                required
+                                onChange={(e) => handleFormChangeYards(tee, index, e)} 
+                            />                                    
+                             
+                        
+                        </label>
+                    </div>
+                ))}
             </div>
         )
+        
     }
-
-
-    const getHoleEditFormDetails = () => {
-        navigate(`/admin/golfcourse/${golfCourse.course_id}/holes_edit`)
-    }
-
-    // const renderEditHolesForm = () => {
-    //     console.log(holes);
-
-    //     if (holes.length !== 0) {
-    //         return (
-    //             <div>
-    //                 <Form className=''>
-    //                     {holes.map(hole => (                        
-    //                         <Form.Group key={hole.id}>
-    //                             <Form.Label>{hole.number}</Form.Label>
-    //                             <Form.Control></Form.Control>
-    //                         </Form.Group>                        
-    //                     ))}
-    //                 </Form>                        
-    //             </div>
-    //         )
-    //     } else {
-    //         console.log('no');
-    //     }
-    // }
-
 
     return (
         <div>
@@ -162,57 +107,33 @@ function AdminCourseHoleDetailsScreen() {
                 </Link>
                 <Col>
                     <h1>{golfCourse.name}</h1>
-                </Col>                
-                <Col>
-                    <Button onClick={(e) => getHoleEditFormDetails()}>Edit Holes</Button>
-                </Col>
+                </Col>                                
 
             </Row>
-
-            {showEditForm && renderEditForm()}
-            {showHolesDetails && renderHoleDetails()}
-            {/* {showHoleEditForm && renderEditHolesForm()} */}
-
             {loading
                 ?(<Loader />)
                 :error
                     ? (<Message variant='danger'>{error}</Message>)
-                    :(  <div>                            
-                            <Table striped bordered hover responsive className='table-sm'>
-                                <thead>
-                                    <tr>                                    
-                                        <th>NUMBER</th>
-                                        <th>PAR</th>                                                                                                     
-                                        <th>HOLE DETAILS</th>                                    
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {golfCourse.holes.map(hole => (
-                                        <tr key={hole.id} >                                        
-                                            <td>{hole.number}</td>
-                                            <td>
-                                                {hole.par}
-                                                <Button variant='light' className='btn-sm' onClick={() => editHandler(hole.id, hole.par, hole.number, hole.tees)}>
-                                                        <i className="fas fa-edit"></i>
-                                                </Button>
-                                            </td>                                                                              
-                                            <td>
-                                                <Button variant='light' className='btn-sm' onClick={() => getHoledetails(hole.id, hole.number, hole.par, hole.tees)}>
-                                                        <i className="fa fa-circle-info"></i>
-                                                </Button>
-                                            </td>
-
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                    :(  <div> 
+                        <button onClick={handleClick}>Edit Holes</button>
+                        
+                        { showForm && <form onSubmit={handleSubmit}>
+                            {golfCourse.holes.map((hole, index) => (
+                            <div key={hole.id} style={{marginBottom: '40px'}}>
+                                <h3>{hole.number}</h3>
+                                <label>Par: <input name='par' type='number' placeholder='Enter Par' value={hole.par} onChange={(e) => handleFormChangePar(index, e)} /> </label>
+                                <p>Tee Colors:</p>
+                                
+                                {showTees && renderTeeInputs(hole)}
+                            </div>
+                            ))}
+                            <input type='submit' />
+                        </form>}
+                          
                         </div>
                     )
 
             }
-            
-
         </div>
     )
 }

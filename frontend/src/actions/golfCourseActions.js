@@ -390,9 +390,6 @@ export const updateTeeColor = (teeColor) => async (dispatch, getState) => {
 
 
 export const updateTeeYards = (golfCourse, teeColor, newTees) => async (dispatch, getState) => {
-console.log(golfCourse);
-console.log(teeColor);
-console.log(golfCourse.newTees);
     try {
         dispatch ({
             type: GOLF_COURSE_DETAILS_REQUEST
@@ -423,6 +420,46 @@ console.log(golfCourse.newTees);
     } catch (error) {
         dispatch({
             type: GOLF_COURSE_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const updateGolfCourseHoles = (holes) => async(dispatch, getState) => {
+    console.log(holes.holes);
+    try {
+        dispatch ({
+            type: GOLF_COURSE_UPDATE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.put(
+            `/api/golfcourses/holes/update/${holes.id}/`,
+            holes.holes,
+            config
+        )
+
+        dispatch ({
+            type: GOLF_COURSE_UPDATE_SUCCESS,
+            payload: data,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GOLF_COURSE_UPDATE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

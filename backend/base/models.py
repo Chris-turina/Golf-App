@@ -44,6 +44,7 @@ class TeeColor(models.Model):
     
 
 class Tee(models.Model):
+    course = models.ForeignKey(GolfCourse, on_delete=models.SET_NULL, null=True)
     color = models.ForeignKey(TeeColor, on_delete=models.SET_NULL, null=True)  
     hole = models.ForeignKey(Hole, on_delete=models.SET_NULL, null=True, blank=False)
     yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])

@@ -12,24 +12,14 @@ from rest_framework import status
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getRoundStats(request, pk):
-    roundStats = RoundStats.objects.get(id=pk)
-    serializer = RoundStatsSerializer(roundStats, many=False)
+def getAllRoundStats(request, pk):
+    roundStats = RoundStats.objects.all()
+    serializer = RoundStatsSerializer(roundStats, many=True)
     return Response (serializer.data)
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def createRoundStats(request, pk):
-    # Get Round
-    linkedRound = Round.objects.filter(id=pk)
-    # Get course
-    course = GolfCourse.objects.filter(id=linkedRound.course)
-    # Get Holes for course
-    
-    # Get Tee Colors total yards 
-    totalYards = linkedRound.teeColorUsed
-    roundStats = 0
-
-
-    serializer = RoundStatsSerializer(roundStats, many=False)
+def getRoundStat(request, pk):
+    roundStat = RoundStats.objects.get(id=pk)
+    serializer = RoundStatsSerializer(roundStat, many=False)
     return Response(serializer.data)
