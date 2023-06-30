@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { listGolfCourseDetails } from '../actions/golfCourseActions';
-import { createHole, updateHole } from '../actions/holeActions';
+import { listGolfCourseDetails, updateGolfCourseHoles } from '../actions/golfCourseActions';
+// import { createHole, updateHole } from '../actions/holeActions';
 
 
 function AdminCourseHoleDetailsScreen() {
@@ -46,9 +46,13 @@ function AdminCourseHoleDetailsScreen() {
 
     // This function submits the form and calls an action to update the database
     const handleSubmit = (e) => {
-        e.preventDefault()
         const data = editHolesArr
-        console.log(data);
+        // console.log(golfCourse);
+
+        dispatch(updateGolfCourseHoles({
+            holes: editHolesArr,
+            id: golfCourse.course_id
+        }))
         
     }
     
@@ -82,6 +86,7 @@ function AdminCourseHoleDetailsScreen() {
                                 type='number' 
                                 placeholder='Enter Yards' 
                                 value={tee.yards} 
+                                required
                                 onChange={(e) => handleFormChangeYards(tee, index, e)} 
                             />                                    
                              

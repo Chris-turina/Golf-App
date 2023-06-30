@@ -14,6 +14,8 @@ urlpatterns = [
     path('<str:pk>/update_yards/<str:tk>/', views.updateBatchTeesYards, name='update-tees'),
 
     path('hole/deletetee/<str:pk>/', views.deleteTees, name='tee-delete'),
+
+    path('holes/update/<str:pk>/', views.updateCourseHoles, name='update-course-holes'),
     
 
     path('<str:pk>/', views.getGolfCourse, name='golfcourse'),

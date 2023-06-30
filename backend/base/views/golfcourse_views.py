@@ -79,10 +79,10 @@ def createTeeColor(request, pk):
 def createTees(request, pk, tk):
     holes = Hole.objects.filter(course=pk)
     teeColor = TeeColor.objects.get(id=tk)
-
+    course = GolfCourse.objects.get(course_id=pk)
 
     for hole in holes:
-        Tee.objects.create(color=teeColor, yards=0, hole=hole)
+        Tee.objects.create(color=teeColor, yards=0, hole=hole, course=course)
 
     return Response('Created Tees')
 
@@ -214,3 +214,18 @@ def updateBatchTeesYards(request, pk, tk):
     serializer = TeeSerializer(tees, many=True)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateCourseHoles(request, pk):
+    holes = request.data
+    oldHoles = Hole.objects.filter(course=pk)
+    oldTees = Tee.objects.filter(course=pk)
+    
+    for hole in holes:   
+        oldHole = oldHoles.filter(id=hole['id'])
+        oldHole.update(par=hole['par'])
+        for tee in hole['tees']:
+            oldTee = oldTees.filter(id=tee['id'])
+            oldTee.update(yards=tee['yards'])
+
+    return Response('Success')
