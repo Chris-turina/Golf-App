@@ -5,6 +5,7 @@ import CourseBooker from '../components/CourseBooker';
 import { listGolfCourses, listTeeColors } from '../actions/golfCourseActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Title from '../components/Title'
 
 function CourseSelector() {
     
@@ -24,8 +25,8 @@ function CourseSelector() {
 
 
     return (
-        <div>
-            <h1>Select a Golf Course</h1>
+        <div className='page-container'>
+            <Title props={'Select a Golf Course'} />
             {loading 
                 ? <Loader />
                 : error 

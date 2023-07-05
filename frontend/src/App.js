@@ -1,5 +1,5 @@
 import "react-datepicker/dist/react-datepicker.css";
-import './styles/ScoreFormInput.css'
+import './styles/app.css'
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -30,35 +30,38 @@ import AdminCourseHoleEditScreen from "./screens/AdminCourseHoleEditScreen";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <main className='py-3'>
-        <Container>
-          <Routes>
-            <Route path='/' element={<HomeScreen />} exact />
-            <Route path='login' element={<LoginScreen />} />
-            <Route path='register' element={<RegisterScreen />} />
-            <Route path='golfcourses' element={<CourseSelector />} />
-            <Route path='rounds' element={<RoundsScreen />} />            
-            <Route path='profile' element={<ProfileScreen />} />
-            <Route path='/golfcourses/:id' element={<CourseDetailsScreen />} />
-            <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
-            
-            <Route path='admin/userlist' element={<UserListScreen />} />
-            <Route path='admin/user/:id/edit' element={<UserEditScreen />} />
+      <div className="background">
+        <Header />
+        <main className='py-3'>
+          <Container>
+            <Routes>
+              <Route path='/' element={<HomeScreen />} exact />
+              <Route path='login' element={<LoginScreen />} />
+              <Route path='register' element={<RegisterScreen />} />
+              <Route path='golfcourses' element={<CourseSelector />} />
+              <Route path='rounds' element={<RoundsScreen />} />            
+              <Route path='profile' element={<ProfileScreen />} />
+              <Route path='/golfcourses/:id' element={<CourseDetailsScreen />} />
+              <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
+              
+              <Route path='admin/userlist' element={<UserListScreen />} />
+              <Route path='admin/user/:id/edit' element={<UserEditScreen />} />
 
-            <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
-            <Route path='admin/golfcourse/:id/create' element={<AdminCourseCreateScreen />} />
-            <Route path='admin/golfcourse/:id/edit' element={<AdminCourseEditScreen />} />
-            <Route path='admin/golfcourse/:id/details' element={<AdminCourseDetailScreen />} />
-            <Route path='admin/golfcourse/:id/holes_details' element={<AdminCourseHoleDetailsScreen />} />
-            <Route path='admin/golfcourse/:id/holes_edit' element={<AdminCourseHoleEditScreen />} />
+              <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
+              <Route path='admin/golfcourse/:id/create' element={<AdminCourseCreateScreen />} />
+              <Route path='admin/golfcourse/:id/edit' element={<AdminCourseEditScreen />} />
+              <Route path='admin/golfcourse/:id/details' element={<AdminCourseDetailScreen />} />
+              <Route path='admin/golfcourse/:id/holes_details' element={<AdminCourseHoleDetailsScreen />} />
+              <Route path='admin/golfcourse/:id/holes_edit' element={<AdminCourseHoleEditScreen />} />
 
 
 
-          </Routes>
-        </Container>
-      </main>
-      <Footer />
+            </Routes>
+          </Container>
+        </main>
+        <Footer />
+      </div>
+      
     </BrowserRouter>
   );
 }

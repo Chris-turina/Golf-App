@@ -1,0 +1,49 @@
+// @import '/frontend/src/styles/utilities/variables' ;
+@import './utilities/variables.scss';
+
+@import './components/ScoreFormInput/ScoreFormInput' ;
+@import './components/Header/Header' ;
+@import './components/Title/Title' ;
+
+@import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
+
+.background {
+    background-image: url('../images/golf-course-one.jpg');
+    // background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    background-color: $bg-color;    
+    opacity: $opacity;    
+    border: .2rem;
+    border-radius: .5rem;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.formScoreInput {
+    background-color: $bg-color;
+    opacity: $opacity;
+    display: flex;
+    flex-direction: column;
+    border-radius: $border-radius;
+    padding: 20px;
+    max-width: 35vh;
+    margin: 15px;
+}
+
+.formScore {
+    display: flex;
+    flex-wrap: wrap;
+
+}

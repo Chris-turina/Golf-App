@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import ScoreFormInput from '../components/ScoreFormInput';
 import { createRound } from '../actions/roundActions';
+import Title from '../components/Title';
 
 function CourseDetailsScreen() {
     
@@ -134,7 +135,7 @@ function CourseDetailsScreen() {
                     : (
                         <div>                            
                             <Row>
-                                <h3>{golfCourse.name}</h3>
+                                <Title props={golfCourse.name} />
                             </Row>
                             <Row><p>Select the Tees you played</p></Row>
                             <Row style={{marginBottom: '2rem'}}>

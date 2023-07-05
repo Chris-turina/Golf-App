@@ -39,23 +39,31 @@ function RoundsScreen() {
 
     const renderRounds = () => {
         console.log(rounds);
-        return (
-            <div>
-                
-                {rounds.map(round => (
-                    <div key={round.id} style={{ backgroundColor: 'lightgray', border: '5px', borderStyle: 'solid', margin:'10px', padding: '10px'}}>   
-                        <h3>{round.course}</h3>
-                        <p> Tee: {round.teeColorUsed}</p>
-                        <hr/>
-                        <p>Score: 100</p>
-                        <hr/>
-                        
-                    </div>
-                ))
-                
-                }
-            </div>
-        )
+        if (rounds.length === 0) {
+            return (
+                <div>
+                    <p>You Have not played any rounds!!!</p>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    
+                    {rounds.map(round => (
+                        <div key={round.id} style={{ backgroundColor: 'lightgray', border: '5px', borderStyle: 'solid', margin:'10px', padding: '10px'}}>   
+                            <h3>{round.course}</h3>
+                            <p> Tee: {round.teeColorUsed}</p>
+                            <hr/>
+                            <p>Score: 100</p>
+                            <hr/>
+                            
+                        </div>
+                    ))
+                    
+                    }
+                </div>
+            )
+        }
     }
 
 
