@@ -5,6 +5,7 @@ import CourseBooker from '../components/CourseBooker';
 import { listGolfCourses, listTeeColors } from '../actions/golfCourseActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Title from '../components/Title'
 
 function CourseSelector() {
     
@@ -24,22 +25,24 @@ function CourseSelector() {
 
 
     return (
-        <div>
-            <h1>Select a Golf Course</h1>
+        <div className='my-container'>
+            <Title props={'Select a Golf Course'} />
             {loading 
                 ? <Loader />
                 : error 
                     ? <Message variant='danger'>{error}</Message>
                     : (
-                        <Row>
-                            {golfCourses.map(golfCourse => (
-                                <Col key={golfCourse.course_id}>
-                                    <CourseBooker golfCourse={golfCourse} teeColors={teeColors} />
-                                    
-                                </Col>                    
+                        <div className='my-second-container'>
+                            {golfCourses.map(golfCourse => (                            
+                                    <CourseBooker
+                                        golfCourse={golfCourse}
+                                        teeColors={teeColors}
+                                        key={golfCourse.course_id}
+                                    />
+                                                 
                             ))}
                         
-                        </Row>
+                        </div>
                     )
             }
             

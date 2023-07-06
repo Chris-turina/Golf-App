@@ -81,16 +81,14 @@ function AdminCourseHoleDetailsScreen() {
                     <div key={tee.id}>
                         <label>
                             {tee.color}: 
-                            <input 
+                            <input                                
                                 name='yards' 
                                 type='number' 
                                 placeholder='Enter Yards' 
                                 value={tee.yards} 
                                 required
                                 onChange={(e) => handleFormChangeYards(tee, index, e)} 
-                            />                                    
-                             
-                        
+                            />                                                                                         
                         </label>
                     </div>
                 ))}
@@ -118,15 +116,16 @@ function AdminCourseHoleDetailsScreen() {
                         <button onClick={handleClick}>Edit Holes</button>
                         
                         { showForm && <form onSubmit={handleSubmit}>
+                            <div className='holeEditForm'>
                             {golfCourse.holes.map((hole, index) => (
-                            <div key={hole.id} style={{marginBottom: '40px'}}>
-                                <h3>{hole.number}</h3>
-                                <label>Par: <input name='par' type='number' placeholder='Enter Par' value={hole.par} onChange={(e) => handleFormChangePar(index, e)} /> </label>
-                                <p>Tee Colors:</p>
-                                
-                                {showTees && renderTeeInputs(hole)}
+                                <div key={hole.id} className='edit-hole-card'>
+                                    <h3>{hole.number}</h3>
+                                    <label>Par: <input name='par' type='number' placeholder='Enter Par' value={hole.par} onChange={(e) => handleFormChangePar(index, e)} /> </label>
+                                    <p>Tee Colors:</p>                                
+                                    {showTees && renderTeeInputs(hole)}
+                                </div>
+                            ))}                            
                             </div>
-                            ))}
                             <input type='submit' />
                         </form>}
                           

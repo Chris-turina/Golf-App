@@ -1,0 +1,14 @@
+@import '../../utilities/variables.scss' ;
+
+.title-card {
+    // align-self: center;
+    background-color: $bg-color;    
+    opacity: $opacity;    
+    align-items: center;
+    max-width: fit-content;
+    border: .2rem;
+    border-radius: .5rem;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}

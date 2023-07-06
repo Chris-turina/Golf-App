@@ -3,6 +3,10 @@ import {
     ROUND_LIST_SUCCESS,
     ROUND_LIST_FAIL,
 
+    ROUND_DETAILS_REQUEST,
+    ROUND_DETAILS_SUCCESS,
+    ROUND_DETAILS_FAIL,
+
     ROUND_CREATE_REQUEST,
     ROUND_CREATE_SUCCESS,
     ROUND_CREATE_FAIL,
@@ -22,6 +26,23 @@ export const roundListReducer = (state = { rounds:[] }, action ) => {
         default:
             return state            
     }
+}
+
+export const roundDetailsReducer = (state = { round: {} }, action) => {
+    switch(action.type) {
+        case ROUND_DETAILS_REQUEST:
+            return { loading: true, round: {} }
+
+        case ROUND_DETAILS_SUCCESS:
+            return { loading: false, round: action.payload }
+
+        case ROUND_DETAILS_FAIL:
+            return { loading: false, error: action.payload}
+
+        default:
+            return state
+    }
+
 }
 
 export const roundCreateReducer = (state = {}, action) => {

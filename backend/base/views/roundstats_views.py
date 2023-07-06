@@ -11,15 +11,15 @@ from base.serializers import RoundStatsSerializer, GolfCourseSerializer, TeeSeri
 from rest_framework import status
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def getAllRoundStats(request, pk):
+# @permission_classes([IsAuthenticated])
+def getAllRoundStats(request):
     roundStats = RoundStats.objects.all()
     serializer = RoundStatsSerializer(roundStats, many=True)
     return Response (serializer.data)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getRoundStat(request, pk):
-    roundStat = RoundStats.objects.get(id=pk)
+    roundStat = RoundStats.objects.get(roundStat=pk)
     serializer = RoundStatsSerializer(roundStat, many=False)
     return Response(serializer.data)

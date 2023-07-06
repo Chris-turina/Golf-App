@@ -17,7 +17,7 @@ function Header () {
 
     return (
         <header>
-            <Navbar bg="light" expand="lg" collapseOnSelect>
+            <Navbar  expand="lg" collapseOnSelect className='header'>
                 <Container>
 
                     <LinkContainer to="/">

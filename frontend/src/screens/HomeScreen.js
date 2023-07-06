@@ -9,8 +9,15 @@ function HomeScreen() {
                 <Link to={'/golfcourses'}>
                     <Card.Title>
                         <Button>Enter Score</Button>
-                    </Card.Title>
+                    </Card.Title>                    
                 </Link>    
+                <p>Rounds Played</p>
+                <p>Total to Par</p>
+                <p>Average score</p>
+                <p>handicap</p>
+                <p>average putts per round</p>
+                <p>Course played the most</p>
+                <p>Best Score</p>
 
         </Container>
     )

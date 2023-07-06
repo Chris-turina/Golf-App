@@ -1,0 +1,13 @@
+.title-card {
+  align-self: center;
+  background-color: white;
+  opacity: 0.9;
+  align-items: center;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  border: 0.2rem;
+  border-radius: 0.5rem;
+  padding: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}/*# sourceMappingURL=Title.css.map */
