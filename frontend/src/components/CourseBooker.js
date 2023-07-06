@@ -9,8 +9,8 @@ function CourseBooker({ golfCourse, teeColors }) {
     
 
     return (
-        <div>
-            <Card style={{ width: '18rem', marginBottom: '2rem'}}>            
+        <div className='course-booker-card'>
+            <Card>            
                 <Card.Body>
                     <Link className='link' to={`/golfcourses/${golfCourse.course_id}`}>
                         <Card.Title className='card-title'>
@@ -20,10 +20,7 @@ function CourseBooker({ golfCourse, teeColors }) {
                     <hr />
                     <Card.Text>
                         Number of Holes: {golfCourse.numOfHoles}
-                    </Card.Text>
-                    <Card.Text>
-                        Tee Colors{teeColors.color}
-                    </Card.Text>
+                    </Card.Text>                    
                 </Card.Body>                            
             </Card>
         </div>

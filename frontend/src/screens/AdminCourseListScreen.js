@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listGolfCourses, deleteGolfCourse, createGolfCourse } from '../actions/golfCourseActions';
 import { GOLF_COURSE_CREATE_RESET } from '../constants/golfCourseConstants';
+import Title from '../components/Title';
 
 function AdminCourseListScreen() {
 
@@ -53,8 +54,8 @@ function AdminCourseListScreen() {
     return (
         <div>
             <Row className='align-items-center'>
-                <Col>
-                    <h1>Golf Courses</h1>
+                <Col>                    
+                    <Title props={'Golf Courses'} />
                 </Col>
                 <Col className='text-right'>
                     <Button className='my-3' onClick={createGolfCourseHandler}>
@@ -74,7 +75,7 @@ function AdminCourseListScreen() {
                 : error
                     ? (<Message variant='danger'>{error}</Message>)
                     : (
-                        <Table striped bordered hover responsive className='table-sm'>
+                        <Table striped bordered hover responsive className='table-sm' style={{ marginLeft:'15px'}}>
                             <thead>
                                 <tr>
                                     <th>ID</th>

@@ -5,13 +5,12 @@
 @import './components/Header/Header' ;
 @import './components/Title/Title' ;
 @import './components/StatCard/StatCard';
-@import './components/CourseBooker/CourseBooker';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
 .background {
-    // background-image: url('../images/golf-course-one.jpg');
-    background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
+    background-image: url('../images/golf-course-one.jpg');
+    // background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -61,5 +60,4 @@
     display: flex;
     flex-wrap: wrap;
 }
-
 

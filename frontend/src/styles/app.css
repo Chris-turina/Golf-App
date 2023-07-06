@@ -4,7 +4,6 @@
 }
 
 .title-card {
-  align-self: center;
   background-color: white;
   opacity: 0.9;
   align-items: center;
@@ -35,13 +34,19 @@
   text-align: center;
 }
 
+.course-booker-card {
+  width: 18rem;
+  margin-bottom: 2rem;
+  margin-left: 15px;
+}
+
 .holeEditForm {
   display: flex;
   flex-wrap: wrap;
 }
 
 .background {
-  background-image: url("../images/golf-course-one.jpg");
+  background-color: #49974f;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;

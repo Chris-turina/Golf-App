@@ -25,22 +25,24 @@ function CourseSelector() {
 
 
     return (
-        <div className='page-container'>
+        <div className='my-container'>
             <Title props={'Select a Golf Course'} />
             {loading 
                 ? <Loader />
                 : error 
                     ? <Message variant='danger'>{error}</Message>
                     : (
-                        <Row>
-                            {golfCourses.map(golfCourse => (
-                                <Col key={golfCourse.course_id}>
-                                    <CourseBooker golfCourse={golfCourse} teeColors={teeColors} />
-                                    
-                                </Col>                    
+                        <div className='my-second-container'>
+                            {golfCourses.map(golfCourse => (                            
+                                    <CourseBooker
+                                        golfCourse={golfCourse}
+                                        teeColors={teeColors}
+                                        key={golfCourse.course_id}
+                                    />
+                                                 
                             ))}
                         
-                        </Row>
+                        </div>
                     )
             }
             
