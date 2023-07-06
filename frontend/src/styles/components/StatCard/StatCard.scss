@@ -1,0 +1,22 @@
+.stat-card {
+    background-color: white;
+    max-width: 35vh;
+    width: 35vh;
+    min-height: 15vh;
+    padding: 20px;
+    background-color: $bg-color;
+    opacity: $opacity;
+    border-radius: $border-radius;
+    margin: 15px;
+    // display: flex;    
+    // flex-direction: column;
+    // align-items: center;
+ 
+    & h5 {
+        text-align: center;
+    }   
+
+    & h3 {
+        text-align: center;
+    }
+}

@@ -79,25 +79,24 @@ function CourseDetailsScreen() {
         const data  = [...selectedTeeHoles]
         const createdValue = e.target.name
         data[index][createdValue] = e.target.value
-        setCreateArr(data)
-        console.log(data);
+        setCreateArr(data)        
 
     }
 
     // This function handles the submition of the form and also converts all the values from the form into an Int instead of a string
     const handleSubmit = () => {
+        // e.preventDefault()
         const data = selectedTeeHoles
         const newScore = []
         data.forEach(({color, hole, id, num, putts, score, yards}) => {
             newScore.push({ color, hole, id, putts:parseInt(putts), score:parseInt(score), yards })
         })  
-
-        setSelectedTeeHoles(newScore)
-           
+        
+        setSelectedTeeHoles(newScore)      
         dispatch(createRound({
             golfCourse: golfCourse.course_id,
             teeColor: selectedTeeId,
-            newScore: selectedTeeHoles
+            newScore: newScore
         }))
 
     }

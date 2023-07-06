@@ -4,6 +4,7 @@
 @import './components/ScoreFormInput/ScoreFormInput' ;
 @import './components/Header/Header' ;
 @import './components/Title/Title' ;
+@import './components/StatCard/StatCard';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
@@ -14,6 +15,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 
 .page-container {
     display: flex;
@@ -47,3 +50,14 @@
     flex-wrap: wrap;
 
 }
+
+.my-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+.my-second-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+

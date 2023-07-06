@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function ScoreFormInput({props, handleChange}) {     
-    console.log(props);  
+    
     return (
         <div className='formScoreInput'>
             <label>

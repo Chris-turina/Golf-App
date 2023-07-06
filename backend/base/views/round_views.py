@@ -12,7 +12,7 @@ from rest_framework import status
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def getRounds(request):
     user = request.user
     stats = Round.objects.filter(user=user.id)
@@ -27,13 +27,15 @@ def getRound(request, pk):
     return Response(serializer.data)
 
 
+# This View Creates a New Round instant, and also Creates a New RoundStat instat
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createRound(request, pk, tk):
     newScores = request.data
     course = GolfCourse.objects.get(course_id=pk)
     teeColor = TeeColor.objects.get(id=tk)
-    user = request.user    
+    user = request.user   
+    
     
     # empty arrs to then add all items
     parArr = []
@@ -59,6 +61,8 @@ def createRound(request, pk, tk):
         hole = Hole.objects.get(id=newScore['hole'])
         tee = Tee.objects.get(id=newScore['id'])
         
+        
+        
         # These are for creating the stats
         parArr.append(hole.par)
         puttsArr.append(newScore['putts'])
@@ -73,10 +77,10 @@ def createRound(request, pk, tk):
             putts = newScore['putts'],
         )
     
-    
     roundPar = sum(parArr)
     roundPutts = sum(puttsArr)
     roundStrokes = sum(strokesArr)
+    
     # Creates a new Round Stats
     RoundStats.objects.create(
         roundStat = newRound,

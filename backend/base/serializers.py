@@ -97,25 +97,35 @@ class HoleScoreSerializer(serializers.ModelSerializer):
         model = HoleScore
         fields = '__all__'        
 
+class RoundStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoundStats
+        fields = '__all__'
+
+
+
 class RoundSerializer(serializers.ModelSerializer):
     course = serializers.StringRelatedField(many=False)  
     teeColorUsed = serializers.StringRelatedField(many=False)    
     holeScores = serializers.SerializerMethodField(read_only=True)
+    roundStats = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Round
-        fields = [ 'id', 'course', 'teeColorUsed', 'course', 'holeScores', 'user']
+        fields = [ 'id', 'course', 'teeColorUsed', 'course', 'holeScores', 'user', 'roundStats']
         
 
     def get_holeScores(self, obj):
         holeScores = obj.holescore_set.all()
         serializer = HoleScoreSerializer(holeScores, many=True)
         return serializer.data
+    
+    def get_roundStats(self, obj):
+        roundStats = obj.roundstats_set.all()
+        serializer = RoundStatsSerializer(roundStats, many=True)
+        return serializer.data
 
 
 
 # Stats Serializers
 
-class RoundStatsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RoundStats
-        fields = '__all__'
+
