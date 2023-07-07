@@ -39,7 +39,8 @@ function RoundStatScreen() {
     }, [dispatch])
 
 
-    const renderStats = () => {        
+    const renderStats = () => {      
+        console.log(round);  
         const score = stats.totalStrokes - stats.totalCoursePar
         let overUnderPar ='' 
         if (score > 0) {
@@ -58,6 +59,7 @@ function RoundStatScreen() {
             return (
                 <div className='my-second-container'>                    
                     <StatCard title={'Course Played'} value={round.course} />
+                    <StatCard title={'Tee Played'} value={round.teeColorUsed} />
                     <StatCard title={'Total Holes'} value={stats.totalHoles} />
                     <StatCard title={'Course Par'} value={stats.totalCoursePar} />
                     <StatCard title={'Course Distance'} value={`${stats.totalDistance} yards`} />

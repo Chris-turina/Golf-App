@@ -6,12 +6,13 @@
 @import './components/Title/Title' ;
 @import './components/StatCard/StatCard';
 @import './components/CourseBooker/CourseBooker';
+@import './components/EditHoleCard/EditHoleCard';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
 .background {
-    // background-image: url('../images/golf-course-one.jpg');
-    background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
+    background-image: url('../images/golf-course-one.jpg');
+    // background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -60,6 +61,29 @@
 .my-second-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+
+// Component Edit hole Card.scss
+
+.holeEditForm {
+    
+    margin-top: 10px;
+}
+
+.form-button {
+    border-radius: $border-radius;
+    transition: 0.4s;
+    border-color: white;
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.form-button:hover {
+    background-color: green;
+    color: white;
+    padding: 8px;
 }
 
 

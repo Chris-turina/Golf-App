@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { listGolfCourseDetails, updateGolfCourseHoles } from '../actions/golfCourseActions';
+import Title from '../components/Title';
 // import { createHole, updateHole } from '../actions/holeActions';
 
 
@@ -78,8 +79,8 @@ function AdminCourseHoleDetailsScreen() {
         return (
             <div>
                 {hole.tees.map((tee, index) => (
-                    <div key={tee.id}>
-                        <label>
+                    <div key={tee.id} >
+                        <label className='input-label'>
                             {tee.color}: 
                             <input                                
                                 name='yards' 
@@ -103,8 +104,8 @@ function AdminCourseHoleDetailsScreen() {
                 <Link to='/admin/golfcourselist'>
                     Go Back
                 </Link>
-                <Col>
-                    <h1>{golfCourse.name}</h1>
+                <Col>                    
+                    <Title props={golfCourse.name} />
                 </Col>                                
 
             </Row>
@@ -113,20 +114,22 @@ function AdminCourseHoleDetailsScreen() {
                 :error
                     ? (<Message variant='danger'>{error}</Message>)
                     :(  <div> 
-                        <button onClick={handleClick}>Edit Holes</button>
+                        <button className='form-button' onClick={handleClick}>Edit Holes</button>
                         
                         { showForm && <form onSubmit={handleSubmit}>
                             <div className='holeEditForm'>
                             {golfCourse.holes.map((hole, index) => (
                                 <div key={hole.id} className='edit-hole-card'>
                                     <h3>{hole.number}</h3>
-                                    <label>Par: <input name='par' type='number' placeholder='Enter Par' value={hole.par} onChange={(e) => handleFormChangePar(index, e)} /> </label>
-                                    <p>Tee Colors:</p>                                
+                                    <label className='input-label'>Par: <input min='3' max='5' name='par' type='number' placeholder='Enter Par' value={hole.par} onChange={(e) => handleFormChangePar(index, e)} /> </label>
+                                    <hr/>
+                                    <h6>Tees:</h6> 
+                                                                   
                                     {showTees && renderTeeInputs(hole)}
                                 </div>
                             ))}                            
                             </div>
-                            <input type='submit' />
+                            <input className='form-button' type='submit' />
                         </form>}
                           
                         </div>

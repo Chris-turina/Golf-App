@@ -40,13 +40,31 @@
   margin-left: 15px;
 }
 
+.edit-hole-card {
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 15px;
+  width: 200px;
+}
+.edit-hole-card input {
+  width: 80px;
+}
+
+.input-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .holeEditForm {
   display: flex;
   flex-wrap: wrap;
 }
 
 .background {
-  background-color: #49974f;
+  background-image: url("../images/golf-course-one.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -92,4 +110,23 @@
 .my-second-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.holeEditForm {
+  margin-top: 10px;
+}
+
+.form-button {
+  border-radius: 0.5rem;
+  transition: 0.4s;
+  border-color: white;
+  background-color: white;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.form-button:hover {
+  background-color: green;
+  color: white;
+  padding: 8px;
 }/*# sourceMappingURL=app.css.map */
