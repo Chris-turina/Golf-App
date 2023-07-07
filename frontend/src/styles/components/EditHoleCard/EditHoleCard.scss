@@ -1,0 +1,19 @@
+.edit-hole-card {
+    opacity: $opacity;
+    display: flex;
+    flex-direction: column;
+    border-radius: $border-radius;
+    padding: 15px;
+    width: 200px;
+
+    input {
+        width:80px;
+    }
+
+}
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

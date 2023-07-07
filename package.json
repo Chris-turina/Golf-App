@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "sass": "^1.63.6"
+  },
+  "dependencies": {
+    "chart.js": "^4.3.0",
+    "react-chartjs-2": "^5.2.0"
   }
 }
