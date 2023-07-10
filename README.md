@@ -6,25 +6,24 @@ Current Python Version 3.10.9
 Install requirements 
 `pip3 install -r requirements.txt` 
 
-Install Vitual Environment
-- Instals the virtual environemt
-`sudo pip3 install virtualenv`
+Install Vitual Environment Software
+- `sudo pip3 install virtualenv`
 
+Create the Virtual Environment
 - `virtualenv venv -p python3`
-NOTE: venv is the name of the virtual environment and it also creates the vitrual environemt
+- NOTE: venv is the name of the virtual environment
 
-Activate the Virtual enviroment:
+Activate and Launch the Virtual enviroment:
 `source venv/bin/activate`
 NOTE: to deactivate the virtual environemnt run:
 `deactivate`
 
-
-Launch venv 
-`source venv/bin/activate`
 Run migrations (first launch)  
-`./manage.py migrate` 
+
+- `./manage.py migrate` 
+
 Launch server 
-`./manage.py runserver` 
+- `./manage.py runserver` 
 
 # Frontend
 TODO
