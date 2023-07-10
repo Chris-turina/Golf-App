@@ -3,8 +3,6 @@
 ### Development Setup 
 # Backend 
 Current Python Version 3.10.9
-Install requirements 
-`pip3 install -r requirements.txt` 
 
 Install Vitual Environment Software
 - `sudo pip3 install virtualenv`
@@ -17,6 +15,9 @@ Activate and Launch the Virtual enviroment:
 `source venv/bin/activate`
 NOTE: to deactivate the virtual environemnt run:
 `deactivate`
+
+Install requirements 
+- `pip3 install -r requirements.txt` 
 
 Run migrations (first launch)  
 
