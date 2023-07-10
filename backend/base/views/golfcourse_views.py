@@ -63,23 +63,30 @@ def deleteGolfCourse(request, pk):
     return Response('Golf Course Deleted')
 
 
+# Creates a teeColor for the golf course
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createTeeColor(request, pk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
     teeColor = golfCourse.teecolor_set.create(colors='TeeColor', yards=0, course=golfCourse)
+    holes = Hole.objects.filter(course=pk)
+    for hole in holes: 
+        Tee.objects.create(color=teeColor, yards=0,hole=hole,course=hole.course)
 
     serializer = TeeColorSerializer(teeColor, many=False)
+
     return Response(serializer.data)
 
 
 # Creates the Tee for each hole
+# DEPRECATE
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createTees(request, pk, tk):
-    holes = Hole.objects.filter(course=pk)
+    holes = Hole.objects.get(course=pk)
     teeColor = TeeColor.objects.get(id=tk)
     course = GolfCourse.objects.get(course_id=pk)
+
 
     for hole in holes:
         Tee.objects.create(color=teeColor, yards=0, hole=hole, course=course)

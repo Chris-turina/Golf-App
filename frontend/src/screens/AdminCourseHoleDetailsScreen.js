@@ -70,7 +70,8 @@ function AdminCourseHoleDetailsScreen() {
     const renderTeeInputs = (hole) => {
 
         // This funciton handles the changes to the yards on each tee per hole
-        const handleFormChangeYards = (tee, index, e) => {            
+        const handleFormChangeYards = (tee, index, e) => {    
+            console.log(tee);        
             const data = [...hole.tees]                      
             data[index][e.target.name] = parseInt(e.target.value)            
             setEditTeeArr(data)  

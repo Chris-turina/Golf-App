@@ -3,7 +3,8 @@
     "sass": "^1.63.6"
   },
   "dependencies": {
+    "@canvasjs/react-charts": "^1.0.0",
     "chart.js": "^4.3.0",
-    "react-chartjs-2": "^5.2.0"
+    "react": "^18.2.0"
   }
 }

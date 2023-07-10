@@ -2,18 +2,12 @@ import React, { useState} from "react";
 import { Card, ListGroup, ListGroupItem, Col, Container, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import  Chart  from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-import LineChart from "../components/LineChart";
-
+import LineChart from '../components/LineChart';
+import LineChartTwo from "../components/LineChartTwo";
 
 
 function HomeScreen() {
     
-
-    
-
-
     return (
         <Container>
             
@@ -30,7 +24,10 @@ function HomeScreen() {
                 <p>average putts per round</p>
                 <p>Course played the most</p>
                 <p>Best Score</p> */}
-                <LineChart />
+
+                {/* <LineChart />
+                <LineChartTwo /> */}
+                
 
         </Container>
     )

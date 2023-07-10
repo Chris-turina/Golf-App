@@ -41,9 +41,11 @@ class TeeColor(models.Model):
 
     def __str__(self):
         return self.colors
+
     
 
 class Tee(models.Model):
+    # Next steps remove COurse from Tee
     course = models.ForeignKey(GolfCourse, on_delete=models.SET_NULL, null=True)
     color = models.ForeignKey(TeeColor, on_delete=models.SET_NULL, null=True)  
     hole = models.ForeignKey(Hole, on_delete=models.SET_NULL, null=True, blank=False)
