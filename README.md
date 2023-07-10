@@ -12,28 +12,28 @@ Create the Virtual Environment
 - NOTE: venv is the name of the virtual environment
 
 Activate and Launch the Virtual enviroment:
-`source venv/bin/activate`
-NOTE: to deactivate the virtual environemnt run:
-`deactivate`
+- `source venv/bin/activate`
+- NOTE: to deactivate the virtual environemnt run: `deactivate`
 
 Install requirements 
 - `pip3 install -r requirements.txt` 
 
-Run migrations (first launch)  
+Go into the backend folder:
+- `cd backend`
 
-- `./manage.py migrate` 
+Run migrations (first launch)  
+- `python manage.py migrate` 
 
 Launch server 
-- `./manage.py runserver` 
+- `python manage.py runserver` 
 
 # Frontend
-TODO
 
 Go into the Frontend Folder
-`cd frontend`
+- `cd frontend`
 
 install dependencies
-`npm install`
+- `npm install`
 
 start local frontend server
-`npm start`
+- `npm start`
