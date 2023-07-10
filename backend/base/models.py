@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
-#Course model
+
 class GolfCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     course_id = models.AutoField(primary_key=True, editable=False)
@@ -45,8 +45,6 @@ class TeeColor(models.Model):
     
 
 class Tee(models.Model):
-    # Next steps remove COurse from Tee
-    course = models.ForeignKey(GolfCourse, on_delete=models.SET_NULL, null=True)
     color = models.ForeignKey(TeeColor, on_delete=models.SET_NULL, null=True)  
     hole = models.ForeignKey(Hole, on_delete=models.SET_NULL, null=True, blank=False)
     yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])

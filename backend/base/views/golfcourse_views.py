@@ -10,20 +10,21 @@ from base.serializers import GolfCourseSerializer, TeeSerializer, TeeColorSerial
 
 from rest_framework import status
 
-
+# Gets all courses 
 @api_view(['GET'])
 def getGolfCourses(request):
     golfCourses = GolfCourse.objects.all()
     serializer = GolfCourseSerializer(golfCourses, many=True)
     return Response(serializer.data)
 
+# Gets 1 golf course
 @api_view(['GET'])
 def getGolfCourse(request, pk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
     serializer = GolfCourseSerializer(golfCourse, many=False)
     return Response(serializer.data)
 
-
+# Creates a Golf Course
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createGolfCourse(request):
@@ -39,6 +40,7 @@ def createGolfCourse(request):
     serializer = GolfCourseSerializer(golfCourse, many=False)
     return Response(serializer.data)
 
+# Updates a Golf Course
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateGolfCourse(request, pk):
@@ -54,7 +56,7 @@ def updateGolfCourse(request, pk):
     return Response(serializer.data)
 
 
-
+# Deletes a Golf Course
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteGolfCourse(request, pk):
@@ -70,6 +72,7 @@ def createTeeColor(request, pk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
     teeColor = golfCourse.teecolor_set.create(colors='TeeColor', yards=0, course=golfCourse)
     holes = Hole.objects.filter(course=pk)
+    
     for hole in holes: 
         Tee.objects.create(color=teeColor, yards=0,hole=hole,course=hole.course)
 
@@ -94,6 +97,7 @@ def createTees(request, pk, tk):
     return Response('Created Tees')
 
 
+# Deletes the Tees
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteTees(request, pk,):
@@ -102,7 +106,7 @@ def deleteTees(request, pk,):
     return Response('Tees Deleted')
 
 
-
+# Delete the TeeColor instance
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteTeeColor(reqest,pk, tk):
@@ -113,7 +117,7 @@ def deleteTeeColor(reqest,pk, tk):
 
 
 
-
+# Gets all the holes for a Golf Course
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getHoles(request, pk):
@@ -124,6 +128,7 @@ def getHoles(request, pk):
     return Response(serializer.data)
 
 
+# Creates the holes of a Golf Course instance
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createHole(request, pk):
@@ -134,6 +139,7 @@ def createHole(request, pk):
     return Response(serializer.data)
 
 
+# Creates 18 holes
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createBatchHoleEighteen(request, pk):
@@ -164,7 +170,7 @@ def createBatchHoleEighteen(request, pk):
     serializer = HoleSerializer(holeBatch, many=True)
     return Response(serializer.data)
 
-
+# Creates 9 holes
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createBatchHoleNine(request, pk):
@@ -187,6 +193,7 @@ def createBatchHoleNine(request, pk):
     return Response(serializer.data)
 
 
+# Updates the Hole information
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateHole(request, pk, hk):
@@ -198,6 +205,7 @@ def updateHole(request, pk, hk):
     hole.par = data['par']
 
     hole.save()
+    print('here')
     serializer = HoleSerializer(hole, many=False)
     return Response(serializer.data)
 
@@ -221,13 +229,16 @@ def updateBatchTeesYards(request, pk, tk):
     serializer = TeeSerializer(tees, many=True)
     return Response(serializer.data)
 
+
+# Updates the holes information
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateCourseHoles(request, pk):
     holes = request.data
     oldHoles = Hole.objects.filter(course=pk)
-    oldTees = Tee.objects.filter(course=pk)
-    
+    oldTees = Tee.objects.filter(hole__course=pk)
+
+
     for hole in holes:   
         oldHole = oldHoles.filter(id=hole['id'])
         oldHole.update(par=hole['par'])

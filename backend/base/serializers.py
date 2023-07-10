@@ -53,7 +53,7 @@ class TeeSerializer(serializers.ModelSerializer):
     color = serializers.StringRelatedField(many=False)    
     class Meta:
         model = Tee
-        fields = ['id', 'color', 'hole', 'yards', 'course']    
+        fields = ['id', 'color', 'hole', 'yards']    
             
 
 class HoleSerializer(serializers.ModelSerializer):
