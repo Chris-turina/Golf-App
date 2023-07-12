@@ -246,3 +246,17 @@ def updateCourseHoles(request, pk):
             oldTee.update(yards=tee['yards'])
 
     return Response('Success')
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateCourseTeeColors(request, pk):
+    teeColors = request.data
+    oldTeeColors = TeeColor.objects.filter(course=pk)
+    
+    for teeColor in teeColors:        
+        oldTeeColor = oldTeeColors.filter(id=teeColor['id'])
+        oldTeeColor.update(back_nine_yards=teeColor['back_nine_yards'])
+        oldTeeColor.update(front_nine_yards=teeColor['front_nine_yards'])
+        oldTeeColor.update(total_yards=teeColor['total_yards'])
+    
+    return Response('Success')

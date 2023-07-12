@@ -16,6 +16,7 @@ urlpatterns = [
     path('hole/deletetee/<str:pk>/', views.deleteTees, name='tee-delete'),
 
     path('holes/update/<str:pk>/', views.updateCourseHoles, name='update-course-holes'),
+    path('teeColors/update/<str:pk>/', views.updateCourseTeeColors, name='update-course-holes'),
     
 
     path('<str:pk>/', views.getGolfCourse, name='golfcourse'),

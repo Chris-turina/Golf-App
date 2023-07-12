@@ -62,7 +62,7 @@ def createRound(request, pk, tk):
     strokesArr = []
     
     # empty vars to have the final nubmbersd in
-    roundYards = teeColor.yards
+    roundYards = teeColor.total_yards
     roundPar = 0
     roundPutts = 0
     roundStrokes = 0

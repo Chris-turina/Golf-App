@@ -6,15 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer'
-import { listGolfCourseDetails, updateGolfCourseHoles } from '../actions/golfCourseActions';
+import { listGolfCourseDetails, updateGolfCourseHoles, updateGolfCourseTeeColors } from '../actions/golfCourseActions';
 import { createTees, deleteTeeBatch, addedToHole} from '../actions/teeActions';
 import { TEE_COLOR_CREATE_RESET } from '../constants/golfCourseConstants';
 
 function AdminCourseScoreCard() {
     const [showTees, setShowTees] = useState(true)
     const [editTeeArr, setEditTeeArr] = useState( [] )
-    const [editFrontNineYards, setFrontNineYards] = useState( [] )
-    const [editBackNineYards, setBackNineYards] = useState( [] )
     const [editTotalYards, setTotalYards] = useState( [] )
     const [editHolesArr, setEditHolesArr] = useState ( [] )
 
@@ -38,13 +36,10 @@ function AdminCourseScoreCard() {
         } else {
             dispatch(listGolfCourseDetails(id))            
         }
-    }, [navigate, dispatch, id])
+    }, [navigate, dispatch, id])    
 
-
-    console.log(courseTeeColors.teeColors);
-
-
-    const handleSubmit = (e) => {        
+    // This Function handles the submit for updating the holes Yards
+    const handleSubmit = (e) => {             
         const data = [...courseHoles.holes]        
         dispatch(updateGolfCourseHoles({
             holes: data,
@@ -52,6 +47,7 @@ function AdminCourseScoreCard() {
         }))
     }    
 
+    // This Funtion handles when the user changes the Par of the hole
     const handleFormChangePar = (index, e) => {
         const data = [...courseHoles.holes]
         data[index][e.target.name] = parseInt(e.target.value)
@@ -59,41 +55,31 @@ function AdminCourseScoreCard() {
 
     }
 
-    const handleTeeColorSubmit = (e) => {
-        console.log('Submitted');
-    }
-
-    const handleFormChangeTeeColorYards = (id, e) => {
-        console.log(id);
+    // This Function hanldes when the user submits the TeeColor yards , FRONT, BACK, TOTAL
+    const handleTeeColorSubmit = (e) => {        
         const data = [...courseTeeColors.teeColors]
-        data[id][e.target.name] = parseInt(e.target.value)
-        setFrontNineYards(data)
+        dispatch(updateGolfCourseTeeColors({
+            teeColors: data,
+            id: courseTeeColors.course_id
+        }))
     }
 
-    // const handleFormChangeBackNine = (index, e) => {
-    //     console.log(index);
-    //     const data = [...courseTeeColors.teeColors]
-    //     data[index][e.target.name] = parseInt(e.target.value)
-    //     setBackNineYards(data)
-    // }
-
-    // const handleFormChangeTotalYards = (index, e) => {
-    //     console.log(index);
-    //     const data = [...courseTeeColors.teeColors]
-    //     data[index][e.target.name] = parseInt(e.target.value)
-    //     setTotalYards(data)
-    // }
+    // This Function hanldes when the user Changes the TeeColor yards , FRONT, BACK, TOTAL
+    const handleFormChangeTeeColorYards = (index , e) => {            
+        const data = [...courseTeeColors.teeColors]
+        data[index][e.target.name] = parseInt(e.target.value)
+        setTotalYards(data)
+    }
 
 
     // This Function Renders the TeesColors on the left hand side and also gets the yards for each hole
     const renderTees = () => {
         const findingYards = (hole, tees, teeColor, index) => {        
-            // console.log(hole);
-            const handleFormChangeYards = (tee, index, e) => {                
+            
+            const handleFormChangeYards = (tee, index, e) => {                                
                 const data = [...hole.tees]                
                 data[index][e.target.name] = parseInt(e.target.value)
-                setEditTeeArr(data)
-                
+                setEditTeeArr(data)                
             }
 
             for (let i = 0; i < tees.length; i++) {
@@ -183,25 +169,24 @@ function AdminCourseScoreCard() {
                                             <tr key={teeColor.id}>
                                                 <th>{teeColor.colors}</th>
                                                 <td>
-                                                    <input    
-                                                        id='`${teeColor.id}`'                                                    
+                                                    <input                                                                                                                                                              
                                                         name='front_nine_yards'
                                                         type='number'
                                                         value={teeColor.front_nine_yards}
-                                                        onChange={(e) => handleFormChangeTeeColorYards(id, e)}
+                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
                                                     />
                                                 </td>                                                   
                                                 <td>
-                                                    <input                                                    
-                                                        name='front_nine_yards'
+                                                    <input                                                                                              
+                                                        name='back_nine_yards'
                                                         type='number'
                                                         value={teeColor.back_nine_yards}
                                                         onChange={(e) => handleFormChangeTeeColorYards(index, e)}
                                                     />
                                                 </td>
                                                 <td>
-                                                    <input
-                                                        name='front_nine_yards'
+                                                    <input                                                        
+                                                        name='total_yards'
                                                         type='number'
                                                         value={teeColor.total_yards}
                                                         onChange={(e) => handleFormChangeTeeColorYards(index, e)}
@@ -212,6 +197,7 @@ function AdminCourseScoreCard() {
                                         ))}
                                     </tbody>
                                 </Table>
+                                <input type='submit'/>
                             </form>
                         </div>
                     )
