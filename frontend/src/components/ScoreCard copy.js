@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap'
 
 function ScoreCard({ round, frontNine, backNine }) {
     console.log(frontNine);
+    console.log(backNine);
     
     return (
         <div>
@@ -21,16 +22,16 @@ function ScoreCard({ round, frontNine, backNine }) {
                             <td key={i}>{holeStat.tee}</td>
                         ))}
                     </tr>
-                    <tr className='table-dark'>
+                    <tr>
                         <th>Par</th>
                         {round.holeScores.map((holeStat, i) => (
                             <td key={i}>{holeStat.par}</td>
                         ))}
                     </tr>
-                    <tr>
+                    <tr className='table-dark'>
                         <th>Score</th>
-                        {round.holeScores.map((holeStat, i) => (
-                            <td key={i}>{holeStat.strokes}</td>
+                        {round.holeScores.map((holeStat, i) => (                            
+                            <td className='score-card-strokes' key={i}>{holeStat.strokes}</td>
                         ))}
                     </tr>
                     <tr>

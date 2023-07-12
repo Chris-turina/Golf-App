@@ -116,6 +116,11 @@ function AdminCourseListScreen() {
                                             <Button variant='danger' className='btn-sm'onClick={() => deleteHandler(golfCourse.course_id)} >
                                                 <i className='fas fa-trash'></i>
                                             </Button>
+                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/score_card`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className="fa fa-arrow-right"></i>
+                                                </Button>
+                                            </LinkContainer>
 
                                             
                                         </td>

@@ -61,6 +61,7 @@ class Round(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     course = models.ForeignKey(GolfCourse, on_delete=models.SET_NULL, null=True)
     teeColorUsed = models.ForeignKey(TeeColor, on_delete=models.SET_NULL, null=True)
+    # Add a Date Played
 
     def __str__(self):
         return 'Round ' + str(self.id) + ' at ' + str(self.course)

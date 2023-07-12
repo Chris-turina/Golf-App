@@ -9,14 +9,12 @@ import StatCard from '../components/StatCard';
 import { render } from 'react-dom';
 import Title from '../components/Title';
 import { Button } from 'react-bootstrap';
-import ScoreCard from '../components/ScoreCard';
+import ScoreCardNine from '../components/ScoreCardNine';
 
 function RoundStatScreen() {
     const [showStats, setShowStats] = useState(true)
     const [plus, setPlus] = useState('+')
     const [showScoreCard, setShowScoreCard] = useState(false)
-    const [frontNine, setFrontNine] = useState( [] )
-    const [backNine, setBackNine] = useState( [] ) 
 
 
     const dispatch = useDispatch()
@@ -88,20 +86,33 @@ function RoundStatScreen() {
     }
 
     const renderScoreCard = () => {
-        console.log(round.holeScores.length);
+        // console.log(round.holeScores.length);
         
         if (loading == false) {
-            if (round.holeScores.length === 18) {
-                // console.log('Yes');
+            if (round.holeScores.length === 18) {                
                 const frontNine = round.holeScores.slice(0,9)
                 const backNine = round.holeScores.slice(9,18)
                 
                 return (
                     <div>
-                        <ScoreCard round={round} frontNine={frontNine} backNine={backNine} />
+                        {/* <ScoreCard round={round} frontNine={frontNine} backNine={backNine} /> */}
                     </div>
                 )
 
+            } else if (round.holeScores.length === 9) {
+
+                
+                // for (let i = 0; i < round.holeScores.length; i++) {
+                //     const hole = round.holeScores[i];                                                         
+                        
+                    
+                // }
+                // console.log(totalYards);
+                return (
+                    <div>
+                        <ScoreCardNine round={round} roundStats ={round.roundStats[0]}/>
+                    </div>
+                )
             }
 
 
