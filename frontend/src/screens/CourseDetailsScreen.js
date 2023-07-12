@@ -9,7 +9,9 @@ import Message from '../components/Message';
 import ScoreFormInput from '../components/ScoreFormInput';
 import { createRound } from '../actions/roundActions';
 import Title from '../components/Title';
+import { ROUND_CREATE_RESET } from '../constants/roundConstants';
 
+// TODO Change to Score Input Screen
 function CourseDetailsScreen() {
     
     const [selectedTee, setSelectedTee] = useState(0)
@@ -30,19 +32,29 @@ function CourseDetailsScreen() {
 
     const golfCourseTeeDetails = useSelector(state => state.golfCourseTeeDetails)
     const { loading, error, golfCourse} = golfCourseTeeDetails
+
+    const roundCreate = useSelector(state => state.roundCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate} = roundCreate
     
 
     useEffect(() => {
+
+        if (successCreate) {
+            dispatch({ type: ROUND_CREATE_RESET})
+            console.log('yes');
+            navigate('/rounds')
+        } 
+        
         if (!userInfo) {
             navigate('/login')
         } else {
             dispatch(listGolfCourseDetails(id))    
         }
-
         
-          
 
-    }, [dispatch, id])
+    }, [dispatch, id, successCreate])
+
+
 
     // This function handles when you click on a tee color, it takes the tee color ID and Color and sets the local state to determine which holes will be displayed
     const teeColorClickHandler = (teeId, color) => {
@@ -84,8 +96,8 @@ function CourseDetailsScreen() {
     }
 
     // This function handles the submition of the form and also converts all the values from the form into an Int instead of a string
-    const handleSubmit = () => {
-        // e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault()
         const data = selectedTeeHoles
         const newScore = []
         data.forEach(({color, hole, id, num, putts, score, yards}) => {
@@ -98,6 +110,7 @@ function CourseDetailsScreen() {
             teeColor: selectedTeeId,
             newScore: newScore
         }))
+
 
     }
 
@@ -126,7 +139,9 @@ function CourseDetailsScreen() {
 
 
     return (
-        <div>            
+        <div>        
+            {loadingCreate && <Loader />} 
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}   
             {loading 
                 ? <Loader />
                 : error 

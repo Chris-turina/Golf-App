@@ -24,6 +24,7 @@ import AdminCourseDetailScreen from "./screens/AdminCourseDetailScreen";
 import AdminCourseHoleDetailsScreen from "./screens/AdminCourseHoleDetailsScreen";
 import AdminCourseHoleEditScreen from "./screens/AdminCourseHoleEditScreen";
 import RoundStatScreen from "./screens/RoundStatScreen";
+import ScoreCardScreen from "./screens/ScoreCardScreen";
 // import ScoreFormInput from "./components/ScoreFormInput";
 
 
@@ -43,6 +44,8 @@ function App() {
 
               <Route path='rounds' element={<RoundsScreen />} />
               <Route path='rounds/:id/stats' element={<RoundStatScreen />} />
+              <Route path='rounds/:id/stats/scorecard' element={<ScoreCardScreen />} />
+              
 
 
               <Route path='profile' element={<ProfileScreen />} />

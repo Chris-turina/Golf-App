@@ -64,7 +64,7 @@
 }
 
 .background {
-  background-image: url("../images/golf-course-one.jpg");
+  background-color: #49974f;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -129,4 +129,31 @@
   background-color: green;
   color: white;
   padding: 8px;
+}
+
+.round-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  opacity: 0.9;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.round-card-title {
+  text-decoration: none;
+  text-decoration-style: none;
+  color: black;
+  transition: 0.01s;
+}
+
+.round-card-title:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.score-card-hole {
+  background-color: white;
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=app.css.map */

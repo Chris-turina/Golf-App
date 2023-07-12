@@ -74,7 +74,7 @@ def createTeeColor(request, pk):
     holes = Hole.objects.filter(course=pk)
     
     for hole in holes: 
-        Tee.objects.create(color=teeColor, yards=0,hole=hole,course=hole.course)
+        Tee.objects.create(color=teeColor, yards=0,hole=hole )
 
     serializer = TeeColorSerializer(teeColor, many=False)
 
@@ -205,7 +205,6 @@ def updateHole(request, pk, hk):
     hole.par = data['par']
 
     hole.save()
-    print('here')
     serializer = HoleSerializer(hole, many=False)
     return Response(serializer.data)
 

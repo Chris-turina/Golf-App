@@ -11,6 +11,10 @@ import {
     ROUND_CREATE_REQUEST,
     ROUND_CREATE_SUCCESS,
     ROUND_CREATE_FAIL,
+
+    ROUND_DELETE_REQUEST,
+    ROUND_DELETE_SUCCESS,
+    ROUND_DELETE_FAIL,
 } from "../constants/roundConstants";
 
 export const listRounds = () => async (dispatch, getState) => {
@@ -119,6 +123,41 @@ export const createRound = (round) => async(dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: ROUND_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const deleteRound = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type:ROUND_DELETE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.delete(
+            `/api/rounds/delete/${id}/`,
+            config
+        )
+
+        dispatch({
+            type: ROUND_DELETE_SUCCESS,
+        })
+    } catch (error) {
+        dispatch({
+            type: ROUND_DETAILS_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

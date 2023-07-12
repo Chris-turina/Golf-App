@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { listRoundStats } from '../actions/roundStatsActions'
 import { listRound } from '../actions/roundActions';
 import Loader from '../components/Loader';
@@ -8,10 +8,15 @@ import Message from '../components/Message';
 import StatCard from '../components/StatCard';
 import { render } from 'react-dom';
 import Title from '../components/Title';
+import { Button } from 'react-bootstrap';
+import ScoreCard from '../components/ScoreCard';
 
 function RoundStatScreen() {
     const [showStats, setShowStats] = useState(true)
     const [plus, setPlus] = useState('+')
+    const [showScoreCard, setShowScoreCard] = useState(false)
+    const [frontNine, setFrontNine] = useState( [] )
+    const [backNine, setBackNine] = useState( [] ) 
 
 
     const dispatch = useDispatch()
@@ -22,7 +27,7 @@ function RoundStatScreen() {
     const { userInfo } = userLogin
 
     const roundDetails = useSelector(state => state.roundDetails)
-    const { loading, error, round } = roundDetails
+    const { loading, error, success, round } = roundDetails
 
     const roundStats = useSelector(state => state.roundStats)
     const { loading: LoadingStats, error: errorStats, stats} = roundStats
@@ -38,9 +43,15 @@ function RoundStatScreen() {
         }
     }, [dispatch])
 
+    const handleShowScoreCard = () => {
+        if (showScoreCard === false) {
+            setShowScoreCard(true)
+        } else if (showScoreCard === true) {
+            setShowScoreCard(false)
+        }
+    }
 
     const renderStats = () => {      
-        console.log(round);  
         const score = stats.totalStrokes - stats.totalCoursePar
         let overUnderPar ='' 
         if (score > 0) {
@@ -76,6 +87,28 @@ function RoundStatScreen() {
         
     }
 
+    const renderScoreCard = () => {
+        console.log(round.holeScores.length);
+        
+        if (loading == false) {
+            if (round.holeScores.length === 18) {
+                // console.log('Yes');
+                const frontNine = round.holeScores.slice(0,9)
+                const backNine = round.holeScores.slice(9,18)
+                
+                return (
+                    <div>
+                        <ScoreCard round={round} frontNine={frontNine} backNine={backNine} />
+                    </div>
+                )
+
+            }
+
+
+            
+        }
+    }
+
     return (
         <div>
             {loading && LoadingStats
@@ -84,8 +117,11 @@ function RoundStatScreen() {
                     ? <Message variant='danger'>{error}</Message>
                     : (
                         <div className='my-container'>      
-                            <Title props={'Round Stats'} />
+                            <Title props={'Round Stats'} />                            
+                            <Button onClick={handleShowScoreCard}>Show ScoreCard</Button>                            
+                            {showScoreCard && renderScoreCard()}
                             {showStats && renderStats()}
+                            
                         </div>
                         
                     )

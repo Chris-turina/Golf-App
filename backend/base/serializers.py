@@ -93,9 +93,12 @@ class GolfCourseSerializer(serializers.ModelSerializer):
 
     
 class HoleScoreSerializer(serializers.ModelSerializer):
+    hole = serializers.IntegerField(source='hole.number')
+    par = serializers.IntegerField(source='hole.par')
+    tee = serializers.IntegerField(source='tee.yards')
     class Meta:
         model = HoleScore
-        fields = '__all__'        
+        fields = [ 'roundStat', 'hole', 'tee', 'strokes', 'putts', 'par' ]       
 
 class RoundStatsSerializer(serializers.ModelSerializer):
     class Meta:

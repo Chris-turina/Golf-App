@@ -8,6 +8,8 @@ urlpatterns = [
     path('create/', views.createRound, name='create-round'),
     path('<str:pk>/', views.getRound, name='round'),
     path('course/<str:pk>/tee_color/<str:tk>/create/', views.createRound, name='create-round'),
+    path('delete/<str:pk>/', views.deleteRound, name='delete-round'),
+
     
 
 ]

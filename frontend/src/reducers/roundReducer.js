@@ -10,6 +10,11 @@ import {
     ROUND_CREATE_REQUEST,
     ROUND_CREATE_SUCCESS,
     ROUND_CREATE_FAIL,
+    ROUND_CREATE_RESET,
+
+    ROUND_DELETE_REQUEST,
+    ROUND_DELETE_SUCCESS,
+    ROUND_DELETE_FAIL,
 } from "../constants/roundConstants";
 
 export const roundListReducer = (state = { rounds:[] }, action ) => {
@@ -55,6 +60,25 @@ export const roundCreateReducer = (state = {}, action) => {
 
         case ROUND_CREATE_FAIL:
             return { loading: false, error: action.payload}
+
+        case ROUND_CREATE_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}
+
+export const roundDeleteReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ROUND_DELETE_REQUEST:
+            return { loading: true }
+        
+        case ROUND_DELETE_SUCCESS:
+            return { loading: false, success: true}
+        
+        case ROUND_DELETE_FAIL:
+            return { loading: false, error: action.payload }
 
         default:
             return state

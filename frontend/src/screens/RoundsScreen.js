@@ -8,6 +8,7 @@ import { listRounds } from '../actions/roundActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listGolfCourses } from '../actions/golfCourseActions';
+import { deleteRound } from '../actions/roundActions';
 
 function RoundsScreen() {
     const [showRounds, setShowRounds] = useState(true)
@@ -30,6 +31,9 @@ function RoundsScreen() {
     const roundStats = useSelector(state => state.roundStats)
     const { loading: loadingStats, error: errorStats, stats } = roundStats
 
+    const roundDelete = useSelector(state => state.roundDelete)
+    const {loading: loadingDelete, error: errorDelete, success: successDelete} = roundDelete
+
     useEffect(() => {
         if (!userInfo) {
             navigate('login')
@@ -39,11 +43,16 @@ function RoundsScreen() {
             
             
         }
-    }, [dispatch, userInfo])
+    }, [dispatch, userInfo, successDelete])
+
+    const deleteHandler = (id) => {
+        if(window.confirm('Are you sure you want to delete this round?')) {
+            dispatch(deleteRound(id))
+        }
+    }
     
 
     const renderRounds = () => {
-        console.log(rounds);
         if (rounds.length === 0) {
             return (
                 <div>
@@ -56,14 +65,17 @@ function RoundsScreen() {
                 <div>
                     
                     {rounds.map(round => (
-                        <div key={round.id} style={{ backgroundColor: 'lightgray', border: '5px', borderStyle: 'solid', margin:'10px', padding: '10px'}}>   
-                            <Link to={`/rounds/${round.id}/stats`}>
-                                <h3>{round.course}</h3>
+                        <div key={round.id} className='round-card'>   
+                            <Link className='round-card-title' to={`/rounds/${round.id}/stats`}>
+                                <h3 className='round-card-title-text'>{round.course}</h3>
                             </Link>                                                
-                            <p> Tee: {round.teeColorUsed}</p>
+                            <p> Tee: <strong>{round.teeColorUsed}</strong></p>
                             <hr/>
-                            <p>Score: {round.roundStats[0].totalStrokes}</p>
+                            <p><strong>{round.roundStats[0].totalStrokes}</strong> strokes</p>
                             <hr/>
+                            <Button variant='danger' className='btn-sm'onClick={() => deleteHandler(round.id)} >
+                                <i className='fas fa-trash'></i>
+                            </Button>
                             
                         </div>
                     ))

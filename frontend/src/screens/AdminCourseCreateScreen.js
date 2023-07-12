@@ -12,12 +12,10 @@ import { GOLF_COURSE_UPDATE_RESET } from '../constants/golfCourseConstants';
 
 
 function AdminCourseCreateScreen() {
-
-    const { id } = useParams()
-
     const [name, setName] = useState('')
     const [numOfHoles, setNumOfHoles] = useState(0)
 
+    const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -39,8 +37,7 @@ function AdminCourseCreateScreen() {
                 
             } else {
                 setName(golfCourse.name)
-                setNumOfHoles(golfCourse.numOfHoles)
-                
+                setNumOfHoles(golfCourse.numOfHoles)            
             }
         }
         
@@ -63,9 +60,6 @@ function AdminCourseCreateScreen() {
             name,
             numOfHoles,
         }))
-
-
-        
         
     }
 

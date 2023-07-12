@@ -10,7 +10,7 @@ from base.serializers import RoundSerializer, HoleScoreSerializer
 
 from rest_framework import status
 
-
+# Gets all of the rounds for the specific user
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getRounds(request):
@@ -19,12 +19,31 @@ def getRounds(request):
     serializer = RoundSerializer(stats, many=True)
     return Response(serializer.data)
 
+# Gets 1 specific round
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getRound(request, pk):
     stats = Round.objects.get(id=pk)
     serializer = RoundSerializer(stats, many=False)
     return Response(serializer.data)
+
+#  Deletes the specific Round
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteRound(request, pk):
+    roundPlayed = Round.objects.get(id=pk)
+    roundStats = RoundStats.objects.get(roundStat=pk)
+
+    # Deletes the Round Instance
+    roundPlayed.delete()
+    # Deletes the Stats Instanace for this round Instance 
+    roundStats.delete()
+    
+    # TODO Delete Round Stats
+
+
+    return Response('Round Deleted')
+    
 
 
 # This View Creates a New Round instant, and also Creates a New RoundStat instat

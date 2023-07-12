@@ -11,8 +11,8 @@
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
 .background {
-    background-image: url('../images/golf-course-one.jpg');
-    // background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
+    // background-image: url('../images/golf-course-one.jpg');
+    background-color: rgba($color: rgb(73, 151, 79), $alpha: 1.0);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -85,5 +85,36 @@
     color: white;
     padding: 8px;
 }
+
+
+.round-card {
+    background-color: white;
+    border-radius: $border-radius;
+    max-width: 400px;
+    opacity: $opacity;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.round-card-title {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: black;
+    transition: .01s;
+    
+}
+
+.round-card-title:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+
+
+.score-card-hole {
+    background-color: white;
+    width:fit-content
+}
+
 
 

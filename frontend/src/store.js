@@ -48,6 +48,7 @@ import {
     roundListReducer,
     roundDetailsReducer,
     roundCreateReducer,
+    roundDeleteReducer,
 } from './reducers/roundReducer'
 
 import {
@@ -93,6 +94,7 @@ const reducer = combineReducers({
     roundCreate: roundCreateReducer,
 
     roundStats :roundStatsReducer,
+    roundDelete :roundDeleteReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
