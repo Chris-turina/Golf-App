@@ -34,9 +34,12 @@ class Hole(models.Model):
 
 class TeeColor(models.Model):
     course = models.ForeignKey(GolfCourse, on_delete=models.SET_NULL, null=True)
-    colors = models.CharField( blank=False, null=True, max_length=255)    
-    yards = models.IntegerField(unique=False, default=0)
+    colors = models.CharField( blank=False, null=True, max_length=255)
+    front_nine_yards = models.IntegerField(unique=False, default=0)
+    back_nine_yards = models.IntegerField(unique=False, default=0)
+    total_yards = models.IntegerField(unique=False, default=0)
     added_to_holes = models.BooleanField(default=False)
+
     
 
     def __str__(self):

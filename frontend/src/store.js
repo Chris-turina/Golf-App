@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { 
     golfCourseListReducer, 
     golfCourseReducer,
+    golfCourseDetailsReducer,
     golfCourseTeeDetailsReducer, 
     golfCourseHoleDetailsReducer,
     golfCourseCreateReducer,
@@ -58,6 +59,7 @@ import {
 
 const reducer = combineReducers({
     golfCourseList: golfCourseListReducer,
+    golfCourseDetails: golfCourseDetailsReducer,
     golfCourseTeeDetails: golfCourseTeeDetailsReducer,
     golfCourseHoleDetails: golfCourseHoleDetailsReducer,
     golfCourseCreate: golfCourseCreateReducer,

@@ -81,6 +81,7 @@ function AdminCourseListScreen() {
                                     <th>ID</th>
                                     <th>NAME</th>
                                     <th>HOLES</th>
+                                    <th>SCORECARD</th>
                                     <th>TEE COLORS</th>
                                     <th>EDIT/DELETE</th>
                                 </tr>
@@ -93,7 +94,14 @@ function AdminCourseListScreen() {
                                         <td>{golfCourse.name}</td>
                                         <td>
                                             {golfCourse.numOfHoles}
-                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/holes_details`}>
+                                            {/* <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/holes_details`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className="fa fa-arrow-right"></i>
+                                                </Button>
+                                            </LinkContainer> */}
+                                        </td>
+                                        <td>
+                                        <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/score_card`}>
                                                 <Button variant='light' className='btn-sm'>
                                                     <i className="fa fa-arrow-right"></i>
                                                 </Button>
@@ -116,11 +124,7 @@ function AdminCourseListScreen() {
                                             <Button variant='danger' className='btn-sm'onClick={() => deleteHandler(golfCourse.course_id)} >
                                                 <i className='fas fa-trash'></i>
                                             </Button>
-                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/score_card`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className="fa fa-arrow-right"></i>
-                                                </Button>
-                                            </LinkContainer>
+                                            
 
                                             
                                         </td>
