@@ -56,12 +56,7 @@ function AdminCourseListScreen() {
             <Row className='align-items-center'>
                 <Col>                    
                     <Title props={'Golf Courses'} />
-                </Col>
-                <Col className='text-right'>
-                    <Button className='my-3' onClick={createGolfCourseHandler}>
-                        <i className='fas fa-plus'></i> Create Golf Course
-                    </Button>
-                </Col>
+                </Col>                
             </Row>
 
             {loadingDelete && <Loader />}
@@ -81,7 +76,7 @@ function AdminCourseListScreen() {
                                     <th>ID</th>
                                     <th>NAME</th>
                                     <th>HOLES</th>
-                                    <th>SCORECARD</th>
+                                    <th>COURSE INFO</th>
                                     <th>TEE COLORS</th>
                                     <th>EDIT/DELETE</th>
                                 </tr>
@@ -130,6 +125,18 @@ function AdminCourseListScreen() {
                                         </td>
                                     </tr>
                                 ))}
+                                <tr>
+                                    <td>
+                                        <Button  size='sm' className='my-1' onClick={createGolfCourseHandler}>
+                                            <i  className='fas fa-plus' onClick={createGolfCourseHandler}></i>
+                                        </Button>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </Table>
                     )

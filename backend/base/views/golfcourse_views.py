@@ -70,7 +70,7 @@ def deleteGolfCourse(request, pk):
 @permission_classes([IsAdminUser])
 def createTeeColor(request, pk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
-    teeColor = golfCourse.teecolor_set.create(colors='TeeColor', yards=0, course=golfCourse)
+    teeColor = golfCourse.teecolor_set.create(colors='New Tee', front_nine_yards=0, back_nine_yards=0, total_yards=0, course=golfCourse)
     holes = Hole.objects.filter(course=pk)
     
     for hole in holes: 
@@ -255,6 +255,7 @@ def updateCourseTeeColors(request, pk):
     
     for teeColor in teeColors:        
         oldTeeColor = oldTeeColors.filter(id=teeColor['id'])
+        oldTeeColor.update(colors=teeColor['colors'])
         oldTeeColor.update(back_nine_yards=teeColor['back_nine_yards'])
         oldTeeColor.update(front_nine_yards=teeColor['front_nine_yards'])
         oldTeeColor.update(total_yards=teeColor['total_yards'])

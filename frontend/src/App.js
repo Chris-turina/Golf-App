@@ -25,7 +25,7 @@ import AdminCourseHoleDetailsScreen from "./screens/AdminCourseHoleDetailsScreen
 import AdminCourseHoleEditScreen from "./screens/AdminCourseHoleEditScreen";
 import RoundStatScreen from "./screens/RoundStatScreen";
 import ScoreCardScreen from "./screens/ScoreCardScreen";
-import AdminCourseScoreCard from "./screens/AdminCourseScoreCard";
+import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
 // import ScoreFormInput from "./components/ScoreFormInput";
 
 
@@ -57,7 +57,7 @@ function App() {
               <Route path='admin/user/:id/edit' element={<UserEditScreen />} />
 
               <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
-              <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseScoreCard />} />
+              <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} />
               
               <Route path='admin/golfcourse/:id/create' element={<AdminCourseCreateScreen />} />
               <Route path='admin/golfcourse/:id/edit' element={<AdminCourseEditScreen />} />

@@ -6,14 +6,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer'
-import { listGolfCourseDetails, updateGolfCourseHoles, updateGolfCourseTeeColors } from '../actions/golfCourseActions';
-import { createTees, deleteTeeBatch, addedToHole} from '../actions/teeActions';
-import { TEE_COLOR_CREATE_RESET } from '../constants/golfCourseConstants';
+import { 
+    listGolfCourseDetails, 
+    updateGolfCourseHoles, 
+    updateGolfCourseTeeColors, 
+    createTeeColor,
+    deleteTeeColor
+} from '../actions/golfCourseActions';
+import { deleteTeeBatch } from '../actions/teeActions';
+import Title from '../components/Title';
 
-function AdminCourseScoreCard() {
+function AdminCourseInfoScreen() {
     const [showTees, setShowTees] = useState(true)
     const [editTeeArr, setEditTeeArr] = useState( [] )
-    const [editTotalYards, setTotalYards] = useState( [] )
+    const [totalYards, setTotalYards] = useState( [] )
+    const [teeColorText, setTeeColorText] = useState( [] )
     const [editHolesArr, setEditHolesArr] = useState ( [] )
 
     const { id } = useParams()
@@ -29,6 +36,9 @@ function AdminCourseScoreCard() {
     const golfCourseTeeDetails = useSelector(state => state.golfCourseTeeDetails)
     const { loading: loadingTeeColors, error: errorTeeColors, golfCourse: courseTeeColors } = golfCourseTeeDetails
 
+    const teeColorDelete = useSelector(state => state.teeColorDelete)
+    const { loading: loadingTeeColorDelete, error: errorTeeColorDelete, success: successTeeColorDelete } = teeColorDelete
+
     useEffect(() => {
 
         if(!userInfo.isAdmin) {
@@ -36,7 +46,9 @@ function AdminCourseScoreCard() {
         } else {
             dispatch(listGolfCourseDetails(id))            
         }
-    }, [navigate, dispatch, id])    
+    }, [navigate, dispatch, id, successTeeColorDelete])    
+
+    console.log(courseTeeColors);
 
     // This Function handles the submit for updating the holes Yards
     const handleSubmit = (e) => {             
@@ -56,7 +68,8 @@ function AdminCourseScoreCard() {
     }
 
     // This Function hanldes when the user submits the TeeColor yards , FRONT, BACK, TOTAL
-    const handleTeeColorSubmit = (e) => {        
+    const handleTeeColorSubmit = (e) => {    
+        // e.preventDefault()    
         const data = [...courseTeeColors.teeColors]
         dispatch(updateGolfCourseTeeColors({
             teeColors: data,
@@ -69,6 +82,26 @@ function AdminCourseScoreCard() {
         const data = [...courseTeeColors.teeColors]
         data[index][e.target.name] = parseInt(e.target.value)
         setTotalYards(data)
+    }
+
+    const handleFormChangeTeeColorText = (index , e) => {            
+        const data = [...courseTeeColors.teeColors]
+        data[index][e.target.name] = e.target.value
+        setTeeColorText(data)
+    }
+
+    const createNewTeeColorHandler = () => {
+        dispatch(createTeeColor(courseTeeColors))
+    }
+
+    const deleteTeeColorHandler = (course_id, teeColor_id ) => {
+        if (window.confirm('Delete this TEE COLOR from all the holes in this course?')) {
+            dispatch(deleteTeeBatch(teeColor_id))            
+        }
+
+        if( window.confirm('Delete this TEE COLOR from the Course')) {
+            dispatch(deleteTeeColor(course_id, teeColor_id))
+        }
     }
 
 
@@ -116,7 +149,10 @@ function AdminCourseScoreCard() {
     return (
         <div>
             <Link to='/admin/golfcourselist'>
-                    Go Back
+                <Button>
+                    <i className="fa fa-arrow-left"></i>
+                </Button>
+                
             </Link>
             {loading && loadingTeeColors
                 ? (<Loader />)
@@ -124,8 +160,77 @@ function AdminCourseScoreCard() {
                     ? (<Message variant='danger'>{error}</Message>)
                     : (
                         <div>
+                            <Title props={`Course Info: ${courseHoles.name}`}/>
+                            <form onSubmit={handleTeeColorSubmit}>
+                                <Table bordered hover responsive >
+                                    <tbody>
+                                        <tr>
+                                            <th>Tee Colors</th>
+                                            <th>Front Nine Distance</th>
+                                            <th>Back Nine Distance</th>
+                                            <th>Total Yards</th>
+                                        </tr>
+                                        {courseTeeColors.teeColors.map((teeColor, index) => (
+                                            <tr key={teeColor.id}>
+                                                <th>
+                                                    <input
+                                                        style={{ border:'none', outline:'0', }}
+                                                        name='colors'
+                                                        type='text'
+                                                        value={teeColor.colors}
+                                                        onChange={(e) => handleFormChangeTeeColorText(index, e)}
+                                                    />
+                                                    <Button variant='danger' className='btn-sm'onClick={() => deleteTeeColorHandler(courseTeeColors.course_id, teeColor.id)} >
+                                                        <i className='fas fa-trash'></i>
+                                                    </Button>                                                    
+                                                </th>
+                                                <td>
+                                                    <input
+                                                        style={{border:'none'}}                                                                                                                                                              
+                                                        name='front_nine_yards'
+                                                        type='number'
+                                                        value={teeColor.front_nine_yards}
+                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
+                                                    />
+                                                </td>                                                   
+                                                <td>
+                                                    <input
+                                                        style={{border:'none'}}                                                                                              
+                                                        name='back_nine_yards'
+                                                        type='number'
+                                                        value={teeColor.back_nine_yards}
+                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        style={{border:'none'}}                                                        
+                                                        name='total_yards'
+                                                        type='number'
+                                                        value={teeColor.total_yards}
+                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
+                                                    />                                                    
+                                                </td>
+                                            </tr>
+                                            
+                                        ))}
+                                        <tr>
+                                            <td>
+                                            <Button size='sm' type='submit' onClick={createNewTeeColorHandler}>
+                                                <i className='fas fa-plus'></i>
+                                            </Button>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                                <input type='submit'/>
+                            </form>
+
                             <form onSubmit={handleSubmit}>
-                                <Table bordered responsive>                                
+                                <Table bordered hover responsive>                                
                                     <tbody>
                                         <tr>
                                             <th>Hole</th>
@@ -156,49 +261,7 @@ function AdminCourseScoreCard() {
                                 <input type='submit'/>
                             </form>
 
-                            <form onSubmit={handleTeeColorSubmit}>
-                                <Table>
-                                    <tbody>
-                                        <tr>
-                                            <th>Tee Colors</th>
-                                            <th>Front Nine Distance</th>
-                                            <th>Back Nine Distance</th>
-                                            <th>Total Yards</th>
-                                        </tr>
-                                        {courseTeeColors.teeColors.map((teeColor, index) => (
-                                            <tr key={teeColor.id}>
-                                                <th>{teeColor.colors}</th>
-                                                <td>
-                                                    <input                                                                                                                                                              
-                                                        name='front_nine_yards'
-                                                        type='number'
-                                                        value={teeColor.front_nine_yards}
-                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
-                                                    />
-                                                </td>                                                   
-                                                <td>
-                                                    <input                                                                                              
-                                                        name='back_nine_yards'
-                                                        type='number'
-                                                        value={teeColor.back_nine_yards}
-                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <input                                                        
-                                                        name='total_yards'
-                                                        type='number'
-                                                        value={teeColor.total_yards}
-                                                        onChange={(e) => handleFormChangeTeeColorYards(index, e)}
-                                                    />                                                    
-                                                </td>
-                                            </tr>
-                                            
-                                        ))}
-                                    </tbody>
-                                </Table>
-                                <input type='submit'/>
-                            </form>
+                            
                         </div>
                     )
             }
@@ -206,4 +269,4 @@ function AdminCourseScoreCard() {
     )
 }
 
-export default AdminCourseScoreCard
+export default AdminCourseInfoScreen
