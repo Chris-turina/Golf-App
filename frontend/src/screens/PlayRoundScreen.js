@@ -10,16 +10,15 @@ import ScoreFormInput from '../components/ScoreFormInput';
 import { createRound } from '../actions/roundActions';
 import Title from '../components/Title';
 import { ROUND_CREATE_RESET } from '../constants/roundConstants';
+import ScoreCard from '../components/ScoreCard';
 
 // TODO Change to Score Input Screen
-function CourseDetailsScreen() {
+function PlayRoundScreen() {
     
     const [selectedTee, setSelectedTee] = useState(0)
     const [selectedTeeId, setSelectedTeeId] = useState('')
     const [selectedTeeHoles, setSelectedTeeHoles] = useState([])
     const [showForm, setShowForm] = useState(false) 
-    
-    
     const [createArr, setCreateArr] = useState( [ {hole: '', yards: '', score: '', putts: '' }] )
 
 
@@ -50,12 +49,10 @@ function CourseDetailsScreen() {
         } else {
             dispatch(listGolfCourseDetails(id))    
         }
-        
 
     }, [dispatch, id, successCreate])
 
-
-
+// console.log(golfCourse);
     // This function handles when you click on a tee color, it takes the tee color ID and Color and sets the local state to determine which holes will be displayed
     const teeColorClickHandler = (teeId, color) => {
         setSelectedTee(color)
@@ -137,6 +134,19 @@ function CourseDetailsScreen() {
         )
     }
 
+    const renderScoreCard = () => {
+        
+        
+        return (
+            <ScoreCard                 
+                holes={golfCourse.holes}
+                teeUsed={selectedTee}
+                teeUsedId={selectedTeeId}
+
+            />
+        )
+    }
+
 
     return (
         <div>        
@@ -151,16 +161,19 @@ function CourseDetailsScreen() {
                             <Row>
                                 <Title props={golfCourse.name} />
                             </Row>
-                            <Row><p>Select the Tees you played</p></Row>
+                            <Row>
+                                <p>Select Tee Color</p>
+                            </Row>
                             <Row style={{marginBottom: '2rem'}}>
                                 {golfCourse.teeColors.map(teeColor => (
                                     <Col key={teeColor.id}>
                                         <Button onClick={() => teeColorClickHandler(teeColor.id, teeColor.colors)} >{teeColor.colors}</Button>
                                     </Col>
-                                ))}
+                                ))}                                
+                                
                             </Row>
                             <div>
-                                {showForm && renderForm()}
+                                {showForm && renderScoreCard()}
                             </div>                  
                         </div>
                         
@@ -172,4 +185,5 @@ function CourseDetailsScreen() {
     )
 }
 
-export default CourseDetailsScreen
+
+export default PlayRoundScreen

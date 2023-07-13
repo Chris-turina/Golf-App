@@ -13,7 +13,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import RoundsScreen from './screens/RoundsScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import CourseDetailsScreen from './screens/CourseDetailsScreen';
+import PlayRoundScreen from './screens/PlayRoundScreen';
 import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
@@ -50,7 +50,7 @@ function App() {
 
 
               <Route path='profile' element={<ProfileScreen />} />
-              <Route path='/golfcourses/:id' element={<CourseDetailsScreen />} />
+              <Route path='/golfcourses/:id' element={<PlayRoundScreen />} />
               <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
               
               <Route path='admin/userlist' element={<UserListScreen />} />

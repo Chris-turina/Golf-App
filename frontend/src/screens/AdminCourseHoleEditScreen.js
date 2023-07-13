@@ -1,3 +1,8 @@
+// This screen can be deleted during next refactor
+
+
+
+
 import React, {useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
