@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 
-function ScoreCard({ holes, teeUsed, teeUsedId }) {
+function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
     const [frontNine, setFrontNine] = useState( [] )
     const [backNine, setBackNine] = useState( [] )
     const [editFrontNineArr, setEditFrontNineArr] = useState( [] )
@@ -25,6 +25,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
     const [puttsIn, setPuttsIn] = useState(0)
     const [puttsTotal, setPuttsTotal] = useState(0)
 
+    const [submitedScore, setSubmitedScore] = useState( [] )
 
     
 
@@ -104,6 +105,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
         setStrokesOut(strokes);
         setEditFrontNineArr(data)
         setStrokesTotal(strokes + strokesIn)
+        
     }
 
     // Changes the state for the score for the second 9 holes, and the total for the second 9 holes
@@ -130,8 +132,10 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
             putts += hole.putts                        
         }
         setPuttsOut(putts)
-        setEditFrontNinePuttsArr(data)
+        // setEditFrontNinePuttsArr(data)
+        setEditFrontNineArr(data)
         setPuttsTotal(putts + puttsIn)
+        
     }
 
     // Changes the state for the putts for the second 9 holes, and the total for the second 9 holes
@@ -144,15 +148,19 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
             putts += hole.putts                        
         }
         setPuttsIn(putts)
-        setEditBackNinePuttsArr(data)
+        setEditBackNineArr(data)
         setPuttsTotal(puttsOut + putts)
     }
 
-
+    const handleSubmit = (e) => {        
+        e.preventDefault()
+        const data = frontNine.concat(backNine)
+        passState(data)
+    }
     
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Table responsive hover>
                     <thead>
                         <tr>
@@ -316,6 +324,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
                         </tr>
                     </tbody>                    
                 </Table>
+                <input type='submit'/>
             </form>
         </div>
     )

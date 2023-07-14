@@ -136,13 +136,23 @@ function PlayRoundScreen() {
 
     const renderScoreCard = () => {
         
+        const setStateFromScoreCard = (data) => {
+            console.log(data);
+            const newScore = []
+            setSelectedTeeHoles(newScore)      
+            dispatch(createRound({
+                golfCourse: golfCourse.course_id,
+                teeColor: selectedTeeId,
+                newScore: data
+            }))
+        }
         
         return (
             <ScoreCard                 
                 holes={golfCourse.holes}
                 teeUsed={selectedTee}
                 teeUsedId={selectedTeeId}
-
+                passState={setStateFromScoreCard}
             />
         )
     }
