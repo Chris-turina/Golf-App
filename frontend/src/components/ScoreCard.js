@@ -11,8 +11,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
     useEffect(() => {
 
         const setScoreCardState = async () => {            
-            const teesPlayed = []
-            // console.log(holes);
+            const teesPlayed = []            
 
             for (let i = 0; i < holes.length; i++) {
                 const hole = holes[i];                
@@ -24,18 +23,20 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
             }
             
 
-            if (holes.length > 9) {                              
+            if (holes.length > 9) {
+                // Cuts the Holes array in half to place on the score card
                 const frontNineHoles = holes.slice(0,9)
                 const backNineHoles = holes.slice(9,18)            
-                
-                
+                                
+                // Sets the State for the Front 9 and Back 9 holes
                 setFrontNine(frontNineHoles)
                 setBackNine(backNineHoles)                
                                                 
                 return '18'
                 
             } else if (holes.length <= 9) {
-                
+                const frontNineHoles = holes
+                setFrontNine(frontNineHoles)
             }
         }
         setScoreCardState()
@@ -44,97 +45,90 @@ function ScoreCard({ holes, teeUsed, teeUsedId }) {
     
     console.log(frontNine);
 
-    const renderFrontYards = () => {        
-        // const teesPlayed = []
-        const frontTeesPlayed = []
-        
-        
-        for (let i = 0; i < frontNine.length; i++) {
-            const hole = frontNine[i];            
-            for (let i = 0; i < hole.tees.length; i++) {
-                const tee = hole.tees[i];
-                if (tee.color === teeUsed) {
-                    frontTeesPlayed.push(tee)
-                    
-                }                                
-            }
-            
-        }
-
-        
-        
-        return (
-            frontTeesPlayed.map(tee => (
-                <td key={tee.id}>{tee.yards}</td>
-            ))
-           
-        )
-        
-    }
-
-    const renderBackYards = () => {
-        // const teesPlayed = []
-        const backTeesPlayed = []
-        
-
-        for (let i = 0; i < backNine.length; i++) {
-            const hole = backNine[i];            
-            for (let i = 0; i < hole.tees.length; i++) {
-                const tee = hole.tees[i];
-                if (tee.color === teeUsed) {
-                    backTeesPlayed.push(tee)                    
-                }                                
-            }            
-        }
-
-        return (
-            backTeesPlayed.map(tee => (
-                <td key={tee.id}>{tee.yards}</td>
-            ))
-    )
+    const handleChangeScore = (id, e) => {
+        console.log('Score Change');
+        // NEXT step here work on handleing the change by updating the state
     }
     
-
-
     return (
         <div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Hole</th> 
-                        {frontNine.map(hole => (
-                            <td key={hole.id}>{hole.number}</td>
-                        ))}
-                        <td>
-                            <strong>
-                                OUT
-                            </strong>
-                        </td>
-                        {backNine.map(hole => (
-                            <td key={hole.id}>{hole.number}</td>
-                        ))}
-                        <td>
-                            <strong>
-                                IN
-                            </strong>
-                        </td>                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>{teeUsed}</th>
-                        {frontNine.map(hole => (
-                            <td key={hole.id}>{hole.tees[0].yards}</td>
-                        ))}
-                        <td>OUT</td>
-                        {backNine.map(hole => (
-                            <td key={hole.id}>{hole.tees[0].yards}</td>
-                        ))}
-                        <td>IN</td>
-                    </tr>
-                </tbody>
-                
-            </Table>
+            <form>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Hole</th> 
+                            {frontNine.map(hole => (
+                                <td key={hole.id}>{hole.number}</td>
+                            ))}
+                            <td>
+                                <strong>
+                                    OUT
+                                </strong>
+                            </td>
+                            {backNine.map(hole => (
+                                <td key={hole.id}>{hole.number}</td>
+                            ))}
+                            <td>
+                                <strong>
+                                    IN
+                                </strong>
+                            </td>    
+                            <td>
+                                <strong>
+                                    TOTAL
+                                </strong>
+                            </td>                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{teeUsed}</th>
+                            {frontNine.map(hole => (
+                                <td key={hole.id}>{hole.tees[0].yards}</td>
+                            ))}
+                            <td>OUT</td>
+                            {backNine.map(hole => (
+                                <td key={hole.id}>{hole.tees[0].yards}</td>
+                            ))}
+                            <td>IN</td>
+                            <td>TOTAL</td>
+                        </tr>
+                        <tr>
+                            <th>Strokes</th>
+                            {frontNine.map(hole => (
+                                <td key={hole.id}>
+                                    <input
+                                        style={{border:'none', width:'50px'}} 
+                                        id='hole.id'
+                                        name='score'
+                                        type='number'
+                                        value={hole.tees[0].score}
+                                        onChange={(e) => handleChangeScore(hole.id, e)}
+                                    />
+                                </td>
+                            ))}
+                            <td>OUT</td>
+                            {backNine.map(hole => (
+                                <td key={hole.id}>{hole.tees[0].score}</td>
+                            ))}
+                            <td>IN</td>
+                            <td>TOTAL</td>
+                        </tr>
+                        <tr>
+                            <th>Putts</th>
+                            {frontNine.map(hole => (
+                                <td key={hole.id}>{hole.tees[0].putts}</td>
+                            ))}
+                            <td>OUT</td>
+                            {backNine.map(hole => (
+                                <td key={hole.id}>{hole.tees[0].putts}</td>
+                            ))}
+                            <td>IN</td>
+                            <td>TOTAL</td>
+                        </tr>
+                    </tbody>                    
+                </Table>
+            </form>
         </div>
     )
 }
