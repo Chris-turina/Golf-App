@@ -48,7 +48,6 @@ function AdminCourseInfoScreen() {
         }
     }, [navigate, dispatch, id, successTeeColorDelete])    
 
-    console.log(courseTeeColors);
 
     // This Function handles the submit for updating the holes Yards
     const handleSubmit = (e) => {             
@@ -112,7 +111,8 @@ function AdminCourseInfoScreen() {
             const handleFormChangeYards = (tee, index, e) => {                                
                 const data = [...hole.tees]                
                 data[index][e.target.name] = parseInt(e.target.value)
-                setEditTeeArr(data)                
+                setEditTeeArr(data)    
+                console.log(data);            
             }
 
             for (let i = 0; i < tees.length; i++) {
