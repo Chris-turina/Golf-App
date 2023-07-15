@@ -21,7 +21,6 @@ function ScoreCardDisplay({ round, roundStats, stats}) {
     const [puttsOut, setPuttsOut] = useState(0)
     const [puttsIn, setPuttsIn] = useState(0)
     
-console.log(round);
 console.log(roundStats);
     useEffect(() => {
         if (round.holeScores.length === 18) {
@@ -66,48 +65,48 @@ console.log(roundStats);
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.tee}</td>
                         ))}
-                        <td>OUT</td>
+                        <td>{roundStats.yards_out}</td>
                         {backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.tee}</td>
                         ))}
-                        <td>IN</td>
-                        <td>TOTAL</td>
+                        <td>{roundStats.yards_in}</td>
+                        <td>{roundStats.totalDistance}</td>
                     </tr>
                     <tr>
                         <th>Par</th>
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.par}</td>
                         ))}
-                        <td>PAR</td>
+                        <td>{roundStats.par_out}</td>
                         {backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.par}</td>
                         ))}
-                        <td>IN</td>
-                        <td>TOTAL</td>
+                        <td>{roundStats.par_in}</td>
+                        <td>{roundStats.totalCoursePar}</td>
                     </tr>
                     <tr className='table-dark'>
                         <th>Score</th>
                         {frontNine.map((holeStat, i) => (                            
                             <td className='score-card-strokes' key={i}>{holeStat.strokes}</td>
                         ))}
-                        <td>StrokesOUT</td>
+                        <td>{roundStats.score_out}</td>
                         {backNine.map((holeStat, i) => (                            
                             <td className='score-card-strokes' key={i}>{holeStat.strokes}</td>
                         ))}
-                        <td>STROKES-IN</td>
-                        <td>TOTAL</td>
+                        <td>{roundStats.score_in}</td>
+                        <td>{roundStats.totalStrokes}</td>
                     </tr>
                     <tr>
                         <th>Putts</th>
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.putts}</td>
                         ))}
-                        <td>PUTTS-OUT</td>
+                        <td>{roundStats.putts_out}</td>
                         {backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.putts}</td>
                         ))}
-                        <td>Puuts -IN</td>
-                        <td>TOTAL</td>
+                        <td>{roundStats.putts_in}</td>
+                        <td>{roundStats.totalPutts}</td>
                     </tr>
                 </tbody>      
             </Table>
