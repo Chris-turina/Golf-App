@@ -84,7 +84,16 @@ class HoleScore(models.Model):
 
     
 class RoundStats(models.Model):
+    # Change roundStat - to roundPlayed
     roundStat = models.ForeignKey(Round, on_delete=models.SET_NULL, null=True)
+    yards_out = models.IntegerField(validators=[MaxValueValidator(10000), MinValueValidator(1)], blank=True, null=True)
+    yards_in = models.IntegerField(validators=[MaxValueValidator(10000), MinValueValidator(1)], blank=True, null=True)
+    par_out = models.IntegerField(validators=[MaxValueValidator(50), MinValueValidator(1)], blank=True, null=True)
+    par_in = models.IntegerField(validators=[MaxValueValidator(50), MinValueValidator(1)], blank=True, null=True)
+    score_out  = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], default=0)
+    score_in = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], default=0)
+    putts_out = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], default=0)
+    putts_in = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], default=0)
     totalStrokes = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])
     totalPutts = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])
     totalCoursePar = models.IntegerField(validators=[MaxValueValidator(200), MinValueValidator(1)])

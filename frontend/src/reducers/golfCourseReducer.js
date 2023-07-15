@@ -65,7 +65,7 @@ export const golfCourseListReducer = (state = { golfCourses:[] }, action) => {
             return { loading: true, golfCourses: [] }
 
         case GOLF_COURSE_LIST_SUCCESS:
-            return { loading: false, golfCourses: action.payload }
+            return { loading: false, success: true, golfCourses: action.payload }
 
         case GOLF_COURSE_LIST_FAIL:
             return { loading: false, error: action.payload}

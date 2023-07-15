@@ -50,7 +50,10 @@ def deleteRound(request, pk):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createRound(request, pk, tk):
-    newScores = request.data
+    newData = request.data
+
+    newScores = newData['newScore']
+    newStats = newData['newStats']
     course = GolfCourse.objects.get(course_id=pk)
     teeColor = TeeColor.objects.get(id=tk)
     user = request.user   
@@ -83,9 +86,9 @@ def createRound(request, pk, tk):
         
         
         # These are for creating the stats
-        parArr.append(hole.par)
-        puttsArr.append(newScore['putts'])
-        strokesArr.append(newScore['score'])
+        # parArr.append(hole.par)
+        # puttsArr.append(newScore['putts'])
+        # strokesArr.append(newScore['score'])
 
         # Creates a new HoleScore Obj
         HoleScore.objects.create(
@@ -96,17 +99,25 @@ def createRound(request, pk, tk):
             putts = newScore['putts'],
         )
     
-    roundPar = sum(parArr)
-    roundPutts = sum(puttsArr)
-    roundStrokes = sum(strokesArr)
+    # roundPar = sum(parArr)
+    # roundPutts = sum(puttsArr)
+    # roundStrokes = sum(strokesArr)
     
     # Creates a new Round Stats
-    RoundStats.objects.create(
+    RoundStats.objects.create(        
         roundStat = newRound,
-        totalStrokes = roundStrokes,
-        totalPutts = roundPutts,
-        totalCoursePar = roundPar,
-        totalDistance = roundYards,
+        yards_out = newStats['yardsOut'],
+        yards_in = newStats['yardsIn'],
+        par_out = newStats['parOut'],
+        par_in = newStats['parIn'],
+        score_out = newStats['strokesOut'],
+        score_in = newStats['strokesIn'],
+        putts_out = newStats['puttsOut'],
+        putts_in = newStats['puttsIn'],       
+        totalStrokes = newStats['strokesTotal'],
+        totalPutts = newStats['puttsTotal'],
+        totalCoursePar = newStats['parTotal'],
+        totalDistance = newStats['yardsTotal'],
         totalHoles = roundHoles
     )
 

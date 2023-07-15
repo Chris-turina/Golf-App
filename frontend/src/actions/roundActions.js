@@ -93,6 +93,7 @@ export const listRound = (id) => async(dispatch, getState) => {
 }
 
 export const createRound = (round) => async(dispatch, getState) => {
+    console.log(round);
     try {
         dispatch({
             type: ROUND_CREATE_REQUEST
@@ -111,7 +112,9 @@ export const createRound = (round) => async(dispatch, getState) => {
 
         const { data } = await axios.post(
             `/api/rounds/course/${round.golfCourse}/tee_color/${round.teeColor}/create/`,
-            round.newScore,
+            // {newScore:round.newScore},
+            // {newStats:round.newStats},
+            round,
             config,
         )
 

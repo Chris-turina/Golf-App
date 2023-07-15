@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 
-function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
+function InputScoreCard({ holes, teeUsed, passState }) {
     const [frontNine, setFrontNine] = useState( [] )
     const [backNine, setBackNine] = useState( [] )
     const [editFrontNineArr, setEditFrontNineArr] = useState( [] )
     const [editBackNineArr, setEditBackNineArr] = useState( [] )
-    const [editFrontNinePuttsArr, setEditFrontNinePuttsArr] = useState( [] )
-    const [editBackNinePuttsArr, setEditBackNinePuttsArr] = useState( [] )
 
     const [yardsOut, setYardsOut] = useState(0)
     const [yardsIn, setYardsIn] = useState(0)
@@ -25,7 +23,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
     const [puttsIn, setPuttsIn] = useState(0)
     const [puttsTotal, setPuttsTotal] = useState(0)
 
-    const [submitedScore, setSubmitedScore] = useState( [] )
+    const [eightteenHoleCourse, setEightteenHoleCourse] = useState(true)
 
     
 
@@ -53,12 +51,12 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
         
             }        
             
-            // THis If statment is going to load what type of score card, either a 9 or 18 hole score car
-            // Note currently it only loads an 18 hole score card => I have not created the 9 hole score card functionality yet
+            // THis If statment is going to load what type of score card, either a 9 or 18 hole score car            
             if (holes.length > 9) {                
                 // Cuts the Holes array in half to place on the score card                
                 const frontNineHoles = teesPlayedArr.slice(0,9)
-                const backNineHoles = teesPlayedArr.slice(9,18)                                            
+                const backNineHoles = teesPlayedArr.slice(9,18)         
+                                                 
                 // Sets the State for the Front 9 and Back 9 holes
                 for (let i = 0; i < frontNineHoles.length; i++) {
                     const hole = frontNineHoles[i];
@@ -84,8 +82,19 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
                                                 
                 return '18'
                 
-            } else if (holes.length <= 9) {
-                const frontNineHoles = holes
+            } else if (holes.length === 9) {
+                
+                const frontNineHoles = teesPlayedArr
+                console.log(frontNineHoles);
+                for (let i = 0; i < frontNineHoles.length; i++) {
+                    const hole = frontNineHoles[i];
+                    yardsOutNum += hole.yards
+                    parOutNum += hole.par
+                }
+
+                setParOut(parOutNum)
+                setYardsOut(yardsOutNum);
+
                 setFrontNine(frontNineHoles)
             }
         }
@@ -94,7 +103,9 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
     }, [])
     
     // Changes the state for the score for the first 9 holes, and the total for the first 9 holes
-    const handleChangeScoreFront = (index , e) => {
+    const handleChangeScoreFront = (index , e) => {            
+        
+        console.log('no');
         let strokes = 0
         const data = [...frontNine]
         data[index][e.target.name] = parseInt(e.target.value)        
@@ -104,8 +115,7 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
         }
         setStrokesOut(strokes);
         setEditFrontNineArr(data)
-        setStrokesTotal(strokes + strokesIn)
-        
+        setStrokesTotal(strokes + strokesIn)        
     }
 
     // Changes the state for the score for the second 9 holes, and the total for the second 9 holes
@@ -132,7 +142,6 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
             putts += hole.putts                        
         }
         setPuttsOut(putts)
-        // setEditFrontNinePuttsArr(data)
         setEditFrontNineArr(data)
         setPuttsTotal(putts + puttsIn)
         
@@ -152,10 +161,25 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
         setPuttsTotal(puttsOut + putts)
     }
 
-    const handleSubmit = (e) => {        
-        e.preventDefault()
-        const data = frontNine.concat(backNine)
-        passState(data)
+    const handleSubmit = (e) => { 
+        e.preventDefault()       
+        // const data = frontNine.concat(backNine)
+        const holeScoreData = frontNine.concat(backNine)
+        const data = {
+            yardsOut, 
+            yardsIn, 
+            yardsTotal, 
+            parOut, 
+            parIn, 
+            parTotal, 
+            strokesOut, 
+            strokesIn, 
+            strokesTotal, 
+            puttsOut, 
+            puttsIn, 
+            puttsTotal,            
+        }        
+        passState(data, holeScoreData)
     }
     
     return (
@@ -330,4 +354,4 @@ function ScoreCard({ holes, teeUsed, teeUsedId, passState }) {
     )
 }
 
-export default ScoreCard
+export default InputScoreCard

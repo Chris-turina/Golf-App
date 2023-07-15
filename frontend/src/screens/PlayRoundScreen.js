@@ -10,7 +10,7 @@ import ScoreFormInput from '../components/ScoreFormInput';
 import { createRound } from '../actions/roundActions';
 import Title from '../components/Title';
 import { ROUND_CREATE_RESET } from '../constants/roundConstants';
-import ScoreCard from '../components/ScoreCard';
+import InputScoreCard from '../components/InputScoreCard';
 
 // TODO Change to Score Input Screen
 function PlayRoundScreen() {
@@ -83,75 +83,29 @@ function PlayRoundScreen() {
         }        
     }
 
-    // This Function handles each change that is made to the form and updates the state
-    const handleFormChange = (index, e) => {
-        const data  = [...selectedTeeHoles]
-        const createdValue = e.target.name
-        data[index][createdValue] = e.target.value
-        setCreateArr(data)        
 
-    }
-
-    // This function handles the submition of the form and also converts all the values from the form into an Int instead of a string
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const data = selectedTeeHoles
-        const newScore = []
-        data.forEach(({color, hole, id, num, putts, score, yards}) => {
-            newScore.push({ color, hole, id, putts:parseInt(putts), score:parseInt(score), yards })
-        })  
-        
-        setSelectedTeeHoles(newScore)      
-        dispatch(createRound({
-            golfCourse: golfCourse.course_id,
-            teeColor: selectedTeeId,
-            newScore: newScore
-        }))
-
-
-    }
-
-    // This function renders Each form input for each hole
-    const renderForm = () => {    
-        // console.log(selectedTeeHoles);        
-        return (
-            <div>                                
-                <form onSubmit={handleSubmit}>
-                    <div className='formScore'>
-                        {selectedTeeHoles.map((hole, index) => (
-
-                        <ScoreFormInput 
-                            props={hole} 
-                            handleChange = {(e) => handleFormChange(index, e)} 
-                            key={hole.id}
-                        />
-
-                        ))}
-                    </div>
-                    <input type='submit' />
-                </form>                
-            </div>
-        )
-    }
-
+    // This Functions Shows the Component InputScoreCard
     const renderScoreCard = () => {
         
-        const setStateFromScoreCard = (data) => {
-            console.log(data);
+        // This function handles the form submition from the data that is passed up from the child Component
+        const setStateFromScoreCard = (data, newScoreData) => {
+            // console.log(data);
             const newScore = []
             setSelectedTeeHoles(newScore)      
             dispatch(createRound({
                 golfCourse: golfCourse.course_id,
                 teeColor: selectedTeeId,
-                newScore: data
+                newScore: newScoreData,
+                newStats: data
+
             }))
         }
         
         return (
-            <ScoreCard                 
+            <InputScoreCard                 
                 holes={golfCourse.holes}
                 teeUsed={selectedTee}
-                teeUsedId={selectedTeeId}
+                // teeUsedId={selectedTeeId}
                 passState={setStateFromScoreCard}
             />
         )
@@ -179,18 +133,14 @@ function PlayRoundScreen() {
                                     <Col key={teeColor.id}>
                                         <Button onClick={() => teeColorClickHandler(teeColor.id, teeColor.colors)} >{teeColor.colors}</Button>
                                     </Col>
-                                ))}                                
-                                
+                                ))}                                                                
                             </Row>
                             <div>
                                 {showForm && renderScoreCard()}
                             </div>                  
-                        </div>
-                        
+                        </div>                        
                     )
-
-            }
-            
+            }            
         </div>
     )
 }

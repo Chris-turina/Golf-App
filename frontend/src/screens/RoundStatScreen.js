@@ -9,7 +9,7 @@ import StatCard from '../components/StatCard';
 import { render } from 'react-dom';
 import Title from '../components/Title';
 import { Button } from 'react-bootstrap';
-import ScoreCardNine from '../components/ScoreCardNine';
+import ScoreCardDisplay from '../components/ScoreCardDisplay';
 
 function RoundStatScreen() {
     const [showStats, setShowStats] = useState(true)
@@ -86,38 +86,11 @@ function RoundStatScreen() {
     }
 
     const renderScoreCard = () => {
-        // console.log(round.holeScores.length);
-        
-        if (loading == false) {
-            if (round.holeScores.length === 18) {                
-                const frontNine = round.holeScores.slice(0,9)
-                const backNine = round.holeScores.slice(9,18)
-                
-                return (
-                    <div>
-                        {/* <ScoreCard round={round} frontNine={frontNine} backNine={backNine} /> */}
-                    </div>
-                )
-
-            } else if (round.holeScores.length === 9) {
-
-                
-                // for (let i = 0; i < round.holeScores.length; i++) {
-                //     const hole = round.holeScores[i];                                                         
-                        
-                    
-                // }
-                // console.log(totalYards);
-                return (
-                    <div>
-                        <ScoreCardNine round={round} roundStats ={round.roundStats[0]}/>
-                    </div>
-                )
-            }
-
-
-            
-        }
+        return (
+            <div>
+                <ScoreCardDisplay round={round} roundStats ={round.roundStats[0]}/>
+            </div>
+        )
     }
 
     return (

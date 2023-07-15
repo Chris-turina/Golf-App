@@ -23,7 +23,7 @@ function RoundsScreen() {
     const { userInfo } = userLogin
 
     const roundList = useSelector(state => state.roundList)
-    const { loading, error, rounds } = roundList
+    const { loading, error, sucess, rounds } = roundList
 
     const golfCourseList = useSelector(state => state.golfCourseList)
     const { loading: loadingCourse, error: errorCourse, golfCourses } = golfCourseList
@@ -39,11 +39,17 @@ function RoundsScreen() {
             navigate('login')
         } else {            
             dispatch(listGolfCourses())
-            dispatch(listRounds())
-            
+            dispatch(listRounds())            
             
         }
+
+        if (successDelete) {
+            dispatch(listGolfCourses())
+            dispatch(listRounds())
+        }
     }, [dispatch, userInfo, successDelete])
+
+    console.log(stats);
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure you want to delete this round?')) {
@@ -53,7 +59,7 @@ function RoundsScreen() {
     
 
     const renderRounds = () => {
-        if (rounds.length === 0) {
+        if ( sucess && rounds.length === 0) {
             return (
                 <div>
                     <p>You Have not played any rounds!!!</p>

@@ -23,7 +23,7 @@ export const roundListReducer = (state = { rounds:[] }, action ) => {
             return { loading: true, rounds: [] }
 
         case ROUND_LIST_SUCCESS:
-            return { loading: false, rounds: action.payload }
+            return { loading: false, success: true, rounds: action.payload }
 
         case ROUND_LIST_FAIL:
             return { loading: false, error: action.payload }
