@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap'
 
-function ScoreCardDisplay({ round, roundStats}) {
+function ScoreCardDisplay({ round, roundStats, stats}) {
     
     const [eightteenHoleCourse, setEightteenHoleCourse] = useState(false)
     const [nineHoleCourse, setNineHoleCourse] = useState(false)
@@ -22,29 +22,11 @@ function ScoreCardDisplay({ round, roundStats}) {
     const [puttsIn, setPuttsIn] = useState(0)
     
 console.log(round);
-// console.log(roundStats);
+console.log(roundStats);
     useEffect(() => {
         if (round.holeScores.length === 18) {
             const frontNineArr = round.holeScores.slice(0,9)
             const backNineArr = round.holeScores.slice(9,18)
-
-            let yardsOutNum = 0
-            let yardsInNum = 0
-            let parOutNum = 0
-            let parInNum = 0
-            let scoreOutNum = 0
-            let scoreInNum = 0
-            let puttsOut = 0
-            let puttsIn = 0
-
-            for (let i = 0; i < frontNine.length; i++) {
-                const hole = frontNine[i];
-                
-            }
-
-
-
-
             setFrontNine(frontNineArr)
             setBackNine(backNineArr)
             setEightteenHoleCourse(true)

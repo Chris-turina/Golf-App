@@ -88,7 +88,7 @@ function RoundStatScreen() {
     const renderScoreCard = () => {
         return (
             <div>
-                <ScoreCardDisplay round={round} roundStats ={round.roundStats[0]}/>
+                <ScoreCardDisplay stats={stats} round={round} roundStats ={round.roundStats[0]}/>
             </div>
         )
     }
