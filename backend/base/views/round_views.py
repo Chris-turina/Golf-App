@@ -104,7 +104,8 @@ def createRound(request, pk, tk):
     # roundStrokes = sum(strokesArr)
     
     # Creates a new Round Stats
-    RoundStats.objects.create(        
+    RoundStats.objects.create(     
+        user = user,   
         roundStat = newRound,
         yards_out = newStats['yardsOut'],
         yards_in = newStats['yardsIn'],
