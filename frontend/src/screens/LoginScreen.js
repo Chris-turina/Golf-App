@@ -8,7 +8,7 @@ import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
 
 function LoginScreen() {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function LoginScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(login(email, password))
+        dispatch(login(username, password))
     }
     return (
         <FormContainer>
@@ -39,13 +39,13 @@ function LoginScreen() {
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 
-                <Form.Group controlId='email'>
-                    <Form.Label>Email Address</Form.Label>
+                <Form.Group controlId='username'>
+                    <Form.Label>User Name</Form.Label>
                     <Form.Control 
-                        type='email'
-                        placeholder='Enter Email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type='name'
+                        placeholder='User Name'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />                    
                 </Form.Group>
 

@@ -1,19 +1,19 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
+from .models import Profile,FriendRequestNotification, GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
 # GolfScore, Round
 
 
 ## Creating the user
 class UserSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField(read_only=True)
+    # name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin']
+        fields = ['id', '_id', 'username', 'email', 'first_name', 'last_name', 'isAdmin']
 
     def get__id(self,obj):
         return obj.id
@@ -21,24 +21,71 @@ class UserSerializer(serializers.ModelSerializer):
     def get_isAdmin(self,obj):
         return obj.is_staff
 
-    def get_name(self, obj):
-        name = obj.first_name
-        if name == '':
-            name = obj.email
-        return name
+    # def get_name(self, obj):
+    #     name = obj.first_name
+    #     if name == '':
+    #         name = obj.email
+    #     return name
     
 ## This class is used to register a new user, it uses the UserSerializer 
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
-        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin', 'token']
+        fields = ['id', '_id', 'username', 'email','first_name','last_name', 'isAdmin', 'token']
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
+    
 
 
+
+
+class ProfileSerializer(serializers.ModelSerializer):  
+    first_name = serializers.StringRelatedField(source='user.first_name')
+    last_name = serializers.StringRelatedField(source='user.last_name')
+    username = serializers.StringRelatedField(source='user.username')
+    sent_friend_requests = serializers.SerializerMethodField(read_only=True)
+    received_friend_requests = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = Profile
+        fields = [ 'id', 'first_name', 'last_name', 'username', 'handicap', 'friends', 'updated', 'created', 'sent_friend_requests', 'received_friend_requests'  ]
+    
+    def get_sent_friend_requests(self,obj):
+        sent_friend_requests = obj.friend_requests_sent.all()
+        serializer = FriendRequestNotificationSerializer(sent_friend_requests, many=True)
+        return serializer.data
+    
+    def get_received_friend_requests(self,obj):
+        received_friend_requests = obj.friend_requests_received.all()
+        serializer = FriendRequestNotificationSerializer(received_friend_requests, many=True)
+        return serializer.data
+
+
+
+class FriendRequestNotificationSerializer(serializers.ModelSerializer):
+    # receiver = serializers.StringRelatedField(read_only=True, many=False)
+    # sender = serializers.StringRelatedField(read_only=True, many=False)
+    receiver = serializers.SerializerMethodField(read_only=True)
+    sender = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = FriendRequestNotification 
+        fields = ['id','sender', 'receiver', 'action', 'updated', 'created']  
+        depth = 1      
+
+    def get_sender(self,obj):
+        user = User.objects.get(profile=obj.sender)
+        print(user.profile.id)
+        data = {"first_name":user.first_name, "last_name":user.last_name, "profile_id": user.profile.id}        
+        return data
+    
+    def get_receiver(self,obj):        
+        user = User.objects.get(profile=obj.receiver)
+        print(user.profile.id)
+        data = {"first_name":user.first_name, "last_name":user.last_name, "profile_id": user.profile.id}
+        return data
 
 
 
@@ -89,8 +136,6 @@ class GolfCourseSerializer(serializers.ModelSerializer):
 
     
 
-
-
     
 class HoleScoreSerializer(serializers.ModelSerializer):
     hole = serializers.IntegerField(source='hole.number')
@@ -99,6 +144,7 @@ class HoleScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = HoleScore
         fields = [ 'roundStat', 'hole', 'tee', 'strokes', 'putts', 'par' ]       
+
 
 class RoundStatsSerializer(serializers.ModelSerializer):
     class Meta:

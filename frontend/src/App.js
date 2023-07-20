@@ -49,7 +49,7 @@ function App() {
               
 
 
-              <Route path='profile' element={<ProfileScreen />} />
+              <Route path='profile/:id' element={<ProfileScreen />} />
               <Route path='/golfcourses/:id' element={<PlayRoundScreen />} />
               <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
               

@@ -30,7 +30,9 @@ console.log(roundStats);
             setBackNine(backNineArr)
             setEightteenHoleCourse(true)
         } else if (round.holeScores.length === 9) {
-            setNineHoleCourse(true)
+            setNineHoleCourse(true)            
+            const frontNineArr = round.holeScores
+            setFrontNine(frontNineArr)
         }
 
         
@@ -39,6 +41,8 @@ console.log(roundStats);
 
     console.log(eightteenHoleCourse);
     console.log(nineHoleCourse);
+
+    console.log(roundStats);
     
     
     return (
@@ -51,13 +55,12 @@ console.log(roundStats);
                             <td key={i}>{holeStat.hole}</td>
                         ))}
 
-                        {eightteenHoleCourse && <td>OUT</td>}
-                        {nineHoleCourse && <td>IN</td>}                                                
+                        {eightteenHoleCourse && <td>OUT</td>}                                                                     
 
-                        {backNine.map((holeStat, i) => (
+                        { eightteenHoleCourse && backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.hole}</td>
-                        ))}    
-                        <td>IN</td>                    
+                        ))}
+                        <td>IN</td>
                         <td>TOTAL</td>
                     </tr>
                     <tr>
@@ -65,8 +68,9 @@ console.log(roundStats);
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.tee}</td>
                         ))}
-                        <td>{roundStats.yards_out}</td>
-                        {backNine.map((holeStat, i) => (
+                        {eightteenHoleCourse && <td>{roundStats.yards_out}</td>}
+
+                        {eightteenHoleCourse && backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.tee}</td>
                         ))}
                         <td>{roundStats.yards_in}</td>
@@ -77,7 +81,9 @@ console.log(roundStats);
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.par}</td>
                         ))}
-                        <td>{roundStats.par_out}</td>
+
+                        {eightteenHoleCourse && <td>{roundStats.par_out}</td>}
+
                         {backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.par}</td>
                         ))}
@@ -89,7 +95,8 @@ console.log(roundStats);
                         {frontNine.map((holeStat, i) => (                            
                             <td className='score-card-strokes' key={i}>{holeStat.strokes}</td>
                         ))}
-                        <td>{roundStats.score_out}</td>
+                        {eightteenHoleCourse && <td>{roundStats.score_out}</td>}
+
                         {backNine.map((holeStat, i) => (                            
                             <td className='score-card-strokes' key={i}>{holeStat.strokes}</td>
                         ))}
@@ -101,7 +108,8 @@ console.log(roundStats);
                         {frontNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.putts}</td>
                         ))}
-                        <td>{roundStats.putts_out}</td>
+                        {eightteenHoleCourse && <td>{roundStats.putts_out}</td>}
+
                         {backNine.map((holeStat, i) => (
                             <td key={i}>{holeStat.putts}</td>
                         ))}

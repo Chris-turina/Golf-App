@@ -8,7 +8,9 @@ import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
 
 function RegisterScreen() {
-    const [name, setName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -36,7 +38,8 @@ function RegisterScreen() {
         if(password != confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            dispatch(register(name, email, password))
+            console.log(firstName, lastName);
+            dispatch(register(firstName, lastName, username, email, password))
         }
     }
 
@@ -49,14 +52,36 @@ function RegisterScreen() {
 
             <Form onSubmit={submitHandler}>
 
-                <Form.Group controlId='name'>
-                    <Form.Label>Name</Form.Label>
+                <Form.Group controlId='firstName'>
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control 
                         type='name'
                         required
-                        placeholder='Enter Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        placeholder='First Name'
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group controlId='lastName'>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control 
+                        type='name'
+                        required
+                        placeholder='Last Name'
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group controlId='username'>
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control 
+                        type='name'
+                        required
+                        placeholder='User Name'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
 
@@ -65,7 +90,7 @@ function RegisterScreen() {
                     <Form.Control 
                         type='email'
                         required
-                        placeholder='Enter Email'
+                        placeholder='Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
@@ -76,7 +101,7 @@ function RegisterScreen() {
                     <Form.Control 
                         type='password'
                         required
-                        placeholder='Enter Password'
+                        placeholder='Password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />

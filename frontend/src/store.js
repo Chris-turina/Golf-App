@@ -56,6 +56,9 @@ import {
     roundStatsReducer,
 } from './reducers/roundStatsReducer'
 
+import {
+    profileReducer
+} from './reducers/profileReducer'
 
 const reducer = combineReducers({
     golfCourseList: golfCourseListReducer,
@@ -90,6 +93,8 @@ const reducer = combineReducers({
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
+
+    profile:profileReducer,
 
     roundList: roundListReducer,
     roundDetails :roundDetailsReducer,

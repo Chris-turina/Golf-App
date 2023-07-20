@@ -34,7 +34,7 @@ import {
     USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (username, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_LOGIN_REQUEST
@@ -48,7 +48,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = await axios.post(
             '/api/users/login/',
-            { 'username': email, 'password': password },
+            { 'username': username, 'password': password },
             config
         )
 
@@ -76,7 +76,7 @@ export const logout = () => (dispatch) => {
     dispatch({ type: USER_LIST_RESET })
 }
 
-export const register = ( name, email, password) => async (dispatch) => {
+export const register = ( firstName, lastName, username, email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -90,7 +90,7 @@ export const register = ( name, email, password) => async (dispatch) => {
 
         const { data } = await axios.post(
             '/api/users/register/', 
-            { 'name': name, 'email': email, 'password': password},
+            { 'firstName': firstName, 'lastName': lastName, 'username':username, 'email': email, 'password': password},
             config
         )
 
@@ -171,7 +171,7 @@ export const updateUserProfile = ( user ) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/profile/update/`,
+            `/api/users/details/update/`,
             user,
             config
         )

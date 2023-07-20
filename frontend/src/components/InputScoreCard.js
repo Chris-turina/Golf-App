@@ -23,7 +23,8 @@ function InputScoreCard({ holes, teeUsed, passState }) {
     const [puttsIn, setPuttsIn] = useState(0)
     const [puttsTotal, setPuttsTotal] = useState(0)
 
-    const [eightteenHoleCourse, setEightteenHoleCourse] = useState(true)
+    const [eightteenHoleCourse, setEightteenHoleCourse] = useState(false)
+    const [nineHoleCourse, setNineHoleCourse] = useState(false)
 
     
 
@@ -68,6 +69,7 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                     yardsInNum += hole.yards
                     parInNum += hole.par
                 }
+                setEightteenHoleCourse(true)
 
                 setParOut(parOutNum)
                 setParIn(parInNum)
@@ -88,12 +90,16 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                 console.log(frontNineHoles);
                 for (let i = 0; i < frontNineHoles.length; i++) {
                     const hole = frontNineHoles[i];
-                    yardsOutNum += hole.yards
-                    parOutNum += hole.par
+                    yardsInNum += hole.yards
+                    parInNum += hole.par
                 }
+                setNineHoleCourse(true)
 
-                setParOut(parOutNum)
-                setYardsOut(yardsOutNum);
+                setParIn(parInNum)
+                setParTotal(parInNum)
+
+                setYardsIn(yardsInNum);
+                setYardsTotal(yardsInNum)
 
                 setFrontNine(frontNineHoles)
             }
@@ -113,9 +119,16 @@ function InputScoreCard({ holes, teeUsed, passState }) {
             const hole = data[i];            
             strokes += hole.score                        
         }
-        setStrokesOut(strokes);
-        setEditFrontNineArr(data)
-        setStrokesTotal(strokes + strokesIn)        
+
+        if (nineHoleCourse === true) {
+            setStrokesIn(strokes);    
+            setStrokesTotal(strokes)
+            setEditFrontNineArr(data)
+        } else {
+            setStrokesOut(strokes);
+            setEditFrontNineArr(data)
+            setStrokesTotal(strokes + strokesIn)        
+        } 
     }
 
     // Changes the state for the score for the second 9 holes, and the total for the second 9 holes
@@ -141,9 +154,18 @@ function InputScoreCard({ holes, teeUsed, passState }) {
             const hole = data[i];            
             putts += hole.putts                        
         }
-        setPuttsOut(putts)
-        setEditFrontNineArr(data)
-        setPuttsTotal(putts + puttsIn)
+
+        if (nineHoleCourse === true) {
+            console.log('yes');
+            setPuttsIn(putts)
+            setPuttsTotal(putts)
+            setEditFrontNineArr(data)
+        } else {
+            setPuttsOut(putts)
+            setEditFrontNineArr(data)
+            setPuttsTotal(putts + puttsIn)
+        }
+        
         
     }
 
@@ -192,12 +214,12 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                             {frontNine.map((hole) => (
                                 <td key={hole.id}>{hole.num}</td>
                             ))}
-                            <td>
+                            {eightteenHoleCourse && <td>
                                 <strong>
                                     OUT
                                 </strong>
-                            </td>
-                            {backNine.map(hole => (
+                            </td>}
+                            {eightteenHoleCourse && backNine.map(hole => (
                                 <td key={hole.id}>{hole.num}</td>
                             ))}                            
                             <td>
@@ -218,12 +240,12 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                             {frontNine.map(hole => (
                                 <td key={hole.id}>{hole.yards}</td>
                             ))}
-                            <td>
+                            {eightteenHoleCourse && <td>
                                 <strong>
                                     {yardsOut}
                                 </strong>
-                            </td>
-                            {backNine.map(hole => (
+                            </td>}
+                            {eightteenHoleCourse && backNine.map(hole => (
                                 <td key={hole.id}>{hole.yards}</td>
                             ))}
                             <td>
@@ -242,12 +264,12 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                             {frontNine.map(hole => (
                                 <td key={hole.id}>{hole.par}</td>
                             ))}
-                            <td>
+                            {eightteenHoleCourse && <td>
                                 <strong>
                                     {parOut}
                                 </strong>
-                            </td>
-                            {backNine.map(hole => (
+                            </td>}
+                            {eightteenHoleCourse && backNine.map(hole => (
                                 <td key={hole.id}>{hole.par}</td>
                             ))}
                             <td>
@@ -276,12 +298,12 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                                     />
                                 </td>
                             ))}
-                            <td>
+                            {eightteenHoleCourse && <td>
                                 <strong>
                                     {strokesOut}
                                 </strong>
-                            </td>
-                            {backNine.map((hole, index) => (
+                            </td>}
+                            {eightteenHoleCourse && backNine.map((hole, index) => (
                                 <td key={hole.id}>
                                     <input
                                             style={{border:'none', width:'50px'}} 
@@ -318,12 +340,12 @@ function InputScoreCard({ holes, teeUsed, passState }) {
                                     />
                                 </td>
                             ))}
-                            <td>
+                            {eightteenHoleCourse && <td>
                                 <strong>
                                     {puttsOut}
                                 </strong>
-                            </td>
-                            {backNine.map((hole, index) => (
+                            </td>}
+                            {eightteenHoleCourse && backNine.map((hole, index) => (
                                 <td key={hole.id}>
                                     <input
                                         style={{border:'none', width:'50px'}} 

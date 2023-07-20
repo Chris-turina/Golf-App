@@ -48,6 +48,7 @@ function AdminCourseListScreen() {
     }
     // create a new instance of course 
     const createGolfCourseHandler = () => {
+        console.log('Create Course');
         dispatch(createGolfCourse())
     }
 
@@ -76,8 +77,7 @@ function AdminCourseListScreen() {
                                     <th>ID</th>
                                     <th>NAME</th>
                                     <th>HOLES</th>
-                                    <th>COURSE INFO</th>
-                                    <th>TEE COLORS</th>
+                                    <th>COURSE INFO</th>                                    
                                     <th>EDIT/DELETE</th>
                                 </tr>
                             </thead>
@@ -101,14 +101,7 @@ function AdminCourseListScreen() {
                                                     <i className="fa fa-arrow-right"></i>
                                                 </Button>
                                             </LinkContainer>
-                                        </td>
-                                        <td>
-                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/details`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className="fa fa-arrow-right"></i>
-                                                </Button>
-                                            </LinkContainer>
-                                        </td>
+                                        </td>                                        
                                         <td>
                                             <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/edit`}>
                                                 <Button variant='light' className='btn-sm'>

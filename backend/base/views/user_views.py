@@ -4,10 +4,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.views.generic import DetailView
+import datetime
 
-# from base.models import GolfCourse, TeeColor, Tee, Hole, GolfScore, Round
+
 from django.contrib.auth.models import User
-from base.serializers import GolfCourseSerializer, TeeSerializer, TeeColorSerializer, HoleSerializer, UserSerializer, UserSerializerWithToken 
+from base.models import Profile
+from base.serializers import ProfileSerializer, UserSerializer, UserSerializerWithToken 
 # Create your views here.
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -34,30 +36,35 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-
-    try:
-        user = User.objects.create(
-            first_name=data['name'],
-            username=data['email'],
-            email=data['email'],
-            password=make_password(data['password'])
-        )
-
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
-    except:
-        message = {'detail': 'User with this email already exists'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    # try:
+    
+    user = User.objects.create(
+        first_name=data['firstName'],
+        last_name=data['lastName'],
+        username=data['username'],
+        email=data['email'],
+        password=make_password(data['password']),
+        
+    )
+    
+    
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+    # except:
+    #     message = {'detail': 'User with this email already exists'}
+    #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def updateUserProfile(request):
+def updateUser(request):
     user = request.user
     serializer = UserSerializerWithToken(user, many=False)
 
     data = request.data
-    user.first_name = data['name']
+    user.first_name = data['firstName']
+    user.last_name = data['lastName']
+    user.username = data['username']
     user.username = data['email']
     user.email = data['email']
 
@@ -72,7 +79,7 @@ def updateUserProfile(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getUserProfile(request):
+def getUser(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
@@ -87,9 +94,10 @@ def getUsers(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def getUserById(request, pk):
-    user = User.objects.get(id=pk)
+    print(request.user)
+    user = request.user
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
@@ -101,8 +109,9 @@ def updateUser(request, pk):
 
     data = request.data
 
-    user.first_name = data['name']
-    user.username = data['email']
+    user.first_name = data['firstName']
+    user.last_name = data['lastName']
+    user.username = data['username']    
     user.email = data['email']
     user.is_staff = data['isAdmin']
 
