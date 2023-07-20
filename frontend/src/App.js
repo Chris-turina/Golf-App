@@ -18,11 +18,6 @@ import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import AdminCourseListScreen from "./screens/AdminCourseListScreen";
-import AdminCourseEditScreen from "./screens/AdminCourseEditScreen";
-import AdminCourseCreateScreen from "./screens/AdminCourseCreateScreen";
-import AdminCourseDetailScreen from "./screens/AdminCourseDetailScreen";
-import AdminCourseHoleDetailsScreen from "./screens/AdminCourseHoleDetailsScreen";
-import AdminCourseHoleEditScreen from "./screens/AdminCourseHoleEditScreen";
 import RoundStatScreen from "./screens/RoundStatScreen";
 import ScoreCardScreen from "./screens/ScoreCardScreen";
 import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
@@ -45,9 +40,7 @@ function App() {
 
               <Route path='rounds' element={<RoundsScreen />} />
               <Route path='rounds/:id/stats' element={<RoundStatScreen />} />
-              {/* <Route path='rounds/:id/stats/scorecard' element={<ScoreCardScreen />} /> */}
-              
-
+        
 
               <Route path='profile/:id' element={<ProfileScreen />} />
               <Route path='/golfcourses/:id' element={<PlayRoundScreen />} />
@@ -58,14 +51,6 @@ function App() {
 
               <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
               <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} />
-              
-              <Route path='admin/golfcourse/:id/create' element={<AdminCourseCreateScreen />} />
-              <Route path='admin/golfcourse/:id/edit' element={<AdminCourseEditScreen />} />
-              <Route path='admin/golfcourse/:id/details' element={<AdminCourseDetailScreen />} />
-              <Route path='admin/golfcourse/:id/holes_details' element={<AdminCourseHoleDetailsScreen />} />
-              <Route path='admin/golfcourse/:id/holes_edit' element={<AdminCourseHoleEditScreen />} />
-
-
 
             </Routes>
           </Container>
