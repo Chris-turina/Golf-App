@@ -10,12 +10,15 @@ import { GOLF_COURSE_CREATE_RESET } from '../constants/golfCourseConstants';
 import Title from '../components/Title';
 
 function AdminCourseListScreen() {
+    const [showCourseEdit, setShowCourseEdit] = useState(false)
+    const [name, setName] = useState('')
+    const [numOfHoles, setNumOfHoles] = useState(0)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const golfCourseList = useSelector(state => state.golfCourseList)
-    const { loading, error, golfCourses, } = golfCourseList
+    const { loading, error, success, golfCourses, } = golfCourseList
 
     const golfCourseDelete = useSelector(state => state.golfCourseDelete)
     const { loading: loadingDelete, error: errorDelete, success: successDelete} = golfCourseDelete
@@ -26,19 +29,23 @@ function AdminCourseListScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    useEffect(() => {
-        dispatch({ type: GOLF_COURSE_CREATE_RESET })
-
+    useEffect(() => {        
+        dispatch({ type: GOLF_COURSE_CREATE_RESET})
         if (!userInfo.isAdmin) {
             navigate('/login')
-        }
-
-        if(successCreate) {
-            navigate(`/admin/golfcourse/${createdGolfCourse.course_id}/create`)
         } else {
             dispatch(listGolfCourses()) 
         }
-    }, [dispatch, navigate, userInfo, successDelete, successCreate, createdGolfCourse])
+
+        if (successCreate) {
+            navigate(`/admin/golfcourselist/create/${createdGolfCourse.course_id}`)
+        }
+
+        if (successDelete) {
+            dispatch(listGolfCourses()) 
+        }
+
+    }, [dispatch, navigate, userInfo, successDelete, successCreate ])
 
     // Delete a Course
     const deleteHandler = (id) => {
@@ -47,8 +54,7 @@ function AdminCourseListScreen() {
         }
     }
     // create a new instance of course 
-    const createGolfCourseHandler = () => {
-        console.log('Create Course');
+    const createGolfCourseHandler = () => {        
         dispatch(createGolfCourse())
     }
 
@@ -88,47 +94,36 @@ function AdminCourseListScreen() {
                                         <td>{golfCourse.course_id}</td>
                                         <td>{golfCourse.name}</td>
                                         <td>
-                                            {golfCourse.numOfHoles}
-                                            {/* <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/holes_details`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className="fa fa-arrow-right"></i>
-                                                </Button>
-                                            </LinkContainer> */}
+                                            {golfCourse.numOfHoles}                                            
                                         </td>
                                         <td>
-                                        <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/score_card`}>
+                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/score_card`}>
                                                 <Button variant='light' className='btn-sm'>
                                                     <i className="fa fa-arrow-right"></i>
                                                 </Button>
                                             </LinkContainer>
                                         </td>                                        
-                                        <td>
-                                            <LinkContainer to={`/admin/golfcourse/${golfCourse.course_id}/edit`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className='fas fa-edit'></i>
-                                                </Button>                                            
-                                            </LinkContainer>
+                                        <td>                                            
+                                            <Button variant='light' className='btn-sm' onClick={() => setShowCourseEdit(true)}>
+                                                <i className='fas fa-edit'></i>
+                                            </Button>                                                                                        
 
                                             <Button variant='danger' className='btn-sm'onClick={() => deleteHandler(golfCourse.course_id)} >
                                                 <i className='fas fa-trash'></i>
-                                            </Button>
-                                            
-
-                                            
+                                            </Button>                                                                                    
                                         </td>
                                     </tr>
                                 ))}
                                 <tr>
                                     <td>
                                         <Button  size='sm' className='my-1' onClick={createGolfCourseHandler}>
-                                            <i  className='fas fa-plus' onClick={createGolfCourseHandler}></i>
+                                            Add
                                         </Button>
                                     </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td></td>                                    
                                 </tr>
                             </tbody>
                         </Table>

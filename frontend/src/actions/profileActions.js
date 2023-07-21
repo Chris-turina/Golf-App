@@ -46,3 +46,75 @@ export const showProfile = () => async (dispatch, getState) => {
     }
 }
 
+export const updateFriendRequestProfile = (status, requestId) => async (dispatch, getState) => {
+    console.log(status, requestId);
+    try{
+        dispatch({ type: PROFILE_UPDATE_REQUEST })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            }            
+
+        const { data } = await axios.put(
+            `/api/f_r_notifications/update/${requestId}`,
+            status,
+            config,
+        )
+
+        dispatch({
+            type: PROFILE_UPDATE_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const updateProfile = (status, requestId) => async (dispatch, getState) => {
+    console.log(status, requestId);
+    try{
+        dispatch({ type: PROFILE_UPDATE_REQUEST })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            }            
+
+        const { data } = await axios.put(
+            `/api/profiles/my_profile/update/`,
+            data,
+            config,
+        )
+
+        dispatch({
+            type: PROFILE_UPDATE_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+

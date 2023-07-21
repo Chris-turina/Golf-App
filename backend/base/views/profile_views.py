@@ -41,7 +41,6 @@ def getFriendRequestNotifications(request):
 def getFriendRequestNotification(request):
     profile = Profile.objects.get(user=request.user)    
     sent_friend_requests =  FriendRequestNotification.objects.filter(sender=profile)
-    print(sent_friend_requests)
     return Response('requests')
 
 @api_view(['POST'])
@@ -49,11 +48,8 @@ def getFriendRequestNotification(request):
 def sendFriendRequest(request):
     data = request.data
     pk = request.data['receiver']
-    print(pk)
     sender = Profile.objects.get(user=request.user)
     receiver = Profile.objects.get(user_id=pk)
-    print(sender)
-    print(receiver)
     friend_ship = FriendRequestNotification.objects.create(
         sender=sender,
         receiver=receiver,

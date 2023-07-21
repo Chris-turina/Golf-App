@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function FriendRequest({ request, type, selection }) {
 
-    const handleSelection = (e) => {
-        const data = e.target.value
-        selection(data)
+    const handleSelection = (e) => {        
+        // const data = e.target.value
+        const data = {"status":e.target.value}
+        console.log(data);
+        selection(data, request.id)
     }
 
 
@@ -15,11 +17,11 @@ function FriendRequest({ request, type, selection }) {
             <div style={{display:'flex', justifyContent:'space-between', backgroundColor: 'white'}}>
                 <p>{request.sender.first_name} {request.sender.last_name}</p>
                 <div>
-                    <Button variant='success' className='my-1' value='accept' onClick={(e) => handleSelection(e)}>
+                    <Button variant='success' className='my-1' value='accepted' onClick={(e) => handleSelection(e)}>
                         Accept
                     </Button>
 
-                    <Button variant='danger' className='my-1' value='decline' onClick={(e) => handleSelection(e)}>
+                    <Button variant='danger' className='my-1' value='rejected' onClick={(e) => handleSelection(e)}>
                         Decline
                     </Button>
                     

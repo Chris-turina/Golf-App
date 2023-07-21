@@ -81,7 +81,7 @@ export const golfCourseDetailsReducer = (state = { golfCourse: {} }, action) => 
             return { loading: true, golfCourse: {} }
 
         case GOLF_COURSE_DETAILS_SUCCESS:
-            return { loading: false, golfCourse: action.payload }
+            return { loading: false, success: true, golfCourse: action.payload }
 
         case GOLF_COURSE_DETAILS_FAIL:
             return { loading: false, error: action.payload}

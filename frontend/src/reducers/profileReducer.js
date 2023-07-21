@@ -22,7 +22,7 @@ export const profileReducer = (state = {profile:{} }, action) => {
         case PROFILE_FAIL:
             return { loading: false, error: action.payload}
         
-        case PROFILE_FAIL:
+        case PROFILE_RESET:
             return {}
 
         default:

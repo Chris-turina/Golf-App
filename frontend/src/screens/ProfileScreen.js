@@ -6,7 +6,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
-import { showProfile } from '../actions/profileActions'
+import { showProfile, updateFriendRequestProfile } from '../actions/profileActions'
+import { updateFriendRequest } from '../actions/friendRequestActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 import FriendRequest from '../components/FriendRequest';
 
@@ -19,6 +20,7 @@ function ProfileScreen() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
     const [showRequests, setShowRequests] = useState(false)
+    const [receivedRequestArr, setReceivedRequestArr] = useState( [] )
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -37,6 +39,9 @@ function ProfileScreen() {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
+    const freindRequest = useSelector(state => state.freindRequest)
+    const {loading: loadingFriendRequest, success: successFriendRequest, f_r_notification} = FriendRequest
+
     useEffect(() => {
         if(!userInfo) {
             navigate('/login')
@@ -49,7 +54,7 @@ function ProfileScreen() {
                 setLastName(user.last_name)
                 setUsername(user.username)
                 setEmail(user.email)
-                setShowRequests(true)
+                setShowRequests(true)                
             }
             
             
@@ -71,12 +76,9 @@ function ProfileScreen() {
                 'password': password            
             }))
         }
-    }
-    
-    console.log(myProfile);
+    }    
 
-    const renderFriendList = () => {
-
+    const renderFriendList = () => {        
         if (myProfile.friends.length === 0) {
             return (
                 <Col md={4}>
@@ -88,9 +90,10 @@ function ProfileScreen() {
         } else {
             return (
                 <Col md={4}>
+                    <h2>Friends</h2>
                     <div style={{ backgroundColor:'white'}}>
                         {myProfile.friends.map( friend => (
-                            <p>Hello</p>
+                            <p key={friend}>Hello</p>
                         ))}
                     </div>
                 </Col>
@@ -99,18 +102,36 @@ function ProfileScreen() {
     }
 
     const renderRequests = () => {
-
-        const handleFriendRequest = (status) => {
-            console.log(status);
+        const allFriendRequestArr = myProfile.received_friend_requests
+        const newFriendRequests = []
+        for (let i = 0; i < allFriendRequestArr.length; i++) {
+            const request = allFriendRequestArr[i];
+            console.log(request);
+            if (request.action === 1) {
+                console.log('TRUE');
+                newFriendRequests.push(request)
+            }
         }
 
+        const handleFriendRequestOnClick = (status, requestId) => {          
+            if (status.status === 'accepted') {
+                console.log('TRUE');                
+                // return dispatch(updateFriendRequest(status, requestId))
+                dispatch(updateFriendRequestProfile(status, requestId))
+                dispatch(showProfile())
+
+            } else if (status.status === 'rejected') {
+                console.log('FALSE');
+                dispatch(updateFriendRequest(status, requestId))
+            }
+        }
         return(
             <Col md={4}>
                 <Row>
                     <h2>New Friend Requests</h2>
                     <div>                        
-                        {myProfile.received_friend_requests.map(request => (
-                            <FriendRequest key={request.id} selection={handleFriendRequest} request={request} type={'received'} />
+                        {newFriendRequests.map(request => (
+                            <FriendRequest key={request.id} selection={handleFriendRequestOnClick} request={request} type={'received'} />
                         ))}
                     </div>
                 </Row>
@@ -133,7 +154,7 @@ function ProfileScreen() {
                 <h2>User Info</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
-                {loading && loadingProfile && <Loader />}
+                {loading && loadingProfile && loadingFriendRequest && <Loader />}
 
                 <Form onSubmit={submitHandler}>
 

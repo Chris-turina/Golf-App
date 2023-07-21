@@ -48,6 +48,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.StringRelatedField(source='user.username')
     sent_friend_requests = serializers.SerializerMethodField(read_only=True)
     received_friend_requests = serializers.SerializerMethodField(read_only=True)
+    friends = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Profile
         fields = [ 'id', 'first_name', 'last_name', 'username', 'handicap', 'friends', 'updated', 'created', 'sent_friend_requests', 'received_friend_requests'  ]
@@ -61,6 +62,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         received_friend_requests = obj.friend_requests_received.all()
         serializer = FriendRequestNotificationSerializer(received_friend_requests, many=True)
         return serializer.data
+    
+    def get_friends(self, obj):
+        profiles = obj.profile_friends.all()
+        profiles_details= []
+        for profile in profiles:
+            profiles_details.append({
+                "first_name":profile.user.first_name,
+                "last_name":profile.user.first_name,
+                "username":profile.user.username,
+                "profile_id":profile.id
+            })
+        return profiles_details
 
 
 
@@ -76,14 +89,12 @@ class FriendRequestNotificationSerializer(serializers.ModelSerializer):
         depth = 1      
 
     def get_sender(self,obj):
-        user = User.objects.get(profile=obj.sender)
-        print(user.profile.id)
+        user = User.objects.get(profile=obj.sender)        
         data = {"first_name":user.first_name, "last_name":user.last_name, "profile_id": user.profile.id}        
         return data
     
     def get_receiver(self,obj):        
-        user = User.objects.get(profile=obj.receiver)
-        print(user.profile.id)
+        user = User.objects.get(profile=obj.receiver)        
         data = {"first_name":user.first_name, "last_name":user.last_name, "profile_id": user.profile.id}
         return data
 

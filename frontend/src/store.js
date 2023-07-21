@@ -60,6 +60,10 @@ import {
     profileReducer
 } from './reducers/profileReducer'
 
+import {
+    freindRequestReducer
+} from './reducers/friendRequestReducer'
+
 const reducer = combineReducers({
     golfCourseList: golfCourseListReducer,
     golfCourseDetails: golfCourseDetailsReducer,
@@ -95,6 +99,8 @@ const reducer = combineReducers({
     userUpdate: userUpdateReducer,
 
     profile:profileReducer,
+
+    freindRequest:freindRequestReducer,
 
     roundList: roundListReducer,
     roundDetails :roundDetailsReducer,
