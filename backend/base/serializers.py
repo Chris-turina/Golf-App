@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Profile,FriendRequestNotification, GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
+from django.db.models import Q
 # GolfScore, Round
 
 
@@ -64,15 +65,29 @@ class ProfileSerializer(serializers.ModelSerializer):
         return serializer.data
     
     def get_friends(self, obj):
-        profiles = obj.profile_friends.all()
-        profiles_details= []
-        for profile in profiles:
-            profiles_details.append({
-                "first_name":profile.user.first_name,
-                "last_name":profile.user.first_name,
-                "username":profile.user.username,
-                "profile_id":profile.id
-            })
+        profiles = obj.profile_friends.all()        
+        current_user = obj
+        if profiles:
+            profiles_details= []
+            for profile in profiles:            
+                sent = obj.friend_requests_sent.filter(Q(sender=current_user) | Q(receiver=current_user)).values()
+                received = obj.friend_requests_received.filter(Q(sender=current_user) | Q(receiver=current_user)).values()            
+                
+                if received and not sent:                    
+                    request_id = received[0]['id']            
+                if sent and not received:                    
+                    request_id = sent[0]['id']
+
+                profiles_details.append({                
+                    "first_name":profile.user.first_name,
+                    "last_name":profile.user.last_name,
+                    "username":profile.user.username,
+                    "profile_id":profile.id,
+                    # "friend_request_id":request_id
+                })
+        else:            
+            profiles_details= []
+        
         return profiles_details
 
 

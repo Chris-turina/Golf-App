@@ -12,7 +12,7 @@ import CourseSelector from './screens/CourseSelector';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import RoundsScreen from './screens/RoundsScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import ProfileScreen from './screens/ProfileScreens/ProfileScreen';
 import PlayRoundScreen from './screens/PlayRoundScreen';
 import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
 import UserListScreen from "./screens/UserListScreen";
@@ -22,6 +22,7 @@ import RoundStatScreen from "./screens/RoundStatScreen";
 import ScoreCardScreen from "./screens/ScoreCardScreen";
 import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
 import AdminCourseCreateScreen from "./screens/AdminCourseCreateScreen"
+import FriendListScreen from "./screens/ProfileScreens/FriendListScreen";
 // import ScoreFormInput from "./components/ScoreFormInput";
 
 
@@ -44,6 +45,7 @@ function App() {
         
 
               <Route path='profile/:id' element={<ProfileScreen />} />
+              <Route path='profile/:id/friends' element={<FriendListScreen />} />
               <Route path='/golfcourses/:id' element={<PlayRoundScreen />} />
               <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
               

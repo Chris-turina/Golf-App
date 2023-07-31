@@ -1,19 +1,26 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
+import { useNavigate, redirect } from 'react-router-dom';
+import {browserHistory} from 'react-router'
 
 function Header () {
+// WORKING ON GETTING THE LOGOUT BUTTON TO NAVIGATE TO THE HOME PAGE ON LOGOUT
+    const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)    
     const { userInfo } = userLogin
 
     const dispatch = useDispatch()
 
-    const logoutHandler = () => {
+    const logoutHandler = () => {        
         dispatch(logout())
+
     }
+
+
 
     return (
         <header>
@@ -40,7 +47,10 @@ function Header () {
                                     <LinkContainer to={`/profile/${userInfo.id}`}>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+
+                                    {/* <LinkContainer to="/"> */}
+                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    {/* </LinkContainer>                                     */}
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">

@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams, redirect } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import FormContainer from '../components/FormContainer';
-import { getUserDetails, updateUserProfile } from '../actions/userActions';
-import { showProfile, updateFriendRequestProfile } from '../actions/profileActions'
-import { updateFriendRequest } from '../actions/friendRequestActions'
-import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
-import FriendRequest from '../components/FriendRequest';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
+import FormContainer from '../../components/FormContainer';
+import { getUserDetails, updateUserProfile } from '../../actions/userActions';
+import { showProfile, updateFriendRequestList, findFriendsProfiles } from '../../actions/profileActions'
+import { updateFriendRequest } from '../../actions/friendRequestActions'
+import { USER_UPDATE_PROFILE_RESET } from '../../constants/userConstants';
+import FriendRequest from '../../components/FriendRequest';
+import ProfileSideHeader from '../../components/ProfileSideHeader';
 
-function ProfileScreen() {
+export default function ProfileScreen() {
     const [firstName, setFirstName] = useState('')
+    const [userId, setUserId] = useState(0)
     const [lastName, setLastName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -21,6 +24,10 @@ function ProfileScreen() {
     const [message, setMessage] = useState('')
     const [showRequests, setShowRequests] = useState(false)
     const [receivedRequestArr, setReceivedRequestArr] = useState( [] )
+
+    const [renderProfile, setRenderProfile] = useState(true)
+    const [showFriends, setShowFriends] = useState(false)
+
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -39,28 +46,38 @@ function ProfileScreen() {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
-    const freindRequest = useSelector(state => state.freindRequest)
-    const {loading: loadingFriendRequest, success: successFriendRequest, f_r_notification} = FriendRequest
+    const friendRequest = useSelector(state => state.freindRequest)
+    const {loading: loadingFriendRequest, success: successFriendRequest, f_r_notification} = friendRequest
+
+    const profileList = useSelector(state => state.profileList)
+    const {loading: loadingProfilesList, profiles} = profileList
+
 
     useEffect(() => {
         if(!userInfo) {
-            navigate('/login')
+            console.log('1');
+            navigate('/login')            
         } else {
             if (!user || success || userInfo._id !== user._id ) {
+                console.log('2');
                 dispatch(getUserDetails(id))
                 dispatch(showProfile())                 
             } else {
+                console.log('3');
                 setFirstName(user.first_name)
                 setLastName(user.last_name)
                 setUsername(user.username)
                 setEmail(user.email)
+                setUserId(userInfo.id)
                 setShowRequests(true)                
-            }
-            
-            
+            }                        
         }
-    }, [dispatch, id, user, success, userInfo])
+    }, [dispatch, id, user, success, userInfo, successFriendRequest])
+// console.log(!userInfo);
+//     console.log(firstName);
+//     console.log(myProfile);
 
+    // THIS FUNCTION CALLS THE ACTION TO CHANGE THE USER INFORMATION
     const submitHandler = (e) => {
         e.preventDefault()
 
@@ -78,6 +95,7 @@ function ProfileScreen() {
         }
     }    
 
+    // THIS FUNCTION SHOWS THE FRIEND LIST
     const renderFriendList = () => {        
         if (myProfile.friends.length === 0) {
             return (
@@ -89,11 +107,11 @@ function ProfileScreen() {
             )
         } else {
             return (
-                <Col md={4}>
+                <Col md={3}>
                     <h2>Friends</h2>
                     <div style={{ backgroundColor:'white'}}>
                         {myProfile.friends.map( friend => (
-                            <p key={friend}>Hello</p>
+                            <p key={friend.profile_id}>{friend.first_name} {friend.last_name}</p>
                         ))}
                     </div>
                 </Col>
@@ -101,28 +119,35 @@ function ProfileScreen() {
         }
     }
 
+    // THIS FUNCTION SHOWS THE FRIEND REQUESTS THAT HAVE BEEN SENT AND REQUESTED
     const renderRequests = () => {
-        const allFriendRequestArr = myProfile.received_friend_requests
+        const allNewFriendRequestArr = myProfile.received_friend_requests
+        const allPendingFriendRequestsArr = myProfile.sent_friend_requests
         const newFriendRequests = []
-        for (let i = 0; i < allFriendRequestArr.length; i++) {
-            const request = allFriendRequestArr[i];
-            console.log(request);
+        const pendingFriendRequests = []
+        for (let i = 0; i < allNewFriendRequestArr.length; i++) {
+            const request = allNewFriendRequestArr[i];            
             if (request.action === 1) {
-                console.log('TRUE');
                 newFriendRequests.push(request)
             }
         }
 
-        const handleFriendRequestOnClick = (status, requestId) => {          
-            if (status.status === 'accepted') {
-                console.log('TRUE');                
-                // return dispatch(updateFriendRequest(status, requestId))
-                dispatch(updateFriendRequestProfile(status, requestId))
-                dispatch(showProfile())
+        for (let i = 0; i < allPendingFriendRequestsArr.length; i++) {
+            const request = allPendingFriendRequestsArr[i];
+            if (request.action === 1) {
+                pendingFriendRequests.push(request)
+            }
+            
+        }
 
-            } else if (status.status === 'rejected') {
-                console.log('FALSE');
-                dispatch(updateFriendRequest(status, requestId))
+        const handleFriendRequestOnClick = (data) => {          
+            console.log(data);
+            if (data.status === 'accepted') {               
+                dispatch(updateFriendRequest(data))
+                // dispatch(showProfile())
+
+            } else if (data.status === 'rejected') {
+                dispatch(updateFriendRequest(data))
             }
         }
         return(
@@ -138,7 +163,7 @@ function ProfileScreen() {
                 <Row>
                     <h2>Pending Requests</h2>
                     <div>
-                        {myProfile.sent_friend_requests.map(request => (
+                        {pendingFriendRequests.map(request => (
                             <FriendRequest key={request.id} request={request} type={'sent'} />
                         ))}
                     </div>
@@ -148,9 +173,52 @@ function ProfileScreen() {
         )
     }
 
+    // THIS FUNCTION SHOWS THE SEARCH BAR TO FIND FRIENDS
+    const renderFindFriends = () => {
+        const handleOnChange = (e) => {
+            if (e.target.value !== '') {
+                const searchTerm = e.target.value
+                dispatch(findFriendsProfiles(searchTerm))  
+            }
+                  
+        }
+
+        const handleSend = (data) => {                       
+            dispatch(updateFriendRequest(data))            
+        }
+
+        return (
+            <Col>
+                <Row>
+                    <p>Find Friends</p>
+                    <input onChange={e => handleOnChange(e)} type='search'></input>
+                </Row>
+                <Row>
+                    {profiles.map(profile => (
+                        <FriendRequest key={profile.id} type={'send'} profile={profile} handleSend={handleSend}  />
+                    ))}
+                </Row>
+
+            </Col>
+        )
+    }
+
+    const handleRenderChange = (e) => {
+        const page = e.target.value
+        if (page === 'profile') {
+            setShowFriends(false)
+            setRenderProfile(true)
+        } else if (page === 'friends') {
+            setShowFriends(true)
+            setRenderProfile(false)
+        }
+    }
+
     return (
-        <Row>
-            <Col md={4}>
+        <Row>        
+            {loading && <Loader />}
+            <ProfileSideHeader userId={userId} />
+            {renderProfile && <Col md={4}>
                 <h2>User Info</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
@@ -223,13 +291,12 @@ function ProfileScreen() {
                     </Button>
 
                 </Form>
-            </Col>
+            </Col>}
 
-            {successProfile === true && renderFriendList()}
-            {successProfile === true && renderRequests()}   
+            {showFriends && renderFriendList()}
+            {showFriends && renderRequests()}
+            {showFriends && renderFindFriends()}
                     
         </Row>
     )
 }
-
-export default ProfileScreen

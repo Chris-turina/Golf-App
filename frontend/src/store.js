@@ -57,7 +57,8 @@ import {
 } from './reducers/roundStatsReducer'
 
 import {
-    profileReducer
+    profileReducer,
+    profileListReducer
 } from './reducers/profileReducer'
 
 import {
@@ -99,6 +100,7 @@ const reducer = combineReducers({
     userUpdate: userUpdateReducer,
 
     profile:profileReducer,
+    profileList:profileListReducer,
 
     freindRequest:freindRequestReducer,
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { redirect } from 'react-router-dom';
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -33,6 +34,12 @@ import {
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
 } from '../constants/userConstants';
+
+import {
+    PROFILE_RESET,
+    PROFILE_LIST_RESET,
+    PROFILE_UPDATE_RESET
+} from '../constants/profileConstants'
 
 export const login = (username, password) => async (dispatch) => {
     try {
@@ -74,6 +81,9 @@ export const logout = () => (dispatch) => {
     dispatch({ type: USER_LOGOUT })
     dispatch({ type: USER_DETAILS_RESET })
     dispatch({ type: USER_LIST_RESET })
+    dispatch({ type: PROFILE_RESET })
+    dispatch({ type: PROFILE_LIST_RESET })
+    // dispatch({ type: PROFILE_RESET })
 }
 
 export const register = ( firstName, lastName, username, email, password) => async (dispatch) => {

@@ -6,8 +6,8 @@ import {
     UPDATE_F_R_NOTIFICATION_RESET
 } from '../constants/friendRequestContstants'
 
-export const updateFriendRequest = (status, requestId) => async (dispatch, getState) => {
-    console.log(requestId);
+export const updateFriendRequest = (status) => async (dispatch, getState) => {
+    console.log(status);
     try {
         dispatch({ type: UPDATE_F_R_NOTIFICATION_REQUEST })
 
@@ -23,14 +23,14 @@ export const updateFriendRequest = (status, requestId) => async (dispatch, getSt
         }
 
         const { data } = await axios.put(
-            `/api/f_r_notifications/update/${requestId}`,
-            data,
+            `/api/f_r_notifications/update/`,
+            status,
             config
         )
-            console.log('HIT');
+
         dispatch({
             type: UPDATE_F_R_NOTIFICATION_SUCCESS,
-            payload: status
+            payload: data
         })
     } catch (error) {
         dispatch({
@@ -41,39 +41,3 @@ export const updateFriendRequest = (status, requestId) => async (dispatch, getSt
         })
     }
 }
-
-// export const updateFriendRequest = (status, requestId) => async (dispatch, getState) => {
-//     console.log(requestId);
-//     try {
-//         dispatch({ type: UPDATE_F_R_NOTIFICATION_REQUEST })
-
-//         const {
-//             userLogin: { userInfo },
-//         } = getState()
-
-//         const config = {
-//             headers: {
-//                 'Content-type': 'application/json',
-//                 Authorization: `Bearer ${userInfo.token}`
-//             }
-//         }
-
-//         const { data } = await axios.put(
-//             `/api/f_r_notifications/update/${requestId}`,
-//             data,
-//             config
-//         )
-//             console.log('HIT');
-//         dispatch({
-//             type: UPDATE_F_R_NOTIFICATION_SUCCESS,
-//             payload: status
-//         })
-//     } catch (error) {
-//         dispatch({
-//             type: UPDATE_F_R_NOTIFICATION_FAIL,
-//             payload: error.response && error.response.data.detail
-//                 ? error.response.data.detail
-//                 : error.message,
-//         })
-//     }
-// }

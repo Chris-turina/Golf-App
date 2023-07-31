@@ -39,4 +39,16 @@ def post_save_delete_from_friends(sender, created, instance, **kwargs):
         receiver_.save()
         instance.delete()
     
+    
+@receiver(post_save, sender=FriendRequestNotification)
+def post_save_delete_from_friends(sender, created, instance, **kwargs):
+    sender_ = instance.sender
+    receiver_ = instance.receiver
+    if instance.action==4:
+        sender_.friends.remove(receiver_.profile)
+        receiver_.friends.remove(sender_.profile)
+        sender_.save()
+        receiver_.save()
+        instance.delete()
+    
         

@@ -36,7 +36,7 @@ function RoundsScreen() {
 
     useEffect(() => {
         if (!userInfo) {
-            navigate('login')
+            navigate('/login')
         } else {            
             dispatch(listGolfCourses())
             dispatch(listRounds())            

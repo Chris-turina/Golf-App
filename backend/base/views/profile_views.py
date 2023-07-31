@@ -2,10 +2,11 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from django.db.models import Q
 
 from base.models import Profile, FriendRequestNotification
 from django.contrib.auth.models import User
-from base.serializers import ProfileSerializer, FriendRequestNotificationSerializer
+from base.serializers import ProfileSerializer, FriendRequestNotificationSerializer, UserSerializer
 
 
 @api_view(['GET'])
@@ -14,6 +15,17 @@ def getProfiles(request):
     profiles = Profile.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def findProfiles(request):
+    data = request.query_params
+    my_friends = Profile.objects.get(user=request.user).friends.all()
+    print(my_friends)
+    profiles = Profile.objects.filter(Q(user__first_name__contains=data['search_term']) | Q(user__last_name__contains=data['search_term'])).exclude(user=request.user)    
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
