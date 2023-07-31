@@ -55,7 +55,8 @@ function FriendRequest({ request, profile, friend, type, selection, handleSend }
             </div>
         )
     } else if (type === 'unfriend') {
-        <div style={{display:'flex', justifyContent:'space-between', backgroundColor: 'white'}}>
+        return (
+            <div style={{display:'flex', justifyContent:'space-between', backgroundColor: 'white'}}>
                 <p>{friend.first_name} {friend.last_name}</p>
                 <div>                    
                     <Button variant='danger' className='my-1' value='unfriend' onClick={(e) => handleRequest(e)}>
@@ -63,6 +64,8 @@ function FriendRequest({ request, profile, friend, type, selection, handleSend }
                     </Button>
                 </div>                
             </div>
+        )
+        
     }
 }
 

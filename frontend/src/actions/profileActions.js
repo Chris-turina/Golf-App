@@ -3,17 +3,17 @@ import {
     PROFILE_REQUEST,
     PROFILE_SUCCESS,
     PROFILE_FAIL,
-    PROFILE_RESET,
+    // PROFILE_RESET,
 
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_FAIL,
-    PROFILE_LIST_RESET,
+    // PROFILE_LIST_RESET,
     
     PROFILE_UPDATE_REQUEST,
     PROFILE_UPDATE_SUCCESS,
     PROFILE_UPDATE_FAIL,
-    PROFILE_UPDATE_RESET,
+    // PROFILE_UPDATE_RESET,
     
 } from "../constants/profileConstants"
 
@@ -104,7 +104,6 @@ export const updateProfile = (status, requestId) => async (dispatch, getState) =
 
         const { data } = await axios.put(
             `/api/profiles/my_profile/update/`,
-            data,
             config,
         )
 

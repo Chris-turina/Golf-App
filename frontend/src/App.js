@@ -1,13 +1,13 @@
 import "react-datepicker/dist/react-datepicker.css";
 import './styles/app.css'
-import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React from 'react'
 
 import Header from './components/Header';
 import Footer from './components/Footer'
 
 
-import HomeScreen from './screens/HomeScreen';
+import PlayerScreen from './screens/PlayerScreen';
 import CourseSelector from './screens/CourseSelector';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -19,23 +19,19 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import AdminCourseListScreen from "./screens/AdminCourseListScreen";
 import RoundStatScreen from "./screens/RoundStatScreen";
-import ScoreCardScreen from "./screens/ScoreCardScreen";
 import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
 import AdminCourseCreateScreen from "./screens/AdminCourseCreateScreen"
 import FriendListScreen from "./screens/ProfileScreens/FriendListScreen";
-// import ScoreFormInput from "./components/ScoreFormInput";
+
 
 
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="background">
-        <Header />
-        <main className='py-3'>
-          <Container>
+      <div className="background">                     
             <Routes>
-              <Route path='/' element={<HomeScreen />} exact />
+              <Route path='/' element={<PlayerScreen />} exact />
               <Route path='login' element={<LoginScreen />} />
               <Route path='register' element={<RegisterScreen />} />
               <Route path='golfcourses' element={<CourseSelector />} />
@@ -56,9 +52,7 @@ function App() {
               <Route path='admin/golfcourselist/create/:id' element={<AdminCourseCreateScreen />} />              
               <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} />
 
-            </Routes>
-          </Container>
-        </main>
+            </Routes>          
         <Footer />
       </div>
       

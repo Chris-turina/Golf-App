@@ -8,18 +8,6 @@ function ScoreCardDisplay({ round, roundStats, stats}) {
 
     const [frontNine,setFrontNine] = useState( [] )
     const [backNine, setBackNine] = useState( [] )
-
-    const [yardsOut, setYardsOut] = useState(0)
-    const [yardsIn, setYardsIn] = useState(0)
-
-    const [parOut, setParOut] = useState(0)
-    const [parIn, setParIn] = useState(0)
-
-    const [scoreOut, setScoreOut] = useState(0)
-    const [scoreIn, setScoreIn] = useState(0)
-
-    const [puttsOut, setPuttsOut] = useState(0)
-    const [puttsIn, setPuttsIn] = useState(0)
     
 console.log(roundStats);
     useEffect(() => {

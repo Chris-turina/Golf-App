@@ -1,7 +1,4 @@
 {
-  "devDependencies": {
-    "sass": "^1.63.6"
-  },
   "dependencies": {
     "@canvasjs/react-charts": "^1.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

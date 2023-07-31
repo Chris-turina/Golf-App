@@ -3,12 +3,12 @@ import {
     TEE_UPDATE_REQUEST,
     TEE_UPDATE_SUCCESS,
     TEE_UPDATE_FAIL,
-    TEE_UPDATE_RESET,
+    // TEE_UPDATE_RESET,
 
     TEE_BATCH_CREATE_REQUEST,
     TEE_BATCH_CREATE_SUCCESS,
     TEE_BATCH_CREATE_FAIL,
-    TEE_BATCH_CREATE_RESET,
+    // TEE_BATCH_CREATE_RESET,
 
     TEE_BATCH_DELETE_REQUEST,
     TEE_BATCH_DELETE_SUCCESS,
@@ -124,6 +124,7 @@ export const deleteTeeBatch = (teeColor_id) => async (dispatch, getState) => {
 
         dispatch ({
             type: TEE_BATCH_DELETE_SUCCESS,
+            payload: data
         })
     } catch (error) {
         dispatch({

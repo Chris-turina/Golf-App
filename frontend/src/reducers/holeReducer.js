@@ -23,10 +23,10 @@ import {
     EIGHTEEN_HOLE_CREATE_FAIL,
     EIGHTEEN_HOLE_CREATE_RESET,
 
-    HOLE_DELETE_REQUEST,
-    HOLE_DELETE_SUCCESS,
-    HOLE_DELETE_FAIL,
-    HOLE_DELETE_RESET,
+    // HOLE_DELETE_REQUEST,
+    // HOLE_DELETE_SUCCESS,
+    // HOLE_DELETE_FAIL,
+    // HOLE_DELETE_RESET,
 } from '../constants/holeConstants';
 
 export const holeListReducer = (state = { holes: [] }, action) => {

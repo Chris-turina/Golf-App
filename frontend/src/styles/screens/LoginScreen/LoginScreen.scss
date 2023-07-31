@@ -1,0 +1,77 @@
+.login-container {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    width: 600px;
+    align-self: center;
+    border: 1px solid #979797;
+    box-shadow: 2px 2px 8px grey;
+    
+}
+
+.login-title-container {
+    background-color: #D8D8D8;
+    width: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.login-title {
+    color: #4A4A4A;
+}
+.login-form {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    label {
+        margin-bottom: 10px;
+    }
+
+    input {
+        padding-left: 15px;
+        outline: none;
+        border-top: none;
+        border-right:none;
+        border-left: none;
+        border-width: 1px;
+    }
+}
+
+.login-submit {
+    background-color: #32C32F;
+    margin-bottom: 25px;
+    border: 1px;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    align-self: center;
+}
+
+.login-link {
+    width: 200px;
+    align-self: center;
+}
+
+.login-create-account {
+    background-color: #1F201F;
+    color: #BFBFBF;
+    margin-bottom: 25px;
+    border: 1px;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+}

@@ -14,7 +14,7 @@ import {
 
     ROUND_DELETE_REQUEST,
     ROUND_DELETE_SUCCESS,
-    ROUND_DELETE_FAIL,
+    // ROUND_DELETE_FAIL,
 } from "../constants/roundConstants";
 
 export const listRounds = () => async (dispatch, getState) => {
@@ -157,6 +157,7 @@ export const deleteRound = (id) => async (dispatch, getState) => {
 
         dispatch({
             type: ROUND_DELETE_SUCCESS,
+            payload:data
         })
     } catch (error) {
         dispatch({

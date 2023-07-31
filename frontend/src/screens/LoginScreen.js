@@ -20,7 +20,6 @@ function LoginScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo, loading, error} = userLogin
 
-    // const userDetails = useSelector(state => state.userDetails)
     
     useEffect(() => {
         if (userInfo) {
@@ -32,48 +31,42 @@ function LoginScreen() {
         e.preventDefault()
         dispatch(login(username, password))
     }
+
     return (
-        <FormContainer>
-            <h1>Sign In</h1>
-            {error && <Message variant='danger'>{error}</Message>}
-            {loading && <Loader />}
-            <Form onSubmit={submitHandler}>
+        <div className='login-screen-container'>
+            
+            <div className='login-container'>
+                <div className='login-title-container'>
+                    <h5 className='login-title'>GRIP IT & RIP IT</h5>
+                </div>
+                <form className='login-form' onSubmit={submitHandler}>
 
-                <Form.Group controlId='username'>
-                    <Form.Label>User Name</Form.Label>
-                    <Form.Control 
-                        type='name'
-                        placeholder='User Name'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />                    
-                </Form.Group>
+                    <div className='login-input-container'>
+                        <label><b>USERNAME</b></label>
+                        <input
+                            placeholder='Enter Username'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}                    
+                        />                
+                    </div>       
 
-                <Form.Group controlId='password'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control 
-                        type='password'
-                        placeholder='Enter Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />                    
-                </Form.Group>
-
-                <Button type='submit' variant='primary'>
-                    Sign In
-                </Button>
-
-            </Form>
-
-            <Row>
-                <Col>
-                    New User? 
-                    <Link to={redirect ? `/register?register=${redirect}` : '/register'}>
-                        Register
-                    </Link>
-                </Col>
-            </Row>
-        </FormContainer>
+                    <div className='login-input-container'>
+                        <label><b>PASSWORD</b></label>
+                        <input
+                            placeholder='Enter Password'
+                            type='password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}                    
+                        />
+                    </div>
+                    <button className='login-submit' type='submit'><b>SIGN IN</b></button>
+                </form>
+                
+                <Link className='login-link' to={'/register'}>
+                    <button className='login-create-account'><b>CREATE ACCOUNT</b></button>
+                </Link>            
+            </div>
+        </div>
     )
 }
 

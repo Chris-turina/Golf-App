@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row, Button, Form } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import CourseInfo from '../components/CourseInfo';
 import { listGolfCourseDetails, listTeeColors } from '../actions/golfCourseActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';

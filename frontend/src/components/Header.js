@@ -1,14 +1,10 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
-import { useNavigate, redirect } from 'react-router-dom';
-import {browserHistory} from 'react-router'
 
-function Header () {
-// WORKING ON GETTING THE LOGOUT BUTTON TO NAVIGATE TO THE HOME PAGE ON LOGOUT
-    const navigate = useNavigate()
+export default function Header () {
 
     const userLogin = useSelector(state => state.userLogin)    
     const { userInfo } = userLogin
@@ -19,8 +15,6 @@ function Header () {
         dispatch(logout())
 
     }
-
-
 
     return (
         <header>
@@ -79,5 +73,3 @@ function Header () {
         </header>
     )
 }
-
-export default Header

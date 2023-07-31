@@ -3,7 +3,7 @@ import {
     UPDATE_F_R_NOTIFICATION_REQUEST,
     UPDATE_F_R_NOTIFICATION_SUCCESS,
     UPDATE_F_R_NOTIFICATION_FAIL,
-    UPDATE_F_R_NOTIFICATION_RESET
+    // UPDATE_F_R_NOTIFICATION_RESET
 } from '../constants/friendRequestContstants'
 
 export const updateFriendRequest = (status) => async (dispatch, getState) => {

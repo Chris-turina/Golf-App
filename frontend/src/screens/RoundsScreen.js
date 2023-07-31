@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
-// import CourseInfo from '../components/CourseInfo';
 import { listRounds } from '../actions/roundActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
