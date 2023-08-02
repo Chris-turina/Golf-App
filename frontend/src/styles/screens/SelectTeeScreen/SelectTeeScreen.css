@@ -1,0 +1,30 @@
+.select-tee-screen-title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.select-tee-screen-title-container h3 {
+  margin-bottom: 0;
+}
+
+.select-tee-screen-back-arrow-container {
+  display: flex;
+  width: 150px;
+  align-items: center;
+}
+.select-tee-screen-back-arrow-container p {
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+
+.select-tee-link {
+  text-decoration: none;
+  color: black;
+}
+
+.empty-container {
+  width: 150px;
+}/*# sourceMappingURL=SelectTeeScreen.css.map */

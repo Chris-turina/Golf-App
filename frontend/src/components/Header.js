@@ -1,75 +1,112 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { logout } from '../actions/userActions';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Header () {
+export default function Header ({userInfo, page}) {
+    const [inactive, setInactive] = useState('header-inactive')
+    const [active, setActive] = useState('header-active')
 
-    const userLogin = useSelector(state => state.userLogin)    
-    const { userInfo } = userLogin
 
-    const dispatch = useDispatch()
+    let player = ''
+    let playGolf = ''
+    let rounds = ''
+    let leauge = ''
+    let admin = ''
 
-    const logoutHandler = () => {        
-        dispatch(logout())
+    if (page === 'player') {        
+        player = active
+        playGolf = inactive
+        rounds = inactive
+        leauge = inactive
+        admin = inactive
 
+    } else if (page === 'play-golf') {
+        player = inactive
+        playGolf = active
+        rounds = inactive
+        leauge = inactive
+        admin = inactive
+
+    } else if (page === 'rounds') {
+        player = inactive
+        playGolf = inactive
+        rounds = active
+        leauge = inactive
+        admin = inactive
+
+    } else if (page === 'leauge') {
+        player = inactive
+        playGolf = inactive
+        rounds = inactive
+        leauge = active
+        admin = inactive
+
+    } else if (page === 'admin') {
+        player = inactive
+        playGolf = inactive
+        rounds = inactive
+        leauge = inactive
+        admin = active
     }
 
-    return (
-        <header>
-            <Navbar  expand="lg" collapseOnSelect className='header'>
-                <Container>
+   
 
-                    <LinkContainer to="/">
-                        <Navbar.Brand>GRIP IT & RIP IT</Navbar.Brand>
-                    </LinkContainer>
-                    
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto">
-                            <LinkContainer to="/golfcourses">
-                                <Nav.Link>Enter Score</Nav.Link>
-                            </LinkContainer>                                                    
-                            
-                            <LinkContainer to="/rounds">
-                                <Nav.Link>Rounds</Nav.Link>
-                            </LinkContainer>
+    return(
+        <header className='header'>
+            <div className='header-title-container'>
 
-                            {userInfo ? (
-                                <NavDropdown title={userInfo.username} id='username'>
-                                    <LinkContainer to={`/profile/${userInfo.id}`}>
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                                    </LinkContainer>
+                <div className='header-filler-box'>                    
+                </div>
 
-                                    {/* <LinkContainer to="/"> */}
-                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                                    {/* </LinkContainer>                                     */}
-                                </NavDropdown>
-                            ) : (
-                                <LinkContainer to="/login">
-                                    <Nav.Link>Login</Nav.Link>
-                                </LinkContainer>    
-                            )}
+                <div className='header-title'>
+                    <h1>{userInfo.first_name} {userInfo.last_name}</h1>
+                    <p>Handicap</p>                
+                </div> 
 
-                            {userInfo && userInfo.isAdmin && (
-                                <NavDropdown title='Admin' id='adminmenue'>
-                                    
-                                    <LinkContainer to='/admin/userlist'>
-                                        <NavDropdown.Item>Users</NavDropdown.Item>
-                                    </LinkContainer>
+                <div className='header-settings'>
+                    <Link to={`/profile/${userInfo.id}`}>
+                        <i className="fa-solid fa-gear fa-xl" style={{color: "black"}}></i>
+                    </Link>
 
-                                    <LinkContainer to='/admin/golfcourselist'>
-                                        <NavDropdown.Item>Gof Courses</NavDropdown.Item>
-                                    </LinkContainer>                                
+                </div>  
+                                                             
+            </div>
 
-                                </NavDropdown>
-                            )}
-                            
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <div className='header-pages-container'>
+                
+                <Link className='header-link' to='/'>
+                    <div className={`${player}`}>
+                        <h6>PLAYER</h6>
+                    </div>
+                </Link>
+                
+                <Link className='header-link' to='/golfcourses'>
+                    <div className={`${playGolf}`}>
+                        <h6>PLAY GOLF</h6>
+                    </div>
+                </Link>
+                
+                <Link className='header-link' to='/rounds'>
+                    <div className={`${rounds}`}>
+                        <h6>ROUNDS</h6>
+                    </div>
+                </Link>
+                
+                <Link className='header-link' to='/'>
+                    <div className={`${leauge}`}>
+                        <h6>LEAUGE</h6>
+                    </div>
+                </Link>                            
+
+                {userInfo && userInfo.isAdmin && (
+                    <Link className='header-link' to='/admin'>
+                        <div className={`${admin}`}>
+                            <h6>ADMIN</h6>
+                        </div>
+                    </Link>
+                )}
+                
+            </div>
         </header>
     )
 }

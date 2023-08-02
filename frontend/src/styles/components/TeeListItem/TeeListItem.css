@@ -1,0 +1,27 @@
+.tee-list-item-container {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  width: auto;
+  margin: 20px 20px 20px 20px;
+  border-bottom: 2px solid #979797;
+}
+.tee-list-item-container h3 {
+  margin: 0;
+  width: 40vw;
+}
+.tee-list-item-container p {
+  margin-bottom: 0;
+}
+
+.tee-list-item-container:hover {
+  border-color: #32c32f;
+  transform: scale(1.02);
+  transition: 0.5s;
+}
+
+.tee-list-item-container-link {
+  text-decoration: none;
+  color: black;
+}/*# sourceMappingURL=TeeListItem.css.map */

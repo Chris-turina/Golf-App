@@ -4,7 +4,6 @@
 
 
 import React, { useEffect, useState} from 'react';
-import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,7 +51,7 @@ function AdminCourseCreateScreen() {
         e.preventDefault()
         console.log(numOfHoles);
 
-        if (numOfHoles == 9) {
+        if (numOfHoles === 9) {
             console.log('9');
             dispatch(createNineHoles(golfCourse))
         } else {

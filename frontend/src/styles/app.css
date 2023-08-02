@@ -1,6 +1,64 @@
 .header {
-  background-color: white;
-  opacity: 0.9;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.header-title-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.header-filler-box {
+  margin-left: 30px;
+  width: 100px;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-settings {
+  margin-right: 30px;
+  width: 100px;
+}
+
+.header-pages-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.header-active {
+  text-align: center;
+  width: 160px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  height: 40px;
+}
+.header-active h6 {
+  margin-bottom: 0;
+  color: #4A4A4A;
+}
+
+.header-inactive {
+  text-align: center;
+  width: 160px;
+  background-color: #ffffff;
+  padding: 10px;
+  height: 40px;
+}
+.header-inactive h6 {
+  margin-bottom: 0;
+  color: #BCBCBC;
+}
+
+.header-link {
+  text-decoration: none;
 }
 
 .title-card {
@@ -56,6 +114,59 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.course-list-item {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  width: auto;
+  margin: 20px 20px 20px 20px;
+  border-bottom: 2px solid #979797;
+}
+.course-list-item h3 {
+  margin-left: 25px;
+  margin-bottom: 0px;
+  color: #4a4a4a;
+}
+
+.course-list-item:hover {
+  border-color: #32c32f;
+  transform: scale(1.02);
+  transition: 0.5s;
+}
+
+.course-list-item-link {
+  text-decoration: none;
+}
+
+.tee-list-item-container {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  width: auto;
+  margin: 20px 20px 20px 20px;
+  border-bottom: 2px solid #979797;
+}
+.tee-list-item-container h3 {
+  margin: 0;
+  width: 40vw;
+}
+.tee-list-item-container p {
+  margin-bottom: 0;
+}
+
+.tee-list-item-container:hover {
+  border-color: #32c32f;
+  transform: scale(1.02);
+  transition: 0.5s;
+}
+
+.tee-list-item-container-link {
+  text-decoration: none;
+  color: black;
 }
 
 .holeEditForm {
@@ -207,6 +318,59 @@
   align-self: center;
 }
 
+.play-golf-screen-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
+}
+
+.play-golf-screen-title {
+  align-self: flex-end;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.play-golf-screen-filter-options {
+  display: flex;
+}
+.play-golf-screen-filter-options p {
+  font-weight: bold;
+  font-size: x-small;
+  padding-left: 30px;
+}
+
+.select-tee-screen-title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.select-tee-screen-title-container h3 {
+  margin-bottom: 0;
+}
+
+.select-tee-screen-back-arrow-container {
+  display: flex;
+  width: 150px;
+  align-items: center;
+}
+.select-tee-screen-back-arrow-container p {
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+
+.select-tee-link {
+  text-decoration: none;
+  color: black;
+}
+
+.empty-container {
+  width: 150px;
+}
+
 .background {
   background-color: #f2f2f2;
   background-repeat: no-repeat;
@@ -229,6 +393,80 @@
   padding-bottom: 30px;
   display: flex;
   justify-content: center;
+}
+
+.content-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+.enter-score-screen-title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.enter-score-screen-title-container h3 {
+  margin-bottom: 0;
+}
+
+.enter-score-screen-back-arrow {
+  display: flex;
+  width: 150px;
+  align-items: center;
+}
+
+.enter-score-link {
+  text-decoration: none;
+  color: black;
+}
+.enter-score-link p {
+  margin-bottom: 0;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.admin-screen-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
+}
+
+.admin-content-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+.admin-list-item {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  width: auto;
+  margin: 20px 20px 20px 20px;
+  border-bottom: 2px solid #979797;
+}
+
+.admin-list-item:hover {
+  border-color: #32c32f;
+  transform: scale(1.02);
+  transition: 0.5s;
+}
+
+.admin-list-item-container-link {
+  text-decoration: none;
+  color: black;
+  width: auto;
 }
 
 .page-container {

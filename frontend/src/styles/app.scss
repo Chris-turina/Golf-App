@@ -7,10 +7,14 @@
 @import './components/StatCard/StatCard';
 @import './components/CourseBooker/CourseBooker';
 @import './components/EditHoleCard/EditHoleCard';
+@import './components/CourseListItem/CourseListItem';
+@import './components/TeeListItem/TeeListItem';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 @import './screens/LoginScreen/LoginScreen.scss';
 @import './screens/RegisterScreen/RegisterScreen.scss';
+@import './screens/PlayGolfScreen/PlayGolfScreen';
+@import './screens/SelectTeeScreen/SelectTeeScreen';
 
 .background {
     // background-image: url('../images/golf-course-one.jpg');
@@ -25,22 +29,109 @@
     display: flex;
     height: 80vh;
 }
-
 .login-screen-container {
     display: flex;
     justify-content: center;
     height: 90vh;
 
 }
-
 .register-screen-container {
     padding-top: 30px;
     padding-bottom: 30px;
     display: flex;
     justify-content: center;
-    
-
 }
+
+.content-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 15px;
+}
+
+
+
+// Enter Score Sccreen
+
+.enter-score-screen-title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+    h3 {
+        margin-bottom: 0;
+    }
+}
+
+.enter-score-screen-back-arrow {
+    display: flex;
+    width: 150px;
+    align-items: center;
+}
+
+.enter-score-link {
+    text-decoration: none;
+    color: black;
+
+    p {
+        margin-bottom: 0;
+        margin-left: 10px;
+        text-transform: uppercase;
+
+    }
+}
+
+// Admin Screen
+
+.admin-screen-container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 100vw;
+}
+
+.admin-content-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 15px;
+}
+
+// Admin List Item
+
+.admin-list-item {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    width: auto;
+    margin: 20px 20px 20px 20px;
+    border-bottom: 2px solid #979797;
+}
+
+.admin-list-item:hover {
+    border-color: #32c32f;
+    transform: scale(1.02);
+    transition: .5s;
+}
+
+.admin-list-item-container-link {
+    text-decoration: none;
+    color: black;
+    width: auto;
+}
+
+
+
+
+
+
 
 
 

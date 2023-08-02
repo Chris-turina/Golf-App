@@ -1,0 +1,29 @@
+.tee-list-item-container {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    width: auto;
+    margin: 20px 20px 20px 20px;
+    border-bottom: 2px solid #979797;
+
+    h3 {
+        margin: 0;   
+        width: 40vw;     
+    }
+
+    p {        
+        margin-bottom: 0; 
+    }
+}
+
+.tee-list-item-container:hover  {
+    border-color: #32c32f;
+    transform: scale(1.02);
+    transition: .5s;
+}
+
+.tee-list-item-container-link {
+    text-decoration: none;
+    color: black;
+}

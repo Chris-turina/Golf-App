@@ -1,24 +1,24 @@
 import React, { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Container, Row, Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Col, Button, Row } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import { listGolfCourseDetails, listTeeColors } from '../actions/golfCourseActions';
+import { listGolfCourseDetails } from '../actions/golfCourseActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import ScoreFormInput from '../components/ScoreFormInput';
 import { createRound } from '../actions/roundActions';
-import Title from '../components/Title';
 import { ROUND_CREATE_RESET } from '../constants/roundConstants';
 import InputScoreCard from '../components/InputScoreCard';
+import Header from '../components/Header';
+import TeeListItem from '../components/TeeListItem';
 
-// TODO Change to Score Input Screen
-function PlayRoundScreen() {
+
+export default function SelectTeeScreen() {
     
     const [selectedTee, setSelectedTee] = useState(0)
     const [selectedTeeId, setSelectedTeeId] = useState('')
     const [selectedTeeHoles, setSelectedTeeHoles] = useState([])
     const [showForm, setShowForm] = useState(false) 
-    const [createArr, setCreateArr] = useState( [ {hole: '', yards: '', score: '', putts: '' }] )
 
 
     const dispatch = useDispatch()
@@ -109,10 +109,9 @@ function PlayRoundScreen() {
             />
         )
     }
-
-
     return (
         <div>        
+            <Header userInfo={userInfo} page='play-golf' />
             {loadingCreate && <Loader />} 
             {errorCreate && <Message variant='danger'>{errorCreate}</Message>}   
             {loading 
@@ -121,19 +120,32 @@ function PlayRoundScreen() {
                     ? <Message variant='danger'>{error}</Message>
                     : (
                         <div>                            
-                            <Row>
-                                <Title props={golfCourse.name} />
-                            </Row>
-                            <Row>
-                                <p>Select Tee Color</p>
-                            </Row>
-                            <Row style={{marginBottom: '2rem'}}>
+                            <div className='select-tee-screen-title-container'>
+                                <div className='select-tee-screen-back-arrow-container'>
+                                    <i className="fa-solid fa-arrow-left"></i>
+                                    <Link className='select-tee-link' to='/golfcourses'>
+                                        <p>{golfCourse.name}</p>
+                                    </Link>
+                                    
+                                </div>
+                                <h3>Select A Tee</h3>    
+                                <div className='empty-container'></div>
+                            </div>                            
+                            
+                            <div className='content-container'>
+                                {golfCourse.teeColors.map(teeColor => (
+                                    <TeeListItem key={teeColor.id} golfCourse={golfCourse} teeColor={teeColor}/>
+                                ))}
+                                
+                            </div>
+                                                        
+                            {/* <Row style={{marginBottom: '2rem'}}>
                                 {golfCourse.teeColors.map(teeColor => (
                                     <Col key={teeColor.id}>
                                         <Button onClick={() => teeColorClickHandler(teeColor.id, teeColor.colors)} >{teeColor.colors}</Button>
                                     </Col>
                                 ))}                                                                
-                            </Row>
+                            </Row> */}
                             <div>
                                 {showForm && renderScoreCard()}
                             </div>                  
@@ -145,4 +157,3 @@ function PlayRoundScreen() {
 }
 
 
-export default PlayRoundScreen

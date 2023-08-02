@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect} from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -10,15 +10,13 @@ import { GOLF_COURSE_CREATE_RESET } from '../constants/golfCourseConstants';
 import Title from '../components/Title';
 
 function AdminCourseListScreen() {
-    const [showCourseEdit, setShowCourseEdit] = useState(false)
-    const [name, setName] = useState('')
-    const [numOfHoles, setNumOfHoles] = useState(0)
+    // const [showCourseEdit, setShowCourseEdit] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const golfCourseList = useSelector(state => state.golfCourseList)
-    const { loading, error, success, golfCourses, } = golfCourseList
+    const { loading, error, golfCourses, } = golfCourseList
 
     const golfCourseDelete = useSelector(state => state.golfCourseDelete)
     const { loading: loadingDelete, error: errorDelete, success: successDelete} = golfCourseDelete
@@ -104,7 +102,7 @@ function AdminCourseListScreen() {
                                             </LinkContainer>
                                         </td>                                        
                                         <td>                                            
-                                            <Button variant='light' className='btn-sm' onClick={() => setShowCourseEdit(true)}>
+                                            <Button variant='light' className='btn-sm'>
                                                 <i className='fas fa-edit'></i>
                                             </Button>                                                                                        
 

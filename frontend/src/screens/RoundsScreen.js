@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listGolfCourses } from '../actions/golfCourseActions';
 import { deleteRound } from '../actions/roundActions';
+import Header from '../components/Header';
 
 function RoundsScreen() {
     const [showRounds, setShowRounds] = useState(true)
@@ -67,7 +68,8 @@ function RoundsScreen() {
         } else {
             
             return (
-                <div>                    
+                <div>      
+                    <Header page='rounds' />              
                     {rounds.map(round => (
                         <div key={round.id} className='round-card'>   
                             <Link className='round-card-title' to={`/rounds/${round.id}/stats`}>

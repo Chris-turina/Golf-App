@@ -1,0 +1,21 @@
+.play-golf-screen-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
+}
+
+.play-golf-screen-title {
+  align-self: flex-end;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.play-golf-screen-filter-options {
+  display: flex;
+}
+.play-golf-screen-filter-options p {
+  font-weight: bold;
+  font-size: x-small;
+  padding-left: 30px;
+}/*# sourceMappingURL=PlayGolfScreen.css.map */
