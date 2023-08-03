@@ -96,8 +96,7 @@ def getUsers(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserById(request, pk):
-    print(request.user)
-    user = request.user
+    user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
@@ -106,7 +105,6 @@ def getUserById(request, pk):
 @permission_classes([IsAuthenticated])
 def updateUser(request, pk):
     user = User.objects.get(id=pk)
-
     data = request.data
 
     user.first_name = data['firstName']
@@ -114,11 +112,9 @@ def updateUser(request, pk):
     user.username = data['username']    
     user.email = data['email']
     user.is_staff = data['isAdmin']
-
     user.save()
 
     serializer = UserSerializer(user, many=False)
-
     return Response(serializer.data)
 
 

@@ -25,6 +25,7 @@ import EnterScoreScreen from "./screens/EnterScoreScreen";
 
 import AdminScreen from "./screens/AdminScreens/AdminScreen";
 import AdminUserListScreen from "./screens/AdminScreens/AdminUserListScreen";
+import AdminUserProfileScreen from "./screens/AdminScreens/AdminUserProfileScreen";
 
 
 
@@ -53,8 +54,11 @@ function App() {
 
               <Route path='admin' element={<AdminScreen />} />
               <Route path='admin/users' element={<AdminUserListScreen />} />
+              <Route path='admin/users/:id' element={<AdminUserProfileScreen />} />
+
               <Route path='admin/userlist' element={<UserListScreen />} />
-              <Route path='admin/user/:id/edit' element={<UserEditScreen />} />
+              
+
 
               <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
               <Route path='admin/golfcourselist/create/:id' element={<AdminCourseCreateScreen />} />              

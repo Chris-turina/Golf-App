@@ -69,7 +69,7 @@ function RoundsScreen() {
             
             return (
                 <div>      
-                    <Header page='rounds' />              
+                    <Header userInfo={userInfo} page='rounds' />              
                     {rounds.map(round => (
                         <div key={round.id} className='round-card'>   
                             <Link className='round-card-title' to={`/rounds/${round.id}/stats`}>

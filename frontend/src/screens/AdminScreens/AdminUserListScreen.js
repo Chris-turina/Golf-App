@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector,  } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { listUsers, deleteUser } from '../../actions/userActions';
 import Header from '../../components/Header';
+import AdminUserListItem from '../../components/AdminUserListItem';
 
 export default function AdminUserListScreen() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    // Used to get the State
+
     const userList = useSelector(state => state.userList)
     const { loading, error, users } = userList
 
@@ -22,6 +22,7 @@ export default function AdminUserListScreen() {
     const userDelete = useSelector(state => state.userDelete)
     const { success: successDelete } = userDelete
  
+    
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
@@ -39,57 +40,6 @@ export default function AdminUserListScreen() {
     }
 
 
-    // return (
-    //     <div>
-    //         <Header userInfo={userInfo} page='admin' />
-    //         <h1>Users</h1>
-    //         {loading
-    //             ? (<Loader />)
-    //             : error
-    //                 ? (<Message variant='danger'>{error}</Message>)
-    //                 : (
-    //                     <Table striped bordered hover responsive className='table-sm'>
-    //                         <thead>
-    //                             <tr>
-    //                                 <th>ID</th>
-    //                                 <th>NAME</th>
-    //                                 <th>EMAIL</th>
-    //                                 <th>ADMIN</th>
-    //                                 <th></th>
-    //                             </tr>
-    //                         </thead>
-
-    //                         <tbody>
-    //                             {users.map(user => (
-    //                                 <tr key={user._id}>
-    //                                     <td>{user._id}</td>
-    //                                     <td>{user.first_name + ' ' + user.last_name}</td>
-    //                                     <td>{user.email}</td>
-    //                                     <td>{user.isAdmin ? (
-    //                                         <i className='fas fa-check' style={{ color: 'green' }}></i>
-    //                                     ) : (
-    //                                             <i className='fas fa-check' style={{ color: 'red' }}></i>
-    //                                         )}</td>
-
-    //                                     <td>
-    //                                         <LinkContainer to={`/admin/user/${user._id}/edit`}>
-    //                                             <Button variant='light' className='btn-sm'>
-    //                                                 <i className='fas fa-edit'></i>
-    //                                             </Button>
-    //                                         </LinkContainer>
-
-    //                                         <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
-    //                                             <i className='fas fa-trash'></i>
-    //                                         </Button>
-    //                                     </td>
-    //                                 </tr>
-    //                             ))}
-    //                         </tbody>
-    //                     </Table>
-    //                 )}
-    //     </div>
-    // )
-
     return (
         <div>
             <Header userInfo={userInfo} page='admin' />
@@ -98,9 +48,42 @@ export default function AdminUserListScreen() {
                 : error
                     ? (<Message variant='danger'>{error}</Message>)
                     : (
-                        <div className=''>
-
+                        <div>
+                            <div className='admin-user-list-screen-back-arrow-container'>
+                                <i className="fa-solid fa-arrow-left"></i>
+                                <Link className='select-tee-link' to='/admin'>
+                                    <p>Admin</p>
+                                </Link>
+                                    
+                            </div>
+                            <div className='admin-user-list-screen-container'>
+                                <div className='admin-user-list-content-container'>
+                                    <AdminUserListItem
+                                        headerStyle='admin-user-list-item-header'
+                                        id='ID'
+                                        username='USERNAME'
+                                        firstName='FIRST NAME'
+                                        lastName='LAST NAME'
+                                        admin='ADMIN'
+                                    />
+                                    {users.map(user => (
+                                        <Link to={`/admin/users/${user.id}`} className='admin-user-list-screen-link' key={user.id}>
+                                            <AdminUserListItem                                         
+                                            id={user.id}
+                                            username={user.username}
+                                            firstName={user.first_name}
+                                            lastName={user.last_name}
+                                            admin={user.isAdmin}
+                                        />
+                                        </Link>
+                                    
+                                ))}
+                            </div>
                         </div>
+                        </div>
+                        
+
+                        
                     )}
         </div>
     )

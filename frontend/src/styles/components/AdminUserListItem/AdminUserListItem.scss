@@ -1,0 +1,35 @@
+.admin-user-list-item-container {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    // width: auto;
+    margin: 40px;
+    border-bottom: 2px solid #979797;
+
+    .admin-user-list-item-small {
+        width: 50px;
+    }
+
+    div {
+        width:20vw;
+         p {
+            color: black;
+            margin-bottom: 0;
+         }
+    }
+}
+
+.admin-user-list-item-container:hover  {
+    border-color: #32c32f;
+    transform: scale(1.02);
+    transition: .5s;
+}
+
+
+
+.admin-user-list-item-header {
+    p {
+        font-weight: bold;
+    }
+}

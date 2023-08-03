@@ -1,0 +1,20 @@
+.admin-user-profile-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    label {
+        margin-bottom: 10px;
+    }
+
+    input {
+        padding-left: 15px;
+        outline: none;
+        border-top: none;
+        border-right:none;
+        border-left: none;
+        border-width: 1px;
+    }
+}

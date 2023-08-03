@@ -9,12 +9,20 @@
 @import './components/EditHoleCard/EditHoleCard';
 @import './components/CourseListItem/CourseListItem';
 @import './components/TeeListItem/TeeListItem';
+@import './components/AdminListItem/AdminListItem';
+@import './components/AdminUserListItem/AdminUserListItem';
+@import './components/AdminUserProfileInput/AdminUserProfileInput';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
+
+@import './screens/AdminScreen/AdminScreen';
+@import './screens/AdminUserListScreen/AdminUserListScreen';
+
 @import './screens/LoginScreen/LoginScreen.scss';
 @import './screens/RegisterScreen/RegisterScreen.scss';
 @import './screens/PlayGolfScreen/PlayGolfScreen';
 @import './screens/SelectTeeScreen/SelectTeeScreen';
+@import './screens/EnterScoreScreen/EnterScoreScreen';
 
 .background {
     // background-image: url('../images/golf-course-one.jpg');
@@ -52,80 +60,41 @@
 
 
 
-// Enter Score Sccreen
-
-.enter-score-screen-title-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
-    
-    h3 {
-        margin-bottom: 0;
-    }
-}
-
-.enter-score-screen-back-arrow {
-    display: flex;
-    width: 150px;
-    align-items: center;
-}
-
-.enter-score-link {
-    text-decoration: none;
-    color: black;
-
-    p {
-        margin-bottom: 0;
-        margin-left: 10px;
-        text-transform: uppercase;
-
-    }
-}
-
-// Admin Screen
-
-.admin-screen-container {
+// Admin User Profile Screen
+.admin-user-profile-screen-container {
     display: flex;
     flex-direction: column;
     height: 80vh;
-    width: 100vw;
 }
 
-.admin-content-container {
+.admin-user-profile-content-container {
     background-color: #ffffff;
     border-radius: 10px;
-    margin-top: 15px;
+    margin-top: 30px;
     margin-left: 15px;
     margin-right: 15px;
     padding: 15px;
 }
 
-// Admin List Item
-
-.admin-list-item {
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-    padding-bottom: 10px;
-    width: auto;
-    margin: 20px 20px 20px 20px;
-    border-bottom: 2px solid #979797;
-}
-
-.admin-list-item:hover {
-    border-color: #32c32f;
-    transform: scale(1.02);
-    transition: .5s;
-}
-
-.admin-list-item-container-link {
+.admin-user-profile-screen-link {
     text-decoration: none;
-    color: black;
-    width: auto;
 }
+
+.admin-user-profile-screen-submit {
+    background-color: #32C32F;
+    margin-bottom: 25px;
+    border: 1px;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    align-self: center;
+    font-weight: bold;
+}
+
+
+
+
+
 
 
 
