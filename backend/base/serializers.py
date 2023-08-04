@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Profile,FriendRequestNotification, GolfCourse, TeeColor, Tee, Hole, Round, HoleScore, RoundStats
+from .models import Profile,FriendRequestNotification, GolfCourse, TeeBox, Tee, Hole, Round, HoleScore, RoundStats
 from django.db.models import Q
 # GolfScore, Round
 
@@ -116,9 +116,9 @@ class FriendRequestNotificationSerializer(serializers.ModelSerializer):
 
 
 
-class TeeColorSerializer(serializers.ModelSerializer):
+class TeeBoxSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TeeColor
+        model = TeeBox
         fields = '__all__'
 
 class TeeSerializer(serializers.ModelSerializer):
@@ -143,21 +143,21 @@ class HoleSerializer(serializers.ModelSerializer):
 
 
 class GolfCourseSerializer(serializers.ModelSerializer):
-    teeColors = serializers.SerializerMethodField(read_only=True)
+    tee_boxes = serializers.SerializerMethodField(read_only=True)
     holes = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = GolfCourse
         # fields = '__all__'
-        fields = ['user', 'course_id', 'name', 'numOfHoles','teeColors', 'holes' ]
+        fields = ['user', 'course_id', 'name', 'num_of_holes','tee_boxes', 'holes' ]
 
     def get_holes(self, obj):
         holes = obj.hole_set.all()
         serializer = HoleSerializer(holes, many=True)
         return serializer.data    
 
-    def get_teeColors(self, obj):
-        teeColors = obj.teecolor_set.all()
-        serializer = TeeColorSerializer(teeColors, many=True)
+    def get_tee_boxes(self, obj):
+        tee_boxes = obj.teebox_set.all()
+        serializer = TeeBoxSerializer(tee_boxes, many=True)
         return serializer.data
 
     

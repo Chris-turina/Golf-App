@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from base.models import GolfCourse, TeeColor, Round, HoleScore, Hole, Tee, RoundStats
+from base.models import GolfCourse, TeeBox, Round, HoleScore, Hole, Tee, RoundStats
 from django.contrib.auth.models import User
 from base.serializers import RoundSerializer, HoleScoreSerializer
 # Create your views here.
@@ -55,7 +55,7 @@ def createRound(request, pk, tk):
     newScores = newData['newScore']
     newStats = newData['newStats']
     course = GolfCourse.objects.get(course_id=pk)
-    teeColor = TeeColor.objects.get(id=tk)
+    tee_box = TeeBox.objects.get(id=tk)
     user = request.user   
     
     
@@ -65,7 +65,7 @@ def createRound(request, pk, tk):
     strokesArr = []
     
     # empty vars to have the final nubmbersd in
-    roundYards = teeColor.total_yards
+    roundYards = tee_box.total_yards
     roundPar = 0
     roundPutts = 0
     roundStrokes = 0
@@ -75,7 +75,7 @@ def createRound(request, pk, tk):
     newRound = Round.objects.create(
         user = user,
         course = course,
-        teeColorUsed = teeColor
+        teeColorUsed = tee_box
     )    
     
     # loops through the data recived

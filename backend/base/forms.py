@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import NON_FIELD_ERRORS # lets us use a custom error message
 from django.contrib.auth.models import User
 
-from .models import Hole, Tee, TeeColor
+from .models import Hole, Tee, TeeBox
 
 
 
@@ -12,7 +12,7 @@ from .models import Hole, Tee, TeeColor
 class HoleForm(ModelForm):
     class Meta:
         model = Hole
-        fields = ('number', 'course', 'par')
+        fields = ('number', 'course', 'handicap')
         # Course is set automatically
         widgets = {
             'course': forms.HiddenInput,
@@ -23,9 +23,9 @@ class HoleForm(ModelForm):
             }
         }
 
-class TeeColorForm(ModelForm):
+class TeeBoxForm(ModelForm):
     class Meta:
-        model: TeeColor
+        model: TeeBox
         fields = ('colors',)
         widegts = {
             #course is set automatically

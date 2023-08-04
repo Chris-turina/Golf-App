@@ -7,8 +7,8 @@ urlpatterns = [
     path('', views.getGolfCourses, name='golfcourses'),
 
     path('create/', views.createGolfCourse, name='golfcourse-create'),
-    path('<str:pk>/createtee_color/', views.createTeeColor, name='teecolor-create'),
-    path('<str:pk>/deletetee_color/<str:tk>/', views.deleteTeeColor, name='teecolor-delete'),
+    path('<str:pk>/createtee_color/', views.createTeeBox, name='teebox-create'),
+    path('<str:pk>/deletetee_color/<str:tk>/', views.deleteTeeBox, name='teebox-delete'),
 
     path('hole/<str:pk>/createtee/<str:tk>/', views.createTees, name='tee-create'),
     path('<str:pk>/update_yards/<str:tk>/', views.updateBatchTeesYards, name='update-tees'),
@@ -16,7 +16,7 @@ urlpatterns = [
     path('hole/deletetee/<str:pk>/', views.deleteTees, name='tee-delete'),
 
     path('holes/update/<str:pk>/', views.updateCourseHoles, name='update-course-holes'),
-    path('teeColors/update/<str:pk>/', views.updateCourseTeeColors, name='update-course-holes'),
+    path('teeColors/update/<str:pk>/', views.updateCourseTeeBoxes, name='update-course-holes'),
     
 
     path('<str:pk>/', views.getGolfCourse, name='golfcourse'),

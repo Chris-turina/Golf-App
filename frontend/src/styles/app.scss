@@ -12,11 +12,14 @@
 @import './components/AdminListItem/AdminListItem';
 @import './components/AdminUserListItem/AdminUserListItem';
 @import './components/AdminUserProfileInput/AdminUserProfileInput';
+@import './components/AdminGolfCourseListItem/AdminGolfCourseListItem';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
 @import './screens/AdminScreen/AdminScreen';
 @import './screens/AdminUserListScreen/AdminUserListScreen';
+@import './screens/AdminUserProfileScreen/AdminUserProfileScreen';
+@import './screens/AdminGolfCourseListScreen/AdminGolfCourseListScreen';
 
 @import './screens/LoginScreen/LoginScreen.scss';
 @import './screens/RegisterScreen/RegisterScreen.scss';
@@ -56,39 +59,6 @@
     margin-left: 15px;
     margin-right: 15px;
     padding: 15px;
-}
-
-
-
-// Admin User Profile Screen
-.admin-user-profile-screen-container {
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
-}
-
-.admin-user-profile-content-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    margin-top: 30px;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding: 15px;
-}
-
-.admin-user-profile-screen-link {
-    text-decoration: none;
-}
-
-.admin-user-profile-screen-submit {
-    background-color: #32C32F;
-    margin-bottom: 25px;
-    border: 1px;
-    border-radius: 20px;
-    width: 200px;
-    height: 40px;
-    align-self: center;
-    font-weight: bold;
 }
 
 

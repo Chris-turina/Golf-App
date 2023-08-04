@@ -40,21 +40,24 @@ class FriendRequestNotification(models.Model):
     
 
 
+
+
 class GolfCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     course_id = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(max_length=200, null=True, blank=False)
-    numOfHoles = models.IntegerField(validators=[MaxValueValidator(18), MinValueValidator(9)], null=True, blank=True, default=0)
+    num_of_holes = models.IntegerField(validators=[MaxValueValidator(18), MinValueValidator(9)], null=True, blank=True, default=0)
     
 
     def __str__(self):
         return self.name
     
 
+
 class Hole(models.Model):
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
-    number = models.IntegerField(unique=False)
-    par = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(3)])
+    number = models.IntegerField(unique=False)    
+    handicap = models.IntegerField(unique=False, default=0)
 
     class Meta:
         unique_together = (('number','course')) # Each course can only have one hole with each number.
@@ -64,25 +67,28 @@ class Hole(models.Model):
 
 
 
-class TeeColor(models.Model):
+class TeeBox(models.Model):
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
-    colors = models.CharField( blank=False, null=True, max_length=255)
+    color = models.CharField( blank=False, null=True, max_length=255)
     front_nine_yards = models.IntegerField(unique=False, default=0)
     back_nine_yards = models.IntegerField(unique=False, default=0)
     total_yards = models.IntegerField(unique=False, default=0)
-    added_to_holes = models.BooleanField(default=False)
+    slope = models.IntegerField(unique=False, default=0)
+    handicap = models.IntegerField(unique=False, default=0)
+    par = models.IntegerField(unique=False, default=0)
 
     
 
     def __str__(self):
-        return self.colors
+        return self.color
 
     
 
 class Tee(models.Model):
-    color = models.ForeignKey(TeeColor, on_delete=models.CASCADE, null=True)  
+    color = models.ForeignKey(TeeBox, on_delete=models.CASCADE, null=True)  
     hole = models.ForeignKey(Hole, on_delete=models.SET_NULL, null=True, blank=False)
     yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    par = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(3)], default=4)
 
     # class Meta:
     #     unique_together = (('color','hole'),) # only have one of each color on the hole
@@ -92,16 +98,21 @@ class Tee(models.Model):
 
 
 
+
+
+
 class Round(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
-    teeColorUsed = models.ForeignKey(TeeColor, on_delete=models.CASCADE, null=True)
+    teeColorUsed = models.ForeignKey(TeeBox, on_delete=models.CASCADE, null=True)
     # Add a Date Played
 
     def __str__(self):
         return 'Round ' + str(self.id) + ' at ' + str(self.course)
     
     
+
+
 class HoleScore(models.Model):
     roundStat = models.ForeignKey(Round, on_delete=models.CASCADE, null=True)
     hole = models.ForeignKey(Hole, on_delete=models.CASCADE, null=True, blank=False)

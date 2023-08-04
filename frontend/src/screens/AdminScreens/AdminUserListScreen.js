@@ -53,8 +53,7 @@ export default function AdminUserListScreen() {
                                 <i className="fa-solid fa-arrow-left"></i>
                                 <Link className='select-tee-link' to='/admin'>
                                     <p>Admin</p>
-                                </Link>
-                                    
+                                </Link>                                    
                             </div>
                             <div className='admin-user-list-screen-container'>
                                 <div className='admin-user-list-content-container'>

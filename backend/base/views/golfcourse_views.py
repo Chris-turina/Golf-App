@@ -3,9 +3,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from base.models import GolfCourse, TeeColor, Hole, Tee
+from base.models import GolfCourse, TeeBox, Hole, Tee
 from django.contrib.auth.models import User
-from base.serializers import GolfCourseSerializer, TeeSerializer, TeeColorSerializer, HoleSerializer
+from base.serializers import GolfCourseSerializer, TeeSerializer, TeeBoxSerializer, HoleSerializer
 # Create your views here.
 
 from rest_framework import status
@@ -65,18 +65,18 @@ def deleteGolfCourse(request, pk):
     return Response('Golf Course Deleted')
 
 
-# Creates a teeColor for the golf course
+# Creates a tee_box for the golf course
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
-def createTeeColor(request, pk):
+def createTeeBox(request, pk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
-    teeColor = golfCourse.teecolor_set.create(colors='New Tee', front_nine_yards=0, back_nine_yards=0, total_yards=0, course=golfCourse)
+    tee_box = golfCourse.teebox_set.create(colors='New Tee', front_nine_yards=0, back_nine_yards=0, total_yards=0, course=golfCourse)
     holes = Hole.objects.filter(course=pk)
     
     for hole in holes: 
-        Tee.objects.create(color=teeColor, yards=0,hole=hole )
+        Tee.objects.create(color=tee_box, yards=0,hole=hole )
 
-    serializer = TeeColorSerializer(teeColor, many=False)
+    serializer = TeeBoxSerializer(tee_box, many=False)
 
     return Response(serializer.data)
 
@@ -87,12 +87,12 @@ def createTeeColor(request, pk):
 @permission_classes([IsAdminUser])
 def createTees(request, pk, tk):
     holes = Hole.objects.get(course=pk)
-    teeColor = TeeColor.objects.get(id=tk)
+    tee_box = TeeBox.objects.get(id=tk)
     course = GolfCourse.objects.get(course_id=pk)
 
 
     for hole in holes:
-        Tee.objects.create(color=teeColor, yards=0, hole=hole, course=course)
+        Tee.objects.create(color=tee_box, yards=0, hole=hole, course=course)
 
     return Response('Created Tees')
 
@@ -106,13 +106,13 @@ def deleteTees(request, pk,):
     return Response('Tees Deleted')
 
 
-# Delete the TeeColor instance
+# Delete the TeeBox instance
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
-def deleteTeeColor(reqest,pk, tk):
+def deleteTeeBox(reqest,pk, tk):
     golfCourse = GolfCourse.objects.get(course_id=pk)
-    teeColor = TeeColor.objects.get(id=tk)
-    teeColor.delete()
+    tee_box = TeeBox.objects.get(id=tk)
+    tee_box.delete()
     return Response('Tee Color Deleted')
 
 
@@ -213,7 +213,7 @@ def updateHole(request, pk, hk):
 @permission_classes([IsAdminUser])
 def updateBatchTeesYards(request, pk, tk):
     newTees = request.data
-    teeColor = TeeColor.objects.get(id=tk)
+    tee_box = TeeBox.objects.get(id=tk)
     tees = Tee.objects.filter(color=tk)
     
     for newTee in newTees:
@@ -249,15 +249,15 @@ def updateCourseHoles(request, pk):
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
-def updateCourseTeeColors(request, pk):
-    teeColors = request.data
-    oldTeeColors = TeeColor.objects.filter(course=pk)
+def updateCourseTeeBoxes(request, pk):
+    tee_boxes = request.data
+    old_tee_boxes = TeeBox.objects.filter(course=pk)
     
-    for teeColor in teeColors:        
-        oldTeeColor = oldTeeColors.filter(id=teeColor['id'])
-        oldTeeColor.update(colors=teeColor['colors'])
-        oldTeeColor.update(back_nine_yards=teeColor['back_nine_yards'])
-        oldTeeColor.update(front_nine_yards=teeColor['front_nine_yards'])
-        oldTeeColor.update(total_yards=teeColor['total_yards'])
+    for tee_box in tee_boxes:        
+        old_tee_box = old_tee_boxes.filter(id=tee_box['id'])
+        old_tee_box.update(colors=tee_box['colors'])
+        old_tee_box.update(back_nine_yards=tee_box['back_nine_yards'])
+        old_tee_box.update(front_nine_yards=tee_box['front_nine_yards'])
+        old_tee_box.update(total_yards=tee_box['total_yards'])
     
     return Response('Success')

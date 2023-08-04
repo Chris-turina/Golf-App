@@ -1,10 +1,10 @@
 from django.urls import path
-from base.views import teecolors_views as views
+from base.views import teeboxes_views as views
 
 
 urlpatterns = [
 
-    path('', views.getTeeColors, name='teecolors'),
-    path('update/<str:pk>/', views.updateTeeColor, name='teecolor-update'),
-    path('added_to_holes/<str:pk>/', views.addTeeColorToHolesBool, name='add-tee-to-holes'),
+    path('', views.getTeeBoxes, name='teeboxes'),
+    path('update/<str:pk>/', views.updateTeeBox, name='teebox-update'),
+    path('added_to_holes/<str:pk>/', views.addTeeBoxToHolesBool, name='add-tee-to-holes'),
 ]

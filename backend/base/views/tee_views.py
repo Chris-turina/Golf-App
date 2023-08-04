@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from base.models import GolfCourse, Tee
 from django.contrib.auth.models import User
-from base.serializers import GolfCourseSerializer, TeeSerializer, TeeColorSerializer, HoleSerializer
+from base.serializers import GolfCourseSerializer, TeeSerializer, HoleSerializer
 # Create your views here.
 
 from rest_framework import status

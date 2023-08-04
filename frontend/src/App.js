@@ -16,9 +16,9 @@ import SelectTeeScreen from './screens/SelectTeeScreen';
 import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
-import AdminCourseListScreen from "./screens/AdminCourseListScreen";
+
 import RoundStatScreen from "./screens/RoundStatScreen";
-import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
+// import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
 import AdminCourseCreateScreen from "./screens/AdminCourseCreateScreen"
 import FriendListScreen from "./screens/ProfileScreens/FriendListScreen";
 import EnterScoreScreen from "./screens/EnterScoreScreen";
@@ -26,6 +26,9 @@ import EnterScoreScreen from "./screens/EnterScoreScreen";
 import AdminScreen from "./screens/AdminScreens/AdminScreen";
 import AdminUserListScreen from "./screens/AdminScreens/AdminUserListScreen";
 import AdminUserProfileScreen from "./screens/AdminScreens/AdminUserProfileScreen";
+import AdminCourseListScreen from "./screens/AdminScreens/Golf Course/AdminCourseListScreen";
+import AdminCourseInfoScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoScreen"; 
+import AdminCreateCourseScreen from "./screens/AdminScreens/Golf Course/AdminCreateCourseScreen";
 
 
 
@@ -56,13 +59,21 @@ function App() {
               <Route path='admin/users' element={<AdminUserListScreen />} />
               <Route path='admin/users/:id' element={<AdminUserProfileScreen />} />
 
+              <Route path='admin/golf_courses' element={<AdminCourseListScreen />} />
+              <Route path='admin/golf_courses/:id' element={<AdminCourseInfoScreen />} />
+              <Route path='admin/golf_courses/create' element={<AdminCreateCourseScreen />} />
+
+
+
+
+              {/* Depricate on Next Refactor */}
               <Route path='admin/userlist' element={<UserListScreen />} />
               
 
 
-              <Route path='admin/golfcourselist' element={<AdminCourseListScreen />} />
-              <Route path='admin/golfcourselist/create/:id' element={<AdminCourseCreateScreen />} />              
-              <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} />
+              
+              {/* <Route path='admin/golfcourselist/create/:id' element={<AdminCourseCreateScreen />} />               */}
+              {/* <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} /> */}
 
             </Routes>          
         <Footer />

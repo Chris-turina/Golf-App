@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from base.models import GolfCourse, TeeColor, Hole, Tee, Round, HoleScore
+from base.models import GolfCourse, Hole, Tee, Round, HoleScore
 from django.contrib.auth.models import User
 from base.serializers import HoleScoreSerializer
 # Create your views here.
