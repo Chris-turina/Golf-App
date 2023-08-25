@@ -92,12 +92,12 @@ export default function AdminCourseListScreen() {
                                 deleteCourse='DELETE COURSE'
                             />
                             {golfCourses.map(golfCourse => (
-                                <Link to={`${golfCourse.course_id}`} className='admin-course-list-screen-link' key={golfCourse.course_id}>
+                                <Link to={`course/${golfCourse.course_id}`} className='admin-course-list-screen-link' key={golfCourse.course_id}>
                                     <AdminCourseListItem                                                                        
                                     listItem='true'
                                     id={golfCourse.course_id}
                                     name={golfCourse.name}
-                                    holes={golfCourse.numOfHoles}
+                                    holes={golfCourse.num_of_holes}
                                     courseInfo='Info'
                                     deleteCourse='delete course'
                                 />

@@ -27,8 +27,8 @@ import AdminScreen from "./screens/AdminScreens/AdminScreen";
 import AdminUserListScreen from "./screens/AdminScreens/AdminUserListScreen";
 import AdminUserProfileScreen from "./screens/AdminScreens/AdminUserProfileScreen";
 import AdminCourseListScreen from "./screens/AdminScreens/Golf Course/AdminCourseListScreen";
-import AdminCourseInfoScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoScreen"; 
 import AdminCreateCourseScreen from "./screens/AdminScreens/Golf Course/AdminCreateCourseScreen";
+import AdminCourseInfoScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoScreen";
 
 
 
@@ -60,7 +60,7 @@ function App() {
               <Route path='admin/users/:id' element={<AdminUserProfileScreen />} />
 
               <Route path='admin/golf_courses' element={<AdminCourseListScreen />} />
-              <Route path='admin/golf_courses/:id' element={<AdminCourseInfoScreen />} />
+              <Route path='admin/golf_courses/course/:id' element={<AdminCourseInfoScreen />} />
               <Route path='admin/golf_courses/create' element={<AdminCreateCourseScreen />} />
 
 

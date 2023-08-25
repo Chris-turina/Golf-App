@@ -20,6 +20,10 @@ import {
     GOLF_COURSE_CREATE_FAIL,
     GOLF_COURSE_CREATE_RESET,
 
+    GOLF_COURSE_NEW_CREATED_REQUEST,
+    GOLF_COURSE_NEW_CREATED_SUCCESS,
+    GOLF_COURSE_NEW_CREATED_FAIL,
+
     GOLF_COURSE_UPDATE_REQUEST,
     GOLF_COURSE_UPDATE_SUCCESS,
     GOLF_COURSE_UPDATE_FAIL,
@@ -139,6 +143,22 @@ export const golfCourseCreateReducer = (state= {}, action) => {
             return {}
 
         default:
+            return state
+    }
+}
+
+export const golfCourseNewAddedReducer = (state = {}, action) => {
+    switch (action.type) {
+        case GOLF_COURSE_NEW_CREATED_REQUEST:
+            return { loading: true}
+
+        case GOLF_COURSE_NEW_CREATED_SUCCESS:
+            return { loading: false, success: true, golfCourse: action.payload }
+
+        case GOLF_COURSE_NEW_CREATED_FAIL:
+            return { loading: false, error: action.payload }
+
+        default: 
             return state
     }
 }

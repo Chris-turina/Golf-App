@@ -19,7 +19,10 @@ import {
     GOLF_COURSE_CREATE_REQUEST,
     GOLF_COURSE_CREATE_SUCCESS,
     GOLF_COURSE_CREATE_FAIL,
-    // GOLF_COURSE_CREATE_RESET,
+    
+    GOLF_COURSE_NEW_CREATED_REQUEST,
+    GOLF_COURSE_NEW_CREATED_SUCCESS,
+    GOLF_COURSE_NEW_CREATED_FAIL,
 
     GOLF_COURSE_UPDATE_REQUEST,
     GOLF_COURSE_UPDATE_SUCCESS,
@@ -175,7 +178,8 @@ export const deleteGolfCourse = (id) => async (dispatch, getState) => {
     }
 }
 
-export const createGolfCourse = () => async (dispatch, getState) => {
+export const createGolfCourse = (golfCourse) => async (dispatch, getState) => {
+    console.log(golfCourse);
     try {
         dispatch({
             type: GOLF_COURSE_CREATE_REQUEST
@@ -191,20 +195,56 @@ export const createGolfCourse = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-
+        
         const { data } = await axios.post(
-            `/api/golfcourses/create/`,
-            {},
+            `/api/create_course/create/`,
+            golfCourse,
             config
         )
         
         dispatch({
             type: GOLF_COURSE_CREATE_SUCCESS,
-            payload: data,
+            payload: golfCourse,
         })
     } catch (error) {
         dispatch({
             type: GOLF_COURSE_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const getGolfCourseNewAdded = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: GOLF_COURSE_NEW_CREATED_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/golfcourses/new_golf_course/`,
+            config
+        )
+
+        dispatch({
+            type: GOLF_COURSE_NEW_CREATED_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: GOLF_COURSE_NEW_CREATED_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

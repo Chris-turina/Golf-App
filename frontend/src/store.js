@@ -7,6 +7,7 @@ import {
     golfCourseTeeDetailsReducer, 
     golfCourseHoleDetailsReducer,
     golfCourseCreateReducer,
+    golfCourseNewAddedReducer,
     golfCourseDeleteReducer,
     golfCourseUpdateReducer,
     
@@ -15,6 +16,10 @@ import {
     teeColorDeleteReducer,
     teeColorUpdateReducer,
 } from './reducers/golfCourseReducer';
+
+import {
+    teeBoxBulkUpdateReducer
+} from './reducers/teeBoxReducer'
 
 import { 
     userLoginReducer,
@@ -29,6 +34,9 @@ import {
 
 import {
     holeListReducer,
+    holesBatchUpdateReducer,
+
+
     nineHoleCreateReducer,
     eighteenHoleCreateReducer,
     holeCreateReducer,
@@ -70,8 +78,11 @@ const reducer = combineReducers({
     golfCourseTeeDetails: golfCourseTeeDetailsReducer,
     golfCourseHoleDetails: golfCourseHoleDetailsReducer,
     golfCourseCreate: golfCourseCreateReducer,
+    golfCourseNewAdded: golfCourseNewAddedReducer,
     golfCourseDelete: golfCourseDeleteReducer,
     golfCourseUpdate: golfCourseUpdateReducer,
+
+    teeBoxBulkUpdate: teeBoxBulkUpdateReducer,
 
     
     teeColorList: teeColorListReducer,
@@ -80,6 +91,8 @@ const reducer = combineReducers({
     teeColorUpdate: teeColorUpdateReducer,
 
     holeList: holeListReducer,
+    holesBatchUpdate:holesBatchUpdateReducer,
+
     holeCreate: holeCreateReducer,
     nineHoleCreate: nineHoleCreateReducer,
     eighteenHoleCreate: eighteenHoleCreateReducer,

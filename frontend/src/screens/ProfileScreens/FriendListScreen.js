@@ -11,10 +11,11 @@ import ProfileSideHeader from '../../components/ProfileSideHeader';
 
 export default function FriendListScreen() {    
     const [friendsList, setFriendsList] = useState( [] )
-    const [newFriendRequests, setNewFriendRequests] = useState( [] )
+    // const [newFriendRequests, setNewFriendRequests] = useState( [] )
     const [pendingFriendRequests, setPendingFriendRequests] = useState( [] )
     const [userId, setUserId] = useState(0)
 
+    console.log(pendingFriendRequests, friendsList );
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ export default function FriendListScreen() {
 
 
     const userDetails = useSelector(state => state.userDetails)
-    const { error, loading, user } = userDetails
+    const {user } = userDetails
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -33,8 +34,8 @@ export default function FriendListScreen() {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
-    const friendRequest = useSelector(state => state.freindRequest)
-    const {loading: loadingFriendRequest, success: successFriendRequest, f_r_notification} = friendRequest
+    // const friendRequest = useSelector(state => state.freindRequest)
+    // const {loading: loadingFriendRequest, success: successFriendRequest, f_r_notification} = friendRequest
 
     const profileList = useSelector(state => state.profileList)
     const {loading: loadingProfilesList, success:successProfilesList, profiles} = profileList
@@ -81,12 +82,12 @@ export default function FriendListScreen() {
         // WORKING HERE
     }
 
-    const handleUnfriend = (e) => {
-        const data = {'status': e.target.value}
-        console.log(data)
-        dispatch(updateFriendRequest(data))
+    // const handleUnfriend = (e) => {
+    //     const data = {'status': e.target.value}
+    //     console.log(data)
+    //     dispatch(updateFriendRequest(data))
 
-    }
+    // }
     // console.log(myProfile.friends);
     return (
         <Row>

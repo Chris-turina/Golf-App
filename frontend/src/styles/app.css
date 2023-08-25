@@ -623,6 +623,143 @@
   padding: 15px;
 }
 
+.admin-create-course-screen {
+  min-height: 100vh;
+}
+
+.create-score-card-container {
+  width: auto;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-name-holes-container {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+.course-name-holes-container input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+.course-name-holes-container input:focus {
+  outline: none;
+}
+
+.tee-box-form-options {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+.tee-box-form-options input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+.tee-box-form-options input:focus {
+  outline: none;
+}
+
+.create-course-score-card {
+  width: auto;
+}
+
+.create-course-score-card-container {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  align-self: center;
+  align-items: center;
+}
+
+.course-score-card-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-score-card-input-div {
+  display: flex;
+  justify-content: space-around;
+}
+.course-score-card-input-div p {
+  padding-bottom: 0;
+}
+.course-score-card-input-div input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  width: 80px;
+}
+.course-score-card-input-div input:focus {
+  outline: none;
+}
+.course-score-card-input-div input::-webkit-outer-spin-button,
+.course-score-card-input-div input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.next-button {
+  background-color: #32C32F;
+  margin-bottom: 25px;
+  border: 1px;
+  border-radius: 20px;
+  width: 200px;
+  height: 40px;
+  align-self: center;
+}
+
+.create-course-score-card {
+  display: flex;
+}
+
+.create-course-score-card-container {
+  display: flex;
+}
+
+.course-score-card-input-container {
+  display: flex;
+}
+
+.score-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.score-card-row {
+  display: flex;
+}
+
+.score-card-hole-numbers {
+  display: flex;
+}
+
+.tee-box-head {
+  display: flex;
+  justify-content: space-around;
+}
+
 .page-container {
   display: flex;
   flex-direction: column;

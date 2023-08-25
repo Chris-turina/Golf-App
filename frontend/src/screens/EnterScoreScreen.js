@@ -11,6 +11,8 @@ export default function EnterScoreScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    
+
 
     console.log(state);
     

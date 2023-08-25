@@ -6,7 +6,9 @@ urlpatterns = [
 
     path('', views.getGolfCourses, name='golfcourses'),
 
-    path('create/', views.createGolfCourse, name='golfcourse-create'),
+    path('new_golf_course/', views.getNewAddedGolfCourse, name='get-new-added-golf-course'),
+
+
     path('<str:pk>/createtee_color/', views.createTeeBox, name='teebox-create'),
     path('<str:pk>/deletetee_color/<str:tk>/', views.deleteTeeBox, name='teebox-delete'),
 

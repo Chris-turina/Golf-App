@@ -23,6 +23,10 @@ import {
     EIGHTEEN_HOLE_CREATE_FAIL,
     EIGHTEEN_HOLE_CREATE_RESET,
 
+    HOLES_BATCH_UPDATE_REQUEST,
+    HOLES_BATCH_UPDATE_SUCCESS,
+    HOLES_BATCH_UPDATE_FAIL,
+
     // HOLE_DELETE_REQUEST,
     // HOLE_DELETE_SUCCESS,
     // HOLE_DELETE_FAIL,
@@ -45,6 +49,23 @@ export const holeListReducer = (state = { holes: [] }, action) => {
     }
 }
 
+export const holesBatchUpdateReducer = (state = {holes:[] }, action) => {
+    switch(action.type) {
+        case HOLES_BATCH_UPDATE_REQUEST:
+            return {loading: true, holes:[] }
+        
+        case HOLES_BATCH_UPDATE_SUCCESS:
+            return { loading: false, success: true, holes: action.payload}
+
+        case HOLES_BATCH_UPDATE_FAIL:
+            return { loading: false, error: action.payload}
+
+        default:
+            return state
+
+    }
+}
+
 export const holeCreateReducer = (state = {}, action) => {
     switch (action.type) {
         case HOLE_CREATE_REQUEST:
@@ -64,16 +85,8 @@ export const holeCreateReducer = (state = {}, action) => {
     }
 }
 
-// export const holeDeleteReducer = (state = {}, action) => {
-//     switch (action.type) {
-//         case HOLE_DELETE_REQUEST:
-//             return { loading: true }
 
-//         case HOLE_CREATE_SUCCESS:
-//             return { loading: false, success: true, }
-//     }
-// }
-
+// DEPRICATE THIS
 export const nineHoleCreateReducer = (state = {}, action) => {
     switch (action.type) {
         case NINE_HOLE_CREATE_REQUEST:
@@ -93,6 +106,7 @@ export const nineHoleCreateReducer = (state = {}, action) => {
     }
 }
 
+// DEPRICATE THIS
 export const eighteenHoleCreateReducer = (state = {}, action) => {
     switch (action.type) {
         case EIGHTEEN_HOLE_CREATE_REQUEST:

@@ -22,12 +22,13 @@ urlpatterns = [
     path('api/f_r_notifications/', include('base.urls.friend_request_notification_urls')),
     path('api/profiles/', include('base.urls.profile_urls')),
     path('api/golfcourses/', include('base.urls.golfcourse_urls')),
-    path('api/teecolors/', include('base.urls.teecolors_urls')),
+    path('api/teeboxes/', include('base.urls.teeboxes_urls')),
     path('api/users/', include('base.urls.user_urls')),
     path('api/tee/', include('base.urls.tee_urls')),
     path('api/holes/', include('base.urls.hole_urls')),
     path('api/rounds/', include('base.urls.round_urls')),
     path('api/holescore/', include('base.urls.holescore_urls')),
     path('api/roundstats/', include('base.urls.roundstats_urls')),
+    path('api/create_course/', include('base.urls.createcourse_urls'))
     
 ]

@@ -110,7 +110,7 @@ function AdminCourseInfoScreen() {
                 const data = [...hole.tees]                
                 data[index][e.target.name] = parseInt(e.target.value)
                 setEditTeeArr(data)    
-                console.log(data);            
+                        
             }
 
             for (let i = 0; i < tees.length; i++) {
