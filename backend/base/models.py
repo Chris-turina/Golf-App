@@ -86,15 +86,16 @@ class TeeBox(models.Model):
 
 class Tee(models.Model):
     color = models.ForeignKey(TeeBox, on_delete=models.CASCADE, null=True)  
-    hole = models.ForeignKey(Hole, on_delete=models.SET_NULL, null=True, blank=False)
-    yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    hole = models.ForeignKey(Hole, on_delete=models.CASCADE, null=True, )
+    yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)], default=0)
     par = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(3)], default=4)
 
     # class Meta:
     #     unique_together = (('color','hole'),) # only have one of each color on the hole
 
     def __str__(self):
-        return str(self.color) + ' TEE ' + str(self.hole)
+        return str(self.color) + ' TEE '
+    # return str(self.color) + ' TEE ' + str(self.hole)
 
 
 

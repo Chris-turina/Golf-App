@@ -1,3 +1,5 @@
+// IN USE
+
 import React, {useState} from 'react'
 
 export default function CourseQuestionnaire({getCourseData}) {
@@ -18,8 +20,8 @@ export default function CourseQuestionnaire({getCourseData}) {
 
 
     return (
-        <form className='form-container' onSubmit={handleSubmit}>
-            <div className='course-name-holes-container'>                            
+        <form className='form-one-container' onSubmit={handleSubmit}>
+            <div className='form-one-input-container'>
                 <input 
                     required
                     type='name'

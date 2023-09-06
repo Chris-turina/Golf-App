@@ -27,6 +27,9 @@
 @import './screens/SelectTeeScreen/SelectTeeScreen';
 @import './screens/EnterScoreScreen/EnterScoreScreen';
 
+@import './utilities/Forms/FormOne/FormOne';
+@import './utilities/Tables/TableOne/TableOne';
+
 .background {
     // background-image: url('../images/golf-course-one.jpg');
     background-color: #f2f2f2;
@@ -35,6 +38,77 @@
     background-size: cover;   
     // height: 100vh;
 }
+
+
+// TABLE STYLE ONE
+.table-style-one-background {
+    background-color: white;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+
+}
+.table-style-one {
+    width: 100%;
+    border-collapse: collapse;
+    
+    
+
+
+    .spacer {
+        padding: 20px;
+        border-bottom: 2px solid black;
+    }
+
+    thead th {
+        text-align: center;
+    }
+
+    tbody td {
+        text-align: center;
+        
+    }
+    tbody th {
+        text-align: center;
+    }
+
+    .table-style-one-tr-header {
+        background-color: #95A5A6;
+    }
+
+    .table-style-one-tr-body {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    }        
+
+    .table-style-one-tr-body:hover {
+        transform: scale(1.02);
+        transition: .5s;
+        background-color: #32C32F;
+        cursor: pointer;
+    }
+
+    
+    
+}
+
+.table-style-one-nested-table {
+    thead th {
+        text-align: center;
+    }
+
+    tbody td {
+        text-align: center;
+    }
+}
+
+
+// END TABLE STYLE ONE
+
+
+
+
+
 
 .screen-container {
     display: flex;
@@ -79,11 +153,7 @@
 
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .course-name-holes-container {
     background-color: #ffffff;

@@ -79,13 +79,30 @@ export const golfCourseListReducer = (state = { golfCourses:[] }, action) => {
     }
 }
 
-export const golfCourseDetailsReducer = (state = { golfCourse: {} }, action) => {
+// export const golfCourseDetailsReducer = (state = {golfCourse: {} }, action) => {
+//     switch(action.type){
+//         case GOLF_COURSE_DETAILS_REQUEST:
+//             return { loading: true }
+
+//         case GOLF_COURSE_DETAILS_SUCCESS:            
+//             return { loading: false, success: true, golfCourse: action.payload }
+            
+
+//         case GOLF_COURSE_DETAILS_FAIL:
+//             return { loading: false, error: action.payload}
+
+//         default: 
+//             return state
+//     }
+// }
+
+export const golfCourseDetailsReducer = (state = { golfCourse: { } }, action) => {
     switch(action.type){
         case GOLF_COURSE_DETAILS_REQUEST:
-            return { loading: true, golfCourse: {} }
+            return { loading: true, ...state }
 
         case GOLF_COURSE_DETAILS_SUCCESS:
-            return { loading: false, success: true, golfCourse: action.payload }
+            return { loading: false, success:true, golfCourse: action.payload }
 
         case GOLF_COURSE_DETAILS_FAIL:
             return { loading: false, error: action.payload}

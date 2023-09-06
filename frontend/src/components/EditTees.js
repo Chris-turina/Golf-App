@@ -1,3 +1,4 @@
+// IN USE
 import React, { useState } from 'react'
 
 export default function EditTees({tees}) {
@@ -12,31 +13,40 @@ export default function EditTees({tees}) {
     }
 
     return (
-        <div>
-            {tees.map((tee, i) => (
-                <div key={tee.id}>
-                    <p>{tee.color}</p>
-
-                    <label>Par</label>
-                    <input 
-                        type='number'
-                        name='par'
-                        placeholder='Par'
-                        value={tee.par}
-                        onChange={e => handleChange(i,e)}
-                    />
-
-                    <label>Yards</label>
-                    <input 
-                        type='number'
-                        name='yards'
-                        placeholder='Yards'
-                        value={tee.yards}
-                        onChange={e => handleChange(i,e)}
-                    />
-                </div>
-
-            ))}
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Par</th>
+                    <th>Yards</th>
+                </tr>
+            </thead>
+            <tbody>
+                {tees.map((tee, i) => (
+                    <tr key={tee.id}>
+                        <td>{tee.color}</td>
+                        <td>
+                            <input 
+                                type='number'
+                                name='par'
+                                placeholder='Par'
+                                value={tee.par}
+                                onChange={e => handleChange(i,e)}
+                            />
+                        </td> 
+                        <td>
+                            <input 
+                                type='number'
+                                name='yards'
+                                placeholder='Yards'
+                                value={tee.yards}
+                                onChange={e => handleChange(i,e)}
+                            />
+                        </td>                                                       
+                    </tr>
+                ))}
+            </tbody>
+            
+        </table>
     )
 }

@@ -121,12 +121,23 @@ class TeeBoxSerializer(serializers.ModelSerializer):
         model = TeeBox
         fields = '__all__'
 
+
 class TeeSerializer(serializers.ModelSerializer):
-    # teeColor = serializers.SerializerMethodField(read_only=True)
-    color = serializers.StringRelatedField(many=False)    
+    color = serializers.StringRelatedField(many=False)
+    hole = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='number'
+    )
+
     class Meta:
         model = Tee
-        fields = ['id', 'color', 'hole', 'yards', 'par']    
+        fields = ['id', 'color', 'hole', 'yards', 'par']   
+
+    def get_hole(self, obj):
+        return {'hole':obj.hole.number }
+
+
             
 
 class HoleSerializer(serializers.ModelSerializer):

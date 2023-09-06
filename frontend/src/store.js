@@ -50,6 +50,7 @@ import {
     teeBatchDeleteReducer,
     teeAddedToHoleReducer,
     teeYardsUpdateReducer,
+    courseTeeListReducer,
 } from './reducers/teeReducer';
 
 import {
@@ -102,6 +103,7 @@ const reducer = combineReducers({
     teeBatchDelete: teeBatchDeleteReducer,
     teeAddedToHole: teeAddedToHoleReducer,
     teeYardsUpdate: teeYardsUpdateReducer,
+    courseTeeList: courseTeeListReducer,
 
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,

@@ -16,6 +16,11 @@ import {
     TEE_ADDED_TO_HOLES_REQUEST,
     TEE_ADDED_TO_HOLES_SUCCESS,
     TEE_ADDED_TO_HOLES_FAIL,
+
+    COURSE_TEE_LIST_REQUEST,
+    COURSE_TEE_LIST_SUCCESS,
+    COURSE_TEE_LIST_FAIL,
+
 } from "../constants/teeConstants";
 
 
@@ -85,6 +90,22 @@ export const teeAddedToHoleReducer = (state = {}, action) => {
             
         case TEE_ADDED_TO_HOLES_FAIL:
             return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
+
+export const courseTeeListReducer = (state = {}, action) => {
+    switch(action.type) {
+        case COURSE_TEE_LIST_REQUEST:
+            return {loading: true}
+
+        case COURSE_TEE_LIST_SUCCESS:
+            return { loading: false, success: true, tees: action.payload}
+
+        case COURSE_TEE_LIST_FAIL:
+            return { laoding: false, error: action.payload}
 
         default:
             return state

@@ -28,46 +28,46 @@ def getGolfCourse(request, pk):
 
 # Creates a Golf Course, and the number of tee boxes inputed, and the holes, and all the tees for the hole
 # IN USE
-@api_view(['POST'])
-@permission_classes([IsAdminUser])
-def createGolfCourse(request):
-    user = request.user
-    data = request.data
-    num_of_tee_boxes = request.data['num_of_tee_boxes']
-    num_of_holes = request.data['num_of_holes']
-    tee_box_list = list()
-    tee_list = list()
-    holes_list = list()
-    starting_num = 1
+# @api_view(['POST'])
+# @permission_classes([IsAdminUser])
+# def createGolfCourse(request):
+#     user = request.user
+#     data = request.data
+#     num_of_tee_boxes = request.data['num_of_tee_boxes']
+#     num_of_holes = request.data['num_of_holes']
+#     tee_box_list = list()
+#     tee_list = list()
+#     holes_list = list()
+#     starting_num = 1
     
 
-    golfCourse = GolfCourse.objects.create(
-        user = user,
-        name = data['name'],
-        num_of_holes = data['num_of_holes'] ,
-    )
+#     golfCourse = GolfCourse.objects.create(
+#         user = user,
+#         name = data['name'],
+#         num_of_holes = data['num_of_holes'] ,
+#     )
 
-    for _ in range(num_of_tee_boxes):
-        tee_box = TeeBox(course= golfCourse, color='Color', front_nine_yards= 0, back_nine_yards=0, total_yards=0, slope=0, handicap=0, par=0 )
-        tee_box_list.append(tee_box)
+#     for _ in range(num_of_tee_boxes):
+#         tee_box = TeeBox(course= golfCourse, color='Color', front_nine_yards= 0, back_nine_yards=0, total_yards=0, slope=0, handicap=0, par=0 )
+#         tee_box_list.append(tee_box)
         
-    for _ in range(num_of_holes):
-        holes_list.append(
-            Hole(course= golfCourse, number= starting_num, handicap= 0))
-        starting_num = starting_num + 1
+#     for _ in range(num_of_holes):
+#         holes_list.append(
+#             Hole(course= golfCourse, number= starting_num, handicap= 0))
+#         starting_num = starting_num + 1
 
-    for hole in holes_list:
-        for tee_box in tee_box_list:
-            tee_list.append(
-                Tee(color=tee_box, hole=hole, yards=0, par=4)
-            )
+#     for hole in holes_list:
+#         for tee_box in tee_box_list:
+#             tee_list.append(
+#                 Tee(color=tee_box, hole=hole, yards=0, par=4)
+#             )
 
-    TeeBox.objects.bulk_create(tee_box_list)
-    Hole.objects.bulk_create(holes_list)
-    Tee.objects.bulk_create(tee_list)
+#     TeeBox.objects.bulk_create(tee_box_list)
+#     Hole.objects.bulk_create(holes_list)
+#     Tee.objects.bulk_create(tee_list)
 
-    serializer = GolfCourseSerializer(golfCourse, many=False)
-    return Response(serializer.data)
+#     serializer = GolfCourseSerializer(golfCourse, many=False)
+#     return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])

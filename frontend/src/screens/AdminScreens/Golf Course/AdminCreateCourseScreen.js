@@ -15,6 +15,7 @@ export default function AdminCreateCourseScreen() {
     const [showCourseQuestions, setShowCourseQuestions] = useState(true)
     const [showTeeBoxes, setShowTeeBoxes] = useState(false)
     const [showHoles, setShowHoles] = useState(false)
+    const [showBackArrow, setShowBackArrow] = useState(true)
 
 
     
@@ -31,6 +32,9 @@ export default function AdminCreateCourseScreen() {
     const teeBoxBulkUpdate = useSelector(state => state.teeBoxBulkUpdate)
     const {success: successTeeBoxUpdate, } = teeBoxBulkUpdate
 
+    const holesBatchUpdate = useSelector(state => state.holesBatchUpdate)
+    const {success: sucessHolesBatchUpdate} = holesBatchUpdate
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -40,18 +44,23 @@ export default function AdminCreateCourseScreen() {
             dispatch(getGolfCourseNewAdded())
             setShowTeeBoxes(true)
             setShowCourseQuestions(false)
+            setShowBackArrow(false)
             
         }
 
         if (successTeeBoxUpdate) {
-            console.log('yes');
             dispatch(getGolfCourseNewAdded())
             setShowTeeBoxes(false)
             setShowHoles(true)
         }
 
+        if (sucessHolesBatchUpdate) {
+            console.log('yes');
+            navigate(`/admin/golf_courses/course/${newCourse.course_id}`)
+        }
 
-    }, [successCreate, setShowCourseQuestions, setShowTeeBoxes, successTeeBoxUpdate])
+
+    }, [successCreate, setShowCourseQuestions, setShowTeeBoxes, successTeeBoxUpdate, sucessHolesBatchUpdate])
 
     
 
@@ -69,6 +78,7 @@ export default function AdminCreateCourseScreen() {
     // THis Funtion updates the created holes and tees
     const holeContentUpdate = (data) => {
         console.log(data);
+        
         dispatch(updateAllHoles(data, newCourse.course_id))
     }
 
@@ -80,18 +90,169 @@ export default function AdminCreateCourseScreen() {
     return (
         <div className='admin-create-course-screen'>
              <Header userInfo={userInfo} page='admin' />
-            <div>
+            {showBackArrow && <div>
                 <div className='admin-user-list-screen-back-arrow-container'>
                     <i className="fa-solid fa-arrow-left"></i>
                     <Link className='select-tee-link' to='/admin/golf_courses'>
                         <p>Courses</p>
                     </Link>                    
                 </div>               
-            </div>            
-            {showCourseQuestions && <CourseQuestionnaire getCourseData={recieveCourseData} />}
+            </div> }           
+            {showCourseQuestions && <CourseQuestionnaire getCourseData={recieveCourseData} />} 
             {successNewCourse && showTeeBoxes && <EditTeeBoxes teeBoxes={newCourse.tee_boxes} teeBoxContentUpdate={teeBoxContentUpdate} />}
-            {successNewCourse && showHoles && <EditHoles holes={newCourse.holes}  holeContentUpdate={holeContentUpdate} />}
+            {successNewCourse && showHoles && <EditHoles holes={newCourse.holes}  holeContentUpdate={holeContentUpdate} /> }
 
+
+            {/* <form>
+                <table className='form-table-one'>
+
+                    <tbody>
+                        
+                        <tr className='hole-rows'>
+                            <tr>
+                                <td><h3># 1</h3></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Handicap: </label>
+                                    <input 
+                                        placeholder='0'
+                                    />
+                                </td>
+                            </tr>
+                            
+                            
+                            <td className='spacer'>
+                                <table>
+                                    <thead>
+                                        <th>Tees</th>
+                                        <th>Par</th>
+                                        <th>Yards</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Black</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>White</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </td>
+                        </tr>
+
+
+
+                        <tr className='hole-rows'>
+                            <tr>
+                                <td><h3># 2</h3></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Handicap: </label>
+                                    <input 
+                                        placeholder='0'
+                                    />
+                                </td>
+                            </tr>
+                            
+                            
+                            <td className='spacer'>
+                                <table>
+                                    <thead>
+                                        <th>Tees</th>
+                                        <th>Par</th>
+                                        <th>Yards</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Black</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>White</td>
+                                            <td>
+                                                <input
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    placeholder='0'
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </td>
+                        </tr>
+                         
+
+                    </tbody>
+                </table>
+                <button className='next-button' type='submit'>Next</button>
+            </form> */}
 
             
         </div>

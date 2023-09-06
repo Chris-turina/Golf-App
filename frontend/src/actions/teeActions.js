@@ -17,6 +17,10 @@ import {
     TEE_ADDED_TO_HOLES_REQUEST,
     TEE_ADDED_TO_HOLES_SUCCESS,
     TEE_ADDED_TO_HOLES_FAIL,
+
+    COURSE_TEE_LIST_REQUEST,
+    COURSE_TEE_LIST_SUCCESS,
+    COURSE_TEE_LIST_FAIL,
 } from "../constants/teeConstants";
 
 export const updateTee = (tee) => async (dispatch, getState) => {
@@ -174,3 +178,39 @@ export const addedToHole = (teeColor) => async (dispatch, getState) => {
         })
     }
 }
+
+
+export const listCourseTees = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: COURSE_TEE_LIST_REQUEST})
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/tee/course_tees/${id}/`,
+            config
+        )
+
+        dispatch({
+            type: COURSE_TEE_LIST_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: COURSE_TEE_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+

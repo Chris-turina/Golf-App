@@ -1,3 +1,5 @@
+// IN USE
+
 import React, { useState } from 'react'
 import EditTees from './EditTees'
 
@@ -17,29 +19,42 @@ export default function EditHoles({holes, holeContentUpdate}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(holesData);
         holeContentUpdate(holesData)
+
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                {holes.map((hole, i) => (
-                    <div key={hole.id}>
-                        <p>Hole {hole.number}</p>
-                        <label>Handicap</label>
-                        <input 
-                            type='number'
-                            name='handicap'
-                            placeholder='Hole Handicap'
-                            value={hole.handicap}
-                            onChange={e => handleChange(i,e)}                        
-                        />
-
-                        <EditTees tees={hole.tees} />
-
-                        
-                    </div>
-                ))}
+        <div className='header-spacer'>
+            <form onSubmit={handleSubmit} className='form-style-one'>
+                <table className='form-table-one'>                    
+                    <tbody>
+                        {holes.map((hole, i) => (
+                            <tr key={hole.id} className='hole-rows'>
+                                <td> <h3># {hole.number}</h3> </td>
+                                <td>
+                                    <label>Handicap:</label>
+                                    <input 
+                                        required
+                                        type='number'
+                                        name='handicap'
+                                        placeholder='Hole Handicap'
+                                        value={hole.handicap}
+                                        onChange={e => handleChange(i,e)}                        
+                                    />
+                                </td>                            
+                                
+                                <td className='spacer'>
+                                    
+                                        <EditTees tees={hole.tees} />
+                                    
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    
+                </table>
+                
 
                 <button className='next-button' type='submit'>Next</button>
             </form>
