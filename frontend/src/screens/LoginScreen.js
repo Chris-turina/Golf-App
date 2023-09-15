@@ -23,7 +23,7 @@ function LoginScreen() {
     
     useEffect(() => {
         if (userInfo) {
-            navigate(redirect)
+            navigate('player')
         }
     }, [navigate, userInfo, redirect])
 

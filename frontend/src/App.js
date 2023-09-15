@@ -14,21 +14,23 @@ import RoundsScreen from './screens/RoundsScreen';
 import ProfileScreen from './screens/ProfileScreens/ProfileScreen';
 import SelectTeeScreen from './screens/SelectTeeScreen';
 import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
-import UserListScreen from "./screens/UserListScreen";
-import UserEditScreen from "./screens/UserEditScreen";
+
 
 import RoundStatScreen from "./screens/RoundStatScreen";
-// import AdminCourseInfoScreen from "./screens/AdminCourseInfoScreen";
-import AdminCourseCreateScreen from "./screens/AdminCourseCreateScreen"
+
+
 import FriendListScreen from "./screens/ProfileScreens/FriendListScreen";
 import EnterScoreScreen from "./screens/EnterScoreScreen";
 
 import AdminScreen from "./screens/AdminScreens/AdminScreen";
-import AdminUserListScreen from "./screens/AdminScreens/AdminUserListScreen";
-import AdminUserProfileScreen from "./screens/AdminScreens/AdminUserProfileScreen";
+
+import AdminUserListScreen from "./screens/AdminScreens/AdminUser/AdminUserListScreen";
+import AdminUserProfileScreen from "./screens/AdminScreens/AdminUser/AdminUserProfileScreen";
+
 import AdminCourseListScreen from "./screens/AdminScreens/Golf Course/AdminCourseListScreen";
 import AdminCreateCourseScreen from "./screens/AdminScreens/Golf Course/AdminCreateCourseScreen";
 import AdminCourseInfoScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoScreen";
+import AdminCourseInfoEditTeeBoxScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoEditTeeBoxScreen";
 
 
 
@@ -38,7 +40,8 @@ function App() {
     <BrowserRouter>
       <div className="background">                     
             <Routes>
-              <Route path='/' element={<PlayerScreen />} exact />
+              <Route path='/' element={<LoginScreen />} exact />
+              <Route path='player' element={<PlayerScreen />} exact />
               <Route path='login' element={<LoginScreen />} />
               <Route path='register' element={<RegisterScreen />} />
               <Route path='golfcourses' element={<PlayGolfScreen />} />
@@ -60,23 +63,14 @@ function App() {
               <Route path='admin/users/:id' element={<AdminUserProfileScreen />} />
 
               <Route path='admin/golf_courses' element={<AdminCourseListScreen />} />
-              <Route path='admin/golf_courses/course/:id' element={<AdminCourseInfoScreen />} />
               <Route path='admin/golf_courses/create' element={<AdminCreateCourseScreen />} />
-
-
-
-
-              {/* Depricate on Next Refactor */}
-              <Route path='admin/userlist' element={<UserListScreen />} />
-              
-
-
-              
-              {/* <Route path='admin/golfcourselist/create/:id' element={<AdminCourseCreateScreen />} />               */}
-              {/* <Route path='admin/golfcourse/:id/score_card' element={<AdminCourseInfoScreen />} /> */}
+              <Route path='admin/golf_courses/course/:id' element={<AdminCourseInfoScreen />} />
+              <Route path='admin/golf_courses/course/:id/edit_tee/:id' element={<AdminCourseInfoEditTeeBoxScreen />} />
+            
+      
 
             </Routes>          
-        <Footer />
+        {/* <Footer /> */}
       </div>
       
     </BrowserRouter>

@@ -1,0 +1,27 @@
+// Admin Header
+
+.header-admin {
+    width: 100vw;
+    height: 10vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    position: fixed;
+    top: 0;
+
+    
+}
+
+.header-admin-user-container {
+    display: flex;
+    p {
+        padding-bottom: 0;
+    }
+}
+
+.header-admin-user {
+    margin-right: 10px;
+}
+
+// End Admin Header

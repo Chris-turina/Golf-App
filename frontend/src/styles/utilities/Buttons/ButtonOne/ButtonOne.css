@@ -1,0 +1,24 @@
+.button-one-style {
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  transition: 0.5s;
+}
+
+.button-one-style:hover {
+  transform: scale(1.1);
+}/*# sourceMappingURL=ButtonOne.css.map */

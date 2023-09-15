@@ -1,0 +1,87 @@
+.table-style-one-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.table-style-one-top-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2.25rem;
+}
+
+.table-style-one-search-bar {
+  background-color: #f9f9f9;
+  border-color: #f9f9f9;
+  border-radius: 0.475rem;
+  border: none;
+  color: #4B5675;
+  box-shadow: none;
+  padding: 0.775rem 1rem;
+}
+
+.table-style-one-search-bar:focus {
+  background-color: #e9e9e9;
+  outline: none;
+}
+
+.table-style-one-button {
+  background-color: #3E97FF;
+  color: #ffffff;
+  outline: 0;
+  padding: 0.775rem 1rem;
+  border-radius: 0.475rem;
+  border: none;
+}
+
+.table-add-course-btn:hover {
+  background-color: #73b1f7;
+}
+
+.table-style-one {
+  padding: 0.5rem;
+}
+.table-style-one table {
+  display: table;
+  width: 100%;
+}
+.table-style-one tr {
+  display: table-row;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #F1F1F2;
+}
+.table-style-one thead th {
+  color: #cbcbd5;
+}
+.table-style-one tbody td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #78829d;
+}
+
+.table-style-one-link {
+  text-decoration: none;
+}
+.table-style-one-link p {
+  margin-bottom: 0;
+  text-decoration: none;
+  color: #252F4A;
+  font-weight: 600;
+}
+.table-style-one-link p:hover {
+  color: #4067e6;
+  transition: color 0.2s;
+}
+
+.table-style-one-dropdown {
+  background-color: #f9f9f9;
+  border: none;
+  padding: 0.35rem;
+  border-radius: 5px;
+}/*# sourceMappingURL=TableStyleOne.css.map */

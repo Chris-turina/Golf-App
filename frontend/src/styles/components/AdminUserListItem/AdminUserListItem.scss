@@ -3,7 +3,6 @@
     align-items: center;
     padding-left: 30px;
     padding-bottom: 10px;
-    // width: auto;
     margin: 40px;
     border-bottom: 2px solid #979797;
 
@@ -20,16 +19,13 @@
     }
 }
 
-.admin-user-list-item-container:hover  {
-    border-color: #32c32f;
-    transform: scale(1.02);
-    transition: .5s;
-}
-
-
-
-.admin-user-list-item-header {
+.is-header {
     p {
         font-weight: bold;
     }
+}
+
+.is-body:hover {
+    border-color: #32c32f;
+    transition: .5s;
 }

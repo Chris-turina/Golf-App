@@ -1,33 +1,39 @@
-.admin-user-list-screen-back-arrow-container {
+.admin-user-list-screen-link {
+  text-decoration: none;
+}
+
+.admin-user-new-row {
   display: flex;
-  margin-left: 30px;
-  align-items: center;
-}
-.admin-user-list-screen-back-arrow-container p {
-  margin-left: 10px;
-  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-.admin-user-list-screen-back-arrow-container:hover {
-  transform: scale(1.02);
-  transition: 0.5s;
-}
-
-.admin-user-list-screen-container {
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-}
-
-.admin-user-list-content-container {
+.admin-users-content-container {
   background-color: #ffffff;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.admin-user-list-screen-link {
-  text-decoration: none;
+.admin-users-content-container-style {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.admin-users-number-of-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-users-number-of-container p {
+  text-align: center;
+  font-weight: bolder;
 }/*# sourceMappingURL=AdminUserListScreen.css.map */

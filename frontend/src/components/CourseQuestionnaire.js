@@ -1,11 +1,12 @@
 // IN USE
 
 import React, {useState} from 'react'
+import FormStyleOneInput from './FormStyleOneInput'
 
 export default function CourseQuestionnaire({getCourseData}) {
 
     const [courseName, setCourseName] = useState('')
-    const [numberOfHoles, setNumberOfHoles] = useState(0)
+    const [numberOfHoles, setNumberOfHoles] = useState('')
     const [numberOfTeeBoxes, setNumberOfTeeBoxes] = useState('')
 
     
@@ -20,33 +21,41 @@ export default function CourseQuestionnaire({getCourseData}) {
 
 
     return (
-        <form className='form-one-container' onSubmit={handleSubmit}>
-            <div className='form-one-input-container'>
-                <input 
-                    required
-                    type='name'
-                    name='courseName'
-                    placeholder='Course Name'
-                    value={courseName}
-                    onChange={(e) => setCourseName(e.target.value)}
-                />
+        <div className='admin-content-item-container-style form-style-one-container'>
+            <form className='form-one-style' onSubmit={handleSubmit}>
+                <div className='form-style-one-input-container'>
+                    <FormStyleOneInput
+                        label={'Course Name'}
+                        type={'text'}
+                        name={'courseName'}
+                        placeholder={'Highlands'}
+                        value={courseName}
+                        handleChange={(e) => setCourseName(e.target.value)}
 
-                <input 
-                    required
-                    type='number'
-                    name='numOfTeeBoxes'
-                    placeholder='Number of Tee Boxes'
-                    value={numberOfTeeBoxes}
-                    onChange={(e) => setNumberOfTeeBoxes(e.target.value)}
-                />
+                    />
+
+                    <FormStyleOneInput 
+                        label={'# of Tee Boxes'}
+                        type={'number'}
+                        name={'numOfTeeBoxes'}
+                        placeholder={'3'}
+                        value={numberOfTeeBoxes}
+                        handleChange={(e) => setNumberOfTeeBoxes(e.target.value)}
+                    />
+
+                    <FormStyleOneInput 
+                        label={'# of Holes'}
+                        type={'holes'}
+                        name={'numOfTeeBoxes'}
+                        placeholder={'18'}
+                        value={numberOfHoles}
+                        handleChange={(e) => setNumberOfHoles(e.target.value)}
+                    />
+                    <button className='next-button' type='submit'>Next</button>        
+                </div>   
                 
-                <select required onChange={(e) => setNumberOfHoles(e.target.value)} >
-                    <option>Number of Holes</option>
-                    <option value={9} >9</option>
-                    <option value={18}>18</option>                    
-                </select>              
-            </div>   
-            <button className='next-button' type='submit'>Next</button>    
-        </form>
+            </form>
+        </div>
+        
     )
 }

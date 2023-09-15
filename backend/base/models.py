@@ -69,13 +69,13 @@ class Hole(models.Model):
 
 class TeeBox(models.Model):
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
-    color = models.CharField( blank=False, null=True, max_length=255)
-    front_nine_yards = models.IntegerField(unique=False, default=0)
-    back_nine_yards = models.IntegerField(unique=False, default=0)
-    total_yards = models.IntegerField(unique=False, default=0)
-    slope = models.IntegerField(unique=False, default=0)
-    handicap = models.IntegerField(unique=False, default=0)
-    par = models.IntegerField(unique=False, default=0)
+    color = models.CharField( max_length=255, null=True, blank=True)
+    front_nine_yards = models.IntegerField(unique=False, default=0, null=True)
+    back_nine_yards = models.IntegerField(unique=False, default=0, null=True)
+    total_yards = models.IntegerField(unique=False, default=0, null=True)
+    slope = models.IntegerField(unique=False, default=0, null=True)
+    handicap = models.IntegerField(unique=False, default=0, null=True)
+    par = models.IntegerField(unique=False, default=0, null=True)
 
     
 

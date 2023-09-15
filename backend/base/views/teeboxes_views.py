@@ -17,20 +17,47 @@ def getTeeBoxes(request):
     serializer = TeeBoxSerializer(tee_boxes, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getTeeBox(request, pk):
+    tee_box = TeeBox.objects.get(id=pk)
+    serializer = TeeBoxSerializer(tee_box, many=False)
+    return Response(serializer.data)
+
+
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateTeeBox(request, pk):
     data = request.data
+    print(data)
+    print('yellow')
     tee_box = TeeBox.objects.get(id=pk)
 
-    tee_box.colors = data['colors']
-    tee_box.yards = data['yards']
+    tee_box.color = data['color']
+    tee_box.slope = data['slope']
+    tee_box.handicap = data['handicap']
+    tee_box.par = data['par']
+    tee_box.front_nine_yards = data['front_nine_yards']
+    tee_box.back_nine_yards = data['back_nine_yards']
+    tee_box.total_yards = data['total_yards']
 
     tee_box.save()
 
     serializer = TeeBoxSerializer(tee_box, many=False)
     return Response(serializer.data)
 
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteTeeBox(request, pk):
+    tee_box = TeeBox.objects.get(id=pk)
+
+    tee_box.delete()
+
+    return Response('Deleted')
+
+
+# Possiblely can delete this function
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def addTeeBoxToHolesBool(request, pk):
@@ -51,11 +78,10 @@ def addTeeBoxToHolesBool(request, pk):
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
-def updateBulkTeeBoxes(request):
+def updateBulkTeeBoxes(request, pk):
     new_tee_boxes = request.data['teeBoxes']
-
     for new_tee_box in new_tee_boxes:
-        old_tee_box = TeeBox.objects.get(course=new_tee_box['course'], id=new_tee_box['id'])
+        old_tee_box = TeeBox.objects.get(course=pk, id=new_tee_box['id'])
         
         old_tee_box.color = new_tee_box['color']
         old_tee_box.front_nine_yards = new_tee_box['front_nine_yards']

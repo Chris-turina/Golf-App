@@ -18,6 +18,7 @@ import {
 } from './reducers/golfCourseReducer';
 
 import {
+    teeBoxDetailsReducer,
     teeBoxBulkUpdateReducer
 } from './reducers/teeBoxReducer'
 
@@ -83,6 +84,7 @@ const reducer = combineReducers({
     golfCourseDelete: golfCourseDeleteReducer,
     golfCourseUpdate: golfCourseUpdateReducer,
 
+    teeBoxDetails:teeBoxDetailsReducer,
     teeBoxBulkUpdate: teeBoxBulkUpdateReducer,
 
     

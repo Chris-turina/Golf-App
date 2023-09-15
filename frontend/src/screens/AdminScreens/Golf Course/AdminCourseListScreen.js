@@ -8,7 +8,11 @@ import Message from '../../../components/Message';
 import { listGolfCourses, deleteGolfCourse, createGolfCourse } from '../../../actions/golfCourseActions';
 import { GOLF_COURSE_CREATE_RESET } from '../../../constants/golfCourseConstants';
 import Header from '../../../components/Header';
+import HeaderAdmin from '../../../components/HeaderAdmin';
 import AdminCourseListItem from '../../../components/AdminCourseListItem';
+import AdminSideHeader from '../../../components/AdminSideHeader';
+import ButtonLargeSquare from '../../../components/Buttons/ButtonLargeSquare';
+import TableStyleOne from '../../../components/Tables/TableStyleOne';
 
 export default function AdminCourseListScreen() {
 
@@ -35,10 +39,6 @@ export default function AdminCourseListScreen() {
             dispatch(listGolfCourses()) 
         }
 
-        if (successCreate) {
-            navigate(`/admin/golfcourselist/create/${createdGolfCourse.course_id}`)
-        }
-
         if (successDelete) {
             dispatch(listGolfCourses()) 
         }
@@ -51,64 +51,94 @@ export default function AdminCourseListScreen() {
             dispatch(deleteGolfCourse(id))
         }
     }
-    // create a new instance of course 
-    const createGolfCourseHandler = () => {
-        dispatch(createGolfCourse())
-        
+    
+    const routeChange = () => {
+        navigate('/admin/golf_courses/create')
     }
 
-    console.log(golfCourses);
+    const deleteEditHandler = (value, id) => {
+        console.log(id);
+        if (value === 'delete') {
+            if (window.confirm('Are you sure you want to delete this Golf Course?')) {
+                dispatch(deleteGolfCourse(id))
+            }
+        }
+    }
+
     return (
         <div>
-            <Header userInfo={userInfo} page='admin' />
-            <div>
-                <div className='admin-user-list-screen-back-arrow-container'>
-                    <i className="fa-solid fa-arrow-left"></i>
-                    <Link className='select-tee-link' to='/admin'>
-                        <p>Admin</p>
-                    </Link>
+            <HeaderAdmin userInfo={userInfo}/>
+            <div className='admin-container'>
+                <AdminSideHeader page='golf-courses' />
+                <div className='admin-content-container'>
+                    {/* <div className='admin-new-row'>                        
+                        <ButtonLargeSquare link={'create'} buttonText={'Create Course'} />
+                    </div> */}
+
+                    <div className='admin-new-row'>
+                        {loading
+                            ? (<Loader />)
+                            : error
+                                ? (<Message variant='danger'>{error}</Message>)
+                                : (
+                                    // <div className='admin-golf-course-content-container-style course-list'>
+                                    //     <AdminCourseListItem
+                                    //         itemStyle='header'
+                                    //         header='true'
+                                    //         id='ID'
+                                    //         name='NAME'
+                                    //         holes='HOLES'
+                                    //         courseInfo='COURSE INFO'
+                                    //         deleteCourse='DELETE COURSE'
+                                    //     />
+                                    //     {golfCourses.map(golfCourse => (
+                                    //         <Link to={`course/${golfCourse.course_id}`} className='admin-course-list-screen-link' key={golfCourse.course_id}>
+                                    //             <AdminCourseListItem     
+                                    //             itemStyle='body'                                                                   
+                                    //             listItem='true'
+                                    //             id={golfCourse.course_id}
+                                    //             name={golfCourse.name}
+                                    //             holes={golfCourse.num_of_holes}
+                                    //             courseInfo='Info'
+                                    //             deleteCourse={deleteHandler}
+                                    //         />
+                                    //         </Link>
+                                            
+                                    //     ))}
+                                    // </div>
+                                    <div className=' admin-course-list'>
+                                        
+                                        <TableStyleOne 
+                                            thArray = {['GOLF COURSE','ID', 'HOLES', 'ACTIONS']}
+                                            tdArray = {golfCourses}
+                                            tdAttributes = {[ 'name', 'course_id', 'num_of_holes', 'ACTIONS']}
+                                            dataPointUrl ={`/admin/golf_courses/course/`}
+                                            topHeader = {true}
+                                            buttonText = {'Add Course'}
+                                            searchBarText = {'Search Courses'}
+                                            handleButtonClick = {routeChange}
+                                            idName = {'course_id'}
+                                            handleActions={deleteEditHandler}
+                                        />
+
+                                        
+
+                                        
+                                    </div>
+
+                                    
+                                )
+                        }
+                    </div>
+                    
+                
+
+
                     
                 </div>
-                <Link to='create'>
-                    <button>Add a Course</button>
-                </Link>
-            </div>
             
-
-
-            {loading
-                ? (<Loader />)
-                : error
-                    ? (<Message variant='danger'>{error}</Message>)
-                    : (
-                        <div className='admin-courses-list-screen-content-container'>
-                            <AdminCourseListItem
-                                headerStyle='admin-user-list-item-header'
-                                header='true'
-                                id='ID'
-                                name='NAME'
-                                holes='HOLES'
-                                courseInfo='COURSE INFO'
-                                deleteCourse='DELETE COURSE'
-                            />
-                            {golfCourses.map(golfCourse => (
-                                <Link to={`course/${golfCourse.course_id}`} className='admin-course-list-screen-link' key={golfCourse.course_id}>
-                                    <AdminCourseListItem                                                                        
-                                    listItem='true'
-                                    id={golfCourse.course_id}
-                                    name={golfCourse.name}
-                                    holes={golfCourse.num_of_holes}
-                                    courseInfo='Info'
-                                    deleteCourse='delete course'
-                                />
-                                </Link>
-                                
-                            ))}
-                        </div>
-
-                        
-                    )
-            }
+                
+            </div>
         </div>
     )
 }

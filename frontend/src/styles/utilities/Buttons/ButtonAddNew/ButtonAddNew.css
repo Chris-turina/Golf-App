@@ -1,0 +1,22 @@
+.button-large-square {
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  position: relative;
+}
+.button-large-square .button-large-square-link {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+.button-large-square button {
+  background-color: inherit;
+  border: none;
+  height: 100%;
+  width: 100%;
+}/*# sourceMappingURL=ButtonAddNew.css.map */

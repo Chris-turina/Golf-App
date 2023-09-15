@@ -12,7 +12,7 @@
     }
 
     div {
-        width:33vw;
+        width:10vw;
          p {
             color: black;
             margin-bottom: 0;
@@ -20,9 +20,12 @@
     }
 }
 
-.admin-course-list-item-container:hover  {
+.is-header {
+    font-weight: bold;
+}
+
+.is-body:hover {
     border-color: #32c32f;
-    transform: scale(1.02);
     transition: .5s;
 }
 

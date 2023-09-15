@@ -1,125 +1,172 @@
 // IN USE
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import FormStyleOneInput from './FormStyleOneInput'
+import ButtonTwo from './Buttons/ButtonTwo'
+
 
 export default function EditTeeBoxes({ teeBoxes, teeBoxContentUpdate }) {
+    // console.log(teeBoxes);
+    const [allTeeBoxes, setAllTeeBoxes] = useState([])
+    const [showTeeBox, setShowTeebox] = useState(false)
+    const [currentTeeBox, setCurrentTeeBox] = useState({})
+    const [currentTeeBoxIndex, setCurrentTeeBoxindex] = useState(0)
 
-    const [teeBoxFields, setTeeBoxFields] = useState([])
+    const [showSubmitBtn, setShowSubmitBtn] = useState(false)
+    const [showNextBtn, setShowNextBtn] = useState(true)
+    const [activeButton, setActiveButton] = useState(false)
+
+    const loadTeeBox = () => {
+        setAllTeeBoxes(teeBoxes)
+        setCurrentTeeBox(teeBoxes[0])
+        setShowTeebox(true)
+    }
+
+    useEffect(() => {
+        loadTeeBox()
+    }, [])
 
 
-    const handleChange = (i, e) => {
-        let data = [...teeBoxes]
+    const handleTeeBoxChange = (e) => {
+        let data = {...currentTeeBox}
+        let allData = allTeeBoxes
 
-        if (e.target.type === 'text') {
-            data[i][e.target.name] = e.target.value    
-        } else if (e.target.type === 'number') {
-            data[i][e.target.name] = parseInt(e.target.value)
+        if (e.target.type === 'number') {
+            data[e.target.name] = parseInt(e.target.value)
+            allData[currentTeeBoxIndex][e.target.name] = parseInt(e.target.value)
+        } else {
+            data[e.target.name] = e.target.value
+            allData[currentTeeBoxIndex][e.target.name] = e.target.value
         }
-        setTeeBoxFields(data)
+        setAllTeeBoxes(allData)
+        setCurrentTeeBox(data)          
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        teeBoxContentUpdate(teeBoxFields)
+        teeBoxContentUpdate(allTeeBoxes)
     }
 
+    const toggleTeeBox = (teeBox, i, e) => {
+        console.log(e.target);
+        if (i === allTeeBoxes.length - 1) {
+            setShowNextBtn(false)
+            setShowSubmitBtn(true)
+        } else {
+            setShowNextBtn(true)
+            setShowSubmitBtn(false)
+        }
+        setCurrentTeeBox(teeBox)
+        setCurrentTeeBoxindex(i)
+    }
+
+    const toggleNextTeeBox = () => {
+        const nextTeeBoxIndex = currentTeeBoxIndex + 1
+        const newTeeBox = allTeeBoxes[nextTeeBoxIndex]        
+        if (allTeeBoxes.length === currentTeeBoxIndex + 2 ) {
+            setShowNextBtn(false)
+            setShowSubmitBtn(true)
+        }
+        setCurrentTeeBoxindex(nextTeeBoxIndex)
+        setCurrentTeeBox(newTeeBox)
+        
+
+    }
+
+    console.log(currentTeeBox);
+    console.log(allTeeBoxes);
+
     return (
-        <div className='header-spacer'>
+        <div className='admin-content-item-container-style form-style-one-container'>
             <form onSubmit={handleSubmit} className='form-style-one'>
-                <table className='form-table-one'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name </th>
-                            <th>Handicap</th>
-                            <th>Slope</th>
-                            <th>Par</th>
-                            <th>Front - 9 YDS</th>
-                            <th>Back - 9 YDS</th>
-                            <th>Total YDS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {teeBoxes.map((teeBox, i) => (
-                        <tr key={teeBox.id}>
-                            <td>
-                                <p>{teeBox.id}</p>
-                            </td>
+                <div className='edit-tee-boxes-container'>
+                    {/* <h3 className='edit-tee-box-title'>Edit Each Tee Box</h3> */}
+                    <div className='tee-box-buttons-container'>
+                        {allTeeBoxes.map((teeBox, index) => (
+                            // <div key={teeBox.id} onClick={(e) => toggleTeeBox(teeBox, i, e)} className={` button-style-two button-margin`}>
+                            //     <p>{i+1}</p>
+                            // </div>
 
-                            <td>
-                                <input
-                                    type='text'
-                                    name='color'
-                                    placeholder='Tee Box Name'
-                                    value={teeBox.color}
-                                    onChange={e => handleChange(i, e)}
-                                />
-                            </td>
+                            <ButtonTwo 
+                                key = {teeBox.id}
+                                teeBoxId = {teeBox.id}
+                                handleClick = {(e) => toggleTeeBox(teeBox, index, e)}
+                                index = {index}
+                                teeBox = {teeBox}
+                            />
+                        ))}
+                    </div>
 
-                            <td>
-                                <input 
-                                    type='number'
-                                    name='handicap'
-                                    placeholder='Handicap'
-                                    value={teeBox.handicap}
-                                    onChange={e => handleChange(i, e)}
-                                />
-                            </td>
+                    { showTeeBox && <div className='form-style-one-input-container'>
+                        <FormStyleOneInput                                
+                            label={'Tee Box Name'}
+                            type={'text'}
+                            name={'color'}
+                            placeholder={'Green'}
+                            value={currentTeeBox.color}                            
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
 
-                            <td>
-                                <input 
-                                    type='number'
-                                    name='slope'
-                                    placeholder='Slope'
-                                    value={teeBox.slope}
-                                    onChange={e => handleChange(i,e)}
-                                />
-                            </td>
+                        <FormStyleOneInput
+                            label={'Handicap'}
+                            type={'number'}
+                            name={'handicap'}
+                            placeholder={'76.2'}
+                            value={currentTeeBox.handicap || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
 
-                            <td>
-                                <input
-                                    type='number'
-                                    name='par'
-                                    placeholder='Par'
-                                    value={teeBox.par}
-                                    onChange={e => handleChange(i,e)}
-                                />
-                            </td>
+                        <FormStyleOneInput
+                            label={'Slope'}
+                            type={'number'}
+                            name={'slope'}
+                            placeholder={'142'}
+                            value={currentTeeBox.slope || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
 
-                            <td>
-                                <input 
-                                    type='number'
-                                    name='front_nine_yards'
-                                    placeholder='Front 9 Distance'
-                                    value={teeBox.front_nine_yards}
-                                    onChange={e => handleChange(i,e)}
-                                />
-                            </td>
+                        <FormStyleOneInput
+                            label={'Par'}
+                            type={'number'}
+                            name={'par'}
+                            placeholder={'72'}
+                            value={currentTeeBox.par || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
 
-                            <td>
-                                <input 
-                                    type='number'
-                                    name='back_nine_yards'
-                                    placeholder='Back 9 Distance'
-                                    value={teeBox.back_nine_yards}
-                                    onChange={e => handleChange(i,e)}
-                                />
-                            </td>
+                        <FormStyleOneInput
+                            label={"Front 9 Yards"}
+                            type={'number'}
+                            name={'front_nine_yards'}
+                            placeholder={'3113'}
+                            value={currentTeeBox.front_nine_yards || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
 
-                            <td>
-                                <input 
-                                    type='number'
-                                    name='total_yards'
-                                    placeholder='Total Yards'
-                                    value={teeBox.total_yards}
-                                    onChange={e => handleChange(i,e)}
-                                />
-                            </td>
-                        </tr>
-                        ))}                        
-                    </tbody>
-                </table>                      
-                <button className='next-button' type='submit'>Next</button>
+                        <FormStyleOneInput
+                            label={"Back 9 Yards"}
+                            type={'number'}
+                            name={'back_nine_yards'}
+                            placeholder={'3303'}
+                            value={currentTeeBox.back_nine_yards || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
+
+                        <FormStyleOneInput
+                            label={"Total Yards"}
+                            type={'number'}
+                            name={'total_yards'}
+                            placeholder={'6612'}
+                            value={currentTeeBox.total_yards || ''}
+                            handleChange={e => handleTeeBoxChange(e)}
+                        />
+                        
+                    </div> } 
+                </div>
+
+                
+                {showNextBtn && <button className='button-style-two' type='button' onClick={() => toggleNextTeeBox()}>Next Tee Box</button>}
+                { showSubmitBtn && <button className='button-style-three' type='submit'>Save Tee Boxes</button>}
             </form>
             
         </div>

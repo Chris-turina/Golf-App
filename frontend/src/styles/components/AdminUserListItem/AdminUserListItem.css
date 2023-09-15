@@ -17,12 +17,11 @@
   margin-bottom: 0;
 }
 
-.admin-user-list-item-container:hover {
-  border-color: #32c32f;
-  transform: scale(1.02);
-  transition: 0.5s;
+.is-header p {
+  font-weight: bold;
 }
 
-.admin-user-list-item-header p {
-  font-weight: bold;
+.is-body:hover {
+  border-color: #32c32f;
+  transition: 0.5s;
 }/*# sourceMappingURL=AdminUserListItem.css.map */

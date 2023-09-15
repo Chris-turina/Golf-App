@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+// Depricate this Component
+
+import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import { logout } from '../actions/userActions';
+import {Button, Col } from 'react-bootstrap';
 
 export default function ProfileSideHeader({ userId}) {
 

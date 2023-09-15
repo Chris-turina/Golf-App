@@ -1,22 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { listGolfCourseDetails } from '../../../actions/golfCourseActions';
 import Header from '../../../components/Header';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import AdminScoreCardTees from '../../../components/AdminScoreCardTees';
 import { listCourseTees } from '../../../actions/teeActions';
+import { deleteTeeBox } from '../../../actions/teeBoxActions';
+import { TEE_BOX_DELETE_SUCCESS } from '../../../constants/teeBoxConstants';
 
 
 export default function AdminCourseInfoScreen() {
+    
 
 
     const golfCourseDetails = useSelector(state => state.golfCourseDetails)
     const { loading , error, success: successDetails, golfCourse } = golfCourseDetails
 
     const courseTeeList = useSelector(state => state.courseTeeList)
-    const { loading: teeListLoading, success: teeListSuccess, tees} = courseTeeList
+    const {success: teeListSuccess, tees} = courseTeeList
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -33,11 +35,25 @@ export default function AdminCourseInfoScreen() {
             dispatch(listGolfCourseDetails(id))    
             dispatch(listCourseTees(id))        
         }
-        
-    }, [navigate, dispatch, id])    
 
-    console.log(golfCourse);
-    console.log(tees);
+        if (TEE_BOX_DELETE_SUCCESS) {
+            dispatch(listGolfCourseDetails(id))    
+            dispatch(listCourseTees(id))        
+        }
+        
+    }, [navigate, dispatch, id, TEE_BOX_DELETE_SUCCESS])    
+
+    const navigateToEditScreen = (teeId) => {
+        navigate(`edit_tee/${teeId}`)
+    }
+
+    // Make it so on delete it updates the screen
+    const deleteHandler = (teeBox) => {
+        if (window.confirm('Are you sure you want to delete this Tee Box?')) {
+            dispatch(deleteTeeBox(teeBox))
+        }
+        
+    }
 
 
     return (
@@ -56,10 +72,10 @@ export default function AdminCourseInfoScreen() {
             {successDetails && teeListSuccess && (
                 <div>
                     <div>
-                        <h1>{golfCourse.name}</h1>
-                        <h3>Tee Boxes</h3>
-                    </div>
-                    <div className='table-style-one-background'>                        
+                        <h1>{golfCourse.name}</h1>                        
+                    </div>                    
+                     <div className='table-style-one-background'>                        
+                        
                         <table className='table-style-one'>
                             <thead>
                                 <tr className='table-style-one-tr-header'>
@@ -68,18 +84,20 @@ export default function AdminCourseInfoScreen() {
                                     <th>Slope</th>
                                     <th>Par</th>
                                     <th>Distance</th>
+                                    <th>Delete Tee Box</th>
+                                    
                                     
                                 </tr>                                
                             </thead>
 
                             <tbody>
-                                {golfCourse.tee_boxes.map(teeBox => (
-                                    <tr key={teeBox.id} className='table-style-one-tr-body'>
-                                        <td>{teeBox.color}</td>
-                                        <td>{teeBox.handicap}</td>
-                                        <td>{teeBox.slope}</td>
-                                        <td>{teeBox.par}</td>
-                                        <td>
+                                {golfCourse.tee_boxes.map(teeBox => (                                    
+                                    <tr key={teeBox.id} className='table-style-one-tr-body'>                                        
+                                        <td className='table-style-one-td-click' onClick={() => navigateToEditScreen(teeBox.id)}>{teeBox.color}</td>
+                                        <td className='table-style-one-td-click' onClick={() => navigateToEditScreen(teeBox.id)}>{teeBox.handicap}</td>
+                                        <td className='table-style-one-td-click' onClick={() => navigateToEditScreen(teeBox.id)}>{teeBox.slope}</td>
+                                        <td className='table-style-one-td-click' onClick={() => navigateToEditScreen(teeBox.id)}>{teeBox.par}</td>
+                                        <td className='table-style-one-td-click' onClick={() => navigateToEditScreen(teeBox.id)}>
                                             <table className='table-style-one-nested-table'>
                                                 <tbody>
                                                     <tr>
@@ -99,10 +117,16 @@ export default function AdminCourseInfoScreen() {
                                                 </tbody>
                                             
                                             </table>
-                                        </td>                                
+                                        </td>    
+                                        <td>
+                                        
+                                            <i className='fas fa-trash' onClick={() => deleteHandler(teeBox)}></i>
+                                        
+                                        </td>                            
                                     </tr>
 
                                 ))}
+                                
                             </tbody>
                             
                         </table>
@@ -136,7 +160,6 @@ export default function AdminCourseInfoScreen() {
                             </table>
                         </div>
                     </div>
-                    
                 </div>
             )}
             

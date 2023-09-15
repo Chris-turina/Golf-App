@@ -28,7 +28,7 @@ def createGolfCourse(request):
     )
 
     for _ in range(num_of_tee_boxes):
-        tee_box = TeeBox(course= golfCourse, color='Color', front_nine_yards= 0, back_nine_yards=0, total_yards=0, slope=0, handicap=0, par=0 )
+        tee_box = TeeBox(course= golfCourse, color='', front_nine_yards= None, back_nine_yards=None, total_yards=None, slope=None, handicap=None, par=None )
         tee_box_list.append(tee_box)
         
     for _ in range(num_of_holes):

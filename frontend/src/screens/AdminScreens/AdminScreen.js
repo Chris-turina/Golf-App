@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import Header from '../../components/Header'
 import AdminListItem from '../../components/AdminListItem';
+import HeaderAdmin from '../../components/HeaderAdmin';
+import AdminSideHeader from '../../components/AdminSideHeader';
 
 export default function AdminScreen() {
 
@@ -22,13 +24,15 @@ export default function AdminScreen() {
 
     return (
         <div>
-            <Header userInfo={userInfo} page='admin' />            
-            <div className='admin-screen-container'>
-                <div className='admin-content-container'>
-                    <AdminListItem link='users' title='Users' />
-                    <AdminListItem link='golf_courses' title='Golf Courses'/>
-                </div>
+            <HeaderAdmin userInfo={userInfo} />
+            <div className='admin-container'>
+                <AdminSideHeader />
+                <div className='admin-content-container'>                    
+                                  
+                </div>          
+                
             </div>
+            
         </div>
     )
 }

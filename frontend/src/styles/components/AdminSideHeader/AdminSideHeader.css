@@ -1,0 +1,39 @@
+.admin-side-header {
+  background-color: black;
+  width: 150px;
+  height: 90vh;
+  position: fixed;
+  left: 0;
+}
+
+.admin-side-header-button {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-side-header-button p {
+  color: rgb(188, 188, 188);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.admin-side-header-button:hover {
+  cursor: pointer;
+}
+.admin-side-header-button:hover p {
+  color: white;
+  text-align: center;
+}
+
+.admin-side-header-active {
+  background-color: #1c1c21;
+}
+.admin-side-header-active p {
+  color: white;
+}
+
+.admin-side-header-link {
+  text-decoration: none;
+}/*# sourceMappingURL=AdminSideHeader.css.map */

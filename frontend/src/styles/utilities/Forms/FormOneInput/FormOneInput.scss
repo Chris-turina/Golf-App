@@ -1,0 +1,84 @@
+.form-style-one-container {
+  width: 500px;
+}
+
+.form-style-one {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.has-float-label {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+    width: 250px;
+    
+
+    label, input {
+        transition: all 0.2s;
+    }
+    
+    input {
+        font-size: 1.5em;
+        border: 0;
+        border-bottom: 1px solid #ccc;
+        font-family: inherit;
+        border-radius: 0;
+        padding: 0;
+        cursor: text;
+      }
+
+      input:placeholder-shown {
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+      }
+
+      input:focus {
+        outline: 0;
+        border-bottom: 1px solid #666;
+        opacity: 1;
+      }
+      
+      label {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      
+      input:placeholder-shown + label {
+        cursor: text;
+        max-width: 66.66%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transform-origin: left bottom;
+        transform: translate(0, 2.125rem) scale(1.5);
+      }
+      
+      
+      ::-webkit-input-placeholder {        
+        opacity: 0;
+        transition: inherit;
+
+      }
+     
+      
+      input:focus::-webkit-input-placeholder {
+        opacity: 1;
+      }
+      
+      
+      input:not(:placeholder-shown) + label, input:focus + label {
+        transform: translate(0, 0) scale(1);
+        
+      }
+
+      
+
+    
+      
+}

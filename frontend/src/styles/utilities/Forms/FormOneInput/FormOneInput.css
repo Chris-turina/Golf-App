@@ -1,0 +1,80 @@
+.form-style-one-container {
+  width: 500px;
+}
+
+.form-style-one {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.has-float-label {
+  display: flex;
+  flex-flow: column-reverse;
+  margin-bottom: 1em;
+  width: 250px;
+}
+.has-float-label label, .has-float-label input {
+  transition: all 0.2s;
+}
+.has-float-label input {
+  font-size: 1.5em;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-family: inherit;
+  border-radius: 0;
+  padding: 0;
+  cursor: text;
+}
+.has-float-label input:-moz-placeholder-shown {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+.has-float-label input:placeholder-shown {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+.has-float-label input:focus {
+  outline: 0;
+  border-bottom: 1px solid #666;
+  opacity: 1;
+}
+.has-float-label label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.has-float-label input:-moz-placeholder-shown + label {
+  cursor: text;
+  max-width: 66.66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left bottom;
+  transform: translate(0, 2.125rem) scale(1.5);
+}
+.has-float-label input:placeholder-shown + label {
+  cursor: text;
+  max-width: 66.66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left bottom;
+  transform: translate(0, 2.125rem) scale(1.5);
+}
+.has-float-label ::-webkit-input-placeholder {
+  opacity: 0;
+  -webkit-transition: inherit;
+  transition: inherit;
+}
+.has-float-label input:focus::-webkit-input-placeholder {
+  opacity: 1;
+}
+.has-float-label input:not(:-moz-placeholder-shown) + label {
+  transform: translate(0, 0) scale(1);
+}
+.has-float-label input:not(:placeholder-shown) + label, .has-float-label input:focus + label {
+  transform: translate(0, 0) scale(1);
+}/*# sourceMappingURL=FormOneInput.css.map */
