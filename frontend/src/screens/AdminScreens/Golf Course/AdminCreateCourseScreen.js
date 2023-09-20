@@ -90,12 +90,19 @@ export default function AdminCreateCourseScreen() {
             <div className='admin-container'>
                 <AdminSideHeader page='golf-courses' />
                 <div className='admin-content-container'>
+
                     <div className='admin-new-row'>
                         {showCourseQuestions && <CourseQuestionnaire getCourseData={recieveCourseData} />}     
                     </div>
+
+                    <div className='admin-new-row'>
+                        {successNewCourse && showTeeBoxes && <EditTeeBoxes teeBoxes={newCourse.tee_boxes} teeBoxContentUpdate={teeBoxContentUpdate} />}
+                    </div>
+
+                    <div className='admin-new-row'>
+                        {successNewCourse && showHoles && <EditHoles holes={newCourse.holes}  holeContentUpdate={holeContentUpdate} /> }                      
+                    </div>
                     
-                    {successNewCourse && showTeeBoxes && <EditTeeBoxes teeBoxes={newCourse.tee_boxes} teeBoxContentUpdate={teeBoxContentUpdate} />}
-                    {successNewCourse && showHoles && <EditHoles holes={newCourse.holes}  holeContentUpdate={holeContentUpdate} /> }  
                 </div>
                 
                 

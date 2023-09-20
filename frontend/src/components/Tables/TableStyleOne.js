@@ -2,20 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function TableStyleOne({ thArray, tdArray, tdAttributes, dataPointUrl, topHeader, buttonText, searchBarText, handleButtonClick, handleActions, idName }) {
-    
+
     const testClick = (e, dataId) => {    
         handleActions(e.target.value, dataId)
     }
 
 
     const renderData = (data) => {
+        console.log(data.course_id);
         let newArry = []
         for (let i = 0; i < tdAttributes.length; i++) {
             const element = tdAttributes[i];  
             
             if (element === tdAttributes[0]) {
+                
                 newArry.push(
-                    <td>
+                    <td key={Math.floor(Math.random() * 100)}>
                         <div>
                             <Link className='table-style-one-link' to={`${dataPointUrl}${data[idName]}`}>
                                 <p>{data[element]}</p>
@@ -27,14 +29,14 @@ export default function TableStyleOne({ thArray, tdArray, tdAttributes, dataPoin
                 
                 if (data[element] === true) {
                     console.log(true);
-                    newArry.push(<td>Yes</td>)
+                    newArry.push(<td key={Math.floor(Math.random() * 100)}>Yes</td>)
                 } else if (data[element] === false) {
-                    newArry.push(<td>No</td>)
+                    newArry.push(<td key={Math.floor(Math.random() * 100)}>No</td>)
                 }
             } else if (element === 'ACTIONS') {
 
                 newArry.push(
-                    <td>
+                    <td key={Math.floor(Math.random() * 100)}>
                         <select onChange={ e => testClick(e, data[idName])} className='table-style-one-dropdown'>
                             <option >ACTIONS</option>
                             <option value={'delete'}>DELETE</option>
@@ -44,7 +46,7 @@ export default function TableStyleOne({ thArray, tdArray, tdAttributes, dataPoin
                 )
 
             } else {
-                newArry.push(<td>{data[element]}</td>)
+                newArry.push(<td key={Math.floor(Math.random() * 100)}>{data[element]}</td>)
             }
 
             
@@ -76,8 +78,8 @@ export default function TableStyleOne({ thArray, tdArray, tdAttributes, dataPoin
                         </tr>
                     </thead>
                     <tbody>
-                        {tdArray.map(data => (
-                            <tr key={data.id}>
+                        {tdArray.map((data, i) => (
+                            <tr key={i}>
                                 {renderData(data)}
                             </tr>
                         ))}

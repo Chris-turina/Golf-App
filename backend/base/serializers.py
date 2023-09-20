@@ -132,7 +132,7 @@ class TeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tee
-        fields = ['id', 'color', 'hole', 'yards', 'par']   
+        fields = ['id', 'color', 'hole', 'yards']   
 
     def get_hole(self, obj):
         return {'hole':obj.hole.number }

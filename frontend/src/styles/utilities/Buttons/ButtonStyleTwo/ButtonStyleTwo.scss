@@ -1,12 +1,30 @@
-// .button-style-two {
-//     background-color: #3E97FF;
-//     color: #ffffff;
-//     outline: 0;
-//     padding: .775rem 1rem;
-//     border-radius: .475rem;
-//     border: none;
-// }
+.button-margin {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
 
-// .button-style-two:hover {
-//     background-color: #73b1f7;
-// }
+.button-style-two {
+    background-color:white;
+    border: 1px solid black;
+    color: Black;
+    outline: 0;
+    padding: .5rem 1.2rem;
+    border-radius: .475rem;
+
+    p {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+.button-style-two:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button-style-two-selected {
+    background-color: #3be138;
+    border: 1px solid #3be138;
+}

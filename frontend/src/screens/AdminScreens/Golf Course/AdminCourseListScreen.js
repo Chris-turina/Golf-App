@@ -71,10 +71,6 @@ export default function AdminCourseListScreen() {
             <div className='admin-container'>
                 <AdminSideHeader page='golf-courses' />
                 <div className='admin-content-container'>
-                    {/* <div className='admin-new-row'>                        
-                        <ButtonLargeSquare link={'create'} buttonText={'Create Course'} />
-                    </div> */}
-
                     <div className='admin-new-row'>
                         {loading
                             ? (<Loader />)

@@ -57,7 +57,8 @@ class GolfCourse(models.Model):
 class Hole(models.Model):
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
     number = models.IntegerField(unique=False)    
-    handicap = models.IntegerField(unique=False, default=0)
+    handicap = models.IntegerField(unique=False, default=0, null=True)
+    par = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(3)], default=4, null=True)
 
     class Meta:
         unique_together = (('number','course')) # Each course can only have one hole with each number.
@@ -87,8 +88,8 @@ class TeeBox(models.Model):
 class Tee(models.Model):
     color = models.ForeignKey(TeeBox, on_delete=models.CASCADE, null=True)  
     hole = models.ForeignKey(Hole, on_delete=models.CASCADE, null=True, )
-    yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)], default=0)
-    par = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(3)], default=4)
+    yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)], default=0, null=True)
+    
 
     # class Meta:
     #     unique_together = (('color','hole'),) # only have one of each color on the hole

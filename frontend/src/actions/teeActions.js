@@ -42,7 +42,7 @@ export const updateTee = (tee) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/tee/yards/update/${tee.id}/`,
+            `/api/tee/update/${tee.id}/`,
             tee,
             config
         )

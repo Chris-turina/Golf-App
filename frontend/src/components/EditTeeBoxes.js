@@ -6,7 +6,7 @@ import ButtonTwo from './Buttons/ButtonTwo'
 
 
 export default function EditTeeBoxes({ teeBoxes, teeBoxContentUpdate }) {
-    // console.log(teeBoxes);
+    
     const [allTeeBoxes, setAllTeeBoxes] = useState([])
     const [showTeeBox, setShowTeebox] = useState(false)
     const [currentTeeBox, setCurrentTeeBox] = useState({})
@@ -20,7 +20,13 @@ export default function EditTeeBoxes({ teeBoxes, teeBoxContentUpdate }) {
         setAllTeeBoxes(teeBoxes)
         setCurrentTeeBox(teeBoxes[0])
         setShowTeebox(true)
+        if (teeBoxes.length === 1) {
+            setShowNextBtn(false)
+            setShowSubmitBtn(true)
+        }
+        
     }
+    
 
     useEffect(() => {
         loadTeeBox()
@@ -73,26 +79,19 @@ export default function EditTeeBoxes({ teeBoxes, teeBoxContentUpdate }) {
 
     }
 
-    console.log(currentTeeBox);
-    console.log(allTeeBoxes);
-
     return (
         <div className='admin-content-item-container-style form-style-one-container'>
             <form onSubmit={handleSubmit} className='form-style-one'>
-                <div className='edit-tee-boxes-container'>
-                    {/* <h3 className='edit-tee-box-title'>Edit Each Tee Box</h3> */}
+                <div className='edit-tee-boxes-container'>                    
                     <div className='tee-box-buttons-container'>
                         {allTeeBoxes.map((teeBox, index) => (
-                            // <div key={teeBox.id} onClick={(e) => toggleTeeBox(teeBox, i, e)} className={` button-style-two button-margin`}>
-                            //     <p>{i+1}</p>
-                            // </div>
-
                             <ButtonTwo 
                                 key = {teeBox.id}
-                                teeBoxId = {teeBox.id}
+                                itemId = {teeBox.id}
                                 handleClick = {(e) => toggleTeeBox(teeBox, index, e)}
                                 index = {index}
                                 teeBox = {teeBox}
+                                selected = {currentTeeBox}
                             />
                         ))}
                     </div>
@@ -111,7 +110,7 @@ export default function EditTeeBoxes({ teeBoxes, teeBoxContentUpdate }) {
                             label={'Handicap'}
                             type={'number'}
                             name={'handicap'}
-                            placeholder={'76.2'}
+                            placeholder={'76'}
                             value={currentTeeBox.handicap || ''}
                             handleChange={e => handleTeeBoxChange(e)}
                         />

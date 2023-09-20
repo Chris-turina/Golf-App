@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default function ButtonTwo({ teeBox, teeBoxId, handleClick, index}) {
-    console.log(index);
+export default function ButtonTwo({ item, itemId, handleClick, index, selected}) {
+    
+    const [selectedStyle, setSelectedStyle] = useState('')
+
+    useEffect(() =>{
+        if (selected.id === itemId) {
+            setSelectedStyle('button-style-two-selected')
+        } else {
+            setSelectedStyle('')
+        }
+    })
+    
+    const handleButtonClick = (e) => {
+        
+        handleClick(e)
+    }
+
     return (
-        <div key={teeBoxId} onClick={handleClick} className={` button-style-two button-margin`}>
-            <p>{index}</p>
+        <div key={itemId} onClick={e => handleButtonClick(e)} className={` button-style-two button-margin ${selectedStyle}`}>
+            <p>{index + 1}</p>
         </div>
     ) 
 }

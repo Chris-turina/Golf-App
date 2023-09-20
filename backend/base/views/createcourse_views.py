@@ -39,7 +39,7 @@ def createGolfCourse(request):
     for hole in holes_list:
         for tee_box in tee_box_list:
             tee_list.append(
-                Tee(color=tee_box, hole=hole, yards=0, par=4)
+                Tee(color=tee_box, hole=hole, yards=None, par=None)
             )
 
     TeeBox.objects.bulk_create(tee_box_list)

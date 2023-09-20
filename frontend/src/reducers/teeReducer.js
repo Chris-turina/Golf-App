@@ -102,7 +102,7 @@ export const courseTeeListReducer = (state = {}, action) => {
             return {loading: true}
 
         case COURSE_TEE_LIST_SUCCESS:
-            return { loading: false, success: true, tees: action.payload}
+            return { loading: false, success: true, courseTees: action.payload}
 
         case COURSE_TEE_LIST_FAIL:
             return { laoding: false, error: action.payload}

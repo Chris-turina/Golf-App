@@ -19,6 +19,7 @@ import {
 
 import {
     teeBoxDetailsReducer,
+    teeBoxUpdateReducer,
     teeBoxBulkUpdateReducer
 } from './reducers/teeBoxReducer'
 
@@ -85,6 +86,7 @@ const reducer = combineReducers({
     golfCourseUpdate: golfCourseUpdateReducer,
 
     teeBoxDetails:teeBoxDetailsReducer,
+    teeBoxUpdate:teeBoxUpdateReducer,
     teeBoxBulkUpdate: teeBoxBulkUpdateReducer,
 
     

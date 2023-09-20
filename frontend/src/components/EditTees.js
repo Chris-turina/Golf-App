@@ -1,5 +1,6 @@
 // IN USE
 import React, { useState } from 'react'
+import FormStyleOneInput from './FormStyleOneInput';
 
 export default function EditTees({tees}) {
 
@@ -13,40 +14,39 @@ export default function EditTees({tees}) {
     }
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Par</th>
-                    <th>Yards</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tees.map((tee, i) => (
-                    <tr key={tee.id}>
-                        <td>{tee.color}</td>
-                        <td>
-                            <input 
-                                type='number'
-                                name='par'
-                                placeholder='Par'
-                                value={tee.par}
-                                onChange={e => handleChange(i,e)}
-                            />
-                        </td> 
-                        <td>
-                            <input 
-                                type='number'
-                                name='yards'
-                                placeholder='Yards'
-                                value={tee.yards}
-                                onChange={e => handleChange(i,e)}
-                            />
-                        </td>                                                       
-                    </tr>
-                ))}
-            </tbody>
-            
-        </table>
+        <div>
+            <table className='edit-tees-table'>
+                <tbody>
+                    {tees.map((tee, i) => (
+                        <tr key={tee.id} className='edit-tees-row-style'>
+                            <td>
+                                <p className='edit-tees-tee-title'>{tee.color}</p>
+                            </td>
+                            <td>
+                                <FormStyleOneInput 
+                                    label={'PAR'}
+                                    type={'number'}
+                                    name={'par'}
+                                    placeholder={'4'}
+                                    value={tee.par || ''}
+                                    handleChange={e => handleChange(i,e)}
+                                />
+                            </td>
+                            <td>
+                                <FormStyleOneInput 
+                                    label={'YARDS'}
+                                    type={'number'}
+                                    name={'yards'}
+                                    placeholder={'314'}
+                                    value={tee.yards || ''}
+                                    handleChange={e =>handleChange(i,e)}
+                                />
+                            </td>
+                        </tr>    
+                    ))}
+                                    
+                </tbody>
+            </table>
+        </div>
     )
 }

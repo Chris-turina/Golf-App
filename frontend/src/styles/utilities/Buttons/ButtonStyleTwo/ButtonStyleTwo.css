@@ -1,1 +1,29 @@
-/*# sourceMappingURL=ButtonStyleTwo.css.map */
+.button-margin {
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.button-style-two {
+  background-color: white;
+  border: 1px solid black;
+  color: Black;
+  outline: 0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.475rem;
+}
+.button-style-two p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.button-style-two:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button-style-two-selected {
+  background-color: #3be138;
+  border: 1px solid #3be138;
+}/*# sourceMappingURL=ButtonStyleTwo.css.map */

@@ -1,4 +1,5 @@
 // @import '/frontend/src/styles/utilities/variables' ;
+
 @import './utilities/variables.scss';
 
 @import './components/ScoreFormInput/ScoreFormInput' ;
@@ -15,6 +16,7 @@
 @import './components/AdminUserListItem/AdminUserListItem';
 @import './components/AdminUserProfileInput/AdminUserProfileInput';
 @import './components/AdminGolfCourseListItem/AdminGolfCourseListItem';
+@import './components/EditTeeBoxes/EditTeeBoxes.scss';
 
 @import './screens/AdminCourseHoleDetailsScreen/AdminCourseHoleDetailsScreen' ;
 
@@ -49,75 +51,205 @@
 
 
 
-// EDIT TEE BOXES
+// ADMIN COURSE INFO SCREEN
+ .admin-scorecard-tee-boxes {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    overflow-x: auto;
+    table {
+        width: 100%;
+        display: table;
+        tr {
+            display: table-row;        
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: #F1F1F2;
+        }        
+    }
 
-.form-style-one-input-container {
-    
+    thead {
+        
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+    }
+
+    tbody {
+        .table-tee-box-title {
+            font-size: larger;
+            color: black;
+         }
+
+        .table-tee-box-title:hover {
+            cursor: pointer;
+        }
+
+         tr:hover {
+            background-color: #f3f3ff;            
+         }
+
+        td {
+            padding: 1rem;
+            color: #707076;
+            
+        }
+    }
+ }
+
+ .admin-scorecard {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    width: 80vw;
+    overflow-x: auto;
+    table {        
+        display: table;
+        
+        tr {
+            display: table-row;        
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: #F1F1F2;
+        }        
+    }
+
+    thead {
+        
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+    }
+
+    tbody {
+        .table-tee-box-title {
+            font-size: larger;
+            color: black;
+         }
+
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+
+        td {
+            padding: 1rem;
+            color: #707076;
+            
+        }
+
+        td:hover {
+            background-color: #f3f3ff;            
+        }
+    }
+ }
+
+ .admin-scorecard-click:hover {
+    cursor: pointer;
+    background-color: #f3f3ff; 
+ }
+
+ .admin-scorecard-fixed {
+    position: fixed;
+ }
+
+ 
+
+.admin-course-info-edit-tees-modal {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    // width: 100%;
+    // height: 100%;
+    position: fixed;    
+    top: 10%;
+    left: 35%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+    justify-content: center;
     
+
+
+}
+
+.add-opacity {
+    opacity: .5;
+}
+
+.form-edit-modal {
+    width: 500px;   
+    opacity: 1;
 }
 
 
 
-.tee-box-buttons-container {
+// END ADMIN COURSE INFO SCREEN
+
+
+// EDIT HOLES
+.admin-holes-edit-form {
+    width: 90%;
+}
+
+.holes-title {
+    p {
+        margin-bottom: 0px;
+        margin-right: 10px;
+        color: #adadb5;
+    }
+}
+.holes-buttons-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-
-    width: 500px;
-    padding-left: 30px;
-    padding-right: 30px;
-
-
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px dashed #F1F1F2;
 }
 
-.button-margin {
-    margin-right: 20px;
+.holes-buttons-content {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.button-style-two {
-    background-color:white;
-    // color: #ffffff;
-    // border: 1px solid black;
-    border: 1px solid black;
-    color: Black;
-    outline: 0;
-    padding: .5rem 1.2rem;
-    border-radius: .475rem;
+.holes-inputs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
 
-    p {
-        text-align: center;
-        margin-bottom: 0;
+    h3 {
+        color: #adadb5;
+        
     }
 }
 
-.button-style-two:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    transition: .3s;
+
+// END EDIT HOLES
+
+
+
+// EDIT Tees 
+.edit-tees-tee-title{
+    margin-bottom: 0px;
+    font-size: 1.5rem;
+    margin-right: 30px;
+    color: #adadb5;
 }
 
-.button-style-three {
-    background-color: #3E97FF;
-    color: #ffffff;
-    outline: 0;
-    padding: .775rem 1rem;
-    border-radius: .475rem;
-    border: none;
+.edit-tees-table {
+    border-collapse: collapse;
 }
 
-.button-style-three:hover {
-    background-color: #73b1f7;
+.edit-tees-row-style {
+    td {
+        border-bottom: 1px solid #F1F1F2;
+    }
+    
 }
 
-
-
-
-// END EDIT TEE BOXES
+// END EDIT TEES
 
 
 

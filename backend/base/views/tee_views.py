@@ -21,7 +21,7 @@ def getTee(request):
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
-def updateTeeYards(request, pk):
+def updateTee(request, pk):
     data = request.data
     tee = Tee.objects.get(id=pk)
 
@@ -41,7 +41,7 @@ def getCourseTees(request, pk):
     tees_list = []
     for tee_box in course_tee_boxes:
         color = tee_box.color
-        tees = Tee.objects.filter(color=tee_box).annotate(hole_number=F('hole__number')).values('id', 'color__color','hole__number', 'par', 'yards')
+        tees = Tee.objects.filter(color=tee_box).annotate(hole_number=F('hole__number')).values('id', 'color__color','hole__number', 'yards')
         tees_list.append({'tee_color': color, 'tees': tees})
         
     return Response(tees_list)

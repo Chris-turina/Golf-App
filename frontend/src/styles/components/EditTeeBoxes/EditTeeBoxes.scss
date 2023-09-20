@@ -1,0 +1,26 @@
+.tee-box-buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    width: 500px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+
+}
+
+
+
+.button-style-three {
+    background-color: #3E97FF;
+    color: #ffffff;
+    outline: 0;
+    padding: .775rem 1rem;
+    border-radius: .475rem;
+    border: none;
+}
+
+.button-style-three:hover {
+    background-color: #73b1f7;
+}

@@ -4,6 +4,10 @@ import {
     TEE_BOX_DETAILS_SUCCESS,
     TEE_BOX_DETAILS_FAIL,
 
+    TEE_BOX_UPDATE_REQUEST,
+    TEE_BOX_UPDATE_SUCCESS,
+    TEE_BOX_UPDATE_FAIL,
+
     TEE_BOX_DELETE_REQUEST,
     TEE_BOX_DELETE_SUCCESS,
     TEE_BOX_DELETE_FAIL,
@@ -51,9 +55,8 @@ export const listTeeBoxDetails = (id) => async(dispatch, getState) => {
 // Updates the Tee Box Data from a Form
 // -IN USE
 export const updateTeeBox = (teeBox) => async (dispatch, getState) => {
-    console.log(teeBox);
     try { 
-        dispatch({ type: TEE_BOX_DETAILS_REQUEST})
+        dispatch({ type: TEE_BOX_UPDATE_REQUEST})
 
         const {
             userLogin: { userInfo },
@@ -73,14 +76,14 @@ export const updateTeeBox = (teeBox) => async (dispatch, getState) => {
         )
 
         dispatch({
-            type: TEE_BOX_DETAILS_SUCCESS,
+            type: TEE_BOX_UPDATE_SUCCESS,
             payload: data,
         })
 
 
     } catch(error) {
         dispatch({
-            type: TEE_BOX_DETAILS_FAIL,
+            type: TEE_BOX_UPDATE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
