@@ -1,64 +1,23 @@
-.header {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
+.header-user {
   width: 100vw;
-}
-
-.header-title-container {
-  margin-top: 30px;
+  height: 10vh;
+  background-color: #1f9b30;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  padding: 30px;
+  position: fixed;
+  top: 0;
 }
 
-.header-filler-box {
-  margin-left: 30px;
-  width: 100px;
-}
-
-.header-title {
+.header-user-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+.header-user-container p {
+  padding-bottom: 0;
 }
 
-.header-settings {
-  margin-right: 30px;
-  width: 100px;
-}
-
-.header-pages-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.header-active {
-  text-align: center;
-  width: 160px;
-  background-color: #f2f2f2;
-  padding: 10px;
-  height: 40px;
-}
-.header-active h6 {
-  margin-bottom: 0;
-  color: #4A4A4A;
-}
-
-.header-inactive {
-  text-align: center;
-  width: 160px;
-  background-color: #ffffff;
-  padding: 10px;
-  height: 40px;
-}
-.header-inactive h6 {
-  margin-bottom: 0;
-  color: #BCBCBC;
-}
-
-.header-link {
-  text-decoration: none;
+.header-user {
+  margin-right: 10px;
 }
 
 .header-admin {
@@ -184,7 +143,7 @@
   padding-left: 30px;
   padding-bottom: 10px;
   width: auto;
-  margin: 20px 20px 20px 20px;
+  margin-bottom: 20px;
   border-bottom: 2px solid #979797;
 }
 .course-list-item h3 {
@@ -195,7 +154,6 @@
 
 .course-list-item:hover {
   border-color: #32c32f;
-  transform: scale(1.02);
   transition: 0.5s;
 }
 
@@ -355,6 +313,95 @@
   background-color: #73b1f7;
 }
 
+.admin-holes-edit-form {
+  width: 90%;
+}
+
+.holes-title p {
+  margin-bottom: 0px;
+  margin-right: 10px;
+  color: #adadb5;
+}
+
+.holes-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px dashed #F1F1F2;
+}
+
+.holes-buttons-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.holes-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: flex-start;
+}
+.holes-inputs-container h3 {
+  color: #adadb5;
+}
+
+.edit-tees-tee-title {
+  margin-bottom: 0px;
+  font-size: 1.5rem;
+  margin-right: 30px;
+  color: #adadb5;
+}
+
+.edit-tees-table {
+  border-collapse: collapse;
+}
+
+.edit-tees-row-style td {
+  border-bottom: 1px solid #F1F1F2;
+}
+
+.user-side-header {
+  background-color: #558C03;
+  width: 150px;
+  height: 90vh;
+  position: fixed;
+  left: 0;
+}
+
+.user-side-header-button {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.user-side-header-button p {
+  color: rgb(206, 203, 203);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.user-side-header-button:hover {
+  cursor: pointer;
+}
+.user-side-header-button:hover p {
+  color: white;
+  text-align: center;
+}
+
+.user-side-header-active {
+  background-color: #0d4e19;
+}
+.user-side-header-active p {
+  color: rgb(255, 255, 255);
+}
+
+.user-side-header-link {
+  text-decoration: none;
+}
+
 .holeEditForm {
   display: flex;
   flex-wrap: wrap;
@@ -467,6 +514,223 @@
   height: 40px;
   align-self: center;
   font-weight: bold;
+}
+
+.admin-golf-course-new-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.admin-course-list {
+  width: 95%;
+  padding: 10px;
+}
+
+.admin-course-list-top-bar {
+  justify-content: space-between;
+  padding: 1rem 2.25rem;
+}
+
+.table-search-bar {
+  background-color: #f9f9f9;
+  border-color: #f9f9f9;
+  border-radius: 0.475rem;
+  border: none;
+  color: #4B5675;
+  box-shadow: none;
+  padding: 0.775rem 1rem;
+}
+
+.table-search-bar:focus {
+  background-color: #e9e9e9;
+  outline: none;
+}
+
+.table-add-course-btn {
+  background-color: #3E97FF;
+  color: #ffffff;
+  outline: 0;
+  padding: 0.775rem 1rem;
+  border-radius: 0.475rem;
+  border: none;
+}
+
+.table-add-course-btn:hover {
+  background-color: #73b1f7;
+}
+
+.admin-course-list-table {
+  padding: 0.5rem;
+}
+.admin-course-list-table table {
+  display: table;
+  width: 100%;
+}
+.admin-course-list-table tr {
+  display: table-row;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #F1F1F2;
+}
+.admin-course-list-table thead th {
+  color: #cbcbd5;
+}
+.admin-course-list-table tbody td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #78829d;
+}
+
+.admin-golf-course-link {
+  text-decoration: none;
+}
+.admin-golf-course-link p {
+  margin-bottom: 0;
+  text-decoration: none;
+  color: #252F4A;
+  font-weight: 600;
+}
+.admin-golf-course-link p:hover {
+  color: #4067e6;
+  transition: color 0.2s;
+}
+
+.admin-course-list-item {
+  margin-bottom: 20px;
+}
+.admin-course-list-item div {
+  width: 25%;
+}
+
+.admin-course-list-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.admin-golf-course-content-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+}
+
+.admin-golf-course-content-container-style {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  padding: 15px;
+}
+
+.course-list {
+  width: 500px;
+}
+
+.admin-scorecard-tee-boxes {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  overflow-x: auto;
+}
+.admin-scorecard-tee-boxes table {
+  width: 100%;
+  display: table;
+}
+.admin-scorecard-tee-boxes table tr {
+  display: table-row;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #F1F1F2;
+}
+.admin-scorecard-tee-boxes thead th {
+  padding: 1rem;
+  color: #a7a7b0;
+}
+.admin-scorecard-tee-boxes tbody .table-tee-box-title {
+  font-size: larger;
+  color: black;
+}
+.admin-scorecard-tee-boxes tbody .table-tee-box-title:hover {
+  cursor: pointer;
+}
+.admin-scorecard-tee-boxes tbody tr:hover {
+  background-color: #f3f3ff;
+}
+.admin-scorecard-tee-boxes tbody td {
+  padding: 1rem;
+  color: #707076;
+}
+
+.admin-scorecard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  width: 80vw;
+  overflow-x: auto;
+}
+.admin-scorecard table {
+  display: table;
+}
+.admin-scorecard table tr {
+  display: table-row;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #F1F1F2;
+}
+.admin-scorecard thead th {
+  padding: 1rem;
+  color: #a7a7b0;
+}
+.admin-scorecard tbody .table-tee-box-title {
+  font-size: larger;
+  color: black;
+}
+.admin-scorecard tbody th {
+  padding: 1rem;
+  color: #a7a7b0;
+}
+.admin-scorecard tbody td {
+  padding: 1rem;
+  color: #707076;
+}
+.admin-scorecard tbody td:hover {
+  background-color: #f3f3ff;
+}
+
+.admin-scorecard-click:hover {
+  cursor: pointer;
+  background-color: #f3f3ff;
+}
+
+.admin-scorecard-fixed {
+  position: fixed;
+}
+
+.admin-course-info-edit-tees-modal {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  display: flex;
+  justify-content: center;
+}
+
+.add-opacity {
+  opacity: 0.5;
+}
+
+.form-edit-modal {
+  width: 500px;
+  opacity: 1;
 }
 
 .login-container {
@@ -628,11 +892,22 @@
 
 .play-golf-screen-filter-options {
   display: flex;
+  border-bottom: 1px solid grey;
+  margin-bottom: 20px;
+  padding: 15px;
 }
-.play-golf-screen-filter-options p {
-  font-weight: bold;
-  font-size: x-small;
-  padding-left: 30px;
+
+.play-golf-buttons {
+  text-align: center;
+  width: 5rem;
+}
+.play-golf-buttons p {
+  margin: 0;
+}
+
+.play-golf-buttons:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .select-tee-screen-title-container {
@@ -664,34 +939,6 @@
 
 .empty-container {
   width: 150px;
-}
-
-.enter-score-screen-title-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-  margin-bottom: 40px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.enter-score-screen-title-container h3 {
-  margin-bottom: 0;
-}
-
-.enter-score-screen-back-arrow {
-  display: flex;
-  width: 150px;
-  align-items: center;
-}
-
-.enter-score-link {
-  text-decoration: none;
-  color: black;
-}
-.enter-score-link p {
-  margin-bottom: 0;
-  margin-left: 10px;
-  text-transform: uppercase;
 }
 
 .form-one-container {
@@ -1035,279 +1282,35 @@
 
 .background {
   background-color: #f2f2f2;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
-.admin-scorecard-tee-boxes {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px #b2b2b2;
-  overflow-x: auto;
-}
-.admin-scorecard-tee-boxes table {
-  width: 100%;
-  display: table;
-}
-.admin-scorecard-tee-boxes table tr {
-  display: table-row;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed;
-  border-bottom-color: #F1F1F2;
-}
-.admin-scorecard-tee-boxes thead th {
-  padding: 1rem;
-  color: #a7a7b0;
-}
-.admin-scorecard-tee-boxes tbody .table-tee-box-title {
-  font-size: larger;
-  color: black;
-}
-.admin-scorecard-tee-boxes tbody .table-tee-box-title:hover {
-  cursor: pointer;
-}
-.admin-scorecard-tee-boxes tbody tr:hover {
-  background-color: #f3f3ff;
-}
-.admin-scorecard-tee-boxes tbody td {
-  padding: 1rem;
-  color: #707076;
-}
-
-.admin-scorecard {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px #b2b2b2;
-  width: 80vw;
-  overflow-x: auto;
-}
-.admin-scorecard table {
-  display: table;
-}
-.admin-scorecard table tr {
-  display: table-row;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed;
-  border-bottom-color: #F1F1F2;
-}
-.admin-scorecard thead th {
-  padding: 1rem;
-  color: #a7a7b0;
-}
-.admin-scorecard tbody .table-tee-box-title {
-  font-size: larger;
-  color: black;
-}
-.admin-scorecard tbody th {
-  padding: 1rem;
-  color: #a7a7b0;
-}
-.admin-scorecard tbody td {
-  padding: 1rem;
-  color: #707076;
-}
-.admin-scorecard tbody td:hover {
-  background-color: #f3f3ff;
-}
-
-.admin-scorecard-click:hover {
-  cursor: pointer;
-  background-color: #f3f3ff;
-}
-
-.admin-scorecard-fixed {
-  position: fixed;
-}
-
-.admin-course-info-edit-tees-modal {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px #b2b2b2;
-  position: fixed;
-  top: 10%;
-  left: 35%;
-  display: flex;
-  justify-content: center;
-}
-
-.add-opacity {
-  opacity: 0.5;
-}
-
-.form-edit-modal {
-  width: 500px;
-  opacity: 1;
-}
-
-.admin-holes-edit-form {
-  width: 90%;
-}
-
-.holes-title p {
-  margin-bottom: 0px;
-  margin-right: 10px;
-  color: #adadb5;
-}
-
-.holes-buttons-container {
+.user-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  border-bottom: 1px dashed #F1F1F2;
+  margin-top: 10vh;
+  height: 90vh;
+  background-color: #6e6e6e;
 }
 
-.holes-buttons-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.holes-inputs-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: flex-start;
-}
-.holes-inputs-container h3 {
-  color: #adadb5;
-}
-
-.edit-tees-tee-title {
-  margin-bottom: 0px;
-  font-size: 1.5rem;
-  margin-right: 30px;
-  color: #adadb5;
-}
-
-.edit-tees-table {
-  border-collapse: collapse;
-}
-
-.edit-tees-row-style td {
-  border-bottom: 1px solid #F1F1F2;
-}
-
-.admin-golf-course-new-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.admin-course-list {
-  width: 95%;
-  padding: 10px;
-}
-
-.admin-course-list-top-bar {
-  justify-content: space-between;
-  padding: 1rem 2.25rem;
-}
-
-.table-search-bar {
-  background-color: #f9f9f9;
-  border-color: #f9f9f9;
-  border-radius: 0.475rem;
-  border: none;
-  color: #4B5675;
-  box-shadow: none;
-  padding: 0.775rem 1rem;
-}
-
-.table-search-bar:focus {
-  background-color: #e9e9e9;
-  outline: none;
-}
-
-.table-add-course-btn {
-  background-color: #3E97FF;
-  color: #ffffff;
-  outline: 0;
-  padding: 0.775rem 1rem;
-  border-radius: 0.475rem;
-  border: none;
-}
-
-.table-add-course-btn:hover {
-  background-color: #73b1f7;
-}
-
-.admin-course-list-table {
-  padding: 0.5rem;
-}
-.admin-course-list-table table {
-  display: table;
-  width: 100%;
-}
-.admin-course-list-table tr {
-  display: table-row;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed;
-  border-bottom-color: #F1F1F2;
-}
-.admin-course-list-table thead th {
-  color: #cbcbd5;
-}
-.admin-course-list-table tbody td {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  color: #78829d;
-}
-
-.admin-golf-course-link {
-  text-decoration: none;
-}
-.admin-golf-course-link p {
-  margin-bottom: 0;
-  text-decoration: none;
-  color: #252F4A;
-  font-weight: 600;
-}
-.admin-golf-course-link p:hover {
-  color: #4067e6;
-  transition: color 0.2s;
-}
-
-.admin-course-list-item {
-  margin-bottom: 20px;
-}
-.admin-course-list-item div {
-  width: 25%;
-}
-
-.admin-course-list-row {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.admin-golf-course-content-container {
-  background-color: #ffffff;
+.user-content-container {
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  margin-top: 15px;
+  margin-left: 150px;
+  margin-right: 15px;
   padding: 15px;
-}
-
-.admin-golf-course-content-container-style {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px #b2b2b2;
-  padding: 15px;
-}
-
-.course-list {
-  width: 500px;
+  width: 100%;
 }
 
 .screen-container {
-  display: flex;
   height: 80vh;
+  width: 100vw;
+}
+
+.content-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .login-screen-container {
@@ -1323,229 +1326,121 @@
   justify-content: center;
 }
 
-.content-container {
-  background-color: #ffffff;
-  border-radius: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
-  padding: 15px;
-}
-
-.admin-create-course-screen {
-  min-height: 100vh;
-}
-
-.create-score-card-container {
-  width: auto;
-  border-radius: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
-  padding: 15px;
-}
-
-.course-name-holes-container {
-  background-color: #ffffff;
+.screen-content-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 10px;
-}
-.course-name-holes-container input {
-  border: none;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-}
-.course-name-holes-container input:focus {
-  outline: none;
+  justify-content: center;
+  width: 100%;
 }
 
-.tee-box-form-options {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 10px;
-}
-.tee-box-form-options input {
-  border: none;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-}
-.tee-box-form-options input:focus {
-  outline: none;
-}
-
-.create-course-score-card {
+.page-title {
   width: auto;
 }
 
-.create-course-score-card-container {
-  background-color: #ffffff;
+.center-items-column {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 10px;
-  align-self: center;
   align-items: center;
 }
 
-.course-score-card-input-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.course-score-card-input-div {
-  display: flex;
-  justify-content: space-around;
-}
-.course-score-card-input-div p {
-  padding-bottom: 0;
-}
-.course-score-card-input-div input {
-  border: none;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-  width: 80px;
-}
-.course-score-card-input-div input:focus {
-  outline: none;
-}
-.course-score-card-input-div input::-webkit-outer-spin-button,
-.course-score-card-input-div input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.next-button {
-  background-color: #32C32F;
-  margin-bottom: 25px;
-  border: 1px;
-  border-radius: 20px;
-  width: 200px;
-  height: 40px;
-  align-self: center;
-}
-
-.create-course-score-card {
-  display: flex;
-}
-
-.create-course-score-card-container {
-  display: flex;
-}
-
-.course-score-card-input-container {
-  display: flex;
-}
-
-.score-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.score-card-row {
-  display: flex;
-}
-
-.score-card-hole-numbers {
-  display: flex;
-}
-
-.tee-box-head {
-  display: flex;
-  justify-content: space-around;
-}
-
-.page-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.card {
+.item-container-style {
   background-color: white;
-  opacity: 0.9;
-  border: 0.2rem;
-  border-radius: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
 }
 
-.link {
-  text-decoration: none;
-}
-
-.formScoreInput {
-  background-color: white;
-  opacity: 0.9;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.5rem;
+.score-card-input-table-container {
   padding: 20px;
-  max-width: 35vh;
-  margin: 15px;
+  border-radius: 5px;
+  background-color: #3d3d3d;
+  width: 100%;
+  margin-top: 30px;
+}
+.score-card-input-table-container table {
+  width: 100%;
+  background-color: #3d3d3d;
+}
+.score-card-input-table-container th {
+  text-align: center;
+  color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.score-card-input-table-container td {
+  text-align: center;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: white;
+}
+.score-card-input-table-container td input {
+  width: 100%;
+  border: none;
+  background-color: grey;
+  text-align: center;
+  color: white;
+}
+.score-card-input-table-container td input:focus {
+  background-color: white;
+  outline: none;
+  text-align: center;
+  color: black;
 }
 
-.formScore {
-  display: flex;
-  flex-wrap: wrap;
+.course-title h3 {
+  padding: 15px;
 }
 
-.my-container {
+.select-tee-box-card {
+  background-color: #3d3d3d;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 20px;
+  width: 200px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.select-tee-box-card p {
+  margin-bottom: 0px;
+  font-size: larger;
+  color: rgb(255, 255, 255);
+}
+.select-tee-box-card p:hover {
+  cursor: pointer;
+}
+.select-tee-box-card h3 {
+  border-bottom: 1px solid black;
 }
 
-.my-second-container {
+.tee-box-select-item {
+  width: 200px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.tee-box-select-item p {
+  font-size: larger;
 }
 
-.holeEditForm {
-  margin-top: 10px;
+.tee-box-select-item:hover {
+  background-color: rgb(176, 176, 176);
+  cursor: pointer;
 }
 
-.form-button {
-  border-radius: 0.5rem;
-  transition: 0.4s;
-  border-color: white;
-  background-color: white;
-  padding: 5px;
-  margin-left: 10px;
-}
-
-.form-button:hover {
-  background-color: green;
-  color: white;
-  padding: 8px;
-}
-
-.round-card {
-  background-color: white;
-  border-radius: 0.5rem;
-  max-width: 400px;
-  opacity: 0.9;
-  padding: 15px;
+.tee-box-button {
+  background-color: #97BF04;
+  width: 4rem;
+  text-align: center;
+  padding: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
+}
+.tee-box-button p {
+  margin-bottom: 0px;
 }
 
-.round-card-title {
-  text-decoration: none;
-  text-decoration-style: none;
-  color: black;
-  transition: 0.01s;
-}
-
-.round-card-title:hover {
-  text-decoration: underline;
-  color: blue;
-}
-
-.score-card-hole {
-  background-color: white;
-  width: -moz-fit-content;
-  width: fit-content;
+.tee-box-button:hover {
+  background-color: #558C03;
+  cursor: pointer;
 }/*# sourceMappingURL=app.css.map */

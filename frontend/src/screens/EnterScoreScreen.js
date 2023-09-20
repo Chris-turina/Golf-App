@@ -1,44 +1,94 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useLocation, Link } from 'react-router-dom'
+import React, { useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
+import { listGolfCourseDetails } from '../actions/golfCourseActions';
+import { ROUND_CREATE_RESET } from '../constants/roundConstants';
+import { listCourseTees } from '../actions/teeActions';
 import Header from '../components/Header';
-import InputScoreCard from '../components/InputScoreCard';
+import SideHeader from '../components/SideHeader';
+import ScoreCardInputTable from '../components/ScoreCardInputTable';
 
 export default function EnterScoreScreen() {
 
-    const { state } = useLocation()
+    const [courseInfoLoaded, setCourseInfoLoaded] = useState(false)
+    const [showScoreCard, setShowScoreCard] = useState(false)
+    
+    const [selectTeeTitle, setSelectTeeTitle] = useState('SELECT TEE')
+    const [selectedTeeBox, setSelectedTeeBox] = useState({})
+    const [showTeeOptions, setShowTeeOptions] = useState(false)
     
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const golfCourseDetails = useSelector(state => state.golfCourseDetails)
+    const {loading, success, golfCourse} = golfCourseDetails
+
+    const courseTeeList = useSelector(state => state.courseTeeList)
+    const {success: teeListSuccess, courseTees} = courseTeeList
+
     
+    const dispatch = useDispatch()
+    const { id } = useParams();
+    const navigate = useNavigate()
 
 
-    console.log(state);
+    useEffect(() => {
+        
+        if (!userInfo) {
+            navigate('/login')
+        } else {
+            dispatch(listGolfCourseDetails(id))    
+            dispatch(listCourseTees(id))             
+        }
+
+        if (success) {
+            setCourseInfoLoaded(true)            
+        }
+
+    }, [dispatch, id, success])
     
 
+    const handleTeeClick = (teeBox) => {
+        console.log(teeBox);
+        setSelectedTeeBox(teeBox)
+        setSelectTeeTitle(teeBox.tee_color)
+        setShowTeeOptions(false)
+        setShowScoreCard(true)
+
+    }
     
-    
+    console.log(golfCourse);
 
     return (
         <div>
             <Header userInfo={userInfo} page='play-golf' />
-            <div className='enter-score-screen-container'>
-                <div className='enter-score-screen-title-container'>
-                    <div className='enter-score-screen-back-arrow'>
-                        <i className="fa-solid fa-arrow-left"></i>
-                        <Link className='enter-score-link' to={`/golfcourses/${state.golf_course.course_id}`}>
-                            <p>{state.tee_color.colors}</p>
-                        </Link>
-                        
-                    </div>
-                    <h3>Enter Score</h3>
-                    <div className='empty-container'></div>                    
+            <div className='user-container'>
+                <SideHeader page='play-golf'/>
+                <div className='user-content-container'>
+                <div>
+                    Go Back
                 </div>
-                <div className='content-container'>
-                    <InputScoreCard holes={state.golf_course.holes} teeUsed={state.tee_color.id}/>
+
+                {courseInfoLoaded && 
+                    <div className='select-tee-box-card'>
+                        <p onClick={e => setShowTeeOptions(true)}>{selectTeeTitle}</p>
+                        {showTeeOptions && courseTees.map((teeBox, i) => (
+                            <div onClick={e => handleTeeClick(teeBox)} key={i} className='tee-box-select-item'>
+                                <p>{teeBox.tee_color}</p>
+                            </div>
+                        ))}
+                    </div>
+                }
+
+                {showScoreCard && 
+                    <div>
+                        <ScoreCardInputTable teeBox={selectedTeeBox} holes={golfCourse.holes} />
+                    </div>
+                }
+                
                 </div>
             </div>
+            
         </div>
     )
 }

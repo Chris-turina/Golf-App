@@ -53,62 +53,7 @@ export default function SelectTeeScreen() {
 
 // console.log(golfCourse);
     // This function handles when you click on a tee color, it takes the tee color ID and Color and sets the local state to determine which holes will be displayed
-    const teeColorClickHandler = (teeId, color) => {
-        setSelectedTee(color)
-        setSelectedTeeId(teeId)
-        setSelectedTeeHoles([])
-        const teeHoles = [...selectedTeeHoles]           
-
-        if (selectedTeeHoles.length === 0) {
-            for (let i = 0; i < golfCourse.holes.length; i++) {
-                const hole = golfCourse.holes[i];                 
-
-                for (let i = 0; i < hole.tees.length; i++) {
-                    const tee = hole.tees[i];                       
-                    if (color === tee.color) {   
-                        tee.num = hole.number
-                        tee.par = hole.par
-                        tee.score = 0
-                        tee.putts = 0
-                        teeHoles.push(tee)                        
-                        setSelectedTeeHoles(teeHoles)                          
-                    }
-                }
-            }
-
-            setShowForm(true)
-        } else {
-            setShowForm(false)
-        }        
-    }
-
-
-    // This Functions Shows the Component InputScoreCard
-    const renderScoreCard = () => {
-        
-        // This function handles the form submition from the data that is passed up from the child Component
-        const setStateFromScoreCard = (data, newScoreData) => {
-            // console.log(data);
-            const newScore = []
-            setSelectedTeeHoles(newScore)      
-            dispatch(createRound({
-                golfCourse: golfCourse.course_id,
-                teeColor: selectedTeeId,
-                newScore: newScoreData,
-                newStats: data
-
-            }))
-        }
-        
-        return (
-            <InputScoreCard                 
-                holes={golfCourse.holes}
-                teeUsed={selectedTee}
-                // teeUsedId={selectedTeeId}
-                passState={setStateFromScoreCard}
-            />
-        )
-    }
+    
     return (
         <div>        
             <Header userInfo={userInfo} page='play-golf' />
@@ -133,22 +78,11 @@ export default function SelectTeeScreen() {
                             </div>                            
                             
                             <div className='content-container'>
-                                {golfCourse.teeColors.map(teeColor => (
-                                    <TeeListItem key={teeColor.id} golfCourse={golfCourse} teeColor={teeColor}/>
-                                ))}
+                                Select Tees
                                 
                             </div>
-                                                        
-                            {/* <Row style={{marginBottom: '2rem'}}>
-                                {golfCourse.teeColors.map(teeColor => (
-                                    <Col key={teeColor.id}>
-                                        <Button onClick={() => teeColorClickHandler(teeColor.id, teeColor.colors)} >{teeColor.colors}</Button>
-                                    </Col>
-                                ))}                                                                
-                            </Row> */}
-                            <div>
-                                {showForm && renderScoreCard()}
-                            </div>                  
+                            
+                                        
                         </div>                        
                     )
             }            

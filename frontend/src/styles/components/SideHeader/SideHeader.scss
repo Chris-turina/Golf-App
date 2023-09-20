@@ -1,0 +1,46 @@
+//Side Header
+.user-side-header {
+    
+    background-color: #558C03;
+    width: 150px;
+    height: 90vh;
+    position: fixed;
+    left: 0;
+}
+
+.user-side-header-button {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    
+    p {
+        color: rgb(206, 203, 203);
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+.user-side-header-button:hover {
+    cursor: pointer;
+    // background-color: #1c1c21;
+
+    p{
+        color: white;
+        text-align: center;
+    }
+}
+
+.user-side-header-active {
+    background-color: #0d4e19;
+    p {
+        color: rgb(255, 255, 255);
+    }
+}
+
+.user-side-header-link {
+    text-decoration: none;
+}
+
+// End SIDE HEADER

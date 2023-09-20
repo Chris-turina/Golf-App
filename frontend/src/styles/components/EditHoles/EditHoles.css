@@ -1,0 +1,33 @@
+.admin-holes-edit-form {
+  width: 90%;
+}
+
+.holes-title p {
+  margin-bottom: 0px;
+  margin-right: 10px;
+  color: #adadb5;
+}
+
+.holes-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px dashed #F1F1F2;
+}
+
+.holes-buttons-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.holes-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: flex-start;
+}
+.holes-inputs-container h3 {
+  color: #adadb5;
+}/*# sourceMappingURL=EditHoles.css.map */

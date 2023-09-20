@@ -8,6 +8,7 @@ import Message from '../components/Message';
 import Title from '../components/Title'
 import Header from '../components/Header';
 import CourseListItem from '../components/CourseListItem';
+import SideHeader from '../components/SideHeader';
 
 export default function PlayGolfScreen() {
     
@@ -19,49 +20,61 @@ export default function PlayGolfScreen() {
     const golfCourseList = useSelector(state => state.golfCourseList)
     const {error, loading, golfCourses} = golfCourseList
 
-    const teeColorList = useSelector(state => state.teeColorList)
-    const { error: teeColorError, loading: teeColorLoading, teeColors} = teeColorList
-
     useEffect(() => {
         dispatch(listGolfCourses())
-        dispatch(listTeeColors())
 
     }, [dispatch])
 
 
     return (
         <div>
-            <Header userInfo={userInfo} page='play-golf' />
-            <div className='play-golf-screen-container'>                        
-            {loading 
-                ? <Loader />
-                : error 
-                    ? <Message variant='danger'>{error}</Message>
-                    : (                        
-                        <div>
-                            <h3 className='play-golf-screen-title'>Select Course</h3>
-                            <div className='play-golf-screen-filter-options'>
-                                <p>FAVORITE</p>
-                                <p>PLAYED</p>
-                                <p>SEARCH</p>
-                            </div>
-                            <div className='content-container'>
-                                {golfCourses.map(golfCourse => (                            
-                                        <CourseListItem
-                                            golfCourse={golfCourse}                                        
-                                            key={golfCourse.course_id}
-                                        />
-                                                    
-                                ))}
-                            </div>
-                            
-                        
-                        </div>
-                        
-                    )
-                    
-            }
+            <Header userInfo={userInfo} />
+            <div className='user-container'>
+                <SideHeader page='play-golf' />
+                <div className='user-content-container'>
+                    <div className='screen-container'>                        
+                        {loading 
+                            ? <Loader />
+                            : error 
+                                ? <Message variant='danger'>{error}</Message>
+                                : (                        
+                                    <div>
+                                        <h3 className='play-golf-screen-title'>Select Course</h3>
+                                        
+                                        <div className='content-container'>
+                                            <div className='play-golf-screen-filter-options'>
+                                                <div className='play-golf-buttons'>
+                                                    <p>FAVORITE</p>
+                                                </div>
+
+                                                <div className='play-golf-buttons'>
+                                                    <p>PLAYED</p>
+                                                </div>
+
+                                                <div className='play-golf-buttons'>
+                                                    <p>SEARCH</p>
+                                                </div>
+                                                
+                                            </div>
+                                            {golfCourses.map(golfCourse => (                            
+                                                    <CourseListItem
+                                                        golfCourse={golfCourse}                                        
+                                                        key={golfCourse.course_id}
+                                                    />
+                                                                
+                                            ))}
+                                        </div>
+                                        
+                                    
+                                    </div>
+                                    
+                                    
+                                )                    
+                        }
+                    </div>
+                </div>
             </div>
+            
         </div>
     )
 }

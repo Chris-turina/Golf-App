@@ -1,0 +1,134 @@
+// ADMIN COURSE INFO SCREEN
+.admin-scorecard-tee-boxes {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    overflow-x: auto;
+    table {
+        width: 100%;
+        display: table;
+        tr {
+            display: table-row;        
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: #F1F1F2;
+        }        
+    }
+
+    thead {
+        
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+    }
+
+    tbody {
+        .table-tee-box-title {
+            font-size: larger;
+            color: black;
+         }
+
+        .table-tee-box-title:hover {
+            cursor: pointer;
+        }
+
+         tr:hover {
+            background-color: #f3f3ff;            
+         }
+
+        td {
+            padding: 1rem;
+            color: #707076;
+            
+        }
+    }
+ }
+
+ .admin-scorecard {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    width: 80vw;
+    overflow-x: auto;
+    table {        
+        display: table;
+        
+        tr {
+            display: table-row;        
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: #F1F1F2;
+        }        
+    }
+
+    thead {
+        
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+    }
+
+    tbody {
+        .table-tee-box-title {
+            font-size: larger;
+            color: black;
+         }
+
+        th {
+            padding: 1rem;
+            color: #a7a7b0;            
+        }
+
+        td {
+            padding: 1rem;
+            color: #707076;
+            
+        }
+
+        td:hover {
+            background-color: #f3f3ff;            
+        }
+    }
+ }
+
+ .admin-scorecard-click:hover {
+    cursor: pointer;
+    background-color: #f3f3ff; 
+ }
+
+ .admin-scorecard-fixed {
+    position: fixed;
+ }
+
+ 
+
+.admin-course-info-edit-tees-modal {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+    // width: 100%;
+    // height: 100%;
+    position: fixed;    
+    top: 10%;
+    left: 35%;
+    display: flex;
+    justify-content: center;
+    
+
+
+}
+
+.add-opacity {
+    opacity: .5;
+}
+
+.form-edit-modal {
+    width: 500px;   
+    opacity: 1;
+}
+
+
+
+// END ADMIN COURSE INFO SCREEN

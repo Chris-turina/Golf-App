@@ -1,3 +1,5 @@
+// PLAY GOLF SCREEN
+
 .play-golf-screen-container {
     display: flex;
     flex-direction: column;
@@ -13,10 +15,24 @@
 
 .play-golf-screen-filter-options {
     display: flex;
-
-    p {
-        font-weight: bold;        
-        font-size: x-small;
-        padding-left: 30px;
-    }
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+    padding: 15px;
 }
+
+.play-golf-buttons {
+text-align: center;
+width: 5rem;
+    p {
+ 
+        margin: 0;  
+    }    
+}
+
+.play-golf-buttons:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+// END PLAY GOLF SCREEN 

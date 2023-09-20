@@ -13,9 +13,20 @@
 
 .play-golf-screen-filter-options {
   display: flex;
+  border-bottom: 1px solid grey;
+  margin-bottom: 20px;
+  padding: 15px;
 }
-.play-golf-screen-filter-options p {
-  font-weight: bold;
-  font-size: x-small;
-  padding-left: 30px;
+
+.play-golf-buttons {
+  text-align: center;
+  width: 5rem;
+}
+.play-golf-buttons p {
+  margin: 0;
+}
+
+.play-golf-buttons:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }/*# sourceMappingURL=PlayGolfScreen.css.map */

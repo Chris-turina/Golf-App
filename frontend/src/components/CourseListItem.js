@@ -6,7 +6,7 @@ export default function CourseListItem({ golfCourse }) {
     return (
         <div className='course-list-item'>
             <i className="fa-regular fa-star fa-xl"></i>
-            <Link className='course-list-item-link' to={`/golfcourses/${golfCourse.course_id}`}>
+            <Link className='course-list-item-link' to={`/golfcourses/${golfCourse.course_id}/scorecard`}>
                 <h3>{golfCourse.name}</h3>
             </Link>        
             
