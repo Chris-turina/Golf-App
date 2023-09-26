@@ -41,8 +41,8 @@ def getCourseTees(request, pk):
     tees_list = []
     for tee_box in course_tee_boxes:
         color = tee_box.color
-        tees = Tee.objects.filter(color=tee_box).annotate(hole_number=F('hole__number')).values('id', 'color__color','hole__number', 'yards')
-        tees_list.append({'tee_color': color, 'tees': tees})
+        tees = Tee.objects.filter(color=tee_box).annotate(hole_number=F('hole__number')).values('id', 'color__color','hole__number', 'hole__par', 'yards')
+        tees_list.append({'tee_color': color, 'tee_id': tee_box.id, 'tees': tees})
         
     return Response(tees_list)
     

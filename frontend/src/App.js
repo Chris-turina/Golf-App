@@ -31,6 +31,7 @@ import AdminCourseListScreen from "./screens/AdminScreens/Golf Course/AdminCours
 import AdminCreateCourseScreen from "./screens/AdminScreens/Golf Course/AdminCreateCourseScreen";
 import AdminCourseInfoScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoScreen";
 import AdminCourseInfoEditTeeBoxScreen from "./screens/AdminScreens/Golf Course/AdminCourseInfoEditTeeBoxScreen";
+import QuickEnterScreen from "./screens/QuickEnterScreen";
 
 
 
@@ -47,6 +48,8 @@ function App() {
               <Route path='golfcourses' element={<PlayGolfScreen />} />
               <Route path='/golfcourses/:id' element={<SelectTeeScreen />} />
               <Route path='/golfcourses/:id/scorecard' element={<EnterScoreScreen />} />
+              <Route path='/golfcourses/quick_enter' element={<QuickEnterScreen />} />
+
 
               <Route path='rounds' element={<RoundsScreen />} />
               <Route path='rounds/:id/stats' element={<RoundStatScreen />} />

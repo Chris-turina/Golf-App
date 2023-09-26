@@ -92,15 +92,15 @@ export default function AdminUserListScreen() {
                             }
                             { mainLoading &&
                                 <TableStyleOne 
-                                thArray = {['USERNAME','ID', 'FIRST NAME', 'LAST NAME' , 'ADMIN']}
-                                tdArray = {users}
-                                tdAttributes = {[ 'username', 'id', 'first_name', 'last_name', 'isAdmin']}
-                                dataPointUrl ={`/admin/users/`}
-                                topHeader = {true}
-                                buttonText = {'Add User'}
-                                searchBarText = {'Search Users'}
-                                handleButtonClick = {(e) => changingComponents('create-user')}
-                                idName = {'id'}
+                                    thArray = {['USERNAME','ID', 'FIRST NAME', 'LAST NAME' , 'ADMIN']}
+                                    tdArray = {users}
+                                    tdAttributes = {[ 'username', 'id', 'first_name', 'last_name', 'isAdmin']}
+                                    dataPointUrl ={`/admin/users/`}
+                                    topHeader = {true}
+                                    buttonText = {'Add User'}
+                                    searchBarText = {'Search Users'}
+                                    handleButtonClick = {(e) => changingComponents('create-user')}
+                                    idName = {'id'}
                                 />
                             }
                             

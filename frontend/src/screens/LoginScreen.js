@@ -8,8 +8,11 @@ import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
 
 function LoginScreen() {
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [showLogin, setShowLogin] = useState(false)
+    const [showLoader, setShowLoader] = useState(true)
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -24,7 +27,9 @@ function LoginScreen() {
     useEffect(() => {
         if (userInfo) {
             navigate('player')
-        }
+        } else (
+            setShowLogin(true)            
+        )
     }, [navigate, userInfo, redirect])
 
     const submitHandler = (e) => {
@@ -34,8 +39,9 @@ function LoginScreen() {
 
     return (
         <div className='login-screen-container'>
+
             
-            <div className='login-container'>
+            {showLogin && <div className='login-container'>
                 <div className='login-title-container'>
                     <h5 className='login-title'>GRIP IT & RIP IT</h5>
                 </div>
@@ -65,7 +71,7 @@ function LoginScreen() {
                 <Link className='login-link' to={'/register'}>
                     <button className='login-create-account'><b>CREATE ACCOUNT</b></button>
                 </Link>            
-            </div>
+            </div>}
         </div>
     )
 }

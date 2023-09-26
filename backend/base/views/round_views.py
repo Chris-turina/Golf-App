@@ -52,8 +52,7 @@ def deleteRound(request, pk):
 def createRound(request, pk, tk):
     newData = request.data
 
-    newScores = newData['newScore']
-    newStats = newData['newStats']
+    newScores = newData['tees']
     course = GolfCourse.objects.get(course_id=pk)
     tee_box = TeeBox.objects.get(id=tk)
     user = request.user   
@@ -61,15 +60,18 @@ def createRound(request, pk, tk):
     
     # empty arrs to then add all items
     parArr = []
+    yardsArr = []
     puttsArr = []
     strokesArr = []
-    
-    # empty vars to have the final nubmbersd in
-    roundYards = tee_box.total_yards
-    roundPar = 0
-    roundPutts = 0
-    roundStrokes = 0
-    roundHoles = course.numOfHoles
+
+    yardsOutArr = []
+    yardsInArr = []
+    parOutArr = []
+    parInArr = []
+    puttsOutArr = []
+    puttsInArr = []
+    scoreOutArr = []
+    scoreInArr = []
 
     # creates a new Round
     newRound = Round.objects.create(
@@ -80,46 +82,56 @@ def createRound(request, pk, tk):
     
     # loops through the data recived
     for newScore in newScores:
-        hole = Hole.objects.get(id=newScore['hole'])
+        hole = Hole.objects.get(course=course, number=newScore['hole__number'])
         tee = Tee.objects.get(id=newScore['id'])
-        
-        
-        
-        # These are for creating the stats
-        # parArr.append(hole.par)
-        # puttsArr.append(newScore['putts'])
-        # strokesArr.append(newScore['score'])
 
+        strokesArr.append(newScore['strokes'])
+        puttsArr.append(newScore['putts'])
+        parArr.append(hole.par)
+        yardsArr.append(tee.yards)
+
+        if hole.number < 10:
+            print('1-9')
+            yardsOutArr.append(tee.yards)
+            parOutArr.append(hole.par)
+            puttsOutArr.append(newScore['putts'])
+            scoreOutArr.append(newScore['strokes'])
+
+        else:
+            print('10-18')
+            yardsInArr.append(tee.yards)
+            parInArr.append(hole.par)
+            puttsInArr.append(newScore['putts'])
+            scoreInArr.append(newScore['strokes'])
+        
         # Creates a new HoleScore Obj
         HoleScore.objects.create(
             roundStat = newRound,
             hole = hole,
             tee = tee,
-            strokes = newScore['score'],
+            strokes = newScore['strokes'],
             putts = newScore['putts'],
         )
-    
-    # roundPar = sum(parArr)
-    # roundPutts = sum(puttsArr)
-    # roundStrokes = sum(strokesArr)
+
+
     
     # Creates a new Round Stats
     RoundStats.objects.create(     
         user = user,   
         roundStat = newRound,
-        yards_out = newStats['yardsOut'],
-        yards_in = newStats['yardsIn'],
-        par_out = newStats['parOut'],
-        par_in = newStats['parIn'],
-        score_out = newStats['strokesOut'],
-        score_in = newStats['strokesIn'],
-        putts_out = newStats['puttsOut'],
-        putts_in = newStats['puttsIn'],       
-        totalStrokes = newStats['strokesTotal'],
-        totalPutts = newStats['puttsTotal'],
-        totalCoursePar = newStats['parTotal'],
-        totalDistance = newStats['yardsTotal'],
-        totalHoles = roundHoles
+        yards_out = sum(yardsOutArr),
+        yards_in = sum(yardsInArr),
+        par_out = sum(parOutArr),
+        par_in = sum(parInArr),
+        score_out = sum(scoreOutArr),
+        score_in = sum(scoreInArr),
+        putts_out = sum(puttsOutArr),
+        putts_in = sum(puttsInArr),       
+        totalStrokes = sum(strokesArr),
+        totalPutts = sum(puttsArr),
+        totalCoursePar = sum(parArr),
+        totalDistance = sum(yardsArr),
+        totalHoles = course.num_of_holes
     )
 
     

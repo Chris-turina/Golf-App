@@ -1,5 +1,6 @@
 import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap'
 import CourseBooker from '../components/CourseBooker';
 import { listGolfCourses, listTeeColors } from '../actions/golfCourseActions';
@@ -9,6 +10,7 @@ import Title from '../components/Title'
 import Header from '../components/Header';
 import CourseListItem from '../components/CourseListItem';
 import SideHeader from '../components/SideHeader';
+import TableStyleOne from '../components/Tables/TableStyleOne';
 
 export default function PlayGolfScreen() {
     
@@ -31,47 +33,55 @@ export default function PlayGolfScreen() {
             <Header userInfo={userInfo} />
             <div className='user-container'>
                 <SideHeader page='play-golf' />
-                <div className='user-content-container'>
-                    <div className='screen-container'>                        
+                <div className='user-content-container'>                                          
                         {loading 
                             ? <Loader />
                             : error 
                                 ? <Message variant='danger'>{error}</Message>
                                 : (                        
                                     <div>
-                                        <h3 className='play-golf-screen-title'>Select Course</h3>
-                                        
-                                        <div className='content-container'>
-                                            <div className='play-golf-screen-filter-options'>
-                                                <div className='play-golf-buttons'>
-                                                    <p>FAVORITE</p>
+                                        <div className='table-style-one-container'>                                            
+                                            <div className='table-style-one-top-header'>
+                                                <div>
+                                                    <form>
+                                                        <input className='table-style-one-search-bar' placeholder={'Search Courses'} />
+                                                    </form>
                                                 </div>
-
-                                                <div className='play-golf-buttons'>
-                                                    <p>PLAYED</p>
+                                                <div>
+                                                    <Link to={`/golfcourses/quick_enter`}>
+                                                        <button className='table-style-one-button'>Quick Score</button>                                                                                                        
+                                                    </Link>
+                                                    
                                                 </div>
-
-                                                <div className='play-golf-buttons'>
-                                                    <p>SEARCH</p>
-                                                </div>
-                                                
+                                            </div>                                            
+                                            <div className='table-style-one'>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>GOLF COURSE</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {golfCourses.map((golfCourse, i) => (
+                                                            <tr key={i}>
+                                                                <td>
+                                                                    <div>
+                                                                        <Link className='table-style-one-link' to={`/golfcourses/${golfCourse.course_id}/scorecard`}>
+                                                                            <p>{golfCourse.name}</p>
+                                                                        </Link>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            {golfCourses.map(golfCourse => (                            
-                                                    <CourseListItem
-                                                        golfCourse={golfCourse}                                        
-                                                        key={golfCourse.course_id}
-                                                    />
-                                                                
-                                            ))}
                                         </div>
-                                        
-                                    
                                     </div>
                                     
                                     
                                 )                    
-                        }
-                    </div>
+                        }                
                 </div>
             </div>
             

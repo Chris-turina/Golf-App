@@ -1,7 +1,7 @@
 //Side Header
 .user-side-header {
     
-    background-color: #558C03;
+    background-color: black;
     width: 150px;
     height: 90vh;
     position: fixed;
@@ -17,7 +17,7 @@
     
     
     p {
-        color: rgb(206, 203, 203);
+        color: rgb(188, 188, 188);
         text-align: center;
         margin-bottom: 0;
     }
@@ -33,9 +33,9 @@
 }
 
 .user-side-header-active {
-    background-color: #0d4e19;
+    background-color: #1c1c21;
     p {
-        color: rgb(255, 255, 255);
+        color: white;
     }
 }
 

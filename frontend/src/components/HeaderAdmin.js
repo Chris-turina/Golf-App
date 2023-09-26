@@ -5,7 +5,7 @@ export default function HeaderAdmin({userInfo}) {
     return (
         <div className='header-admin'>
             <div className='header-admin-title'>
-                <h5>GRIP IT & RIP IT</h5>
+                <h5>GRIP IT & RIP IT - ADMIN PANEL</h5>
             </div>
             <div className='header-admin-user-container'>
                 <p className='header-admin-user'>{userInfo.first_name} {userInfo.last_name}</p>

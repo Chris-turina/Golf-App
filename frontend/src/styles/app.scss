@@ -118,6 +118,144 @@
 }
 
 
+// SCORE form input
+.enter-score-form-container {
+    
+
+}
+
+.enter-score-form-header {
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 15vh;
+    margin-bottom: 20px;
+}
+
+.enter-score-form {
+    background-color: #ffffff;
+    height: 60vh;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.enter-score-form-holes-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+.score-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+// SCORE BUTTON STYLE
+.score-button-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    p {
+        margin-bottom: 0;
+        color: black;
+    }
+}
+
+.score-button-style:hover {
+    cursor: pointer;
+    background-color: #017bfe;
+}
+
+
+
+.score-button-style-one {
+    height: 40px;
+    width: 40px;
+    border: 4px double black;
+    border-radius: 50%;
+
+}
+
+.score-button-style-three {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: #ffffff;
+}
+
+.score-button-style-four {
+    height: 40px;
+    width: 40px;
+    background-color: #ffffff ;
+    p {
+        color: black;
+    }
+}
+
+.score-button-style-five {
+    height: 40px;
+    width: 40px;
+    border: 2px solid black;
+}
+
+.score-button-style-six {
+    height: 40px;
+    width: 40px;
+    border: 4px double black;
+}
+
+// END SCORE BUTTON STYLE
+
+
+
+// END SCORE FORM INPUT
+
+
+
+
+// BUTTON THREE
+.button-style-three {
+    background-color:white;
+    border: 1px solid black;
+    color: Black;
+    outline: 0;
+    padding: .5rem 1rem;
+    border-radius: .475rem;
+
+    p {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+.button-style-three:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button-style-three-selected {
+    background-color: #017bfe;
+    border: 1px solid #017bfe;
+}
+// END BUTTON THREE
+
+
+
+
+
+
 
 
 // SCORE CARD INPUT TABLE
