@@ -81,9 +81,7 @@ export default function EnterScoreScreen() {
             <div className='user-container'>
                 <SideHeader page='play-golf'/>
                 <div className='user-content-container'>
-                {/* <div>
-                    Go Back
-                </div> */}
+                
 
                 {courseInfoLoaded && 
                     <div className='select-tee-box-card'>
