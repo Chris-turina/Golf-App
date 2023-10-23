@@ -1,0 +1,50 @@
+// PUTT BUTTON
+
+.putt-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.putt-buttons {
+    display: flex;
+}
+
+.putt-button-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    p {
+        margin-bottom: 0;
+        color: rgb(97, 97, 97);
+    }
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid rgb(97, 97, 97);
+}
+
+.putt-button-style:hover {
+    background-color: black;    
+    cursor: pointer;
+    transition: .3s;
+    p {
+        color: white;
+    }
+}
+
+.putt-button-selected-style {
+    background-color: #007bfd;
+    border: none;
+    p {
+        color: black;
+    }
+}
+
+.putt-button-selected-style:hover {
+    background-color: #007bfd;
+    border: none;
+}
+
+// END PUTT BUTTON

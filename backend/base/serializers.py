@@ -197,7 +197,7 @@ class RoundSerializer(serializers.ModelSerializer):
     roundStats = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Round
-        fields = [ 'id', 'course', 'teeColorUsed', 'course', 'holeScores', 'user', 'roundStats']
+        fields = [ 'id', 'course', 'teeColorUsed', 'course', 'holeScores', 'user', 'roundStats', 'created_at']
         
 
     def get_holeScores(self, obj):

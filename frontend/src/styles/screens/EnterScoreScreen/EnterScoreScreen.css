@@ -1,1 +1,154 @@
-/*# sourceMappingURL=EnterScoreScreen.css.map */
+.course-title h3 {
+  padding: 15px;
+}
+
+.select-tee-box-card {
+  background-color: #3d3d3d;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.select-tee-box-card p {
+  margin-bottom: 0px;
+  font-size: larger;
+  color: rgb(255, 255, 255);
+}
+.select-tee-box-card p:hover {
+  cursor: pointer;
+}
+.select-tee-box-card h3 {
+  border-bottom: 1px solid black;
+}
+
+.tee-box-select-item {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.tee-box-select-item p {
+  font-size: larger;
+}
+
+.tee-box-select-item:hover {
+  background-color: rgb(176, 176, 176);
+  cursor: pointer;
+}
+
+.tee-box-button {
+  background-color: #97BF04;
+  width: 4rem;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.tee-box-button p {
+  margin-bottom: 0px;
+}
+
+.tee-box-button:hover {
+  background-color: #558C03;
+  cursor: pointer;
+}
+
+.enter-score-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enter-score-form-holes-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  width: 100%;
+}
+
+.enter-score-form-header {
+  background-color: #ffffff;
+  border-radius: 5px;
+  height: 15vh;
+  width: 50vw;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.enter-score-form-header-item {
+  width: 25%;
+}
+
+.enter-score-form {
+  background-color: #ffffff;
+  width: 50vw;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.enter-score-form-hole-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.enter-score-form-hole-info h1 {
+  padding: 15px;
+  margin-bottom: 0px;
+}
+
+.enter-score-form-yards-and-par p {
+  margin-bottom: 0;
+}
+
+.score-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.score-buttons-title {
+  display: flex;
+  align-items: center;
+}
+.score-buttons-title p {
+  margin-bottom: 0px;
+}
+
+.fairway-buttons-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fairway-buttons-title p {
+  margin-bottom: 0px;
+}
+
+.fairway-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fairway-buttons-content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.enter-score-form-next-button {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=EnterScoreScreen.css.map */

@@ -107,6 +107,8 @@ export default function EditHoles({holes, holeContentUpdate}) {
                                 value={currentHole.handicap || ''}
                                 handleChange={e => handleChange(e)}
                             />
+
+                            {/* ADD PAR for HOLE HERE */}
                         </div>
 
                         <EditTees 

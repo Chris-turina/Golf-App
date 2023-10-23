@@ -1,7 +1,7 @@
 .header-user {
   width: 100vw;
   height: 10vh;
-  background-color: #1f9b30;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   padding: 30px;
@@ -400,6 +400,43 @@
 
 .user-side-header-link {
   text-decoration: none;
+}
+
+.score-card-input-table-container {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #3d3d3d;
+  width: 100%;
+  margin-top: 30px;
+}
+.score-card-input-table-container table {
+  width: 100%;
+  background-color: #3d3d3d;
+}
+.score-card-input-table-container th {
+  text-align: center;
+  color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.score-card-input-table-container td {
+  text-align: center;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: white;
+}
+.score-card-input-table-container td input {
+  width: 100%;
+  border: none;
+  background-color: grey;
+  text-align: center;
+  color: white;
+}
+.score-card-input-table-container td input:focus {
+  background-color: white;
+  outline: none;
+  text-align: center;
+  color: black;
 }
 
 .holeEditForm {
@@ -941,6 +978,161 @@
   width: 150px;
 }
 
+.course-title h3 {
+  padding: 15px;
+}
+
+.select-tee-box-card {
+  background-color: #3d3d3d;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.select-tee-box-card p {
+  margin-bottom: 0px;
+  font-size: larger;
+  color: rgb(255, 255, 255);
+}
+.select-tee-box-card p:hover {
+  cursor: pointer;
+}
+.select-tee-box-card h3 {
+  border-bottom: 1px solid black;
+}
+
+.tee-box-select-item {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.tee-box-select-item p {
+  font-size: larger;
+}
+
+.tee-box-select-item:hover {
+  background-color: rgb(176, 176, 176);
+  cursor: pointer;
+}
+
+.tee-box-button {
+  background-color: #97BF04;
+  width: 4rem;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.tee-box-button p {
+  margin-bottom: 0px;
+}
+
+.tee-box-button:hover {
+  background-color: #558C03;
+  cursor: pointer;
+}
+
+.enter-score-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enter-score-form-holes-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+  width: 100%;
+}
+
+.enter-score-form-header {
+  background-color: #ffffff;
+  border-radius: 5px;
+  height: 15vh;
+  width: 50vw;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.enter-score-form-header-item {
+  width: 25%;
+}
+
+.enter-score-form {
+  background-color: #ffffff;
+  width: 50vw;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.enter-score-form-hole-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.enter-score-form-hole-info h1 {
+  padding: 15px;
+  margin-bottom: 0px;
+}
+
+.enter-score-form-yards-and-par p {
+  margin-bottom: 0;
+}
+
+.score-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.score-buttons-title {
+  display: flex;
+  align-items: center;
+}
+.score-buttons-title p {
+  margin-bottom: 0px;
+}
+
+.fairway-buttons-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fairway-buttons-title p {
+  margin-bottom: 0px;
+}
+
+.fairway-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fairway-buttons-content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.enter-score-form-next-button {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-one-container {
   display: flex;
   flex-direction: column;
@@ -1192,6 +1384,181 @@
   width: 100%;
 }
 
+.button-style-three {
+  background-color: white;
+  border: 1px solid black;
+  color: Black;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.475rem;
+}
+.button-style-three p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.button-style-three:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button-style-three-selected {
+  background-color: #017bfe;
+  border: 1px solid #017bfe;
+}
+
+.button-style-three-completed {
+  background-color: #21ae49;
+  border: 1px solid #198754;
+}
+
+.button-style-three-not-completed {
+  background-color: #c82828;
+  border: 1px solid #c82828;
+}
+
+.score-button-style {
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.score-button-style p {
+  margin-bottom: 0;
+  color: black;
+  text-align: center;
+}
+
+.score-button-style:hover {
+  cursor: pointer;
+  background-color: black;
+  border-color: #ffffff;
+}
+.score-button-style:hover p {
+  color: white;
+}
+
+.score-button-style-one {
+  height: 40px;
+  width: 40px;
+  border: 4px double black;
+  border-radius: 50%;
+}
+
+.score-button-style-three {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: #ffffff;
+}
+
+.score-button-style-four {
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+}
+.score-button-style-four p {
+  color: black;
+}
+
+.score-button-style-five {
+  height: 40px;
+  width: 40px;
+  border: 2px solid black;
+}
+
+.score-button-style-six {
+  height: 40px;
+  width: 40px;
+  border: 4px double black;
+}
+
+.score-button-selected-style {
+  background-color: #007bfd;
+  border: none;
+}
+
+.score-button-selected-style:hover {
+  background-color: #007bfd;
+  border: none;
+}
+
+.putt-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.putt-buttons {
+  display: flex;
+}
+
+.putt-button-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid rgb(97, 97, 97);
+}
+.putt-button-style p {
+  margin-bottom: 0;
+  color: rgb(97, 97, 97);
+}
+
+.putt-button-style:hover {
+  background-color: black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.putt-button-style:hover p {
+  color: white;
+}
+
+.putt-button-selected-style {
+  background-color: #007bfd;
+  border: none;
+}
+.putt-button-selected-style p {
+  color: black;
+}
+
+.putt-button-selected-style:hover {
+  background-color: #007bfd;
+  border: none;
+}
+
+.fairway-button-style {
+  background-color: white;
+  border: 1px solid black;
+  color: Black;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.475rem;
+}
+.fairway-button-style p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.fairway-button-style:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fairway-button-selected-style {
+  background-color: #017bfe;
+  border: 1px solid #017bfe;
+}
+
 .table-style-one-container {
   background-color: white;
   border-radius: 10px;
@@ -1289,7 +1656,7 @@
   flex-direction: row;
   margin-top: 10vh;
   height: 90vh;
-  background-color: #6e6e6e;
+  background-color: #fcfcfc;
 }
 
 .user-content-container {
@@ -1299,6 +1666,12 @@
   margin-right: 15px;
   padding: 15px;
   width: 100%;
+}
+
+.user-content-container-style {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
 }
 
 .screen-container {
@@ -1347,305 +1720,4 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 1px 1px 4px #b2b2b2;
-}
-
-.enter-score-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.enter-score-form-holes-buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: #ffffff;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.enter-score-form-header {
-  background-color: #ffffff;
-  border-radius: 5px;
-  height: 15vh;
-  width: 50vw;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.enter-score-form-header-item {
-  width: 25%;
-}
-
-.enter-score-form {
-  background-color: #ffffff;
-  width: 50vw;
-  border-radius: 5px;
-  padding: 20px;
-}
-
-.enter-score-form-hole-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.enter-score-form-hole-info h1 {
-  padding: 15px;
-  margin-bottom: 0px;
-}
-
-.enter-score-form-yards-and-par p {
-  margin-bottom: 0;
-}
-
-.score-buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.score-buttons-title {
-  display: flex;
-  align-items: center;
-}
-.score-buttons-title p {
-  margin-bottom: 0px;
-}
-
-.score-button-style {
-  transition: 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-}
-.score-button-style p {
-  margin-bottom: 0;
-  color: black;
-  text-align: center;
-}
-
-.score-button-style:hover {
-  cursor: pointer;
-  background-color: black;
-  border-color: #ffffff;
-}
-.score-button-style:hover p {
-  color: white;
-}
-
-.score-button-style-one {
-  height: 40px;
-  width: 40px;
-  border: 4px double black;
-  border-radius: 50%;
-}
-
-.score-button-style-three {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: 2px solid black;
-  background-color: #ffffff;
-}
-
-.score-button-style-four {
-  height: 40px;
-  width: 40px;
-  background-color: #ffffff;
-}
-.score-button-style-four p {
-  color: black;
-}
-
-.score-button-style-five {
-  height: 40px;
-  width: 40px;
-  border: 2px solid black;
-}
-
-.score-button-style-six {
-  height: 40px;
-  width: 40px;
-  border: 4px double black;
-}
-
-.score-button-selected-style {
-  background-color: #007bfd;
-  border: none;
-}
-
-.score-button-selected-style:hover {
-  background-color: #007bfd;
-  border: none;
-}
-
-.button-style-three {
-  background-color: white;
-  border: 1px solid black;
-  color: Black;
-  outline: 0;
-  padding: 0.5rem 1rem;
-  border-radius: 0.475rem;
-}
-.button-style-three p {
-  text-align: center;
-  margin-bottom: 0;
-}
-
-.button-style-three:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.button-style-three-selected {
-  background-color: #017bfe;
-  border: 1px solid #017bfe;
-}
-
-.putt-buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.putt-buttons {
-  display: flex;
-}
-
-.putt-button-style {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: 2px solid rgb(97, 97, 97);
-}
-.putt-button-style p {
-  margin-bottom: 0;
-  color: rgb(97, 97, 97);
-}
-
-.putt-button-style:hover {
-  background-color: black;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.putt-button-style:hover p {
-  color: white;
-}
-
-.putt-button-selected-style {
-  background-color: #007bfd;
-  border: none;
-}
-.putt-button-selected-style p {
-  color: black;
-}
-
-.putt-button-selected-style:hover {
-  background-color: #007bfd;
-  border: none;
-}
-
-.score-card-input-table-container {
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #3d3d3d;
-  width: 100%;
-  margin-top: 30px;
-}
-.score-card-input-table-container table {
-  width: 100%;
-  background-color: #3d3d3d;
-}
-.score-card-input-table-container th {
-  text-align: center;
-  color: white;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.score-card-input-table-container td {
-  text-align: center;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  color: white;
-}
-.score-card-input-table-container td input {
-  width: 100%;
-  border: none;
-  background-color: grey;
-  text-align: center;
-  color: white;
-}
-.score-card-input-table-container td input:focus {
-  background-color: white;
-  outline: none;
-  text-align: center;
-  color: black;
-}
-
-.course-title h3 {
-  padding: 15px;
-}
-
-.select-tee-box-card {
-  background-color: #3d3d3d;
-  border-radius: 5px;
-  margin-top: 30px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.select-tee-box-card p {
-  margin-bottom: 0px;
-  font-size: larger;
-  color: rgb(255, 255, 255);
-}
-.select-tee-box-card p:hover {
-  cursor: pointer;
-}
-.select-tee-box-card h3 {
-  border-bottom: 1px solid black;
-}
-
-.tee-box-select-item {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-}
-.tee-box-select-item p {
-  font-size: larger;
-}
-
-.tee-box-select-item:hover {
-  background-color: rgb(176, 176, 176);
-  cursor: pointer;
-}
-
-.tee-box-button {
-  background-color: #97BF04;
-  width: 4rem;
-  text-align: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-.tee-box-button p {
-  margin-bottom: 0px;
-}
-
-.tee-box-button:hover {
-  background-color: #558C03;
-  cursor: pointer;
 }/*# sourceMappingURL=app.css.map */

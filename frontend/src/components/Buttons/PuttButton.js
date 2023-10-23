@@ -7,11 +7,9 @@ export default function PuttButton({ text, value, handleClick, selected }) {
     const [buttonStyle, setButtonStyle] = useState(' ')
 
     useEffect(() => {
-        if (selected === value) {
-            console.log('yes');
+        if (selected === value) {            
             setSelectedStyle('putt-button-selected-style')
         } else {
-            console.log('no');
             setSelectedStyle(' ')
         }
     })

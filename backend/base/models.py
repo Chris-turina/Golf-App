@@ -91,9 +91,6 @@ class Tee(models.Model):
     yards = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)], default=0, null=True)
     
 
-    # class Meta:
-    #     unique_together = (('color','hole'),) # only have one of each color on the hole
-
     def __str__(self):
         return str(self.color) + ' TEE '
     # return str(self.color) + ' TEE ' + str(self.hole)
@@ -107,7 +104,13 @@ class Round(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey(GolfCourse, on_delete=models.CASCADE, null=True)
     teeColorUsed = models.ForeignKey(TeeBox, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     # Add a Date Played
+
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         self.created = timezone.now()
+
 
     def __str__(self):
         return 'Round ' + str(self.id) + ' at ' + str(self.course)
@@ -121,6 +124,9 @@ class HoleScore(models.Model):
     tee = models.ForeignKey(Tee, on_delete=models.CASCADE, null=True, blank=False)
     strokes = models.IntegerField(validators=[MaxValueValidator(20), MinValueValidator(1)])
     putts = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
+    fairway_hit = models.CharField(max_length=20, null=True, blank=True)
+    
+    
     # Where did your drive go
 
     def __str__(self):

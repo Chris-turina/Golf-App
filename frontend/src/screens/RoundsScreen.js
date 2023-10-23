@@ -14,7 +14,10 @@ import Header from '../components/Header';
 import SideHeader from '../components/SideHeader';
 
 function RoundsScreen() {
-    const [showRounds, setShowRounds] = useState(true)
+
+    const [showLoader, setShowLoader] = useState(true)
+    const [showRounds, setShowRounds] = useState(false)
+
     const [roundsPlayed, setRoundsPlayed] = useState( [] )
     const [courses, setCourses] = useState( [] )    
 
@@ -42,8 +45,9 @@ function RoundsScreen() {
             navigate('/login')
         } else {            
             dispatch(listGolfCourses())
-            dispatch(listRounds())            
-            
+            dispatch(listRounds())       
+            setShowLoader(false)   
+            setShowRounds(true)              
         }
 
         if (successDelete) {
@@ -61,40 +65,8 @@ function RoundsScreen() {
     }
     
 
-    // const renderRounds = () => {
-    //     if ( sucess && rounds.length === 0) {
-    //         return (
-    //             <div>
-    //                 <p>You Have not played any rounds!!!</p>
-    //             </div>
-    //         )
-    //     } else {
-            
-    //         return (
-    //             <div>      
-    //                 <Header userInfo={userInfo} page='rounds' />              
-    //                 {rounds.map(round => (
-    //                     <div key={round.id} className='round-card'>   
-    //                         <Link className='round-card-title' to={`/rounds/${round.id}/stats`}>
-    //                             <h3 className='round-card-title-text'>{round.course}</h3>
-    //                         </Link>                                                
-    //                         <p> Tee: <strong>{round.teeColorUsed}</strong></p>
-    //                         <hr/>
-    //                         <p><strong>{round.roundStats[0].totalStrokes}</strong> strokes</p>
-    //                         <hr/>
-    //                         <Button variant='danger' className='btn-sm'onClick={() => deleteHandler(round.id)} >
-    //                             <i className='fas fa-trash'></i>
-    //                         </Button>
-                            
-    //                     </div>
-    //                 ))
-                    
-    //                 }
-    //             </div>
-    //         )
-    //     }
-    // }
-
+    
+console.log(rounds);
 
     return (
         <div>
@@ -102,10 +74,10 @@ function RoundsScreen() {
             <div className='user-container'>
                 <SideHeader page='rounds' />
                 <div className='user-content-container'>
-                    <div>Go Back</div>
                     <div>
-                        
+                        {showLoader && <Loader/>}
                     </div>
+                    
                 </div>
             </div>
         </div>

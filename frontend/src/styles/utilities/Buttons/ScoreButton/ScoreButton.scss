@@ -1,0 +1,73 @@
+// SCORE BUTTON STYLE
+.score-button-style {
+    transition: .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    p {
+        margin-bottom: 0;
+        color: black;
+        text-align: center;
+    }
+}
+
+.score-button-style:hover {
+    cursor: pointer;
+    background-color: black;
+    border-color: #ffffff;
+    p {
+        color: white;
+    }
+}
+
+
+
+.score-button-style-one {
+    height: 40px;
+    width: 40px;
+    border: 4px double black;
+    border-radius: 50%;
+
+}
+
+.score-button-style-three {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: #ffffff;
+}
+
+.score-button-style-four {
+    height: 40px;
+    width: 40px;
+    background-color: #ffffff ;
+    p {
+        color: black;
+    }
+}
+
+.score-button-style-five {
+    height: 40px;
+    width: 40px;
+    border: 2px solid black;
+}
+
+.score-button-style-six {
+    height: 40px;
+    width: 40px;
+    border: 4px double black;
+}
+
+.score-button-selected-style {
+    background-color: #007bfd;
+    border: none;
+}
+
+.score-button-selected-style:hover {
+    background-color: #007bfd;
+    border: none;
+}
+
+// END SCORE BUTTON STYLE

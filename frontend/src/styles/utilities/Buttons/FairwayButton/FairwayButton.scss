@@ -1,0 +1,31 @@
+// FAIRWAY BUTTON
+
+.fairway-button-style {
+    background-color:white;
+    border: 1px solid black;
+    color: Black;
+    outline: 0;
+    padding: .5rem 1rem;
+    border-radius: .475rem;
+    
+
+    p {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+.fairway-button-style:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.fairway-button-selected-style {
+    background-color: #017bfe;
+    border: 1px solid #017bfe;
+}
+
+
+// END FAIRWAY BUTTON

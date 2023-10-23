@@ -2,23 +2,30 @@ import React, { useState, useEffect } from 'react';
 import ButtonThree from './Buttons/ButtonThree';
 import ScoreButton from './Buttons/ScoreButton';
 import PuttButton from './Buttons/PuttButton';
+import FairwayButton from './Buttons/FairwayButton';
+import { createRound } from '../actions/roundActions';
 
-// [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-// [1,2,3,4,5,6,7,8,9]
 
-export default function EnterScoreForm({ tees }) {     
+export default function EnterScoreForm({ tees, submitScore }) {     
 
     const [teesArr, setTeesArr] = useState( [] )
     const [currentTee, setCurrentTee] = useState({})
     const [currentTeeIndex, setCurrentTeeIndex] = useState(0)
     const [showInputForm, setShowInputForm] = useState(false)
-    
+
+
     const [selectedScoreButton, setSelectedScoreButton] = useState(0)
     const [selectedPuttButton, setSelectedPuttButton] = useState(0)
+    const [selectedFairwayButton, setSelectedFairwayButton] = useState('')
+
+    const [currentPar, setCurrentPar] = useState(0)
 
     const [totalStrokes, setTotalStrokes] = useState(0)
     const [totalPutts, setTotalPutts] = useState(0)
-    const [totalPar, setTotalPar] = useState(0)
+    const [totalToPar, setTotalToPar] = useState('E')
+
+    const [showNextBtn, setShowNextBtn] = useState(true)
+    const [showSubmitBtn, setShowSubmitBtn] = useState(false)
 
 
 
@@ -26,17 +33,31 @@ export default function EnterScoreForm({ tees }) {
         setTeesArr(tees)        
         setCurrentTee(tees[0])
         setShowInputForm(true)
+
     }, [setShowInputForm, setTeesArr, setCurrentTee])
+
+    useEffect(() => {        
+        let oldCurrentTee = {...currentTee}
+        let allTees = teesArr
+
+        if ('strokes' in currentTee != 0 && 'putts' in currentTee != 0 && 'fairway' in currentTee && 'completed' in currentTee != true) {
+            oldCurrentTee['completed'] = true
+            allTees[currentTeeIndex]['completed'] = true
+            console.log(oldCurrentTee);
+            setTeesArr(allTees)
+            setCurrentTee(oldCurrentTee)
+        } 
+    })
 
 
     const updateScore = (value) => {       
         // FUNCTION takes value from button then adds the attribute to the currently selected Tee 
         let oldCurrentTee = {...currentTee}
+        console.log(oldCurrentTee);
         let allTees = teesArr
         if (Object.hasOwn(oldCurrentTee, 'strokes') === true) {
             oldCurrentTee.strokes = value
-            allTees[currentTeeIndex].strokes = value
-            console.log(allTees[currentTeeIndex]);
+            allTees[currentTeeIndex].strokes = value            
         } else {
             oldCurrentTee['strokes'] = value
             allTees[currentTeeIndex]['strokes'] = value
@@ -46,13 +67,26 @@ export default function EnterScoreForm({ tees }) {
         setSelectedScoreButton(value)     
         
         let addStrokes = 0
+        let toPar = 0
         for (let i = 0; i < teesArr.length; i++) {
             const tee = teesArr[i];
             if (Object.hasOwn(tee, 'strokes') === true) {
                 addStrokes += tee.strokes    
+                toPar = toPar + (tee.strokes - tee.hole__par)
+                console.log(toPar);
+                
             }            
         }
+        if (toPar > 0) {
+            toPar = `+${toPar}`
+        } else if (toPar === 0) {
+            toPar = 'E'
+        }
+        console.log(toPar);
         setTotalStrokes(addStrokes)
+        setTotalToPar(toPar)
+        
+        
     }
 
     const updatePutt = (value) => {
@@ -60,8 +94,7 @@ export default function EnterScoreForm({ tees }) {
         let allTees = teesArr
         if (Object.hasOwn(oldCurrentTee, 'putts') === true) {
             oldCurrentTee.putts = value
-            allTees[currentTeeIndex].putts = value
-            console.log(allTees[currentTeeIndex]);
+            allTees[currentTeeIndex].putts = value            
         } else {
             oldCurrentTee['putts'] = value
             allTees[currentTeeIndex]['putts'] = value
@@ -78,19 +111,72 @@ export default function EnterScoreForm({ tees }) {
             }            
         }
         setTotalPutts(addPutts)
+        
+        
 
     }
 
-    console.log(selectedPuttButton);
+    const updateFairwayHit = (value) => {
+        let oldCurrentTee = {...currentTee}
+        let allTees = teesArr
+        if (Object.hasOwn(oldCurrentTee, 'fairway') === true) {
+            oldCurrentTee.fairway = value
+            allTees[currentTeeIndex].fairway = value            
+        } else {
+            oldCurrentTee['fairway'] = value
+            allTees[currentTeeIndex]['fairway'] = value
+        }   
+        setTeesArr(allTees)
+        setCurrentTee(oldCurrentTee)
+        setSelectedFairwayButton(value)
+        
+        
+    }
 
+    // THIS FUNCTION CONTROLS WHEN YOU CLICK ON A TEE BUTTON AT THE TOP OF THE DIPLAY
     const toggleTee = (tee, i, e) => {
+        if (i === teesArr.length -1) {
+            setShowNextBtn(false)
+            setShowSubmitBtn(true)
+        } else {
+            setShowNextBtn(true)
+            setShowSubmitBtn(false)
+        }
+
         setCurrentTee(tee)
         setCurrentTeeIndex(i)
         setSelectedScoreButton(tee.strokes)
+        setSelectedPuttButton(tee.putts)
+        setSelectedFairwayButton(tee.fairway)
     }
 
+    // THIS FUNCTION CONTROLS THE NEXT TEE BUTTON
     const toggleNextTee = () => {
+        const nextTeeIndex = currentTeeIndex + 1
+        const newTee = teesArr[nextTeeIndex]
+        if (teesArr.length === currentTeeIndex + 2) {
+            setShowNextBtn(false)
+            setShowSubmitBtn(true)
+        }
 
+        setCurrentTeeIndex(nextTeeIndex)
+        setCurrentTee(newTee)
+
+        setSelectedScoreButton(newTee.strokes)
+        setSelectedPuttButton(newTee.putts)
+        setSelectedFairwayButton(newTee.fairway)
+    }
+
+    const handleSubmit = () => {
+        
+        for (let i = 0; i < teesArr.length; i++) {
+            const tee = teesArr[i];
+            if (tee.completed !== true) {                
+                return window.confirm('Please Fill Out Each Hole')
+            }
+        }
+        submitScore(teesArr)
+        
     }
     
     
@@ -98,18 +184,19 @@ export default function EnterScoreForm({ tees }) {
         <div>
             { showInputForm &&
                 <div className='enter-score-form-container'>
-                    <div className='enter-score-form-holes-buttons-container'>
-                        {teesArr.map((tee, i) => (                            
-                            <ButtonThree 
-                                key={tee.id}
-                                itemId={tee.id} 
-                                handleClick={e => toggleTee(tee, i, e)}                                                              
-                                text={tee.hole__number}
-                                selected={currentTee}
-                            />                            
-                        ))}
+                    <div className='enter-score-form-holes-buttons-container'>                        
+                            {teesArr.map((tee, i) => (                            
+                                <ButtonThree 
+                                    key={tee.id}
+                                    itemId={tee.id} 
+                                    item={tee}
+                                    handleClick={e => toggleTee(tee, i, e)}                                                              
+                                    text={tee.hole__number}
+                                    selected={currentTee}
+                                />                            
+                            ))}                        
                     </div>
-                    <div className='enter-score-form-header'>
+                    <div className='enter-score-form-header user-content-container-style'>
                         <div className='enter-score-form-header-item enter-score-form-hole-info'>
                             <h1>{currentTee.hole__number}</h1>
                             <div className='enter-score-form-yards-and-par'>
@@ -118,22 +205,23 @@ export default function EnterScoreForm({ tees }) {
                             </div>                            
                         </div>
 
-                        <div className='enter-score-form-header-item'>
-                            Total Strokes
+                        <div className='enter-score-form-header-item'>                            
+                            <p>TOTAL STOKES</p>
                             <p>{totalStrokes}</p>
                         </div>
 
                         <div className='enter-score-form-header-item'>
-                            Total Putts
+                            <p>TOTAL PUTTS</p>
                             <p>{totalPutts}</p>
                         </div>
 
                         <div className='enter-score-form-header-item'>
-                            Total To Par
+                            <p>TO PAR</p>
+                            <p>{totalToPar}</p>
                         </div>
                     </div>
                     
-                    <div className='enter-score-form'>
+                    <div className='enter-score-form user-content-container-style'>
                         <div>
                             <div className='score-buttons-container'>
                                 <div className='score-buttons-title'>
@@ -163,11 +251,21 @@ export default function EnterScoreForm({ tees }) {
                                 </div>
                             </div>
 
-                            <div className='fairway-buttons'>
-                                Fairway Hit
+                            <div className='fairway-buttons-container'>
+                                <div className='fairway-buttons-title'>
+                                    <p>FAIRWAY HIT:</p>
+                                </div>
+                                <div className='fairway-buttons-content-container'>
+                                    <FairwayButton text={'ROUGH LEFT'} value={'left'} selected={selectedFairwayButton} handleClick={updateFairwayHit} />
+                                    <FairwayButton text={'FAIRWAY'} value={'center'} selected={selectedFairwayButton} handleClick={updateFairwayHit} />
+                                    <FairwayButton text={'ROUGH RIGHT'} value={'right'} selected={selectedFairwayButton} handleClick={updateFairwayHit} />
+                                </div>
                             </div>
                         </div>
-                        
+                        <div className='enter-score-form-next-button'>
+                            {showNextBtn && <button className='button-style-two' type='button' onClick={() => toggleNextTee()}>Next Hole</button>}
+                            {showSubmitBtn && <button className='button-style-three' type='button' onClick={() => handleSubmit()}>Save Score</button>}
+                        </div>
                     </div>
                 </div>
             }

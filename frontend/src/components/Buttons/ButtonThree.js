@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react"
 
-export default function ButtonThree({ text, itemId, handleClick, selected }) {
+export default function ButtonThree({ text, itemId, handleClick, selected, item }) {
 
     const [selectedStyle, setSelectedStyle] = useState('')
 
     useEffect(() =>{
         if (selected.id === itemId) {
             setSelectedStyle('button-style-three-selected')
+        } else if (Object.hasOwn(item, 'completed') === true) {
+            setSelectedStyle('button-style-three-completed')
         } else {
-            setSelectedStyle('')
+            setSelectedStyle('button-style-three-not-completed')
         }
     })
     

@@ -17,6 +17,7 @@ export default function EnterScoreScreen() {
     
     const [selectTeeTitle, setSelectTeeTitle] = useState('SELECT TEE')
     const [selectedTeeBox, setSelectedTeeBox] = useState({})
+    const [selectedTeeBoxInfo, setSelectedTeeBoxInfo] = useState({})
     const [showTeeOptions, setShowTeeOptions] = useState(false)
     
     const userLogin = useSelector(state => state.userLogin)
@@ -34,7 +35,6 @@ export default function EnterScoreScreen() {
     const dispatch = useDispatch()
     const { id } = useParams();
     const navigate = useNavigate()
-
 
     useEffect(() => {
         
@@ -64,16 +64,11 @@ export default function EnterScoreScreen() {
 
     }
 
-
-    const handleScoreSubmit = (data) => {
-        const round = {'tees': data, 'teeColor':selectedTeeBox.tee_id, 'golfCourse': golfCourse.course_id }
-        console.log(selectedTeeBox);
+    const handleSubmitRound = (data) => {
+        const round = {'tees': data, 'teeColor':selectedTeeBox.tee_id, 'golfCourse': golfCourse.course_id }   
         dispatch(createRound(round))
-        
-
     }
     
-    console.log(selectedTeeBox);
 
     return (
         <div>
@@ -95,7 +90,7 @@ export default function EnterScoreScreen() {
                 }
 
                 {showScoreCard && 
-                    <EnterScoreForm tees={selectedTeeBox.tees} />
+                    <EnterScoreForm tees={selectedTeeBox.tees} submitScore={handleSubmitRound} />
                 }
                 
                 </div>

@@ -1,0 +1,37 @@
+// BUTTON THREE
+.button-style-three {
+    background-color:white;
+    border: 1px solid black;
+    color: Black;
+    outline: 0;
+    padding: .5rem 1rem;
+    border-radius: .475rem;
+
+    p {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+.button-style-three:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button-style-three-selected {
+    background-color: #017bfe;
+    border: 1px solid #017bfe;
+}
+
+.button-style-three-completed {
+    background-color: #21ae49;
+    border: 1px solid #198754;
+}
+
+.button-style-three-not-completed {
+    background-color: #c82828;
+    border: 1px solid #c82828;
+}
+// END BUTTON THREE

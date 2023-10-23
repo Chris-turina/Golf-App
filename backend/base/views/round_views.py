@@ -51,12 +51,11 @@ def deleteRound(request, pk):
 @permission_classes([IsAuthenticated])
 def createRound(request, pk, tk):
     newData = request.data
-
+    
     newScores = newData['tees']
     course = GolfCourse.objects.get(course_id=pk)
     tee_box = TeeBox.objects.get(id=tk)
-    user = request.user   
-    
+    user = request.user
     
     # empty arrs to then add all items
     parArr = []
@@ -78,10 +77,13 @@ def createRound(request, pk, tk):
         user = user,
         course = course,
         teeColorUsed = tee_box
-    )    
+    ) 
+    
+    newRound.save()
     
     # loops through the data recived
     for newScore in newScores:
+        print("PRINT", newScore['strokes'])
         hole = Hole.objects.get(course=course, number=newScore['hole__number'])
         tee = Tee.objects.get(id=newScore['id'])
 
@@ -91,21 +93,21 @@ def createRound(request, pk, tk):
         yardsArr.append(tee.yards)
 
         if hole.number < 10:
-            print('1-9')
+            # print('1-9')
             yardsOutArr.append(tee.yards)
             parOutArr.append(hole.par)
             puttsOutArr.append(newScore['putts'])
             scoreOutArr.append(newScore['strokes'])
 
         else:
-            print('10-18')
+            # print('10-18')
             yardsInArr.append(tee.yards)
             parInArr.append(hole.par)
             puttsInArr.append(newScore['putts'])
             scoreInArr.append(newScore['strokes'])
         
         # Creates a new HoleScore Obj
-        HoleScore.objects.create(
+        new_hole_score = HoleScore.objects.create(
             roundStat = newRound,
             hole = hole,
             tee = tee,
@@ -113,10 +115,12 @@ def createRound(request, pk, tk):
             putts = newScore['putts'],
         )
 
+        new_hole_score.save()
+
 
     
     # Creates a new Round Stats
-    RoundStats.objects.create(     
+    new_round_stat = RoundStats.objects.create(     
         user = user,   
         roundStat = newRound,
         yards_out = sum(yardsOutArr),
@@ -133,6 +137,8 @@ def createRound(request, pk, tk):
         totalDistance = sum(yardsArr),
         totalHoles = course.num_of_holes
     )
+
+    new_round_stat.save()
 
     
     serializer = RoundSerializer(newRound, many=False)
