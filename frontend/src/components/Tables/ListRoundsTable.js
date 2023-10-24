@@ -1,10 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default function TableStyleOne({ thArray, tdArray, tdSecondArray, tdAttributes, dataPointUrl, topHeader, buttonText, searchBarText, handleButtonClick, handleActions, idName }) {
+export default function ListRoundsTable({ thArray, tdArray, tdSecondArray, tdAttributes, dataPointUrl, topHeader, buttonText, searchBarText, handleButtonClick, handleActions, idName }) {
 
-    const testClick = (e, dataId) => {    
-        handleActions(e.target.value, dataId)
+    const months = {
+        '01': 'January',
+        '02': 'Febuary',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'Septemeber',
+        '10': 'October',
+        '11': 'November',
+        '12': 'Decemeber'
     }
 
 
@@ -12,41 +23,37 @@ export default function TableStyleOne({ thArray, tdArray, tdSecondArray, tdAttri
         let newArry = []
         for (let i = 0; i < tdAttributes.length; i++) {
             const element = tdAttributes[i];  
-            if (element === tdAttributes[0]) {
-                
+            if (element === 'strokes') {
                 newArry.push(
                     <td key={Math.floor(Math.random() * 100)}>
                         <div>
-                            <Link className='table-style-one-link' to={`${dataPointUrl}${data[idName]}`}>
-                                <p>{data[element]}</p>
+                            <Link className='table-style-one-link' to={`${data.id}/stats`}>
+                                <p>{data.roundStats[0].totalStrokes}</p>
                             </Link>
                         </div>
                     </td>
                 )
-            } else if (typeof(data[element]) === 'boolean') {
+            } else if (element === 'created_at') {
+                let dateTimeArray = []
+                let dateArray = []
+                const date = data[element]
+                dateTimeArray = date.split('T')
+                dateArray = dateTimeArray[0].split('-')
+                let year = dateArray[0]
+                let monthNum = dateArray[1]
+                let day = dateArray[2]
+                let month = months[monthNum]
                 
-                if (data[element] === true) {                    
-                    newArry.push(<td key={Math.floor(Math.random() * 100)}>Yes</td>)
-                } else if (data[element] === false) {
-                    newArry.push(<td key={Math.floor(Math.random() * 100)}>No</td>)
-                }
-            } else if (element === 'ACTIONS') {
-
                 newArry.push(
                     <td key={Math.floor(Math.random() * 100)}>
-                        <select onChange={ e => testClick(e, data[idName])} className='table-style-one-dropdown'>
-                            <option >ACTIONS</option>
-                            <option value={'delete'}>DELETE</option>
-                            <option value={'edit'}>EDIT</option>
-                        </select>
+                        <div>                            
+                            <p>{month} {day}</p>                            
+                        </div>
                     </td>
                 )
-
             } else {
                 newArry.push(<td key={Math.floor(Math.random() * 100)}>{data[element]}</td>)
-            }
-
-            
+            }            
         }                    
         return newArry
     }

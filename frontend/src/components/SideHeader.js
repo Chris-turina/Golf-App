@@ -6,42 +6,42 @@ export default function SideHeader({page}) {
     const [active, setActive] = useState('user-side-header-active')
 
     let player = ''
-    let playGolf = ''
+    let enterScore = ''
     let rounds = ''
     let league = ''
     let admin = ''
 
     if (page === 'player') {        
         player = active
-        playGolf = inactive
+        enterScore = inactive
         rounds = inactive
         league = inactive
         admin = inactive
 
     } else if (page === 'play-golf') {
         player = inactive
-        playGolf = active
+        enterScore = active
         rounds = inactive
         league = inactive
         admin = inactive
 
     } else if (page === 'rounds') {
         player = inactive
-        playGolf = inactive
+        enterScore = inactive
         rounds = active
         league = inactive
         admin = inactive
 
     } else if (page === 'league') {
         player = inactive
-        playGolf = inactive
+        enterScore = inactive
         rounds = inactive
         league = active
         admin = inactive
 
     } else if (page === 'admin') {
         player = inactive
-        playGolf = inactive
+        enterScore = inactive
         rounds = inactive
         league = inactive
         admin = active
@@ -57,8 +57,8 @@ export default function SideHeader({page}) {
             </Link>
 
             <Link to={`/golfcourses`} className='user-side-header-link'>
-                <div className={`user-side-header-button ${playGolf}`}>
-                    <p>Play Golf</p>
+                <div className={`user-side-header-button ${enterScore}`}>
+                    <p>Enter Score</p>
                 </div>
             </Link>
 

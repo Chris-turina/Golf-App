@@ -12,6 +12,8 @@ import { listGolfCourses } from '../actions/golfCourseActions';
 import { deleteRound } from '../actions/roundActions';
 import Header from '../components/Header';
 import SideHeader from '../components/SideHeader';
+import ListRoundsTable from '../components/Tables/ListRoundsTable';
+
 
 function RoundsScreen() {
 
@@ -44,7 +46,7 @@ function RoundsScreen() {
         if (!userInfo) {
             navigate('/login')
         } else {            
-            dispatch(listGolfCourses())
+            // dispatch(listGolfCourses())
             dispatch(listRounds())       
             setShowLoader(false)   
             setShowRounds(true)              
@@ -56,12 +58,15 @@ function RoundsScreen() {
         }
     }, [dispatch, userInfo, successDelete])
 
-    console.log(stats);
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure you want to delete this round?')) {
             dispatch(deleteRound(id))
         }
+    }
+
+    const routeChange = () => {
+        navigate('/golfcourses')
     }
     
 
@@ -76,6 +81,19 @@ console.log(rounds);
                 <div className='user-content-container'>
                     <div>
                         {showLoader && <Loader/>}
+                        {showRounds && 
+                            <div>                                
+                               <ListRoundsTable
+                                    thArray={['STROKES', 'GOLF COURSE', 'DATE']}
+                                    tdArray={rounds}
+                                    tdAttributes={['strokes', 'course', 'created_at']}                                    
+                                    topHeader={true}
+                                    searchBarText={'Search Rounds'}
+                                    buttonText={'Enter Score'}
+                                    handleButtonClick={routeChange}                                
+                               />
+                            </div>
+                        }
                     </div>
                     
                 </div>
