@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import SideHeader from "../components/SideHeader";
@@ -22,17 +22,31 @@ export default function PlayerScreen() {
 
     return (
         <div>            
-            <Header userInfo={userInfo} page='player' />
+            <Header userInfo={userInfo} />
             <div className="user-container">
                 <SideHeader page='player' />
                 <div className="user-content-container">
-                    <h1>Player Screen</h1>
-                    <p>Number of Rounds Played</p>
-                    <p>Handicap</p>
-                    <p>Strkes gained </p>
-                    <p>Messages</p>
-                    <p>Friend Request</p>
-                    <p>Play a roubd of golf =</p>
+                    <div className="player-screen-row">
+                        <div className='player-screen-box-container player-stats-contanier'>
+                            <p>Handicap</p>
+                            <p>15</p>
+                        </div>
+
+                        <div className='player-screen-box-container player-stats-contanier'>
+                            <p>Last Round</p>
+                            <p>15</p>
+                        </div>
+
+                        <Link to={`/friends`} className="player-screen-link">
+                            <div className='player-screen-box-container player-friends-contanier'>
+                                <p>Friend Requests</p>
+                                <p>0</p>
+                            </div>
+                        </Link>
+                        
+
+                    </div>
+                    
                 </div>
             </div>
             

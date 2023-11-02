@@ -134,13 +134,78 @@
 
 // END APP CONTENT
 
+// PLAYER SCREEN
+
+.player-screen-link {
+    text-decoration: none;
+    color: black;
+}
+
+.player-screen-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.player-screen-box-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.player-stats-contanier {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        font-weight: bolder;
+    }
+}
+
+.player-friends-contanier {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        font-weight: bolder;
+    }
+}
+
+// END PLAYER SCREEN
+
+// FRIEND LIST SCREEN
+.friendlist-screen-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.friendlist-screen-box-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.friendlist-stats-contanier {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        font-weight: bolder;
+    }
+}
 
 
-
-
-
-
-
-// ROUNDS SCREEN
-
-// END ROUNDS SCREEN
+// END FRIEND LIST SCREEN

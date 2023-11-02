@@ -19,7 +19,7 @@ import BookTeeTimeScreen from "./screens/BookTeeTimeScreen";
 import RoundStatScreen from "./screens/RoundStatScreen";
 
 
-import FriendListScreen from "./screens/ProfileScreens/FriendListScreen";
+import FriendListScreen from "./screens/FriendListScreen";
 import EnterScoreScreen from "./screens/EnterScoreScreen";
 
 import AdminScreen from "./screens/AdminScreens/AdminScreen";
@@ -56,7 +56,7 @@ function App() {
         
 
               <Route path='profile/:id' element={<ProfileScreen />} />
-              <Route path='profile/:id/friends' element={<FriendListScreen />} />
+              <Route path='/friends' element={<FriendListScreen />} />
               
               <Route path='bookTeeTime' element={<BookTeeTimeScreen />} />
 

@@ -1720,4 +1720,69 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.player-screen-link {
+  text-decoration: none;
+  color: black;
+}
+
+.player-screen-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.player-screen-box-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.player-stats-contanier {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.player-stats-contanier p {
+  text-align: center;
+  font-weight: bolder;
+}
+
+.player-friends-contanier {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.player-friends-contanier p {
+  text-align: center;
+  font-weight: bolder;
+}
+
+.friendlist-screen-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.friendlist-screen-box-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #b2b2b2;
+}
+
+.friendlist-stats-contanier {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.friendlist-stats-contanier p {
+  text-align: center;
+  font-weight: bolder;
 }/*# sourceMappingURL=app.css.map */

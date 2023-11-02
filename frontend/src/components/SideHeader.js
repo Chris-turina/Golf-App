@@ -6,6 +6,7 @@ export default function SideHeader({page}) {
     const [active, setActive] = useState('user-side-header-active')
 
     let player = ''
+    let friends = ''
     let enterScore = ''
     let rounds = ''
     let league = ''
@@ -13,6 +14,15 @@ export default function SideHeader({page}) {
 
     if (page === 'player') {        
         player = active
+        friends = inactive
+        enterScore = inactive
+        rounds = inactive
+        league = inactive
+        admin = inactive
+
+    } else if (page === 'friends') {
+        player = inactive
+        friends = active
         enterScore = inactive
         rounds = inactive
         league = inactive
@@ -20,6 +30,7 @@ export default function SideHeader({page}) {
 
     } else if (page === 'play-golf') {
         player = inactive
+        friends = inactive
         enterScore = active
         rounds = inactive
         league = inactive
@@ -27,6 +38,7 @@ export default function SideHeader({page}) {
 
     } else if (page === 'rounds') {
         player = inactive
+        friends = inactive
         enterScore = inactive
         rounds = active
         league = inactive
@@ -34,6 +46,7 @@ export default function SideHeader({page}) {
 
     } else if (page === 'league') {
         player = inactive
+        friends = inactive
         enterScore = inactive
         rounds = inactive
         league = active
@@ -41,6 +54,7 @@ export default function SideHeader({page}) {
 
     } else if (page === 'admin') {
         player = inactive
+        friends = inactive
         enterScore = inactive
         rounds = inactive
         league = inactive
@@ -54,6 +68,13 @@ export default function SideHeader({page}) {
                 <div className={`user-side-header-button ${player}`}>
                     <p>Player</p>
                 </div>
+            </Link>
+
+            <Link to={'/friends'} className='user-side-header-link'>
+                <div className={`user-side-header-button ${friends}`} >
+                    <p>Friends</p>
+                </div>
+            
             </Link>
 
             <Link to={`/golfcourses`} className='user-side-header-link'>
