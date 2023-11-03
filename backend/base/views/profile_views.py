@@ -30,7 +30,8 @@ def findProfiles(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getProfile(request):
-    profile = Profile.objects.get(user=request.user.id)     
+    profile = Profile.objects.get(user=request.user.id)   
+    print(profile)  
     serializer = ProfileSerializer(profile, many=False )
     return Response(serializer.data)
 
@@ -59,14 +60,15 @@ def getFriendRequestNotification(request):
 @permission_classes([IsAuthenticated])
 def sendFriendRequest(request):
     data = request.data
-    pk = request.data['receiver']
-    sender = Profile.objects.get(user=request.user)
-    receiver = Profile.objects.get(user_id=pk)
-    friend_ship = FriendRequestNotification.objects.create(
-        sender=sender,
-        receiver=receiver,
-        status = data['action'],
-    )
+    print(data)
+    # pk = request.data['receiver']
+    # sender = Profile.objects.get(user=request.user)
+    # receiver = Profile.objects.get(user_id=pk)
+    # friend_ship = FriendRequestNotification.objects.create(
+    #     sender=sender,
+    #     receiver=receiver,
+    #     status = data['action'],
+    # )
     # serializer = FriendRequestNotificationSerializer(friend_ship, many=False)
     # return Response(serializer.data)
     return Response('Friends')

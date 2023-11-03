@@ -55,7 +55,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [ 'id', 'first_name', 'last_name', 'username', 'handicap', 'friends', 'updated', 'created', 'sent_friend_requests', 'received_friend_requests'  ]
     
     def get_sent_friend_requests(self,obj):
-        sent_friend_requests = obj.friend_requests_sent.all()
+        sent_friend_requests = obj.friend_requests_sent.filter(action=1)
+        # print(obj.friend_requests_sent.filter(action=1))
         serializer = FriendRequestNotificationSerializer(sent_friend_requests, many=True)
         return serializer.data
     

@@ -44,7 +44,7 @@ export default function AdminCourseListScreen() {
         }
 
     }, [dispatch, navigate, userInfo, successDelete, successCreate ])
-
+console.log(golfCourses);
     // Delete a Course
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this Golf Course?')) {
@@ -117,9 +117,6 @@ export default function AdminCourseListScreen() {
                                             handleActions={deleteEditHandler}
                                         />
 
-                                        
-
-                                        
                                     </div>
 
                                     

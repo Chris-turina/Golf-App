@@ -7,14 +7,21 @@ import Message from '../components/Message';
 import { showProfile, findFriendsProfiles } from '../actions/profileActions'
 import { updateFriendRequest } from '../actions/friendRequestActions'
 import FriendRequest from '../components/FriendRequest';
-import ProfileSideHeader from '../components/ProfileSideHeader';
+
 import Header from '../components/Header';
 import SideHeader from '../components/SideHeader';
+import FriendListTable from '../components/Tables/FriendListTable';
+import { login } from '../actions/userActions';
+import FindFriendsTable from '../components/Tables/FindFriendsTable';
 
 export default function FriendListScreen() {    
     const [friendsList, setFriendsList] = useState( [] )    
     const [pendingFriendRequests, setPendingFriendRequests] = useState( [] )
-    const [userId, setUserId] = useState(0)
+    
+    const [showMyFriendsTable, setShowMyFriendsTable] = useState(true)
+    const [showFindFriendsTable, setShowFindFriendsTable] = useState(false)
+    const [activeTable, setActiveTable] = useState('my-friends')
+
 
 
     const dispatch = useDispatch()
@@ -41,15 +48,25 @@ export default function FriendListScreen() {
         if(!userInfo) {
             navigate('/login')
         } else {              
-            dispatch(showProfile())                         
-            setFriendsList(myProfile.friends)            
-            setPendingFriendRequests(myProfile.sent_friend_requests)  
-            setUserId(userInfo.id)                    
+            dispatch(showProfile())  
+            setFriendsList(myProfile.friends)                   
         }
-    }, [dispatch, id, user, success, userInfo])
+    }, [success])
+
+    const handleTableChange = () => {
+        if (activeTable === 'my-friends') {
+            setShowMyFriendsTable(false)
+            setShowFindFriendsTable(true)
+            setActiveTable('find-friends')
+        } else if (activeTable === 'find-friends') {
+            setShowMyFriendsTable(true)
+            setShowFindFriendsTable(false)
+            setActiveTable('my-friends')
+        }
+    }
 
     // THIS HANDLES SEARCH BAR AS THE USER LOOKS OF OTHER USERS TO BEFRIEND
-    const handleOnChange = (e) => {
+    const handleFindFriendsChange = (e) => {
         if (e.target.value !== '') {
             const searchTerm = e.target.value
             dispatch(findFriendsProfiles(searchTerm))  
@@ -58,9 +75,11 @@ export default function FriendListScreen() {
     }
 
     // THIS FUNCTION HANDLES THE SEND FRIEND REQUEST
-    const handleSend = (data) => {                       
-        dispatch(updateFriendRequest(data))  
-        window.location.reload(false)         
+    const handleSendFriendRequest = (data,e ) => {                 
+        console.log(data);
+        const friendRequest = {sender_id: myProfile.id, receiver_id:data.id, status:'send'}
+        dispatch(updateFriendRequest(friendRequest))  
+        // window.location.reload(false)         
     }
 
     // THIS FUNCTION HANDLES ACCEPTING OR DECLINING THE FRIEND REQUEST
@@ -74,6 +93,10 @@ export default function FriendListScreen() {
         //     window.location.reload(false)
         // }
 
+        const handleAddFriend = () => {
+
+        }
+
         dispatch(updateFriendRequest(data))
         window.location.reload(false)
         // WORKING HERE
@@ -86,37 +109,69 @@ export default function FriendListScreen() {
 
     // }
     // console.log(myProfile.friends);
+
+console.log(myProfile);
     return (
         <div>
-            {loadingProfile && loadingProfilesList && loadingProfile
-                ? <Loader />
-                : errorProfile
-                    ? <Message>{errorProfile}</Message>
-                    : (
-                        <div>
-                            <Header userInfo={userInfo} />
-                            <div className='user-container'>
-                                <SideHeader page='friends' />
-                                <div className="user-content-container">
-                                    <div className='friendlist-screen-row'>
-                                        <div className='friendlist-screen-box-container friendlist-stats-contanier'>
-                                            <p>New Friend Requests</p>
-                                        </div>
+            {loadingProfile}
+                
+            {successProfile && 
+                <div>
+                    <Header userInfo={userInfo} />
+                    <div className='user-container'>
+                        <SideHeader page='friends' />
+                        <div className="user-content-container">
+                            <div className='friendlist-screen-row friendlist-screen-row-margin'>
+                                <div className='friendlist-screen-box-container friendlist-stats-contanier'>
+                                    <p>New Friend Requests</p>
+                                </div>
 
-                                        <div className='friendlist-screen-box-container friendlist-stats-contanier'>
-                                            <p>Awaiting Acceptance</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        Freind List here
-                                    </div>
-                                    
+                                <div className='friendlist-screen-box-container friendlist-stats-contanier'>
+                                    <p>Awaiting Acceptance</p>
+                                    {myProfile.sent_friend_requests.map(request => (
+                                        <p>{request.receiver.first_name} {request.receiver.last_name}</p>
+                                    )) }
                                 </div>
                             </div>
+
+                            <div className='friendlist-screen-row-margin'>
+                                {showMyFriendsTable &&
+                                    <FriendListTable
+                                        thArray={['USERNAME', 'FIRST NAME', 'LAST NAME', 'ACTIONS']}
+                                        tdArray={myProfile.friends}
+                                        tdAttributes={['username', 'first_name', 'last_name', 'ACTIONS']}
+                                        handleButtonClick={handleTableChange}
+                                        buttonText={'Add Friend'}
+                                        searchBarText={'Search My Friends'}
+                                        
+                                    
+                                    /> 
+                                }
+
+                                {showFindFriendsTable &&
+                                    <FindFriendsTable 
+                                        thArray={['USERNAME', 'FIRST NAME', 'LAST NAME', 'ACTIONS']}
+                                        tdArray={profiles}
+                                        tdAttributes={['username', 'first_name', 'last_name', 'ACTIONS']}
+                                        handleButtonClick={handleTableChange}
+                                        handleSearchChange={handleFindFriendsChange}
+                                        buttonText={'My Friends'}
+                                        searchBarText={'Search'}
+                                        handleAddFriend={handleSendFriendRequest}
+                                    />
+
+                                }
+
+
+                                                                        
+                            </div>
+                            
                         </div>
-                    )
+                    </div>
+                </div>
             }
+                    
+            
         </div>
     )
 }

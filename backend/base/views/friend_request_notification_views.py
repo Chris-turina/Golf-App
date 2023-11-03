@@ -20,7 +20,7 @@ def updateFRNotification(request):
         print('SEND')
         friend_request = FriendRequestNotification.objects.create(
             sender = request.user.profile,
-            receiver = Profile.objects.get(id=data['id']),
+            receiver = Profile.objects.get(id=data['receiver_id']),
             action = 1,
         )
 
