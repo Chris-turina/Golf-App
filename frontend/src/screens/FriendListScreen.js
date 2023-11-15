@@ -49,7 +49,8 @@ export default function FriendListScreen() {
             navigate('/login')
         } else {              
             dispatch(showProfile())  
-            setFriendsList(myProfile.friends)                   
+            setFriendsList(myProfile.friends)  
+                         
         }
     }, [success])
 
@@ -79,7 +80,7 @@ export default function FriendListScreen() {
         console.log(data);
         const friendRequest = {sender_id: myProfile.id, receiver_id:data.id, status:'send'}
         dispatch(updateFriendRequest(friendRequest))  
-        // window.location.reload(false)         
+        window.location.reload(true)
     }
 
     // THIS FUNCTION HANDLES ACCEPTING OR DECLINING THE FRIEND REQUEST
@@ -111,10 +112,11 @@ export default function FriendListScreen() {
     // console.log(myProfile.friends);
 
 console.log(myProfile);
-    return (
+    return (            
+        
         <div>
             {loadingProfile}
-                
+            
             {successProfile && 
                 <div>
                     <Header userInfo={userInfo} />
@@ -123,13 +125,17 @@ console.log(myProfile);
                         <div className="user-content-container">
                             <div className='friendlist-screen-row friendlist-screen-row-margin'>
                                 <div className='friendlist-screen-box-container friendlist-stats-contanier'>
-                                    <p>New Friend Requests</p>
+                                    <p>Friend Requests</p>
+                                    {myProfile.received_friend_requests.map((request, i) => (
+                                        <p key={i}>{request.sender.first_name} {request.sender.last_name}</p>
+                                    ))}
+                                    
                                 </div>
 
                                 <div className='friendlist-screen-box-container friendlist-stats-contanier'>
                                     <p>Awaiting Acceptance</p>
-                                    {myProfile.sent_friend_requests.map(request => (
-                                        <p>{request.receiver.first_name} {request.receiver.last_name}</p>
+                                    {myProfile.sent_friend_requests.map((request, i) => (
+                                        <p key={i}>{request.receiver.first_name} {request.receiver.last_name}</p>
                                     )) }
                                 </div>
                             </div>
@@ -170,8 +176,6 @@ console.log(myProfile);
                     </div>
                 </div>
             }
-                    
-            
         </div>
     )
 }
@@ -179,65 +183,3 @@ console.log(myProfile);
 
 
                    
-{/* <Col md={3}>
-<h2>Friends</h2>
-<div style={{ backgroundColor:'white'}}>
-    {successProfile && myProfile.friends.map(friend => (                                                                                
-        <FriendRequest                                        
-            key={friend.profile_id}
-            selection={handleFriendRequestOnClick}
-            friend={friend}
-            type={'unfriend'}
-        />                                                         
-    ))}
-</div>
-</Col>
-
-<Col md={4}>
-<Row>
-    <h2>New Friend Requests</h2>
-    <div>                        
-        {successProfile && myProfile.received_friend_requests.map(request => (
-            <FriendRequest
-                key={request.id}
-                selection={handleFriendRequestOnClick}
-                request={request}
-                type={'received'}
-            />
-        ))}
-        
-    </div>
-</Row>
-<Row>
-    <h2>Pending Requests</h2>
-    <div>
-        {successProfile && myProfile.sent_friend_requests.map(request => (
-            <FriendRequest
-                key={request.id}
-                request={request}
-                type={'sent'}
-            />
-        ))}
-    </div>
-    
-</Row>            
-</Col>
-
-<Col>
-<Row>
-    <p>Find Friends</p>
-    <input onChange={e => handleOnChange(e)} type='search'></input>
-</Row>
-<Row>
-    {successProfilesList && profiles.map(profile => (
-        <FriendRequest
-            key={profile.id}
-            type={'send'}
-            profile={profile}
-            handleSend={handleSend}
-        />
-    ))}
-</Row>
-
-</Col>
-</Row> */}

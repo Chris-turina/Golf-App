@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
@@ -6,6 +6,9 @@ import SideHeader from "../components/SideHeader";
 
 
 export default function PlayerScreen() {
+
+
+    const [showScreen, setShowScreen] = useState(false)
     
     const navigate = useNavigate()
 
@@ -16,11 +19,14 @@ export default function PlayerScreen() {
     useEffect(() => {        
         if (!userInfo) {            
             navigate('/login')
+        } else {
+            setShowScreen(true)
         }        
     }, [navigate, userInfo])
 
 
     return (
+                    
         <div>            
             <Header userInfo={userInfo} />
             <div className="user-container">
@@ -48,10 +54,8 @@ export default function PlayerScreen() {
                     </div>
                     
                 </div>
-            </div>
-            
+            </div>            
         </div>
-            
     )
 }
 

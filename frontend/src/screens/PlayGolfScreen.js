@@ -1,6 +1,6 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap'
 import CourseBooker from '../components/CourseBooker';
 import { listGolfCourses, listTeeColors } from '../actions/golfCourseActions';
@@ -11,10 +11,14 @@ import Header from '../components/Header';
 import CourseListItem from '../components/CourseListItem';
 import SideHeader from '../components/SideHeader';
 import TableStyleOne from '../components/Tables/TableStyleOne';
+import { login } from '../actions/userActions';
 
 export default function PlayGolfScreen() {
+
+    const [showScreen, setShowScreen] = useState(false)
     
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -23,12 +27,19 @@ export default function PlayGolfScreen() {
     const {error, loading, golfCourses} = golfCourseList
 
     useEffect(() => {
-        dispatch(listGolfCourses())
+        if (!userInfo) {
+            navigate('/login')
+        } else {
+            dispatch(listGolfCourses())
+            setShowScreen(true)
+        }
+        
 
     }, [dispatch])
 
 
     return (
+            
         <div>
             <Header userInfo={userInfo} />
             <div className='user-container'>
@@ -84,7 +95,6 @@ export default function PlayGolfScreen() {
                         }                
                 </div>
             </div>
-            
         </div>
     )
 }

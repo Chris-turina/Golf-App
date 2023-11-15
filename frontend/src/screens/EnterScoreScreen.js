@@ -12,6 +12,7 @@ import EnterScoreForm from '../components/EnterScoreForm';
 
 export default function EnterScoreScreen() {
 
+    const [showScreen, setShowScreen] = useState(false)
     const [courseInfoLoaded, setCourseInfoLoaded] = useState(false)
     const [showScoreCard, setShowScoreCard] = useState(false)
     
@@ -42,7 +43,8 @@ export default function EnterScoreScreen() {
             navigate('/login')
         } else {
             dispatch(listGolfCourseDetails(id))    
-            dispatch(listCourseTees(id))             
+            dispatch(listCourseTees(id))  
+            setShowScreen(true)           
         }
 
         if (success) {
@@ -69,33 +71,32 @@ export default function EnterScoreScreen() {
         dispatch(createRound(round))
     }
     
+    return (       
+            <div>
+                <Header userInfo={userInfo} page='play-golf' />
+                <div className='user-container'>
+                    <SideHeader page='play-golf'/>
+                    <div className='user-content-container'>
+                    
 
-    return (
-        <div>
-            <Header userInfo={userInfo} page='play-golf' />
-            <div className='user-container'>
-                <SideHeader page='play-golf'/>
-                <div className='user-content-container'>
-                
+                    {courseInfoLoaded && 
+                        <div className='select-tee-box-card'>
+                            <p onClick={e => setShowTeeOptions(true)}>{selectTeeTitle}</p>
+                            {showTeeOptions && courseTees.map((teeBox, i) => (
+                                <div onClick={e => handleTeeClick(teeBox)} key={i} className='tee-box-select-item'>
+                                    <p>{teeBox.tee_color}</p>
+                                </div>
+                            ))}
+                        </div>
+                    }
 
-                {courseInfoLoaded && 
-                    <div className='select-tee-box-card'>
-                        <p onClick={e => setShowTeeOptions(true)}>{selectTeeTitle}</p>
-                        {showTeeOptions && courseTees.map((teeBox, i) => (
-                            <div onClick={e => handleTeeClick(teeBox)} key={i} className='tee-box-select-item'>
-                                <p>{teeBox.tee_color}</p>
-                            </div>
-                        ))}
+                    {showScoreCard && 
+                        <EnterScoreForm tees={selectedTeeBox.tees} submitScore={handleSubmitRound} />
+                    }
+                    
                     </div>
-                }
-
-                {showScoreCard && 
-                    <EnterScoreForm tees={selectedTeeBox.tees} submitScore={handleSubmitRound} />
-                }
-                
                 </div>
             </div>
-            
-        </div>
+        
     )
 }

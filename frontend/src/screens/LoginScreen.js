@@ -26,7 +26,7 @@ function LoginScreen() {
     
     useEffect(() => {
         if (userInfo) {
-            navigate('player')
+            navigate('/player')
         } else (
             setShowLogin(true)            
         )
