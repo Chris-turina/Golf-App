@@ -62,9 +62,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     
     def get_received_friend_requests(self,obj):
         received_friend_requests = obj.friend_requests_received.all()
-        serializer = FriendRequestNotificationSerializer(received_friend_requests, many=True)
-        return serializer.data
-    
+        serializer = FriendRequestNotificationSerializer(received_friend_requests, many=True)    
     def get_friends(self, obj):
         profiles = obj.profile_friends.all()        
         current_user = obj

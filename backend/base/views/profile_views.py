@@ -31,7 +31,7 @@ def findProfiles(request):
 @permission_classes([IsAuthenticated])
 def getProfile(request):
     profile = Profile.objects.get(user=request.user.id)   
-    print(profile)  
+     
     serializer = ProfileSerializer(profile, many=False )
     return Response(serializer.data)
 
